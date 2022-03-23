@@ -16,6 +16,7 @@ module.exports = {
       },
       colors:{
         'blue':'#252647',
+        'blue2' : '#303030',
         'yellow' : '#F4B01A',
         'yellow2' : '#E89F00',
         'gray' : '#CBCBCB',
@@ -24,6 +25,10 @@ module.exports = {
         'gray3' : '#E5E5E5',
         'gray4' : '#707070',
         'gray5' : '#E1E1E1',
+        'gray6' : '#89898980',
+        'gray7' : '#6C6C6C',
+        'gray8' : '#9F9F9F',
+        'gray9' : '#D4D4D4',
         'black' : '#252647',
         'black1' : '#252647',
         'black2' : '#565656',

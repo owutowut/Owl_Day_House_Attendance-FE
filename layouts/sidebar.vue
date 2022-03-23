@@ -58,7 +58,7 @@
         </div>
       </div>
     </aside>
-    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray3 h-full">
+    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray3 h-screen">
       <Nuxt/>
     </div>
 
