@@ -3,3 +3,22 @@
 body {
   font-family: 'Kanit', sans-serif !important;
 }
+
+/*vue-persian-datetime-picker.js*/
+  .vpd-time .vpd-down-arrow-btn, .vpd-time .vpd-up-arrow-btn {
+    text-align: -webkit-center;
+  }
+
+.vpd-next, .vpd-prev svg {
+  display: initial;
+}
+
+.vpd-month-label {
+  width: auto !important;
+}
+
+.vpd-content {
+  font-family: inherit !important;
+}
+
+/*vue-persian-datetime-picker.js*/

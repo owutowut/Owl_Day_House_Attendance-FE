@@ -36,19 +36,21 @@
                 Work list</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/"> Work list Yesterday</NuxtLink>
+              <NuxtLink to="/worklist"> Work list Yesterday</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/">Work list Complete</NuxtLink>
+              <NuxtLink to="/worklist_complete">Work list Complete</NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/">Leaves</NuxtLink>
+              <NuxtLink to="/leaves" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leaves'"/>
+                Leaves</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/">Leave</NuxtLink>
+              <NuxtLink to="/leaves">Leave</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/">Work from Home</NuxtLink>
+              <NuxtLink to="/wfh" >Work from Home</NuxtLink>
             </li>
           </ul>
           <button class="rounded-md bg-red1 text-white w-full p-3 mt-20 flex space-x-4 justify-center">

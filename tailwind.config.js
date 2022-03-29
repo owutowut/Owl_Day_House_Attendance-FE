@@ -29,6 +29,12 @@ module.exports = {
         'gray7' : '#6C6C6C',
         'gray8' : '#9F9F9F',
         'gray9' : '#D4D4D4',
+        'gray10' : 'rgba(196, 196, 196, 0.5)',
+        'gray11' : '#8C8C8C',
+        'gray12' : '#DCDCDC',
+        'gray13' : '#C4C4C4',
+        'gray14' : '#C0C0C0',
+        'gary15' : '#F2F2F2',
         'black' : '#252647',
         'black1' : '#252647',
         'black2' : '#565656',
@@ -36,6 +42,7 @@ module.exports = {
         'red1' : '#F26464',
         'red2' : '#EB4646',
         'red3' : '#FF5D26',
+        'red4' : '#DB6A32',
         'green' : '#30C97F'
       }
     },
