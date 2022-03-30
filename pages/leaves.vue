@@ -1,38 +1,38 @@
 <template>
   <div>
-    <div class="flex justify-between mb-[24px]" >
+    <div class="flex justify-between mb-8" >
       <span class="text-3xl font-semibold">LEAVES</span>
-      <button class="bg-yellow px-10 py-2 text-white rounded-[8px] text-[18px] font-light flex justify-center items-center"
+      <button class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center"
       @click="AddLeave">
         <img src="~/assets/images/Add.png" class="w-[15px] h-[15px]" >
-        <span class="text-[18px]">Add Leave</span>
+        <span class="text-lg">Add Leave</span>
       </button>
     </div>
-    <div class="grid grid-cols-4 gap-[24px] mb-[34px]">
-      <div class="bg-white shadow p-6 rounded-md text-center">
-        <p class="text-[18px] ">ลาป่วย</p>
+    <div class="grid grid-cols-4 gap-6 mb-8">
+      <div class="bg-white  p-4 rounded-md text-center">
+        <p class="text-lg mb-4">ลาป่วย</p>
         <p class="text-gray4">3</p>
       </div>
-      <div class="bg-white shadow p-6 rounded-md text-center">
-        <p class="text-[18px]">ลากิจ</p>
+      <div class="bg-white  p-4 rounded-md text-center">
+        <p class="text-lg mb-4">ลากิจ</p>
         <p class="text-gray4">2</p>
       </div>
-      <div class="bg-white shadow p-6 rounded-md text-center">
-        <p class="text-[18px]">การลาทั้งหมด</p>
+      <div class="bg-white  p-4 rounded-md text-center">
+        <p class="text-lg mb-4">การลาทั้งหมด</p>
         <p class="text-gray4">5</p>
       </div>
-      <div class="grid grid-cols-2 bg-white shadow p-6 rounded-md ">
+      <div class="grid grid-cols-2 bg-white  p-4 rounded-lg">
         <div class="border-r border-gray13 text-center">
-          <span class="text-[14px] ">ลาทั้งหมด</span>
-          <p class="text-gray4">5</p>
+          <div class="text-sm mb-3">ลาทั้งหมด</div>
+          <div class="text-gray4 text-sm">5</div>
         </div>
         <div class="text-center ">
-          <span class="text-[14px] ">ลาของเดือนนี้</span>
-          <p class="text-gray4">3</p>
+          <div class="text-sm mb-3">ลาของเดือนนี้</div>
+          <div class="text-gray4 text-sm">3</div>
         </div>
       </div>
     </div>
-    <div class="flex justify-end space-x-4 mb-[24px]">
+    <div class="flex justify-end space-x-4 mb-6">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-md px-4 py-2">
         <img src="~/assets/images/Search.png" class="w-[14px] h-[14px] mr-2 ">
         <input type="text" v-model="search" placeholder="Search.." class="w-[488px]"/>
@@ -47,8 +47,8 @@
       </div>
 
     </div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
-      <table class="w-full  ">
+    <div class="relative overflow-x-auto  sm:rounded-lg ">
+      <table class="w-full">
         <thead class="text-lg text-blue  bg-white font-medium">
         <tr>
           <th scope="col" class="px-6 py-4">
@@ -88,63 +88,63 @@
         </thead>
         <tbody>
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap text-center">ลาป่วย</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap ">1 day</td>
-          <td class="px-6 py-4 flex justify-center">
-            <div class="bg-green rounded-[10px] text-white  whitespace-nowrap px-4 ">Approve</div>
+          <td class="px-2 py-4 flex justify-center">
+            <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 ">Approve</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap text-center">ลากิจ</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลากิจ</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 flex justify-center">
-            <div class="bg-yellow rounded-[10px] text-white  whitespace-nowrap px-4">pending</div>
+            <div class="bg-yellow rounded-2xl text-white  whitespace-nowrap px-4">pending</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap text-center">ลาป่วย</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 flex justify-center">
-            <div class="bg-yellow rounded-[10px] text-white flex whitespace-nowrap px-4">pending</div>
+            <div class="bg-yellow rounded-2xl text-white flex whitespace-nowrap px-4">pending</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap text-center">ลาป่วย</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4  flex justify-center">
-            <div class="bg-yellow rounded-[10px] text-white whitespace-nowrap px-4">pending</div>
+            <div class="bg-yellow rounded-2xl text-white whitespace-nowrap px-4">pending</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap text-center">ลากิจ</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลากิจ</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 flex justify-center">
-            <div class="bg-green rounded-[10px] text-white whitespace-nowrap px-4">Approve</div>
+            <div class="bg-green rounded-2xl text-white whitespace-nowrap px-4">Approve</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         </tbody>
@@ -164,13 +164,14 @@ export default {
   name: "leaves",
   layout: 'sidebar',
   components: {
-    AddLeave
+    AddLeave,Modal
   },
   data() {
     return {
       selected: 'Leave type',
       isAddLeave: false,
-      isModal: false
+      isModal: false,
+      search: ''
     }
   },
   methods: {

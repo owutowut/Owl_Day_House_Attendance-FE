@@ -18,7 +18,6 @@
             <option>C</option>
           </select>
         </div>
-
         <p class="mb-3 text-xl">From</p>
         <div class="relative w-full mb-4">
           <input class="custom-input-date-from w-full border border-gray12 rounded-lg h-10 pl-3 pr-8" placeholder="วว/ดด/ปปปป"/>
@@ -37,7 +36,6 @@
             custom-input=".custom-input"
           />
         </div>
-
         <div class="w-full mt-4">
           <p class="mb-4 text-xl">Number of day</p>
           <input v-model="form.number_of_day" class="w-full bg-gary15 rounded-md h-10"/>
@@ -49,7 +47,6 @@
         <div class="flex justify-center">
           <button class="bg-blue rounded-md py-2 px-8 text-white" @click="update">Submit</button>
         </div>
-
       </div>
     </div>
 

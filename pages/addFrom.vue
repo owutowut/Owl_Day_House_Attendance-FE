@@ -8,9 +8,9 @@
         </button>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-4">
-      <div class="bg-white shadow p-6 rounded-md">
-        <p class="mb-3 text-lg">From</p>
+    <div class="grid grid-cols-4 gap-6 mb-8">
+      <div class="bg-white  p-6 rounded-lg">
+        <p class="mb-4 text-lg">From</p>
         <div class="relative w-full mb-4">
           <input class="custom-input-date-from w-full border border-gray12 rounded-lg h-10 pl-3 pr-8" placeholder="วว/ดด/ปปปป"/>
           <svg-icon name="Calendar" width="24" height="24" class="absolute right-2 top-2"/>
@@ -21,8 +21,8 @@
           />
         </div>
       </div>
-      <div class="bg-white shadow p-6 rounded-md">
-        <p class="mb-3 text-lg">to</p>
+      <div class="bg-white  p-6 rounded-lg">
+        <p class="mb-4 text-lg">to</p>
         <div class="relative w-full mb-4">
           <input class="custom-input w-full border border-gray12 rounded-lg h-10 pl-3 pr-8" placeholder="วว/ดด/ปปปป"/>
           <svg-icon name="Calendar" width="24" height="24" class="absolute right-2 top-2"/>
@@ -32,13 +32,13 @@
             color="#252647"/>
         </div>
       </div>
-      <div class="bg-white shadow p-6 rounded-md">
-        <p class="mb-3 text-lg">No of day</p>
+      <div class="bg-white  p-6 rounded-md">
+        <p class="mb-4 text-lg">No of day</p>
         <input v-model="message" placeholder="5 day" class="w-full pl-2 bg-gary15 rounded-md h-10"/>
       </div>
-      <div class="grid grid-cols-2 bg-white shadow p-6 rounded-md">
-        <div class="border-r border-gray13 text-center text-sm">
-          <p class="mb-4">Punch In</p>
+      <div class="grid grid-cols-2 bg-white  p-4 rounded-lg">
+        <div class="border-r border-gray13 text-center ">
+          <p class="mb-4 text-sm">Punch In</p>
           <input type="text" class="custom-punchIn w-40 pl-2 rounded-md h-10 border border-gray12" placeholder="10:00 AM"/>
           <date-picker
             type="time"
@@ -47,8 +47,8 @@
             color="#252647"
           />
         </div>
-        <div class="text-center text-sm">
-          <p class="mb-4">Punch Out</p>
+        <div class="text-center ">
+          <p class="mb-4 text-sm">Punch Out</p>
           <input type="text" class="custom-punchOut w-40 pl-2 rounded-md h-10 border border-gray12" placeholder="17:00 PM"/>
           <date-picker
             type="time"
@@ -60,18 +60,26 @@
       </div>
     </div>
 
-    <div class="bg-white shadow p-6 rounded-md mt-6 ">
-      <div class="w-full mt-4 flex space-x-6">
-        <span class="mb-4 text-xl">Reason</span>
-        <input v-model="message" class="w-full border border-gray12 rounded-md h-10 "/>
+    <div class="bg-white  p-6 rounded-md mt-6 ">
+      <div class="grid grid-cols-12 gap-4 mb-8">
+          <div class="col-span-2">
+            <span class="mb-4 text-xl text-black3">Reason</span>
+          </div>
+          <div class="col-span-10">
+            <input v-model="form.reason" class="w-full border border-gray12 rounded-lg text-gray8 py-2 px-4"/>
+          </div>
       </div>
-      <div class="w-full mt-4 mb-10 flex space-x-6">
-        <span class="mb-4 text-xl">Details</span>
-        <textarea v-model="message" class="w-full h-40 border border-gray12 rounded-md "/>
-      </div>
-      <div class="flex justify-end">
-        <button class="bg-blue px-10 py-2 text-white rounded-md text-sm" @click="update">Submit</button>
-      </div>
+        <div class="grid grid-cols-12 gap-4 mb-8">
+          <div class="col-span-2">
+            <span class="mb-4 text-xl text-black3">Details</span>
+          </div>
+          <div class="col-span-10">
+            <textarea v-model="form.details" rows="8" class="w-full  border border-gray12 rounded-lg text-gray8 py-2 px-4"/>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <button class="bg-blue px-10 py-2 text-white rounded-md text-sm" @click="update">Submit</button>
+        </div>
       <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
     </div>
   </div>
@@ -88,7 +96,11 @@ export default {
   },
   data() {
     return {
-      isModal: false
+      isModal: false,
+      form: {
+        reason: 'Lorem ipsum dolor sit',
+        details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.'
+      }
     }
   },
 

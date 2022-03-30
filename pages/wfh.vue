@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-[32px]">
+    <div class="relative  sm:rounded-lg mt-8">
       <table class="w-full">
         <thead class="text-lg text-blue  bg-white font-medium">
         <tr>
@@ -63,10 +63,10 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap ">14 day</td>
           <td class="px-6 py-4 flex justify-center ">
-            <div class="bg-green rounded-[10px] text-white whitespace-nowrap px-4">Approve</div>
+            <div class="bg-green rounded-2xl text-white whitespace-nowrap px-4">Approve</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12 ">
@@ -75,10 +75,10 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">3 day</td>
           <td class="px-6 py-4 flex justify-center">
-            <div class="bg-yellow rounded-[10px] text-white whitespace-nowrap px-4">pending</div>
+            <div class="bg-yellow rounded-2xl text-white whitespace-nowrap px-4">pending</div>
           </td>
           <td >
-            <img src="~/assets/images/Edit Square.svg" class="ml-14 whitespace-nowrap"/>
+            <img src="~/assets/images/Edit Square.svg" class="ml-24 whitespace-nowrap"/>
           </td>
         </tr>
         </tbody>

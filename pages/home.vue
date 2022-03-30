@@ -21,7 +21,7 @@
         <div class=" flex justify-around border-y-[0.4px] border-white py-[24px] px-5">
           <img src="~/assets/images/Loading.png" class="w-[25px] h-[25px]">
           <span class="text-[14px] mx-[16px]">Lorem ipsum dolor sit amet,consectetur ...</span>
-          <button class="bg-black1 w-[75px] flex justify-center items-center rounded-[15px] ">
+          <button class="bg-black1 w-[75px] flex justify-center items-center rounded-[15px] " >
             <img src="~/assets/images/Add.png" class="w-[10px] h-[10px]" >
             <span class="text-[10px] text-white">ADD TASK</span>
           </button>
@@ -50,7 +50,7 @@
         <span :class="`${punch ? 'text-3xl font-semibold text-black1' : 'text-3xl font-semibold text-blue opacity-50'}`">TODAY LIST</span>
         <div :class="`${punch ? 'flex  justify-center items-center bg-black1 rounded-md px-5 py-3' : 'flex  justify-center items-center bg-blue opacity-50 rounded-md px-5 py-3'}`">
           <img src="~/assets/images/Add.png" class="w-[15px] h-[15px]">
-          <button class=" text-white text-sm ">ADD TASK</button>
+          <button class=" text-white text-sm " @click="update">ADD TASK</button>
         </div>
       </div>
       <div class="grid grid-cols-4">
@@ -67,8 +67,8 @@
               </div>
             </div>
             <div class="text-white w-full grid grid-cols-2 gap-6 mt-7">
-              <button class="rounded-[15px] px-5 py-3 bg-red3">Break</button>
-              <button class="rounded-[15px] px-5 py-3 bg-black">Completed</button>
+              <button class="rounded-xl px-5 py-3 bg-red3">Break</button>
+              <button class="rounded-xl px-5 py-3 bg-black" >Completed</button>
             </div>
           </div>
         </div>
@@ -87,8 +87,8 @@
               </div>
             </div>
             <div class="text-white w-full grid grid-cols-2 gap-6 mt-7">
-              <button class="rounded-[15px] px-5 py-3 bg-yellow2">Edit</button>
-              <button class="rounded-[15px] px-5 py-3 bg-black">View</button>
+              <button class="rounded-xl px-5 py-3 bg-yellow2">Edit</button>
+              <button class="rounded-xl px-5 py-3 bg-black">View</button>
             </div>
           </div>
         </div>
@@ -102,24 +102,47 @@
               </div>
             </div>
             <div class="text-white w-full grid grid-cols-2 gap-6 mt-7">
-              <button class="rounded-[15px] px-5 py-3 bg-yellow2">Edit</button>
-              <button class="rounded-[15px] px-5 py-3 bg-black">View</button>
+              <button class="rounded-xl px-5 py-3 bg-yellow2">Edit</button>
+              <button class="rounded-xl px-5 py-3 bg-black">View</button>
             </div>
           </div>
         </div>
+        <AddTask v-if="isAddTask" :isAddTask="isAddTask" @handleHideAddTask="onHideAddTask" />
+        <Completed v-if="isCompleted" :isCompleted="isCompleted" @handleHideCompleted="onHideCompleted" />
       </div>
     </div>
 
 </template>
 
 <script>
+import AddTask from "@/components/AddTask";
+import Completed from "@/components/Completed";
+
 export default {
   name: "home",
   layout: 'sidebar',
-
+  components: {
+    AddTask,Completed
+  },
   data(){
     return {
-      punch: false
+      punch: false,
+      isAddTask: false,
+      isCompleted: false
+    }
+  },
+  methods: {
+    onHideAddTask(event) {
+      this.isAddTask = event
+    },
+    update(){
+      this.isAddTask = true
+    },
+    onHideCompleted(event) {
+      this.isCompleted = event
+    },
+    completed(){
+      this.isCompleted = true
     }
   }
 }

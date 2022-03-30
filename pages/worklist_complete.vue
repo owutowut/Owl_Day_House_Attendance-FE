@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p class="text-3xl font-semibold mb-[41px]">work list Complete</p>
+    <p class="text-3xl font-semibold mb-8">work list Complete</p>
     <div class="flex justify-end">
-      <div class="flex justify-end items-center bg-white rounded-md px-4 mb-[24px]">
+      <div class="flex justify-end items-center bg-white rounded-md px-4 mb-6">
         <img src="~/assets/images/Search.png" class="h-[14px] w-[14px]">
         <input class="rounded-md px-4 py-2 w-[320px]"  placeholder="Search.." />
       </div>
@@ -52,10 +52,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap ">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-yellow rounded-[10px] text-white flex justify-center ">Pending</div>
+            <div class="bg-yellow rounded-2xl text-white flex justify-center ">Pending</div>
             </td>
-          <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+          <td>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -64,10 +68,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-red4 rounded-[10px] text-white flex justify-center">Break</div>
+            <div class="bg-red4 rounded-2xl text-white flex justify-center">Break</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -76,10 +84,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -88,10 +100,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -100,10 +116,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -112,10 +132,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -124,10 +148,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         <tr class="bg-white border-t border-gray12">
@@ -136,10 +164,14 @@
           <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
           <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="bg-green rounded-[10px] text-white flex justify-center">Complete</div>
+            <div class="bg-green rounded-2xl text-white flex justify-center">Complete</div>
           </td>
           <td >
-            <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/project_complete">
+                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         </tbody>

@@ -19,7 +19,7 @@
         <div class="px-5">
           <ul class="text-white mt-12">
             <li class="mb-6">
-              <NuxtLink to="/home" class="flex items-center">
+              <NuxtLink to="/home" exact class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home'"/>
                 <span>Home</span>
               </NuxtLink>
@@ -31,26 +31,27 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/worklist" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='worklist'"/>
-                Work list</NuxtLink>
+              <div class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='worklist' || currentPath==='worklist_complete'"/>
+                Work list</div>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/worklist"> Work list Yesterday</NuxtLink>
+              <NuxtLink to="/worklist" :class="`${currentPath === 'worklist' && 'text-yellow'}`"> Work list Yesterday</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/worklist_complete">Work list Complete</NuxtLink>
+              <NuxtLink to="/worklist_complete" :class="`${currentPath === 'worklist_complete' && 'text-yellow'}`">Work list Complete</NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/leaves" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leaves'"/>
-                Leaves</NuxtLink>
+              <div class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leaves'||currentPath==='wfh'"/>
+                Leaves
+              </div>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/leaves">Leave</NuxtLink>
+              <NuxtLink to="/leaves" :class="`${currentPath === 'leaves' && 'text-yellow'}`">Leave</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/wfh" >Work from Home</NuxtLink>
+              <NuxtLink to="/wfh" :class="`${currentPath === 'wfh' && 'text-yellow'}`" >Work from Home</NuxtLink>
             </li>
           </ul>
           <button class="rounded-md bg-red1 text-white w-full p-3 mt-20 flex space-x-4 justify-center">
@@ -72,7 +73,8 @@ export default {
   name: "sidebar",
   data() {
     return {
-      currentPath: ""
+      currentPath: "",
+      isActive: false
     }
   },
   mounted() {
@@ -93,6 +95,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>
