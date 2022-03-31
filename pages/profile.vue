@@ -2,12 +2,12 @@
   <div>
     <p class="text-4xl font-semibold mb-[32px]">Profile</p>
     <div class="grid grid-cols-2 gap-6">
-      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-[48px]">
+      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14">
         <img src="~/assets/images/Group 894.png" class="h-[126px] w-[126px]">
-        <div class="flex flex-col justify-center pl-[24px]">
+        <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
-          <div class="bg-blue rounded-[15px] text-white text-[10px] w-14 mt-2 flex justify-center">พนักงาน</div>
+          <div class="bg-blue rounded-lg text-white text-[10px] w-14 mt-2 flex justify-center">พนักงาน</div>
         </div>
       </div>
       <div class="bg-white shadow p-6 rounded-md grid lg:grid-cols-5 grid-cols-2">
@@ -27,8 +27,8 @@
         </div>
      </div>
       <div class="bg-white shadow p-6 rounded-md col-end-3">
-        <p class="mb-[16px] text-blue2">Account Data</p>
-        <div class="flex mb-[16px]">
+        <p class="mb-6 text-blue2">Account Data</p>
+        <div class="flex mb-6">
           <p class="font-light text-blue2">Email :</p> <p class="text-gray7 ml-4 font-light">chwannop@owndayshouse.com</p>
         </div>
         <button class="bg-blue rounded-lg text-white text-xs px-3 py-2">

@@ -38,7 +38,7 @@
           <span class="mb-4 text-xl text-black3">Project Name</span>
         </div>
         <div class="col-span-10">
-          <input v-model="form.project_name" class="w-full rounded-lg text-gray8 disabled:bg-gary16 py-2 px-4" disabled/>
+          <input v-model="form.project_name" class="w-full rounded-lg text-gray8 border border-gray17 py-2 px-4" />
         </div>
       </div>
       <div class="grid grid-cols-12 gap-4 mb-8">
@@ -46,7 +46,7 @@
           <span class="mb-4 text-xl text-black3">Details</span>
         </div>
         <div class="col-span-10">
-          <textarea v-model="form.detail" rows="8" class="w-full rounded-lg text-gray8 disabled:bg-gary16 py-2 px-4" disabled/>
+          <textarea v-model="form.detail" rows="8" class="w-full rounded-lg text-gray8 border border-gray17 py-2 px-4" />
         </div>
       </div>
       <div class="grid grid-cols-12 gap-4 mb-8">
@@ -54,24 +54,42 @@
           <span class="mb-4 text-xl text-black3">Proceeding</span>
         </div>
         <div class="col-span-10">
-          <textarea v-model="form.proceeding" rows="8" class="w-full rounded-lg text-gray8 disabled:bg-gary16 py-2 px-4" disabled/>
+          <textarea v-model="form.proceeding" rows="8" class="w-full rounded-lg text-gray8 border border-gray17 py-2 px-4" />
         </div>
       </div>
+      <div class="flex justify-end">
+        <button class="bg-blue px-10 py-2 text-white rounded-md text-sm" @click="update">Submit</button>
+      </div>
+      <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
     </div>
   </div>
 </template>
 
 <script>
+import Modal from "@/components/Modal";
+
 export default {
-  name: "project_complete",
+  name: "edit_project",
   layout: 'sidebar',
+  components: {
+    Modal
+  },
   data() {
     return {
+      isModal: false,
       form: {
         project_name: 'Lorem ipsum dolor sit',
         detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.',
         proceeding: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.'
       }
+    }
+  },
+  methods: {
+    onHideModal(event) {
+      this.isModal = event
+    },
+    update(){
+      this.isModal = true
     }
   }
 }
