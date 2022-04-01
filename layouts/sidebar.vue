@@ -32,14 +32,19 @@
             </li>
             <li class="mb-6">
               <div class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='worklist' || currentPath==='worklist_complete'"/>
-                Work list</div>
+                <svg-icon name="ArrowRight" height="28" width="28"
+                          v-if="currentPath==='worklist' || currentPath==='worklist_complete'"/>
+                Work list
+              </div>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/worklist" :class="`${currentPath === 'worklist' && 'text-yellow'}`"> Work list Yesterday</NuxtLink>
+              <NuxtLink to="/worklist" :class="`${currentPath === 'worklist' && 'text-yellow'}`"> Work list Yesterday
+              </NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/worklist_complete" :class="`${currentPath === 'worklist_complete' && 'text-yellow'}`">Work list Complete</NuxtLink>
+              <NuxtLink to="/worklist_complete" :class="`${currentPath === 'worklist_complete' && 'text-yellow'}`">Work
+                list Complete
+              </NuxtLink>
             </li>
             <li class="mb-6">
               <div class="flex items-center">
@@ -51,17 +56,17 @@
               <NuxtLink to="/leaves" :class="`${currentPath === 'leaves' && 'text-yellow'}`">Leave</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/wfh" :class="`${currentPath === 'wfh' && 'text-yellow'}`" >Work from Home</NuxtLink>
+              <NuxtLink to="/wfh" :class="`${currentPath === 'wfh' && 'text-yellow'}`">Work from Home</NuxtLink>
             </li>
           </ul>
-          <button class="rounded-md bg-red1 text-white w-full p-3 mt-20 flex space-x-4 justify-center">
+          <button class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
             <img src="~/assets/images/ls_logout.svg">
             <span>ออกจากระบบ</span>
           </button>
         </div>
       </div>
     </aside>
-    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray3 h-screen">
+    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray18 min-h-screen">
       <Nuxt/>
     </div>
 
@@ -80,8 +85,8 @@ export default {
   mounted() {
     this.checkPath(this.$route.path)
   },
-  watch:{
-    $route(){
+  watch: {
+    $route() {
       this.checkPath(this.$route.path)
     }
   },

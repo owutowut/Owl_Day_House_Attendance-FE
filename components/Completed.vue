@@ -8,21 +8,21 @@
         <svg-icon name="cross" width="20" height="20"/>
       </div>
       <div>
-        <p class="font-medium text-3xl text-blue text-center mb-4">Add Task</p>
+        <p class="font-medium text-3xl text-blue text-center mb-4">Completed</p>
         <div class="w-full mt-4">
-          <p class="mb-4 text-xl">Project Name</p>
+          <p class="mb-4 text-xl font-medium">Project Name</p>
           <input v-model="projaect_name" class="w-full border border-gray12 rounded-lg text-gray12 h-10  py-2 px-4" disabled/>
         </div>
         <div class="w-full mt-4 mb-10">
-          <p class="mb-4 text-xl">Details</p>
+          <p class="mb-4 text-xl font-medium">Details</p>
           <textarea v-model="details" class="w-full h-40 border border-gray12 rounded-lg text-gray12  py-2 px-4" disabled/>
         </div>
         <div class="w-full mt-4 mb-10">
-          <p class="mb-4 text-xl">Proceeding</p>
+          <p class="mb-4 text-xl font-medium">Proceeding</p>
           <textarea v-model="proceeding" class="w-full h-40 border border-gray12 rounded-lg text-gray12 " />
         </div>
         <div class="flex justify-center">
-          <button class="bg-blue rounded-md py-2 px-8 text-white" @click="hideCompleted">Submit</button>
+          <button class="bg-blue rounded-lg py-2 px-8 text-white" @click="hideCompleted">Submit</button>
         </div>
       </div>
     </div>

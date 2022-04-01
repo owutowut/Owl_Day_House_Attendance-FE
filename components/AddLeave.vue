@@ -20,7 +20,7 @@
         </div>
         <p class="mb-3 text-xl">From</p>
         <div class="relative w-full mb-4">
-          <input class="custom-input-date-from w-full border border-gray12 rounded-lg h-10 pl-3 pr-8" placeholder="วว/ดด/ปปปป"/>
+          <input class="custom-input-date-from w-full border border-gray12 rounded-lg h-10 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
           <svg-icon name="Calendar" width="24" height="24" class="absolute right-2 top-2"/>
           <date-picker
             v-model="form.date_from"
@@ -29,7 +29,7 @@
         </div>
         <p class="mb-3 text-xl">To</p>
         <div class="relative w-full mb-4">
-          <input class="custom-input w-full border border-gray12 rounded-lg h-10 pl-3 pr-8" placeholder="วว/ดด/ปปปป"/>
+          <input class="custom-input w-full border border-gray12 rounded-lg h-10 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
           <svg-icon name="Calendar" width="24" height="24" class="absolute right-2 top-2"/>
           <date-picker
             v-model="form.date_to"

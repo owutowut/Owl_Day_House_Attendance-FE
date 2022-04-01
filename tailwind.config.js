@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'kanit' : ['Kanit', 'sans-serif']
+      },
       screens: {
         sm: '480px',
         md: '768px',
@@ -37,6 +40,7 @@ module.exports = {
         'gary15' : '#F2F2F2',
         'gary16' : '#F5F5F5',
         'gray17' : '#C1C1C1',
+        'gray18' : '#EFF0F6',
         'black' : '#252647',
         'black1' : '#252647',
         'black2' : '#565656',
@@ -48,7 +52,7 @@ module.exports = {
         'red3' : '#FF5D26',
         'red4' : '#DB6A32',
         'green' : '#30C97F'
-      }
+      },
     },
   },
   plugins: [],

@@ -10,15 +10,15 @@
       <div>
         <p class="font-medium text-3xl text-blue text-center mb-4">Add Task</p>
         <div class="w-full mt-4">
-          <p class="mb-4 text-xl">Project Name</p>
+          <p class="mb-4 text-xl font-medium">Project Name</p>
           <input v-model="message" class="w-full border border-gray12 rounded-md h-10"/>
         </div>
         <div class="w-full mt-4 mb-10">
-          <p class="mb-4 text-xl">Details</p>
+          <p class="mb-4 text-xl font-medium">Details</p>
           <textarea v-model="message" class="w-full h-40 border border-gray12 rounded-md"/>
         </div>
         <div class="flex justify-center">
-          <button class="bg-blue rounded-md py-2 px-8 text-white" @click="hideAddTask">Submit</button>
+          <button class="bg-blue rounded-lg py-2 px-8 text-white" @click="hideAddTask">Submit</button>
         </div>
       </div>
     </div>
