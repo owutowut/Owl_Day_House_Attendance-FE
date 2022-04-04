@@ -19,13 +19,13 @@
         <div class="px-5">
           <ul class="text-white mt-12">
             <li class="mb-6">
-              <NuxtLink to="/home" exact class="flex items-center">
+              <NuxtLink to="/hr/home" exact class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home'"/>
                 <span>Home</span>
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/" class="flex items-center">
+              <NuxtLink to="/hr/employee" class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='employee'"/>
                 Employee
               </NuxtLink>

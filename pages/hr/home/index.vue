@@ -88,8 +88,8 @@
     </div>
     <div class="flex justify-between mt-24" >
       <span class="text-3xl font-semibold">Attendance Today</span>
-      <button class="bg-blue py-2 px-8 rounded-lg">
-        <p class="text-lg text-white">View all</p>
+      <button class="bg-blue px-10 py-2 text-white rounded-lg text-lg">
+        <NuxtLink to="/hr/attendance-of-mounth">View all</NuxtLink>
       </button>
     </div>
     <div class="grid grid-cols-4 gap-6 mt-12">
@@ -191,7 +191,11 @@
             <div class="bg-red4 rounded-2xl text-white  whitespace-nowrap px-4 px-6" v-if="data.status=='Leaves'">{{data.status}}</div>
           </td>
           <td >
-            <svg-icon name="Search2" width="25" height="25" class="ml-24 whitespace-nowrap"/>
+            <button>
+              <NuxtLink to="/hr/profile">
+                <img src="~/assets/images/Search.svg" class="ml-24 whitespace-nowrap"/>
+              </NuxtLink>
+            </button>
           </td>
         </tr>
         </tbody>

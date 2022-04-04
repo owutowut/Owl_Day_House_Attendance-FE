@@ -49,6 +49,7 @@ module.exports = {
         'black3' : '#5B5B5B',
         'white1': '#F7F7FC',
         'white2' : '#EBEBEB',
+        'white3' : '#E8E8E8',
         'red1' : '#F26464',
         'red2' : '#EB4646',
         'red3' : '#FF5D26',
