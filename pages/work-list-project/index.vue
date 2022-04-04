@@ -4,7 +4,7 @@
       <span class="text-3xl font-semibold mb-12">Project Complete</span>
       <div>
         <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
-          <nuxt-link to="/worklist">Back</nuxt-link>
+          <nuxt-link to="/work-list-complete">Back</nuxt-link>
         </button>
       </div>
     </div>
@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: "view_project",
+  name: "worklist_project",
   layout: 'sidebar',
   data() {
     return {

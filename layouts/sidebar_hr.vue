@@ -12,7 +12,7 @@
           <img src="~/assets/images/ODH_Banding-09 (1) 2.png">
         </div>
         <div class="flex flex-col items-center text-white  ">
-          <img src="~/assets/images/Group 894.png" class="py-5">
+          <img src="~/assets/images/profile-hr.png" class="py-5">
           <p class="font-light">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs mt-2 font-thin">UX/UI Designer</p>
         </div>
@@ -25,38 +25,28 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/profile" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='profile'"/>
-                Profile
+              <NuxtLink to="/" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='employee'"/>
+                Employee
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <div class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28"
-                          v-if="currentPath==='work-list-yesterday' || currentPath==='work-list-complete'"/>
-                Work list
-              </div>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/work-list-yesterday" :class="`${currentPath === 'work-list-yesterday' && 'text-yellow'}`"> Work list Yesterday
-              </NuxtLink>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/work-list-complete" :class="`${currentPath === 'work-list-complete' && 'text-yellow'}`">Work
-                list Complete
+              <NuxtLink to="/" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='holiday'"/>
+                Hoilday
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <div class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'||currentPath==='work-from-home'"/>
+              <NuxtLink to="/" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'"/>
                 Leaves
-              </div>
+              </NuxtLink>
             </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/leave" :class="`${currentPath === 'leave' && 'text-yellow'}`">Leave</NuxtLink>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/work-from-home" :class="`${currentPath === 'work-from-home' && 'text-yellow'}`">Work from Home</NuxtLink>
+            <li class="mb-6">
+              <NuxtLink to="/" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='work-from-home'"/>
+                Work from Home
+              </NuxtLink>
             </li>
           </ul>
           <button class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
@@ -75,7 +65,7 @@
 
 <script>
 export default {
-  name: "sidebar",
+  name: "sidebar_hr",
   data() {
     return {
       currentPath: "",
@@ -95,7 +85,7 @@ export default {
       console.log(path.split("/"))
       this.currentPath = path.split("/")[1]
     }
-  },
+  }
 }
 </script>
 

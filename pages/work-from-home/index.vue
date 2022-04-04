@@ -17,7 +17,7 @@
       <div>
         <button class="bg-yellow px-10 py-2 text-white rounded-lg text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="10" height="10" class="mr-2"/>
-          <NuxtLink to="/addFrom">Add from</NuxtLink>
+          <NuxtLink to="/addForm">Add from</NuxtLink>
         </button>
       </div>
     </div>

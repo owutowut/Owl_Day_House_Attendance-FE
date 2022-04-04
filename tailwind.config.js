@@ -41,6 +41,8 @@ module.exports = {
         'gary16' : '#F5F5F5',
         'gray17' : '#C1C1C1',
         'gray18' : '#EFF0F6',
+        'gray19' : '#E9E9E9',
+        'gray20' : '#A6A6A6',
         'black' : '#252647',
         'black1' : '#252647',
         'black2' : '#565656',
@@ -50,8 +52,10 @@ module.exports = {
         'red1' : '#F26464',
         'red2' : '#EB4646',
         'red3' : '#FF5D26',
+        'red4' : '#CA1823',
         'red4' : '#DB6A32',
-        'green' : '#30C97F'
+        'green' : '#30C97F',
+        'purple1' : '#BEAEFF'
       },
     },
   },

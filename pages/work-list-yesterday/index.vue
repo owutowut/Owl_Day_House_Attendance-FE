@@ -9,7 +9,7 @@
         <img src="~/assets/images/check-circle-solid 2.svg" class="w-[25px] h-[25px]">
         <p class="font-light text-lg ">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <button class="bg-blue px-11 py-1 text-white rounded-lg text-xs font-light">
-          <NuxtLink to="/view_project">VIEW</NuxtLink>
+          <NuxtLink to="/project-completed">VIEW</NuxtLink>
         </button>
       </div>
       <div class="flex justify-between border border-white1 bg-white1 rounded-lg px-6 py-4" >
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "worklist",
+  name: "index",
   layout: 'sidebar',
 }
 </script>

@@ -4,7 +4,7 @@
       <span class="text-3xl font-semibold mb-12">Work from Home</span>
       <div>
         <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
-          <NuxtLink to="/wfh">Back</NuxtLink>
+          <NuxtLink to="/work-from-home">Back</NuxtLink>
         </button>
       </div>
     </div>

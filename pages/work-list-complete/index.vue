@@ -56,7 +56,7 @@
             </td>
           <td >
             <button >
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -72,7 +72,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -88,7 +88,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -104,7 +104,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -120,7 +120,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -136,7 +136,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -152,7 +152,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
@@ -168,7 +168,7 @@
           </td>
           <td >
             <button>
-              <NuxtLink to="/worklist_project">
+              <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
             </button>
