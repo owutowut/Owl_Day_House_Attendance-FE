@@ -33,12 +33,12 @@
         <div class="bg-white shadow py-6 rounded-md mb-6">
           <p class="text-2xl font-medium px-5">Notifications</p>
           <div class="flex justify-start space-x-2 items-center mt-7 border-y-[0.4px] border-gray3 py-6 px-5">
-            <img src="~/assets/images/Danger Circle.png" class="w-[20px] h-[20px]">
+            <svg-icon name="DangerCircle" width="20" height="20"/>
             <span class="text-xs text-black1 font-kanit">คุณได้รับการอนุมัติการลากิจในวันที่ 11 Jan 2021 ของคุณเรียบร้อยแล้ว!</span>
           </div>
         </div>
         <div class="bg-white shadow py-6 rounded-md">
-          <p class="text-2xl px-5">Holiday of the month</p>
+          <p class="text-2xl font-medium px-5">Holiday of the month</p>
           <div class="flex items-center space-x-6 items-center mt-7 border-y-[0.4px] border-gray3 py-6 px-5">
             <svg-icon name="Calendar-yellow" width='20' height="20"/>
             <span class="text-xs text-black1 font-kanit">วันสงกรานต์</span>
