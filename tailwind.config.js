@@ -43,6 +43,8 @@ module.exports = {
         'gray18' : '#EFF0F6',
         'gray19' : '#E9E9E9',
         'gray20' : '#A6A6A6',
+        'gray21' : '#E0E0E0',
+        'gray22' : '#CCCCCC',
         'black' : '#252647',
         'black1' : '#252647',
         'black2' : '#565656',

@@ -10,7 +10,7 @@
     </div>
     <div class="grid grid-cols-2 gap-6">
       <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14">
-        <img src="~/assets/images/Group 894.png" class="h-[126px] w-[126px]">
+        <img src="~/assets/images/Group 894.png" class="h-32 w-32">
         <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
@@ -73,7 +73,9 @@
             </div>
             <div class="text-white flex items-center space-x-4 mt-7">
               <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</button>
-              <button class="rounded-2xl px-5 py-3 bg-black w-full">View</button>
+              <button class="rounded-2xl px-5 py-3 bg-black w-full">
+                <nuxt-link to="/hr/project-complete">View</nuxt-link>
+              </button>
             </div>
           </div>
           <div class="bg-white shadow p-6 rounded-md">
@@ -86,7 +88,9 @@
             </div>
             <div class="text-white flex items-center space-x-4 mt-7">
               <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</button>
-              <button class="rounded-2xl px-5 py-3 bg-black w-full">View</button>
+              <button class="rounded-2xl px-5 py-3 bg-black w-full">
+                <nuxt-link to="/hr/project-complete">View</nuxt-link>
+              </button>
             </div>
           </div>
         </div>
