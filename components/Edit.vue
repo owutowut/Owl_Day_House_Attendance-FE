@@ -3,37 +3,50 @@
     <div class="bg-white px-6 py-4 border border-gray21 w-40 h-20" >
       <div class="flex space-x-4">
         <svg-icon name="Edit" width="20" height="20"/>
-        <button>Edit</button>
+        <button>
+          <NuxtLink to="/hr/edit_employee">Edit</NuxtLink>
+        </button>
       </div>
       <div class="flex space-x-4 mt-2">
         <svg-icon name="Delete" width="20" height="20"/>
-        <button @click="update">Delete</button>
+        <button @click="Delete">Delete</button>
       </div>
     </div>
-    <Delete v-if="isDelete" :isDelete="isDelete" @handleHideDelete="onHideDelete"/>
+    <Delete v-if="isDelete" :isDelete="isDelete" @handleHideDelete="onHideDelete" @submit="submit"/>
+    <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
   </div>
 </template>
 
 <script>
 import Delete from "@/components/Delete";
-
+import Modal from "@/components/Modal";
 export default {
   name: "Edit",
   props: ['isEdit'],
   components: {
-    Delete
+    Delete,Modal
   },
   data() {
     return {
-      isDelete: false
+      isDelete: false,
+      isModal: false
     }
   },
   methods: {
     onHideDelete(event) {
       this.isDelete = event
     },
-    update(){
+    Delete(){
       this.isDelete = true
+    },
+    onHideModal(event) {
+      this.isModal = event
+    },
+    submit(event){
+      this.isDelete = false
+      setTimeout(()=>{
+        this.isModal = true
+      },500)
     }
   }
 }
