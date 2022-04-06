@@ -37,7 +37,7 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/" class="flex items-center">
+              <NuxtLink to="/hr/leaves/" class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'"/>
                 Leaves
               </NuxtLink>
