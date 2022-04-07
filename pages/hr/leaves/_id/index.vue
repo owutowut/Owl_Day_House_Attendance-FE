@@ -42,21 +42,66 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-4 col-span-full flex gap-4 text-gray23">
-    <div class="bg-white p-4 rounded-lg text-left font-kanit space-y-1">
-      <Span class="text-xl text-blue">From</Span>
-      <div class="flex border border-gray12 rounded-md bg-gray22 w-full">
-        <p class="px-2 py-1">{{leave.from}}</p>
-        <svg-icon name="Calendar" width="16" height="16" class="self-center"/>
+  <div class="grid grid-cols-4 flex space-x-4">
+    <div class="col-span-3 space-y-4">
+      <div class="grid grid-cols-3 col-span-full flex gap-4 text-gray23">
+        <div class="bg-white p-4 rounded-lg text-left space-y-1">
+          <Span class="text-base text-blue font-semibold">From</Span>
+          <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+            <p class="pl-2 py-1">{{leave.from}}</p>
+            <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg text-left space-y-1">
+          <Span class="text-base text-blue font-semibold">to</Span>
+          <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+            <p class="pl-2 py-1">{{leave.to}}</p>
+            <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg text-left space-y-1">
+          <Span class="text-base text-blue font-semibold">No of day</Span>
+          <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{leave.noofdays}}</p>
+        </div>
+      </div>
+      <div class="overflow-x-hidden pb-16 text-base font-kanit">
+        <div class="bg-white p-10 rounded-lg text-left space-y-4 text-gray23 w-full">
+          <div class="flex space-x-2 overflow-x-hidden">
+            <div class="space-y-8 mt-2 text-blue w-1/6">
+              <p>Leave Type</p>
+              <p>Leave Reason</p>
+            </div>
+            <div class="space-y-4 w-full">
+              <input type="text" disabled class="w-full border border-gray12 rounded-md bg-gray22 px-4 py-2" v-model="leave.leavetype">
+              <textarea rows="10" cols="40" disabled class="w-full border border-gray12 rounded-md bg-gray22 p-4" v-model="leave.reason"></textarea>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="bg-white p-4 rounded-lg text-left font-kanit space-y-1">
-      <Span class="text-xl text-blue">to</Span>
-      <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{leave.to}}</p>
+    <div class="col-span-1">
+      <div class="bg-white p-4 rounded-lg space-y-1">
+        <Span class="text-base text-blue font-semibold text-left">Status</Span>
+        <div class="grid justify-items-center">
+          <select class="w-full border border-gray12 rounded-md bg-white px-2 py-1 text-gray23 font-kanit" placeholder="leave.status">
+            <option value="approve">Approve</option>
+            <option value="pending">pending</option>
+          </select>
+          <div class="pt-8 self-center">
+            <button @click="showModal = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+              <span class="text-lg font-kanit">Submit</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="bg-white p-4 rounded-lg text-left font-kanit space-y-1">
-      <Span class="text-base text-blue">No of day</Span>
-      <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{leave.noofdays}}</p>
+  </div>
+  <div>
+    <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="showModal">
+      <div class="grid justify-items-center modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
+        <svg-icon name="Edit_Square" width="77.5" height="77.5" class="mt-14"/>
+        <span>Successful transaction</span>
+      </div>
     </div>
   </div>
 </div>
@@ -68,6 +113,7 @@ export default {
   layout: 'sidebar_hr',
   data() {
     return {
+      showModal: false,
       leave: {
         id: this.$route.params,
         profile: 'https://www.img.in.th/images/351eda90b97de7ef50dc6202a7f03819.jpg',
@@ -76,10 +122,12 @@ export default {
         from: '11 Jan 2020',
         to: '11 Jan 2020',
         noofdays: '1 day',
-        department:'UX/UI Designer',
+        department:'Front End Developer',
         tag: 'พนักงาน',
         status: 'Approve',
-
+        reason: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. ' +
+          'Suscipit proin aliquam morbi pellentesque euismod.',
       },
     }
   },
@@ -87,5 +135,50 @@ export default {
 </script>
 
 <style scoped>
+.modal{
+  width: 590px;
+  height: 292px;
+}
 
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.faster {
+  -webkit-animation-duration: 250ms;
+  animation-duration: 250ms;
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
 </style>
