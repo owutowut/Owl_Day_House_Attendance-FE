@@ -99,8 +99,13 @@
   <div>
     <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="showModal">
       <div class="grid justify-items-center modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-        <svg-icon name="Edit_Square" width="77.5" height="77.5" class="mt-14"/>
-        <span>Successful transaction</span>
+        <div @click="showModal = false" class="cursor-pointer justify-self-end m-4">
+          <svg-icon name="close" width="15" height="15"/>
+        </div>
+        <div class="mt-2">
+          <svg-icon name="check-circle-solid2" width="77.5" height="77.5"/>
+        </div>
+        <span class="pb-12">Successful transaction</span>
       </div>
     </div>
   </div>

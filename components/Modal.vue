@@ -8,7 +8,7 @@
         <svg-icon name="close" width="15" height="15"/>
       </div>
       <div class="flex flex-col justify-center items-center my-8">
-        <img src="~/assets/images/check-circle-solid 2.svg" class="w-20 h-20 mb-6">
+        <img src="~/assets/images/check-circle-solid2.svg" class="w-20 h-20 mb-6">
         <p class="text-3xl font-semibold">Successful transaction</p>
       </div>
     </div>

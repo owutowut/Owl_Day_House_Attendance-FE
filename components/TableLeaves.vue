@@ -9,40 +9,40 @@
               <Span>Employee</Span>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>Leave Type</Span>
+          <th @click="sort.field='type'; sort.sorted = !sort.sorted" scope="col">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">Leave Type</button>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>From</Span>
+          <th @click="sort.field='from'; sort.sorted = !sort.sorted" scope="col" class="">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">From</button>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>To</Span>
+          <th @click="sort.field='to'; sort.sorted = !sort.sorted" scope="col" class="">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">To</button>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>No of Days</Span>
+          <th @click="sort.field='noofdays'; sort.sorted = !sort.sorted" scope="col" class="">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">No of Days</button>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>Tag</Span>
+          <th @click="sort.field='tag'; sort.sorted = !sort.sorted" scope="col" class="">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">Tag</button>
             </div>
           </th>
-          <th scope="col" class="">
-            <div class="flex justify-center space-x-2">
-              <svg-icon name="Swap" width="15.82px" height="16.33px"/>
-              <Span>Status</Span>
+          <th @click="sort.field='status'; sort.sorted = !sort.sorted" scope="col" class="">
+            <div class="flex justify-center space-x-2 cursor-pointer">
+              <svg-icon name="Swap" width="15.82px" height="16.33px" class="mt-1"/>
+              <button class="text-blue font-semibold">Status</button>
             </div>
           </th>
           <th scope="col">
@@ -59,16 +59,16 @@
           <td class="py-4 ">{{ employee.from }}</td>
           <td class="py-4 ">{{ employee.to }}</td>
           <td class="py-4 ">{{ employee.noofdays }}</td>
-          <td class="px-2 ">
-            <div v-if="employee.tag=='พนักงาน'" class="bg-blue rounded-xl text-white text-center">{{ employee.tag }}</div>
-            <div v-else-if="employee.tag=='ทดลองงาน'" class="bg-yellow rounded-xl text-white text-center">{{ employee.tag }}
+          <td class="pr-1">
+            <div v-if="employee.tag=='พนักงาน'" class="px-1 bg-blue rounded-xl text-white text-center">{{ employee.tag }}</div>
+            <div v-else-if="employee.tag=='ทดลองงาน'" class="px-1 bg-yellow rounded-xl text-white text-center">{{ employee.tag }}
             </div>
             <div v-else class="bg-purple1 rounded-xl text-white text-center">{{ employee.tag }}</div>
           </td>
-          <td class="px-2 pl-8">
-            <div v-if="employee.status=='Approve'" class="bg-green rounded-xl text-white text-center">{{ employee.status }}
+          <td class="pl-1">
+            <div v-if="employee.status=='Approve'" class="px-2 bg-green rounded-xl text-white text-center">{{ employee.status }}
             </div>
-            <div v-else class="bg-yellow rounded-xl text-white text-center">{{ employee.status }}</div>
+            <div v-else class="px-2 bg-yellow rounded-xl text-white text-center">{{ employee.status }}</div>
           </td>
           <td>
             <a :href="`/hr/leaves/${employee.id}`">
@@ -79,37 +79,28 @@
         </tbody>
       </table>
     </div>
-    <div class="flex justify-end mt-2 mb-4 text-gray8">
-      <nav class="relative z-0 inline-flex rounded-md -space-x-px" aria-label="Pagination">
-        <a href="#" class="relative inline-flex items-center py-2 rounded-l-md text-sm font-medium ">
-          <span class="sr-only">Previous</span>
-          <!-- Heroicon name: solid/chevron-left -->
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-        <a href="#" aria-current="page" class="px-2 z-10 text-blue relative inline-flex items-center py-2 text-sm font-medium"> 1 </a>
-        <a href="#" class="px-2 relative inline-flex items-center py-2 text-sm font-medium"> 2 </a>
-        <a href="#" class="px-2 hidden md:inline-flex relative items-center py-2 text-sm font-medium"> 3 </a>
-        <span class="px-2 relative inline-flex items-center py-2 text-sm font-medium"> ... </span>
-        <a href="#" class="px-2 relative inline-flex items-center py-2 text-sm font-medium"> 10 </a>
-        <a href="#" class=" relative inline-flex items-center py-2 rounded-r-md text-sm font-medium">
-          <span class="sr-only">Next</span>
-          <!-- Heroicon name: solid/chevron-right -->
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </nav>
-    </div>
+<!--    <div>-->
+<!--      <paginate-->
+<!--        :page-count="20"-->
+<!--        :click-handler="functionName"-->
+<!--        :prev-text="'Prev'"-->
+<!--        :next-text="'Next'"-->
+<!--        :container-class="'className'">-->
+<!--      </paginate>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
+// import Paginate from 'vuejs-paginate'
+
 export default {
+  // components: {
+  //   Paginate,
+  // },
   props: {
-      employees: {}
-    }
-  }
+    employees: {},
+    sort: {},
+  },
+}
 </script>

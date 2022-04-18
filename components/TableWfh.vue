@@ -71,7 +71,7 @@
             <div v-else class="px-2 bg-yellow rounded-xl text-white text-center">{{ employee.status }}</div>
           </td>
           <td>
-            <a :href="`/hr/leaves/${employee.id}`">
+            <a :href="`/hr/workfromhome/${employee.id}`">
               <svg-icon name="Search" width="18.76px" height="19.22px" class="ml-8"/>
             </a>
           </td>

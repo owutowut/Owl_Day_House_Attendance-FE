@@ -48,8 +48,7 @@
       </div>
     </div>
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <TableLeaves :employees="filtered"/>
-
+      <TableLeaves :employees="filtered" :sort="sort"/>
       <AddLeave v-if="isAddLeave" :isAddLeave="isAddLeave" @handleHidAddLeave="onHideAddLeave" @submit="submit"/>
       <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
     </div>
@@ -69,13 +68,81 @@ export default {
     filtered: function () {
       if (this.search !== "") {
         return this.leaves.filter(item => {
-          return item.name.toLowerCase().includes(this.search) ||  item.leavetype.toLowerCase().includes(this.selected)
+          return item.name.toLowerCase().includes(this.search.toLowerCase()) || item.leavetype.includes(this.selected)
         })
       }
       if (this.selected !== "all") {
         return this.leaves.filter(item => {
-          return  item.leavetype.toLowerCase().includes(this.selected)
+          return item.leavetype.includes(this.selected)
         })
+      }
+      if (this.sort.field){
+        if (this.sort.field == "type") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.leavetype > b.leavetype) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.leavetype > b.leavetype) ? -1:1
+            })
+          }
+        }
+        if (this.sort.field == "from") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (Date.parse(a.from) > Date.parse(b.from)) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (Date.parse(a.from) > Date.parse(b.from)) ? -1:1
+            })
+          }
+        }
+        if (this.sort.field == "to") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (Date.parse(a.to) > Date.parse(b.to)) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (Date.parse(a.to) > Date.parse(b.to)) ? -1:1
+            })
+          }
+        }
+        if (this.sort.field == "noofdays") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.noofdays > b.noofdays) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.noofdays > b.noofdays) ? -1:1
+            })
+          }
+        }
+        if (this.sort.field == "tag") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.tag > b.tag) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.tag > b.tag) ? -1:1
+            })
+          }
+        }
+        if (this.sort.field == "status") {
+          if(this.sort.sorted==true){
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.status > b.status) ? 1:-1
+            })
+          }else {
+            return this.leaves.slice().sort((a,b)=>{
+              return (a.status > b.status) ? -1:1
+            })
+          }
+        }
       }
       return this.leaves
     }
@@ -99,6 +166,10 @@ export default {
   },
   data() {
     return {
+      sort: {
+        field: '',
+        sorted:true,
+      },
       isAddLeave: false,
       isModal: false,
       selected: 'all',
@@ -119,9 +190,9 @@ export default {
           id: 2,
           name: 'CHAWANNOP JIRAPHAT',
           leavetype: 'ลาป่วย',
-          from: '5 Jan 2020',
-          to: '5 Jan 2020',
-          noofdays: '1 day',
+          from: '5 Oct 2020',
+          to: '6 Oct 2020',
+          noofdays: '2 day',
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'pending',
@@ -142,8 +213,8 @@ export default {
           name: 'CHAWANNOP BUNMEE',
           leavetype: 'ลาป่วย',
           from: '18 Jan 2020',
-          to: '18 Jan 2020',
-          noofdays: '1 day',
+          to: '21 Jan 2020',
+          noofdays: '3 day',
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'pending',
@@ -152,8 +223,8 @@ export default {
           id: 5,
           name: 'SARAWUT BUNMEE',
           leavetype: 'ลากิจ',
-          from: '3 Mar 2020',
-          to: '3 Mar 2020',
+          from: '3 Feb 2020',
+          to: '3 Feb 2020',
           noofdays: '1 day',
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
