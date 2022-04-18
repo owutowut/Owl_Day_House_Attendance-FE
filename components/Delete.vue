@@ -2,7 +2,7 @@
   <div
     :class="`fixed w-full h-screen inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10`"
   >
-    <div class="bg-white  p-6 rounded-md w-1/3"
+    <div class="bg-white  p-6 rounded-md lg:w-1/3"
          v-if="isDelete">
       <div class="flex flex-col justify-center items-center my-8" >
         <svg-icon name="trash-alt-solid" class="w-20 h-20 mb-6" />

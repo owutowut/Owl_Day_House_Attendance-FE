@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="font-semibold text-3xl">Hello! HR</div>
-    <div class="grid grid-cols-3 mt-16 gap-6">
+    <div class="grid md:grid-cols-1 lg:grid-cols-3 mt-16 gap-6">
       <div>
         <div class="bg-white p-6 rounded-lg">
           <p class="text-2xl font-medium mb-6 px-5">Employee</p>
@@ -92,7 +92,7 @@
         <NuxtLink to="/hr/attendance-of-mounth">View all</NuxtLink>
       </button>
     </div>
-    <div class="grid grid-cols-4 gap-6 mt-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">พนักงาน</p>
         <p class="text-gray4 text-lg">3</p>
@@ -119,22 +119,22 @@
     <div class="flex justify-end space-x-4 mt-6">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg w-[704px]"/>
+        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg lg:w-[704px]"/>
       </div>
       <div>
         <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-[236px]">
           <option value="Position" >Position</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+          <option>พนักงาน</option>
+          <option>ทดลองงาน</option>
+          <option>ฝึกงาน</option>
         </select>
       </div>
       <div>
         <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-[152px]">
           <option value="Status" >Status</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+          <option>Punch In</option>
+          <option>Punch Out</option>
+          <option>Leaves</option>
         </select>
       </div>
     </div>
@@ -171,7 +171,7 @@
               <Span>Status</Span>
             </div>
           </th>
-          <th scope="col" class="px-6 py-4">
+          <th scope="col" class="px-4 py-4">
             <Span>Actions</Span>
           </th>
         </tr>
@@ -193,7 +193,7 @@
           <td >
             <button>
               <NuxtLink to="/hr/profile">
-                <img src="~/assets/images/Search.svg" class="ml-24 whitespace-nowrap"/>
+                <img src="~/assets/images/Search.svg" class="flex md:ml-10 lg:ml-32 whitespace-nowrap"/>
               </NuxtLink>
             </button>
           </td>

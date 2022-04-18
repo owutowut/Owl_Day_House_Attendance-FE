@@ -2,7 +2,7 @@
   <div
     :class="`fixed w-full h-screen inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10`"
   >
-    <div class="bg-white shadow p-6 rounded-md w-1/3"
+    <div class="bg-white shadow p-6 rounded-md md:w-1/2 lg:w-1/3"
          v-if="isAddTask">
       <div class="flex justify-end cursor-pointer" @click="hideAddTask">
         <svg-icon name="cross" width="20" height="20"/>

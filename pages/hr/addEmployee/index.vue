@@ -8,11 +8,11 @@
         </button>
       </div>
     </div>
-    <div class="bg-white rounded-lg p-6 w-3/4">
+    <div class="bg-white rounded-lg p-6  lg:w-3/4">
       <div class="grid grid-cols-12 gap-8 mt-12">
         <div class="col-span-3">
-          <div class="w-36 h-36 bg-gray5 rounded-full flex justify-center items-center ml-16">
-            <svg-icon name="Profile" width="96" height="96" class="relative left-4" />
+          <div class="w-36 h-36 bg-gray5 rounded-full flex lg:justify-center md:items-center lg:ml-8">
+            <svg-icon name="Profile" width="96" height="96" class="relative md:left-5" />
             <svg-icon name="camera" width="32" height="32" class="relative top-14" />
           </div>
         </div>

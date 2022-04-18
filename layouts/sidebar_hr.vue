@@ -1,12 +1,16 @@
 <template>
   <div class="flex flex-col ">
-    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
-      <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden">
+    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6"
+         :class="isOpen ? 'pl-[0px] lg:pl-[290px]' : 'pl-[290px]'"
+    >
+      <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden" v-show='isOpen' @click='handleOpen'>
       <img src="~/assets/images/Notification.svg">
     </nav>
 
     <aside
-      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full shadow-lg overflow-auto ease-in-out transition-all duration-300 z-10 md:hidden lg:block'>
+      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 md:hidden lg:block'
+      :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
+    >
       <div>
         <div class="flex justify-center py-3.5 mx-4 border-b border-white">
           <img src="~/assets/images/ODH_Banding-09 (1) 2.png">
@@ -56,7 +60,7 @@
         </div>
       </div>
     </aside>
-    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray18 min-h-screen">
+    <div class="lg:pl-[276px] pt-10 px-6 bg-gray18 min-h-screen " @click='isOpen = true'>
       <Nuxt/>
     </div>
 
@@ -69,7 +73,8 @@ export default {
   data() {
     return {
       currentPath: "",
-      isActive: false
+      isActive: false,
+      isOpen: true
     }
   },
   mounted() {
@@ -84,6 +89,9 @@ export default {
     checkPath(path) {
       console.log(path.split("/"))
       this.currentPath = path.split("/")[1]
+    },
+    handleOpen() {
+      this.isOpen = !this.isOpen
     }
   }
 }

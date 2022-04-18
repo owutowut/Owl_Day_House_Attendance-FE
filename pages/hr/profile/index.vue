@@ -8,9 +8,9 @@
         </button>
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-6">
-      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14">
-        <img src="~/assets/images/Group 894.png" class="h-32 w-32">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14 py-8">
+        <img src="~/assets/images/Group894.png" class="h-32 w-32">
         <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
@@ -42,7 +42,7 @@
         <div class="mt-14 mb-6">
           <p class="text-lg text-black border-b-2 w-1/2 pb-2">Pending</p>
         </div>
-        <div class="grid grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="bg-white shadow p-6 rounded-md">
             <p class="text-sm font-medium mb-2">Punch In at</p>
             <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022 10:30 AM</p>
@@ -62,7 +62,7 @@
         <div class="mt-14 mb-6">
           <p class="text-lg text-black border-b-2 w-1/2 pb-2">Completed</p>
         </div>
-        <div class="grid grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="bg-white shadow p-6 rounded-md">
             <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
             <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022 10:30 AM - 14:00 AM</p>

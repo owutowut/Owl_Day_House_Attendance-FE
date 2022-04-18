@@ -8,7 +8,7 @@
         </button>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-6 mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-white p-4 rounded-lg">
         <p class="text-lg mb-2 font-medium">Punch In</p>
         <p class="text-gray4">Mon, 11 January 2022 10.30 AM </p>

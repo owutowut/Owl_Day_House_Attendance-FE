@@ -11,22 +11,48 @@
     <div class="bg-white py-6 rounded-lg flex justify-start space-x-4 pl-8 mt-8">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2 border border-white3">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg w-96"/>
+        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-96"/>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-72 border border-white3">
-          <option value="SelectMonth" >Select Month</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+        <select
+          v-model="month"
+          @change="onChange"
+          class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-72 border border-white3"
+        >
+          <option>Select Month</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
         </select>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-64 border border-white3">
-          <option value="SelectYear" >Select Year</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+        <select
+          v-model="year"
+          @change="onChange"
+          class="
+          rounded-lg
+          px-4
+          py-2
+          text-gray14
+          font-kanit
+          text-lg
+          w-64
+          border border-white3
+        "
+        >
+          <option>Select Year</option>
+          <option>2022</option>
+          <option>2021</option>
+          <option>2020</option>
         </select>
       </div>
       <div>
@@ -42,7 +68,11 @@
               <Span>Employee</Span>
             </div>
           </th>
-
+          <th scope="col" class="" v-for="n in 31" :key="n">
+            <div class="flex items-center justify-center">
+              {{ n }}
+            </div>
+          </th>
         </tr>
         </thead>
         <tbody class="font-kanit text-lg">
@@ -59,6 +89,7 @@
 </template>
 
 <script>
+
 export default {
   name: "index",
   layout: 'sidebar_hr',

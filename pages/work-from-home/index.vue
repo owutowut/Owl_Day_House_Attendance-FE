@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="mx-4">
     <p class="text-3xl font-semibold mb-12">Work from Home</p>
     <div class="flex bg-white rounded-md p-4 space-x-4">
-      <div class="border border-gray5 flex justify-center items-center bg-white rounded-md px-4 py-2">
+      <div class="border border-gray5 flex lg:justify-center items-center bg-white rounded-md px-4 py-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
         <input type="text" v-model="search" placeholder="Search.." class="text-gray14 text-lg font-kanit"/>
       </div>
@@ -57,25 +57,14 @@
         </tr>
         </thead>
         <tbody class="font-kanit text-lg">
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">ต้องกักตัว</td>
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">14 day</td>
+        <tr class="bg-white border-t border-gray12 " v-for="wfh in wfhData" :key="wfh.id">
+          <td class="px-6 py-4 text-gray11 whitespace-nowrap">{{wfh.name}}</td>
+          <td class="px-6 py-4 text-gray11 whitespace-nowrap">{{wfh.from}}</td>
+          <td class="px-6 py-4 text-gray11 whitespace-nowrap">{{wfh.to}}</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">{{wfh.no_of_day}}</td>
           <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white whitespace-nowrap px-4 ">Approve</div>
-          </td>
-          <td >
-            <svg-icon name="EditSquare" width="25" height="25" class="ml-10 whitespace-nowrap"/>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap ">ต้องเดินทาง...</td>
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">3 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-yellow rounded-2xl text-white whitespace-nowrap px-4">pending</div>
+            <div class="bg-yellow rounded-2xl text-white  whitespace-nowrap px-4 " v-if="wfh.status=='pending'">pending</div>
+            <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 " v-if="wfh.status=='Approve'">Approve</div>
           </td>
           <td >
             <svg-icon name="EditSquare" width="25" height="25" class="ml-10 whitespace-nowrap"/>
@@ -94,7 +83,25 @@ export default {
   data() {
     return {
       selected: 'Date',
-      search: 'Search..'
+      search: 'Search..',
+      wfhData: [
+        {
+          id:1,
+          name:'ต้องกักตัว',
+          from:'11 Jan 2020',
+          to:'25 Jan 2020',
+          no_of_day: '14 day',
+          status: 'Approve'
+        },
+        {
+          id:2,
+          name:'ต้องเดินทาง...',
+          from:'5 Jan 2020',
+          to:'8 Jan 2020',
+          no_of_day: '3 day',
+          status: 'pending'
+        }
+      ]
     }
   }
 }

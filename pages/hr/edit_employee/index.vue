@@ -8,10 +8,10 @@
         </button>
       </div>
     </div>
-    <div class="bg-white rounded-lg p-6 w-3/4">
+    <div class="bg-white rounded-lg p-6 lg:w-3/4">
       <div class="grid grid-cols-12 gap-8 mt-12">
         <div class="col-span-3">
-          <div class="ml-16">
+          <div class="lg:ml-16">
             <img src="~/assets/images/Ellipse4.png" class="h-36 w-36">
             <svg-icon name="camera" width="32" height="32" class="relative -top-6 left-24" />
           </div>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="mx-4">
     <div class="font-semibold text-3xl">Hello! CHAWANNOP</div>
-    <div class="grid grid-cols-3 mt-16">
-      <div class="bg-white shadow p-6 rounded-md  mr-6">
+    <div class="grid md:grid-cols-1 lg:grid-cols-3 mt-16 gap-6">
+      <div class="bg-white shadow p-6 rounded-md  ">
         <p class="text-2xl font-medium">Timesheet</p>
         <p class="text-xs font-medium  mt-6">Punch In at</p>
         <p class="text-xs text-gray4 mt-4">Mon, 11 January 2022 10:30 AM</p>
@@ -49,7 +49,7 @@
     </div>
 
     <div :class="`${!punch ? 'opacity-50' : ''}`">
-      <div class="flex justify-between mt-[72px]">
+      <div class="flex justify-between mt-24">
         <span :class="`text-3xl font-semibold text-blue`">TODAY LIST</span>
         <div
           :class="`flex justify-center items-center bg-black1 rounded-lg px-5 py-3 space-x-2`">
@@ -64,13 +64,13 @@
           <p :class="`text-lg text-black border-b-2 w-1/2 pb-2`">
             Pending</p>
         </div>
-        <div class="grid grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div
             :class="`${punch ? 'bg-white shadow p-6 rounded-md' : 'bg-white opacity-50 shadow p-6 rounded-md'}`"
           >
             <p class="text-sm font-medium mb-2">Punch In at</p>
             <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022 10:30 AM</p>
-            <div class="flex justify-center mt-[40px]">
+            <div class="flex justify-center mt-10">
               <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
                 <div class="text-lg text-black2 font-medium">2.35 hrs</div>
               </div>
@@ -89,7 +89,7 @@
           <p :class="`text-lg text-black border-b-2 w-1/2 pb-2`">Completed</p>
         </div>
       </div>
-      <div class="grid grid-cols-4 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           :class="`${punch ? 'bg-white shadow p-6 rounded-md' : 'bg-white opacity-50 shadow p-6 rounded-md'}`"
         >

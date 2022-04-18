@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-4">
     <p class="text-3xl font-semibold mb-8">work list Complete</p>
     <div class="flex justify-end">
       <div class="flex justify-end items-center bg-white rounded-md px-4 mb-6 text-lg">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table class="w-full  text-left">
+      <table class="lg:w-full  text-left">
         <thead class="text-lg text-blue font-kanit bg-white font-medium">
         <tr>
           <th scope="col" class="px-6 py-4">Project Name</th>
@@ -45,129 +45,19 @@
             </th>
         </tr>
         </thead>
-        <tbody class="font-kanit text-lg">
+        <tbody class="font-kanit text-lg" v-for="worklist in worklistData" :key="worklist.id">
         <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-yellow rounded-2xl text-white flex justify-center px-6">Pending</div>
-            </td>
+          <td class="px-6 py-4 text-gray11 whitespace-nowrap">{{worklist.name}}</td>
+          <td class="px-10 py-4 text-gray11 whitespace-nowrap">{{ worklist.punch_in }}</td>
+          <td class="px-10 py-4 text-gray11 whitespace-nowrap">{{ worklist.punch_out }}</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">{{worklist.no_of_day}}</td>
+          <td class="flex mt-4  w-8">
+            <div class="bg-yellow rounded-2xl text-white text-center px-8" v-if="worklist.status=='Pending'">{{worklist.status}}</div>
+            <div class="bg-red4 rounded-2xl text-white text-center px-10" v-if="worklist.status=='Break'">{{worklist.status}}</div>
+            <div class="bg-green rounded-2xl text-white text-center px-6" v-if="worklist.status=='Complete'">{{worklist.status}}</div>
+          </td>
           <td >
             <button >
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-red4 rounded-2xl text-white flex justify-center px-8">Break</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/work-list-project">
-                <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap">Lorem ipsum dolor sit</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-10 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white flex justify-center px-4">Complete</div>
-          </td>
-          <td >
-            <button>
               <NuxtLink to="/work-list-project">
                 <img src="~/assets/images/Search.svg" class="ml-14 whitespace-nowrap"/>
               </NuxtLink>
@@ -186,7 +76,77 @@
 <script>
 export default {
   name: "worklist_complete",
-  layout: 'sidebar'
+  layout: 'sidebar',
+  data(){
+    return{
+      worklistData: [
+        {
+          id:1,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'11 Jan 2020',
+          punch_out:'11 Jan 2020',
+          no_of_day: '1 day',
+          status: 'Pending'
+        },
+        {
+          id:2,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'5 Jan 2020',
+          punch_out:'5 Jan 2020',
+          no_of_day: '1 day',
+          status: 'Break'
+        },
+        {
+          id:3,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'24 Mar 2020',
+          punch_out:'24 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+        {
+          id:4,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'18 Mar 2020',
+          punch_out:'18 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+        {
+          id:5,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'3 Mar 2020',
+          punch_out:'3 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+        {
+          id:6,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'24 Mar 2020',
+          punch_out:'24 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+        {
+          id:7,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'18 Jan 2020',
+          punch_out:'18 Jan 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+        {
+          id:8,
+          name:'Lorem ipsum dolor sit',
+          punch_in:'3 Mar 2020',
+          punch_out:'3 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Complete'
+        },
+      ]
+    }
+  }
 }
 </script>
 

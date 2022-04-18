@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-4">
       <div class="mb-12">
         <span class="text-3xl font-semibold mr-6">Yesterday’s work list</span>
         <span class="text-lg font-medium bg-blue py-1 px-5 text-white rounded-lg">11/01/65</span>

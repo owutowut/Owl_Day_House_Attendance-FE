@@ -1,9 +1,9 @@
 <template>
   <div>
     <p class="text-4xl font-semibold mb-8">Profile</p>
-    <div class="grid grid-cols-2 gap-6">
+    <div class="grid lg:grid-cols-2 gap-6">
       <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14">
-        <img src="~/assets/images/Group 894.png" class="h-[126px] w-[126px]">
+        <img src="~/assets/images/Group894.png" class="h-[126px] w-[126px]">
         <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
@@ -27,8 +27,8 @@
           <p class="py-2">199/50 one bn kof ,frlp;@:, 10130</p>
           <p class="py-2">Manee Owan</p>
         </div>
-     </div>
-      <div class="bg-white shadow p-6 rounded-md col-end-3">
+      </div>
+      <div class="bg-white shadow p-6 rounded-md  col-end-3">
         <p class="mb-6 text-blue2">Account Data</p>
         <div class="flex mb-6">
           <p class="font-light text-blue2">Email :</p> <p class="text-gray7 ml-4 font-light">chwannop@owndayshouse.com</p>

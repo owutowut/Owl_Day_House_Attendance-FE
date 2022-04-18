@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-4">
     <div class="flex justify-between mb-8" >
       <span class="text-3xl font-semibold">LEAVES</span>
       <button class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center"
@@ -8,7 +8,7 @@
         <span class="text-lg font-kanit">Add Leave</span>
       </button>
     </div>
-    <div class="grid grid-cols-4 gap-6 mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">ลาป่วย</p>
         <p class="text-gray4 text-lg">3</p>
@@ -32,13 +32,13 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end space-x-4 mb-6">
+    <div class="lg:flex lg:justify-end space-x-4 mb-6">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-md px-4 py-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg"/>
+        <input type="text" v-model="search" placeholder="Search.." class="lg:w-[488px] font-kanit text-lg"/>
       </div>
       <div>
-        <select v-model="selected" class="rounded-md px-4 py-2 w-[354px] text-gray14 font-kanit text-lg">
+        <select v-model="selected" class="rounded-md px-4 py-2 mt-4 lg:w-[354px] text-gray14 font-kanit text-lg">
           <option value="Leave type" >Leave type</option>
           <option>A</option>
           <option>B</option>
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="relative overflow-x-auto  sm:rounded-lg ">
-      <table class="w-full">
+      <table class="lg:w-full">
         <thead class="text-lg text-blue  bg-white">
         <tr>
           <th scope="col" class="px-6 py-4">
@@ -86,61 +86,14 @@
         </tr>
         </thead>
         <tbody class="font-kanit text-lg">
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">11 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">1 day</td>
+        <tr class="bg-white border-t border-gray12 " v-for="leave in leaveData" :key="leave.id">
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">{{leave.name}}</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">{{leave.from}}</td>
+          <td class="px-8 py-4 text-gray11 whitespace-nowrap">{{leave.to}}</td>
+          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">{{leave.no_of_day}}</td>
           <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 ">Approve</div>
-          </td>
-          <td >
-            <svg-icon name="Edit_Square" width="25" height="25" class="ml-24 whitespace-nowrap"/>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลากิจ</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">5 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-yellow rounded-2xl text-white  whitespace-nowrap px-4">pending</div>
-          </td>
-          <td >
-            <svg-icon name="Edit_Square" width="25" height="25" class="ml-24 whitespace-nowrap"/>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">24 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-yellow rounded-2xl text-white flex whitespace-nowrap px-4">pending</div>
-          </td>
-          <td >
-            <svg-icon name="Edit_Square" width="25" height="25" class="ml-24 whitespace-nowrap"/>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลาป่วย</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">18 Jan 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-yellow rounded-2xl text-white whitespace-nowrap px-4">pending</div>
-          </td>
-          <td >
-            <svg-icon name="Edit_Square" width="25" height="25" class="ml-24 whitespace-nowrap"/>
-          </td>
-        </tr>
-        <tr class="bg-white border-t border-gray12 ">
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap ">ลากิจ</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">3 Mar 2020</td>
-          <td class="px-14 py-4 text-gray11 whitespace-nowrap">1 day</td>
-          <td class="flex mt-4 ml-4">
-            <div class="bg-green rounded-2xl text-white whitespace-nowrap px-4">Approve</div>
+            <div class="bg-yellow rounded-2xl text-white  whitespace-nowrap px-4 " v-if="leave.status=='pending'">pending</div>
+            <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 " v-if="leave.status=='Approve'">Approve</div>
           </td>
           <td >
             <svg-icon name="Edit_Square" width="25" height="25" class="ml-24 whitespace-nowrap"/>
@@ -170,7 +123,49 @@ export default {
       selected: 'Leave type',
       isAddLeave: false,
       isModal: false,
-      search: ''
+      search: '',
+      leaveData: [
+        {
+          id:1,
+          name:'ลาป่วย',
+          from:'11 Jan 2020',
+          to:'11 Jan 2020',
+          no_of_day: '1 day',
+          status: 'Approve'
+        },
+        {
+          id:2,
+          name:'ลากิจ',
+          from:'5 Jan 2020',
+          to:'5 Jan 2020',
+          no_of_day: '1 day',
+          status: 'pending'
+        },
+        {
+          id:3,
+          name:'ลาป่วย',
+          from:'24 Mar 2020',
+          to:'24 Mar 2020',
+          no_of_day: '1 day',
+          status: 'pending'
+        },
+        {
+          id:4,
+          name:'ลาป่วย',
+          from:'18 Mar 2020',
+          to:'18 Mar 2020',
+          no_of_day: '1 day',
+          status: 'pending'
+        },
+        {
+          id: 5,
+          name: 'ลากิจ',
+          from: '3 Mar 2020',
+          to: '3 Mar 2020',
+          no_of_day: '1 day',
+          status: 'Approve'
+        }
+      ]
     }
   },
   methods: {
