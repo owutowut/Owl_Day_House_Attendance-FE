@@ -68,7 +68,7 @@
               <Span>Employee</Span>
             </div>
           </th>
-          <th scope="col" class="" v-for="n in 31" :key="n">
+          <th scope="col" class="" v-for="n in 31" :key ="n">
             <div class="flex items-center justify-center">
               {{ n }}
             </div>
@@ -82,8 +82,18 @@
         </tbody>
       </table>
     </div>
-    <div class="mt-6 flex justify-end">
-      <img src="~/assets/images/Group 204.png">
+    <div>
+      <paginate
+        class="flex justify-end mt-10 text-xl text-black2"
+        :pageCount="10"
+        :page-range="3"
+        :margin-pages="1"
+        :clickHandler="onChangePage"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :containerClass="'pagination'"
+        :page-class="'page-item'">
+      </paginate>
     </div>
   </div>
 </template>
@@ -95,6 +105,8 @@ export default {
   layout: 'sidebar_hr',
   data(){
     return {
+      currentPage: 1,
+      perPage: 10,
       employeeData: [
         {
           id:1,
@@ -129,6 +141,16 @@ export default {
           name:'CHAWANNOP THAMMAJAI'
         }
       ]
+    }
+  },
+  computed: {
+    pageStart() {
+      return (this.currentPage - 1) * this.data.perPage
+    }
+  },
+  methods: {
+    onChangePage(i) {
+      this.currentPage = i
     }
   }
 }

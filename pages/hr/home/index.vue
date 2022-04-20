@@ -165,13 +165,13 @@
               <Span>Tag</Span>
             </div>
           </th>
-          <th scope="col" class="px-10 py-4">
+          <th scope="col" class="px-6 py-4">
             <div class="flex items-center">
               <svg-icon name="Swap" width="20" height="20"/>
               <Span>Status</Span>
             </div>
           </th>
-          <th scope="col" class="px-4 py-4">
+          <th scope="col" class="px-6 py-4">
             <Span>Actions</Span>
           </th>
         </tr>
@@ -193,7 +193,7 @@
           <td >
             <button>
               <NuxtLink to="/hr/profile">
-                <img src="~/assets/images/Search.svg" class="flex md:ml-10 lg:ml-32 whitespace-nowrap"/>
+                <img src="~/assets/images/Search.svg" class="flex md:ml-10 lg:ml-20 whitespace-nowrap"/>
               </NuxtLink>
             </button>
           </td>
@@ -201,18 +201,29 @@
         </tbody>
       </table>
     </div>
-    <div class="mt-6 flex justify-end">
-      <img src="~/assets/images/Group 204.png">
-    </div>
+      <paginate
+        class="flex justify-end mt-10 text-xl text-black2"
+        v-model="page"
+        :page-count="10"
+        :page-range="3"
+        :margin-pages="1"
+        :click-handler="onChangePage"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination'"
+        :page-class="'page-item'">
+      </paginate>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "home",
   layout: 'sidebar_hr',
   data(){
     return{
+      page: 10,
       mockData: [
         {
           id:1,
