@@ -22,7 +22,11 @@
     </div>
 
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <TableHoliday :holidays="filtered" :sort="sort"/>
+      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="holidays.map((item, index) => {
+        return {
+          index: (index + 1) + pageStart,
+          ...item,}
+      })"/>
     </div>
 
     <form onsubmit="Submit()">
@@ -136,63 +140,13 @@
 </template>
 
 <script>
-import TableHoliday from '@/components/TableHoliday.vue'
+import Table from '@/components/Table.vue'
 
 export default {
   name: "holiday",
   layout: 'sidebar_hr',
   components:{
-    TableHoliday,
-  },
-  computed: {
-    filtered: function () {
-      if (this.search !== "") {
-        return this.holidays.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase()) || item.noofdays.includes(this.selected)
-        })
-      }
-      if (this.selected !== "all") {
-        return this.holidays.filter(item => {
-          return item.noofdays.includes(this.selected)
-        })
-      }
-      if (this.sort.field){
-        if (this.sort.field == "from") {
-          if(this.sort.sorted==true){
-            return this.holidays.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? 1:-1
-            })
-          }else {
-            return this.holidays.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "to") {
-          if(this.sort.sorted==true){
-            return this.holidays.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? 1:-1
-            })
-          }else {
-            return this.holidays.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "noofdays") {
-          if(this.sort.sorted==true){
-            return this.holidays.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? 1:-1
-            })
-          }else {
-            return this.holidays.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? -1:1
-            })
-          }
-        }
-      }
-      return this.holidays
-    }
+    Table,
   },
   data() {
     return {
@@ -212,6 +166,26 @@ export default {
       },
       selected: 'all',
       search: '',
+      path:'holidays',
+      icon:'Edit_Square',
+      headers: [{
+        key: 'name',
+        title:'Holiday Name',
+      }, {
+        key: 'from',
+        title: 'From',
+        sort: true,
+      }, {
+        key: 'to',
+        title: 'To',
+        sort: true,
+      }, {
+        key: 'noofdays',
+        title: 'No of Days',
+        sort: true,
+      }, {
+        title: 'Actions',
+      }],
       holidays: [
         {
           id: 1,

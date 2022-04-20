@@ -19,102 +19,23 @@
       </div>
     </div>
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <TableWfh :employees="filtered" :sort="sort"/>
+      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="workfromhome.map((item, index) => {
+        return {
+          index: (index + 1) + pageStart,
+          ...item,}
+      })"/>
     </div>
   </div>
 </template>
 
 <script>
-import TableWfh from '@/components/TableWfh.vue'
+import Table from '@/components/Table.vue'
 
 export default {
   name: "workfromhome",
   layout: 'sidebar_hr',
   components:{
-    TableWfh,
-  },
-  computed: {
-    filtered: function () {
-      if (this.search !== "") {
-        return this.leaves.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase()) || item.leavetype.includes(this.selected)
-        })
-      }
-      if (this.selected !== "all") {
-        return this.leaves.filter(item => {
-          return item.leavetype.includes(this.selected)
-        })
-      }
-      if (this.sort.field){
-        if (this.sort.field == "type") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.leavetype > b.leavetype) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.leavetype > b.leavetype) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "from") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "to") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "noofdays") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "tag") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.tag > b.tag) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.tag > b.tag) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "status") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.status > b.status) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.status > b.status) ? -1:1
-            })
-          }
-        }
-      }
-      return this.leaves
-    }
+    Table,
   },
   methods: {
     onHideModal(event) {
@@ -133,9 +54,42 @@ export default {
         field: '',
         sorted:true,
       },
+      path:'workfromhome',
       selected: 'all',
       search: '',
-      leaves: [
+      icon:'Search2',
+      headers: [{
+        key: 'name',
+        title:'Employee',
+      }, {
+        key: 'leavetype',
+        title: 'type',
+        sort: true,
+      }, {
+        key: 'from',
+        title: 'From',
+        sort: true,
+      }, {
+        key: 'to',
+        title: 'To',
+        sort: true,
+      }, {
+        key: 'noofdays',
+        title: 'No of Days',
+        sort: true,
+      }, {
+        key: 'tag',
+        title: 'Tag',
+        sort: true,
+      }, {
+        key: 'status',
+        title: 'Status',
+        sort: true,
+      }, {
+        title: 'Actions',
+      },
+      ],
+      workfromhome: [
         {
           id: 1,
           name: 'JIRAPHAT THAMMAJAI',

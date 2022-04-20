@@ -48,106 +48,60 @@
       </div>
     </div>
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <TableLeaves :employees="filtered" :sort="sort"/>
+      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="leaves.map((item, index) => {
+        return {
+          index: (index + 1) + pageStart,
+          ...item,}
+      })"/>
       <AddLeave v-if="isAddLeave" :isAddLeave="isAddLeave" @handleHidAddLeave="onHideAddLeave" @submit="submit"/>
       <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
     </div>
+
+<!--    <client-only>-->
+<!--      <div class="flex justify-end">-->
+<!--        <Paginate-->
+<!--          :pageCount="totalPage"-->
+<!--          :page-range="3"-->
+<!--          :margin-pages="1"-->
+<!--          :clickHandler="onChangePage"-->
+<!--          :containerClass="'pagination'"-->
+<!--          :prev-text="'<'"-->
+<!--          :next-text="'>'"-->
+<!--          :page-class="'page-item'"-->
+<!--          :page-link-class="'page-link'"-->
+<!--          :prev-class="'page-item'"-->
+<!--          :prev-link-class="'page-link'"-->
+<!--          :next-class="'page-item'"-->
+<!--          :next-link-class="'page-link'"-->
+<!--        >-->
+<!--        </Paginate>-->
+<!--      </div>-->
+<!--    </client-only>-->
+
   </div>
 </template>
 
 <script>
-import TableLeaves from '@/components/TableLeaves.vue'
+import Table from '@/components/Table.vue'
 
 export default {
   name: "leaves",
   layout: 'sidebar_hr',
   components:{
-    TableLeaves,
+    Table,
   },
-  computed: {
-    filtered: function () {
-      if (this.search !== "") {
-        return this.leaves.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase()) || item.leavetype.includes(this.selected)
-        })
-      }
-      if (this.selected !== "all") {
-        return this.leaves.filter(item => {
-          return item.leavetype.includes(this.selected)
-        })
-      }
-      if (this.sort.field){
-        if (this.sort.field == "type") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.leavetype > b.leavetype) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.leavetype > b.leavetype) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "from") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.from) > Date.parse(b.from)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "to") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (Date.parse(a.to) > Date.parse(b.to)) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "noofdays") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.noofdays > b.noofdays) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "tag") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.tag > b.tag) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.tag > b.tag) ? -1:1
-            })
-          }
-        }
-        if (this.sort.field == "status") {
-          if(this.sort.sorted==true){
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.status > b.status) ? 1:-1
-            })
-          }else {
-            return this.leaves.slice().sort((a,b)=>{
-              return (a.status > b.status) ? -1:1
-            })
-          }
-        }
-      }
-      return this.leaves
-    }
-  },
+  // computed: {
+  //   pageStart() {
+  //     return (this.currentPage - 1) * this.leaves.perPage
+  //   },
+  //   totalPage() {
+  //     return Math.ceil(this.leaves.total / this.leaves.perPage)
+  //   },
+  // },
   methods: {
+    // onChangePage(i) {
+    //   this.currentPage = i
+    // },
     onHideAddLeave(event) {
       this.isAddLeave = event
     },
@@ -166,6 +120,8 @@ export default {
   },
   data() {
     return {
+      // currentPage: 1,
+      // perPage: 10,
       sort: {
         field: '',
         sorted:true,
@@ -173,7 +129,40 @@ export default {
       isAddLeave: false,
       isModal: false,
       selected: 'all',
+      path:'leaves',
+      icon:'Search2',
       search: '',
+      headers: [{
+        key: 'name',
+        title:'Employee',
+      }, {
+        key: 'leavetype',
+        title: 'LeaveType',
+        sort: true,
+      }, {
+        key: 'from',
+        title: 'From',
+        sort: true,
+      }, {
+        key: 'to',
+        title: 'To',
+        sort: true,
+      }, {
+        key: 'noofdays',
+        title: 'No of Days',
+        sort: true,
+      }, {
+        key: 'tag',
+        title: 'Tag',
+        sort: true,
+      }, {
+        key: 'status',
+        title: 'Status',
+        sort: true,
+      }, {
+        title: 'Actions',
+      },
+      ],
       leaves: [
         {
           id: 1,
