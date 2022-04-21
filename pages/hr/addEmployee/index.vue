@@ -35,12 +35,14 @@
           </div>
           <div class="my-4">
             <p class="mb-2">Date of Join</p>
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
-<!--            <svg-icon name="Calendar" width="24" height="24" class="relative left-80 top-6"/>-->
-            <date-picker
-              v-model="form.date_of_join"
-              custom-input=".custom-input"
-            />
+            <div>
+              <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
+              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
+              <date-picker
+                v-model="form.date_of_join"
+                custom-input=".custom-input"
+              />
+            </div>
           </div>
         </div>
         <div class="col-span-4 ">
@@ -63,14 +65,16 @@
           </div>
           <div class="my-5">
             <p class="mb-2">Birthday</p>
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
-<!--            <svg-icon name="Calendar" width="24" height="24" class="relative left-80 top-6"/>-->
-            <date-picker
-              v-model="form.birthday"
-              custom-input=".custom-input-birthday"
-            />
+            <div>
+              <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
+              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
+              <date-picker
+                v-model="form.birthday"
+                custom-input=".custom-input-birthday"
+              />
+            </div>
           </div>
-          <div class="my-5">
+          <div class="-my-6">
             <p class="mt-2">Report to</p>
             <select v-model="form.report_to" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
               <option value="Select Name">Select Name</option>
