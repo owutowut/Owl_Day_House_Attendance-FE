@@ -3,7 +3,7 @@
     <div class="flex justify-between mb-2">
       <span class="text-3xl font-semibold text-blue">LEAVES</span>
       <button class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center"
-              @click="AddLeave">
+              @click="show.addleave=true">
         <svg-icon name="add1" width="15" height="15" class="mr-2"/>
         <span class="text-lg font-kanit">Add Leave</span>
       </button>
@@ -22,13 +22,13 @@
         <p class="leavesresult">5</p>
       </div>
       <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
-        <div class="grid grid-cols-2 divide-x justify-center divide-gray13">
-          <div>
-            <p class="text-xs text-blue mb-2">ลาทั้งหมด</p>
+        <div class="grid grid-cols-2 divide-x justify-center divide-gray13 text-xs text-blue">
+          <div class="mt-1.5">
+            <p>ลาทั้งหมด</p>
             <p class="leavesresult">5</p>
           </div>
-          <div>
-            <p class="text-xs text-blue mb-2">ลาของเดือนนี้</p>
+          <div class="mt-1.5">
+            <p>ลาของเดือนนี้</p>
             <p class="leavesresult">3</p>
           </div>
         </div>
@@ -47,14 +47,17 @@
         </select>
       </div>
     </div>
+
     <div class="relative overflow-x-auto sm:rounded-lg">
       <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="leaves.map((item, index) => {
         return {
           index: (index + 1) + pageStart,
           ...item,}
       })"/>
-      <AddLeave v-if="isAddLeave" :isAddLeave="isAddLeave" @handleHidAddLeave="onHideAddLeave" @submit="submit"/>
-      <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
+    </div>
+
+    <div>
+      <ModalHR :show="show"/>
     </div>
 
 <!--    <client-only>-->
@@ -83,12 +86,13 @@
 
 <script>
 import Table from '@/components/Table.vue'
+import ModalHR from '@/components/ModalHR.vue'
 
 export default {
   name: "leaves",
   layout: 'sidebar_hr',
   components:{
-    Table,
+    Table,ModalHR
   },
   // computed: {
   //   pageStart() {
@@ -105,18 +109,6 @@ export default {
     onHideAddLeave(event) {
       this.isAddLeave = event
     },
-    AddLeave() {
-      this.isAddLeave = true
-    },
-    onHideModal(event) {
-      this.isModal = event
-    },
-    submit(event) {
-      this.isAddLeave = false
-      setTimeout(() => {
-        this.isModal = true
-      }, 500)
-    },
   },
   data() {
     return {
@@ -126,8 +118,9 @@ export default {
         field: '',
         sorted:true,
       },
-      isAddLeave: false,
-      isModal: false,
+      show:{
+        addleave: false,
+      },
       selected: 'all',
       path:'leaves',
       icon:'Search2',

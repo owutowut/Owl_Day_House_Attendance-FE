@@ -6,6 +6,7 @@
         <span class="text-lg font-kanit">Back</span>
       </nuxt-link>
     </div>
+
     <div class="grid grid-cols-2 gap-4 mb-4">
       <div class="flex bg-white p-10 rounded-lg text-left font-kanit border border-gray19 space-x-6">
         <div class="self-center">
@@ -42,6 +43,7 @@
         </div>
       </div>
     </div>
+
     <div class="grid grid-cols-4 flex space-x-4">
       <div class="col-span-3 space-y-4">
         <div class="grid grid-cols-3 col-span-full flex gap-4 text-gray23">
@@ -79,6 +81,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-span-1 space-y-4">
         <div class="bg-white p-4 rounded-lg">
           <div class="text-center grid grid-cols-2 divide-x justify-center divide-gray13">
@@ -99,12 +102,13 @@
         <div class="bg-white p-4 rounded-lg space-y-1">
           <Span class="text-base text-blue font-semibold text-left">Status</Span>
           <div class="grid justify-items-center">
-            <select class="cursor-pointer w-full border border-gray12 rounded-md bg-white px-2 py-1 text-gray23 font-kanit" placeholder="leave.status">
-              <option value="approve">Approve</option>
-              <option value="pending">pending</option>
+            <select v-model="selected" class="cursor-pointer w-full border border-gray12 rounded-md bg-white px-2 py-1 text-gray23 font-kanit">
+              <option value="current" > {{workfromhome.status}} </option>
+              <option v-if="selected=='approve'" value="approve">Approve</option>
+              <option v-else value="pending">pending</option>
             </select>
             <div class="pt-8 self-center">
-              <button @click="showModal = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+              <button @click="show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
                 <span class="text-lg font-kanit">Submit</span>
               </button>
             </div>
@@ -112,29 +116,29 @@
         </div>
       </div>
     </div>
+
     <div>
-      <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="showModal">
-        <div class="grid justify-items-center modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-          <div @click="showModal = false" class="cursor-pointer justify-self-end m-4">
-            <svg-icon name="close" width="15" height="15"/>
-          </div>
-          <div class="mt-2">
-            <svg-icon name="check-circle-solid2" width="77.5" height="77.5"/>
-          </div>
-          <span class="pb-12">Successful transaction</span>
-        </div>
-      </div>
+      <ModalHR :show="show"/>
     </div>
+
   </div>
 </template>
 
 <script>
+import ModalHR from "@/components/ModalHR";
+
 export default {
   name: "leaveview.vue",
   layout: 'sidebar_hr',
+  components:{
+    ModalHR
+  },
   data() {
     return {
-      showModal: false,
+      selected:'current',
+      show:{
+        success: false,
+      },
       workfromhome: {
         id: this.$route.params,
         profile: 'https://www.img.in.th/images/351eda90b97de7ef50dc6202a7f03819.jpg',
