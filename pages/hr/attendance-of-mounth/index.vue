@@ -78,6 +78,17 @@
         <tbody class="font-kanit text-lg">
         <tr class="bg-white border-t border-gray12"  v-for="employee in employeeData" :key="employee.id">
         <td class="px-6 py-4 text-gray11 whitespace-nowrap ">{{employee.name}}</td>
+          <td v-for="n in 31" :key ="n">
+            <div v-if="employee.status=='active'" >
+              <svg-icon name="check" width="20" height="20" />
+            </div>
+            <div v-if="employee.status=='weekend'">
+              <svg-icon name="cross_red" width="20" height="20" />
+            </div>
+            <div v-if="employee.status=='wait'">
+              <svg-icon name="cross_yellow" width="20" height="20" />
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -110,35 +121,43 @@ export default {
       employeeData: [
         {
           id:1,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:2,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:3,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:4,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:5,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:6,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:7,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         },
         {
           id:8,
-          name:'CHAWANNOP THAMMAJAI'
+          name:'CHAWANNOP THAMMAJAI',
+          status: 'active'
         }
       ]
     }
@@ -152,7 +171,8 @@ export default {
     onChangePage(i) {
       this.currentPage = i
     }
-  }
+  },
+
 }
 </script>
 
