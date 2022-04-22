@@ -40,7 +40,7 @@
         <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4"/>
       </div>
       <div>
-        <select v-model="selected" class="rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+        <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
           <option value="all">Leave type</option>
           <option value="ลาป่วย">ลาป่วย</option>
           <option value="ลากิจ">ลากิจ</option>

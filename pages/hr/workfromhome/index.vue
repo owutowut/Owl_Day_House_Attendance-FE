@@ -12,11 +12,10 @@
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
         <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4"/>
       </div>
-      <div>
-        <select v-model="selected" class="rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
-          <option value="all">Date</option>
-        </select>
-      </div>
+      <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+        <option value="all">Date</option>
+        <option v-for="date in workfromhome" :value="date.createdate">{{date.createdate}}</option>
+      </select>
     </div>
     <div class="relative overflow-x-auto sm:rounded-lg">
       <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="workfromhome.map((item, index) => {
@@ -36,17 +35,6 @@ export default {
   layout: 'sidebar_hr',
   components:{
     Table,
-  },
-  methods: {
-    onHideModal(event) {
-      this.isModal = event
-    },
-    submit(event) {
-      this.isAddForm = false
-      setTimeout(() => {
-        this.isModal = true
-      }, 500)
-    },
   },
   data() {
     return {
@@ -100,6 +88,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'Approve',
+          createdate: '7 Jan 2020',
         },
         {
           id: 2,
@@ -111,6 +100,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'pending',
+          createdate: '2 Oct 2020',
         },
         {
           id: 3,
@@ -122,6 +112,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
           status: 'pending',
+          createdate: '23 Mar 2020',
         },
         {
           id: 4,
@@ -133,6 +124,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'pending',
+          createdate: '16 Jan 2020',
         },
         {
           id: 5,
@@ -144,6 +136,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'Approve',
+          createdate: '1 Feb 2020',
         },
         {
           id: 6,
@@ -155,6 +148,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'Approve',
+          createdate: '22 Mar 2020',
         },
         {
           id: 7,
@@ -166,6 +160,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
           status: 'Approve',
+          createdate: '15 Jan 2020',
         },
         {
           id: 8,
@@ -177,6 +172,7 @@ export default {
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'Approve',
+          createdate: '2 Mar 2020',
         },
       ],
     }

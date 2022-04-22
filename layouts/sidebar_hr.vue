@@ -31,7 +31,7 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/" class="flex items-center">
+              <NuxtLink to="/hr/holidays/" class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='holiday'"/>
                 Hoilday
               </NuxtLink>
@@ -43,7 +43,7 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/" class="flex items-center">
+              <NuxtLink to="/hr/workfromhome/" class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='work-from-home'"/>
                 Work from Home
               </NuxtLink>

@@ -15,8 +15,9 @@
         <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4"/>
       </div>
       <div>
-        <select v-model="selected" class="rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+        <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
           <option value="all">Date</option>
+          <option v-for="date in holidays" :value="date.createdate">{{date.createdate}}</option>
         </select>
       </div>
     </div>
@@ -89,23 +90,26 @@ export default {
         {
           id: 1,
           name: 'สงกรานต์',
-          from: '10 Jan 2020',
-          to: '17 Jan 2020',
+          from: '10 April 2020',
+          to: '17 April 2020',
           noofdays: 7,
+          createdate: '9 April 2020',
         },
         {
           id: 2,
           name: 'วันจักรี',
-          from: '6 Jan 2020',
-          to: '7 Jan 2020',
+          from: '6 April 2020',
+          to: '7 April 2020',
           noofdays: 1,
+          createdate: '28 March 2020',
         },
         {
           id: 3,
           name: 'วันภาพยนตร์แห่งชาติ',
-          from: '4 Jan 2020',
-          to: '5 Jan 2020',
+          from: '4 April 2020',
+          to: '5 April 2020',
           noofdays: 1,
+          createdate: '1 April 2020',
         },
       ],
     }

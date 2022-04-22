@@ -105,8 +105,8 @@
                         </div>
                       </div>
                       <div class="mt-2 flex justify-end text-blue text-sm space-x-4">
-                        <button @click="showModalPunchout = false">CANCEL</button>
-                        <button type="onSubmit" ">OK</button>
+                        <button @click="showModalPunchout = false;punchout.hour='',punchout.minute=''">CANCEL</button>
+                        <button type="onSubmit">OK</button>
                       </div>
                     </div>
                   </div>

@@ -155,9 +155,15 @@ export default {
         }
       }
       if (this.selected !== "all") {
-        return this.data.filter(item => {
-          return item.leavetype.includes(this.selected)
-        })
+        if (this.path === "holidays"||"workfromhome") {
+          return this.data.filter(item => {
+            return item.createdate.includes(this.selected)
+          })
+        } else{
+          return this.data.filter(item => {
+            return item.leavetype.includes(this.selected)
+          })
+        }
       }
       if (this.sort.field !== ""){
         if (this.sort.field === "leavetype") {
@@ -220,7 +226,7 @@ export default {
             return this.data.slice().sort((a,b)=>{
               return (a.status > b.status) ? 1:-1
             })
-          }else {
+          } else {
             return this.data.slice().sort((a,b)=>{
               return (a.status > b.status) ? -1:1
             })
