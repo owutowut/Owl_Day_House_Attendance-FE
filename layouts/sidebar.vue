@@ -1,14 +1,12 @@
 <template>
   <div class="flex flex-col ">
-    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6"
-         :class="isOpen ? 'pl-[0px] lg:pl-[290px]' : 'pl-[290px]'"
-    >
+    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
       <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden" v-show='isOpen' @click='handleOpen'>
       <img src="~/assets/images/Notification.svg">
     </nav>
 
     <aside
-      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full shadow-lg overflow-auto ease-in-out transition-all duration-300 z-10 md:hidden lg:block'
+      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full shadow-lg overflow-auto ease-in-out transition-all duration-300 z-10 sm:hidden md:block'
       :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
     >
       <div>

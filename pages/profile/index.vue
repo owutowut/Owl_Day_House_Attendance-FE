@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="pl-6">
     <p class="text-4xl font-semibold mb-8">Profile</p>
     <div class="grid lg:grid-cols-2 gap-6">
-      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14">
+      <div class="bg-white shadow  rounded-md flex justify-start items-center pl-14 py-12">
         <img src="~/assets/images/Group894.png" class="h-[126px] w-[126px]">
         <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
-          <div class="bg-blue rounded-xl text-white text-xs w-1/3 mt-2 py-1 font-kanit flex justify-center">
-            <p>พนักงาน</p>
+          <div class="bg-blue rounded-xl text-white text-xs w-1/3 mt-2 py-1 px-10 font-kanit flex justify-center">
+            พนักงาน
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
           <p class="py-2">Manee Owan</p>
         </div>
       </div>
-      <div class="bg-white shadow p-6 rounded-md  col-end-3">
+      <div class="bg-white shadow p-6 rounded-md  lg:col-end-3">
         <p class="mb-6 text-blue2">Account Data</p>
         <div class="flex mb-6">
           <p class="font-light text-blue2">Email :</p> <p class="text-gray7 ml-4 font-light">chwannop@owndayshouse.com</p>

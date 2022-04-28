@@ -14,8 +14,8 @@
         <div class="flex flex-col justify-center pl-8">
           <p class="text-blue2">CHAWANNOP THAMMAJAI</p>
           <p class="text-xs text-gray6">UX/UI Designer</p>
-          <div class="bg-blue rounded-xl text-white text-xs w-1/3 mt-2 py-1 font-kanit flex justify-center">
-            <p>พนักงาน</p>
+          <div class="bg-blue rounded-xl text-white text-xs w-1/3 mt-2 py-1 px-10 font-kanit flex justify-center">
+            พนักงาน
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="bg-white shadow p-6 rounded-md mt-6 ">
-      <div class="grid grid-cols-12 gap-4 mb-8">
+      <div class="grid lg:grid-cols-12 gap-4 mb-8">
         <div class="col-span-2">
           <span class="mb-4 text-xl text-black3 font-medium">Project Name</span>
         </div>
@@ -41,7 +41,7 @@
           <input v-model="form.project_name" class="w-full rounded-lg text-gray8 disabled:bg-gary16 py-2 px-4" disabled/>
         </div>
       </div>
-      <div class="grid grid-cols-12 gap-4 mb-8">
+      <div class="grid lg:grid-cols-12 gap-4 mb-8">
         <div class="col-span-2">
           <span class="mb-4 text-xl text-black3 font-medium">Details</span>
         </div>
@@ -49,7 +49,7 @@
           <textarea v-model="form.detail" rows="8" class="w-full rounded-lg text-gray8 disabled:bg-gary16 py-2 px-4" disabled/>
         </div>
       </div>
-      <div class="grid grid-cols-12 gap-4 mb-8">
+      <div class="grid lg:grid-cols-12 gap-4 mb-8">
         <div class="col-span-2">
           <span class="mb-4 text-xl text-black3 font-medium">Proceeding</span>
         </div>

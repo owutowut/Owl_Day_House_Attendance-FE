@@ -16,7 +16,7 @@
           <button class="rounded-xl px-5 py-3 bg-red2" @click="punch = false">Punch Out</button>
         </div>
       </div>
-      <div class="bg-white shadow py-6 rounded-md  mr-6">
+      <div class="bg-white shadow py-6 rounded-md w-full mr-6">
         <p class="text-2xl font-medium mb-6 px-5">Yesterday's work list</p>
         <div class="flex justify-between items-center border-y-[0.4px] border-white2 py-6 px-5">
           <div class="flex items-center space-x-4">

@@ -1,13 +1,13 @@
 <template>
   <div class="mx-4">
     <p class="text-3xl font-semibold mb-12">Work from Home</p>
-    <div class="flex bg-white rounded-md p-4 space-x-4">
-      <div class="border border-gray5 flex lg:justify-center items-center bg-white rounded-md px-4 py-2">
+    <div class="lg:flex bg-white rounded-md p-4 lg:space-x-4">
+      <div class="border border-gray5 flex lg:justify-center items-center bg-white rounded-md px-4 py-2 my-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
         <input type="text" v-model="search" placeholder="Search.." class="text-gray14 text-lg font-kanit"/>
       </div>
       <div>
-        <select v-model="selected" class="rounded-md px-4 py-2 border border-gray5 text-gray14 w-[354px] text-lg font-kanit">
+        <select v-model="selected" class="rounded-md px-4 my-2 py-2 border border-gray5 text-gray14 w-full lg:w-[354px] text-lg font-kanit">
           <option value="Date" >Date</option>
           <option>A</option>
           <option>B</option>
@@ -22,8 +22,8 @@
       </div>
     </div>
 
-    <div class="relative  sm:rounded-lg mt-8">
-      <table class="w-full ">
+    <div class="relative overflow-x-auto sm:rounded-lg mt-8">
+      <table class="w-full">
         <thead class="text-lg text-blue text-left bg-white">
         <tr>
           <th scope="col" class="px-6 py-4">Reason</th>

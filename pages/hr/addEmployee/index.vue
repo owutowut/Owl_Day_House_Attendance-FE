@@ -8,73 +8,65 @@
         </button>
       </div>
     </div>
-    <div class="bg-white rounded-lg p-6  lg:w-3/4">
-      <div class="grid grid-cols-12 gap-8 mt-12">
-        <div class="col-span-3">
-          <div class="w-36 h-36 bg-gray5 rounded-full flex lg:justify-center md:items-center lg:ml-8">
-            <svg-icon name="Profile" width="96" height="96" class="relative md:left-5" />
-            <svg-icon name="camera" width="32" height="32" class="relative top-14" />
-          </div>
-        </div>
-        <div class="col-span-4 ">
-          <div>
+    <div class="bg-white rounded-lg p-6 lg:w-3/4 ">
+      <Profile_img class="my-4 lg:mt-14 lg:left-14" />
+      <div class="grid lg:grid-cols-3 gap-6 lg:-mt-32">
+          <div class="lg:col-start-2">
             <p>First Name</p>
             <input v-model="form.first_name" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="my-4">
+        <div>
+          <p>Last Name</p>
+          <input v-model="form.last_name" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+          <div class="lg:col-start-2 ">
             <p>Email</p>
             <input v-model="form.email" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="my-4">
+        <div>
+          <p>Password</p>
+          <input v-model="form.password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+          <div class="lg:col-start-2 ">
             <p>Position</p>
             <input v-model="form.position" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="my-4">
+        <div>
+          <p class="mb-2">Tag</p>
+          <select v-model="form.select_Tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
+            <option value="Select Tag">Select Tag</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
+          <div class="lg:col-start-2 ">
             <p>Phone</p>
             <input v-model="form.phone" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="my-4">
+        <div>
+          <p class="mb-2">Birthday</p>
+          <div class="relative">
+            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
+            <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3 "/>
+            <date-picker
+              v-model="form.birthday"
+              custom-input=".custom-input-birthday"
+            />
+          </div>
+        </div>
+          <div class="lg:col-start-2 ">
             <p class="mb-2">Date of Join</p>
-            <div>
+            <div class="relative">
               <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
-              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
+              <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3"/>
               <date-picker
                 v-model="form.date_of_join"
                 custom-input=".custom-input"
               />
             </div>
           </div>
-        </div>
-        <div class="col-span-4 ">
-          <div>
-            <p>Last Name</p>
-            <input v-model="form.last_name" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p>Password</p>
-            <input v-model="form.password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-5">
-            <p class="mb-2">Tag</p>
-            <select v-model="form.select_Tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
-              <option value="Select Tag">Select Tag</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
-          </div>
-          <div class="my-5">
-            <p class="mb-2">Birthday</p>
-            <div>
-              <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
-              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
-              <date-picker
-                v-model="form.birthday"
-                custom-input=".custom-input-birthday"
-              />
-            </div>
-          </div>
-          <div class="-my-6">
+          <div class="">
             <p class="mt-2">Report to</p>
             <select v-model="form.report_to" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
               <option value="Select Name">Select Name</option>
@@ -83,13 +75,12 @@
               <option>C</option>
             </select>
           </div>
-        </div>
-        <div class="col-start-4 col-span-8">
+        <div class="lg:col-start-2 lg:col-span-2" >
           <p>Address</p>
           <input v-model="form.address" class="w-full  border border-gray12 rounded-lg  py-2 px-4"/>
         </div>
-        <div class="col-start-4 col-span-4 ">
-          <div>
+
+          <div class="lg:col-start-2">
             <p>State</p>
             <input v-model="form.state" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -97,8 +88,8 @@
             <p>Pincode</p>
             <input v-model="form.pincode" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-        </div>
-        <div class="col-span-4 ">
+
+        <div class="lg:col-start-2">
           <p>Country</p>
           <input v-model="form.country" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
         </div>
@@ -114,12 +105,13 @@
 <script>
 
 import Modal from "@/components/Modal";
+import Profile_img from "@/components/Profile_img";
 
 export default {
   name: "index",
   layout: 'sidebar_hr',
   components: {
-    Modal
+    Modal,Profile_img
   },
   data(){
     return {

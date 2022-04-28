@@ -25,11 +25,11 @@
           </div>
         </div>
         <div class="bg-white mt-4 py-6 px-4 rounded-lg grid grid-cols-2 ">
-          <div class="flex items-center ml-16">
+          <div class="flex items-center  justify-center">
             <svg-icon name="Man" width="65" height="65" />
             <span class="text-lg font-medium">60%</span>
           </div>
-          <div class="flex items-center ml-10 ">
+          <div class="flex items-center justify-center ">
             <svg-icon name="Female" width="65" height="65" />
             <span class="text-lg font-medium">40%</span>
           </div>
@@ -88,8 +88,8 @@
     </div>
     <div class="flex justify-between mt-24" >
       <span class="text-3xl font-semibold">Attendance Today</span>
-      <button class="bg-blue px-10 py-2 text-white rounded-lg text-lg">
-        <NuxtLink to="/hr/attendance-of-mounth">View all</NuxtLink>
+      <button class="bg-blue px-6 md:px-10 md:py-2 text-white rounded-lg text-lg">
+        <NuxtLink to="/hr/attendance-of-month">View all</NuxtLink>
       </button>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -116,13 +116,13 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end space-x-4 mt-6">
-      <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2">
+    <div class="lg:flex justify-end lg:space-x-4 mt-6">
+      <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2 my-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg lg:w-[704px]"/>
+        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[704px]"/>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-[236px]">
+        <select  class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[236px]">
           <option value="Position" >Position</option>
           <option>พนักงาน</option>
           <option>ทดลองงาน</option>
@@ -130,7 +130,7 @@
         </select>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2  text-gray14 font-kanit text-lg w-[152px]">
+        <select  class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[152px]">
           <option value="Status" >Status</option>
           <option>Punch In</option>
           <option>Punch Out</option>
@@ -179,7 +179,9 @@
         <tbody class="font-kanit text-lg">
         <tr class="bg-white border-t border-gray12"  v-for="data in mockData" :key="data.id">
           <td class="px-6 py-4 text-gray11 whitespace-nowrap ">{{data.name}}</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">{{ data.time_in }}</td>
+          <td class="px-8
+
+           py-4 text-gray11 whitespace-nowrap">{{ data.time_in }}</td>
           <td class="px-8 py-4 text-gray11 whitespace-nowrap">{{ data.time_out}}</td>
           <td class="w-8">
             <div class="bg-blue rounded-2xl text-white  whitespace-nowrap px-4 text-center" v-if="data.tag=='พนักงาน'" >{{data.tag}}</div>
@@ -188,12 +190,12 @@
           </td>
           <td class="flex mt-4 ml-10">
             <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 " v-if="data.status=='Punch In'">{{data.status}}</div>
-            <div class="bg-red4 rounded-2xl text-white  whitespace-nowrap px-4 px-6" v-if="data.status=='Leaves'">{{data.status}}</div>
+            <div class="bg-red4 rounded-2xl text-white  whitespace-nowrap  px-6" v-if="data.status=='Leaves'">{{data.status}}</div>
           </td>
           <td >
             <button>
               <NuxtLink to="/hr/profile">
-                <img src="~/assets/images/Search.svg" class="flex md:ml-10 lg:ml-20 whitespace-nowrap"/>
+                <img src="~/assets/images/Search.svg" class="flex ml-8 md:ml-10 lg:ml-20 whitespace-nowrap"/>
               </NuxtLink>
             </button>
           </td>
@@ -202,7 +204,7 @@
       </table>
     </div>
       <paginate
-        class="flex justify-end mt-10 text-xl text-black2"
+        class="flex justify-end mt-10 text-sm text-black2 space-x-4"
         v-model="page"
         :page-count="10"
         :page-range="3"

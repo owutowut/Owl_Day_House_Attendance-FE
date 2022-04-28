@@ -1,14 +1,12 @@
 <template>
-  <div class="flex flex-col ">
-    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6"
-         :class="isOpen ? 'pl-[0px] lg:pl-[290px]' : 'pl-[290px]'"
-    >
-      <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden" v-show='isOpen' @click='handleOpen'>
-      <img src="~/assets/images/Notification.svg">
+  <div class="flex flex-col">
+    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
+      <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen'>
+      <img src="~/assets/images/notification1.png">
     </nav>
 
     <aside
-      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 md:hidden lg:block'
+      class='overflow transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 sm:hidden md:block'
       :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
     >
       <div>
@@ -24,13 +22,13 @@
           <ul class="text-white mt-12">
             <li class="mb-6">
               <NuxtLink to="/hr/home" exact class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home'"/>
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home' || currentPath==='attendance-of-month'  "/>
                 <span>Home</span>
               </NuxtLink>
             </li>
             <li class="mb-6">
               <NuxtLink to="/hr/employee" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='employee'"/>
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='employee' || currentPath==='addEmployee' || currentPath==='edit_employee' || currentPath==='project-complete' || currentPath==='profile'"/>
                 Employee
               </NuxtLink>
             </li>
@@ -88,7 +86,7 @@ export default {
   methods: {
     checkPath(path) {
       console.log(path.split("/"))
-      this.currentPath = path.split("/")[1]
+      this.currentPath = path.split("hr/")[1]
     },
     handleOpen() {
       this.isOpen = !this.isOpen

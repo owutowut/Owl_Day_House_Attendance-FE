@@ -44,6 +44,7 @@ export default {
     },
     submit(event){
       this.isDelete = false
+      this.$emit('handleHideEdit',false)
       setTimeout(()=>{
         this.isModal = true
       },500)

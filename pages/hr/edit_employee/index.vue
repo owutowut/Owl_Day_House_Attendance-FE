@@ -8,99 +8,90 @@
         </button>
       </div>
     </div>
-    <div class="bg-white rounded-lg p-6 lg:w-3/4">
-      <div class="grid grid-cols-12 gap-8 mt-12">
-        <div class="col-span-3">
-          <div class="lg:ml-16">
-            <img src="~/assets/images/Ellipse4.png" class="h-36 w-36">
-            <svg-icon name="camera" width="32" height="32" class="relative -top-6 left-24" />
+    <div class="bg-white rounded-lg p-6 lg:w-3/4 ">
+      <ProfileEmployee class="my-4 lg:mt-10 lg:left-14" />
+      <div class="grid lg:grid-cols-3 gap-6 lg:-mt-32 ">
+        <div class="lg:col-start-2">
+          <p>First Name</p>
+          <input v-model="form.first_name" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div>
+          <p>Last Name</p>
+          <input v-model="form.last_name" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div class="lg:col-start-2 ">
+          <p>Email</p>
+          <input v-model="form.email" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div>
+          <p>Password</p>
+          <input v-model="form.password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div class="lg:col-start-2 ">
+          <p>Position</p>
+          <input v-model="form.position" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div>
+          <p class="mb-2">Tag</p>
+          <select v-model="form.select_Tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
+            <option value="Select Tag">Select Tag</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
+        <div class="lg:col-start-2 ">
+          <p>Phone</p>
+          <input v-model="form.phone" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+        <div>
+          <p class="mb-2">Birthday</p>
+          <div class="relative">
+            <input class="custom-input w-full text-black4 border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
+            <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3 "/>
+            <date-picker
+              v-model="form.birthday"
+              custom-input=".custom-input-birthday"
+            />
           </div>
         </div>
-        <div class="col-span-4 ">
-          <div>
-            <p>First Name</p>
-            <input v-model="form.first_name" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p>Email</p>
-            <input v-model="form.email" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p>Position</p>
-            <input v-model="form.position" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p>Phone</p>
-            <input v-model="form.phone" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p class="mb-2">Date of Join</p>
-            <div>
-              <input class="custom-input-date-from w-full border border-gray12 rounded-lg h-10 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
-              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
-              <date-picker
-                v-model="form.date_of_join"
-                custom-input=".custom-input"
-              />
-            </div>
+        <div class="lg:col-start-2 ">
+          <p class="mb-2">Date of Join</p>
+          <div class="relative">
+            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
+            <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3"/>
+            <date-picker
+              v-model="form.date_of_join"
+              custom-input=".custom-input"
+            />
           </div>
         </div>
-        <div class="col-span-4 ">
-          <div>
-            <p>Last Name</p>
-            <input v-model="form.last_name" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-4">
-            <p>Password</p>
-            <input v-model="form.password" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div class="my-2">
-            <p class="mb-2">Tag</p>
-            <select v-model="form.select_Tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
-              <option value="Select Tag">Select Tag</option>
-              <option>พนักงาน</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
-          </div>
-          <div class="my-5">
-            <p class="mb-2">Birthday</p>
-            <div>
-              <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
-              <svg-icon name="Calendar" width="24" height="24" class="relative md:left-48 md:-top-8  lg:left-64 lg:-top-8"/>
-              <date-picker
-                v-model="form.birthday"
-                custom-input=".custom-input-birthday"
-              />
-            </div>
-          </div>
-          <div class="-my-4">
-            <p class="mt-2">Report to</p>
-            <select v-model="form.report_to" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
-              <option value="Select Name">Select Name</option>
-              <option>Manee Owan</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
-          </div>
+        <div>
+          <p class="mt-2">Report to</p>
+          <select v-model="form.report_to" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
+            <option value="Select Name">Select Name</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
         </div>
-        <div class="col-start-4 col-span-8">
+        <div class="lg:col-start-2 lg:col-span-2" >
           <p>Address</p>
-          <input v-model="form.address" class="w-full text-gray7 border border-gray12 rounded-lg  py-2 px-4"/>
+          <input v-model="form.address" class="w-full text-black4 border border-gray12 rounded-lg  py-2 px-4"/>
         </div>
-        <div class="col-start-4 col-span-4 ">
-          <div>
-            <p>State</p>
-            <input v-model="form.state" class="w-full font-kanit text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
-          <div>
-            <p>Pincode</p>
-            <input v-model="form.pincode" class="w-full text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
-          </div>
+
+        <div class="lg:col-start-2">
+          <p>State</p>
+          <input v-model="form.state" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
         </div>
-        <div class="col-span-4 ">
+        <div>
+          <p>Pincode</p>
+          <input v-model="form.pincode" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+        </div>
+
+        <div class="lg:col-start-2">
           <p>Country</p>
-          <input v-model="form.country" class="w-full font-kanit text-gray7 border border-gray12 rounded-lg my-2 py-2 px-4"/>
+          <input v-model="form.country" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
         </div>
       </div>
       <div class="flex justify-center mt-10">
@@ -113,11 +104,12 @@
 
 <script>
 import Modal from "@/components/Modal";
+import ProfileEmployee from "@/components/ProfileEmployee";
 export default {
   name: "index",
   layout: 'sidebar_hr',
   components: {
-    Modal
+    Modal,ProfileEmployee
   },
   data(){
     return {
