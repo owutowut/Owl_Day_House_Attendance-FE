@@ -11,36 +11,36 @@
       </button>
     </div>
     <div class="lg:flex justify-end lg:space-x-4 mt-16">
-      <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg my-2 px-4 py-2">
+      <div class="search-wrapper flex justify-center items-center bg-white rounded-lg my-2 px-4 py-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[420px]"/>
+        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[420px] focus:outline-none "/>
       </div>
       <div>
-        <select v-model="selected" class="rounded-lg px-4 py-2  text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full">
-          <option disabled value="Position">Position</option>
+        <select v-model="selected" placeholder="Position"  class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full focus:outline-none">
+          <option disabled value="">Position</option>
           <option value="UX/UI Designer">UX/UI Designer</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
+          <option value="Tester">Tester</option>
+          <option value="Dev">Dev</option>
         </select>
       </div>
       <div>
-        <select class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full">
-          <option value="Status">Status</option>
-          <option>พนักงาน</option>
-          <option>ทดลองงาน</option>
-          <option>ฝึกงาน</option>
+        <select v-model="selected_status" placeholder="Status"  class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full focus:outline-none">
+          <option disabled value="">Status</option>
+          <option value="พนักงาน">พนักงาน</option>
+          <option value="ทดลองงาน">ทดลองงาน</option>
+          <option value="ฝึกงาน">ฝึกงาน</option>
         </select>
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <EmployeeCard v-for="Employee in selected === '' ? filterEmployees : filterPosition" :key="Employee.id" :card="Employee"/>
+      <EmployeeCard v-for="Employee in filterData" :key="Employee.id" :card="Employee"/>
     </div>
   </div>
 </template>
-
 <script>
 
 import EmployeeCard from "@/components/EmployeeCard";
+import search from "@/components/Search";
 
 export default {
   name: "index",
@@ -53,24 +53,26 @@ export default {
       isEdit: false,
       search: '',
       selected:'',
+      selected_status:'',
+      filterData: '',
       Employees: [
         {
           id: 1,
-          name: 'game01',
-          department: 'B',
+          name: 'kono',
+          department: 'Tester',
           tag: 'พนักงาน',
           profile: 'images/employee1.png'
         },
         {
           id: 2,
           name: 'CHAWANNOP THAMMAJAI',
-          department: 'C',
+          department: 'Dev',
           tag: 'พนักงาน',
           profile: 'images/employee2.png'
         },
         {
           id: 3,
-          name: 'jajajaj',
+          name: 'bajajaj',
           department: 'UX/UI Designer',
           tag: 'พนักงาน',
           profile: 'images/employee3.png'
@@ -141,17 +143,48 @@ export default {
       ]
     }
   },
-  computed: {
-    filterEmployees() {
-      return this.Employees.filter(val => {
-        return val.name.toLowerCase().includes(this.search.toLowerCase())
-      })
+  watch: {
+    search: function (val) {
+      this.filterEmployee(val)
     },
-     filterPosition(){
-       return this.Employees.filter(val => {
-         return val.department.toLowerCase().includes(this.selected.toLowerCase())
-       })
-     },
+    selected: function (val){
+      this.filterPosition(val)
+    },
+    selected_status: function (val){
+      this.filterStatus(val)
+    }
+  },
+  methods: {
+    filterEmployee(search) {
+      if(search){
+        this.filterData = this.Employees.filter(val => {
+          return val.name.toLowerCase().includes(search.toLowerCase())
+        })
+      }else {
+        this.filterData = this.Employees
+      }
+    },
+    filterPosition(selected) {
+      if(selected){
+        this.filterData = this.Employees.filter(val => {
+          return val.department.toLowerCase().includes(selected.toLowerCase())
+        })
+      }else {
+        this.filterData = this.Employees
+      }
+    },
+    filterStatus(selected_status) {
+      if(selected_status){
+        this.filterData = this.Employees.filter(val => {
+          return val.tag.toLowerCase().includes(selected_status.toLowerCase())
+        })
+      }else {
+        this.filterData = this.Employees
+      }
+    }
+  },
+  mounted() {
+    this.filterData = this.Employees
   }
 }
 </script>

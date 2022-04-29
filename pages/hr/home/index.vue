@@ -119,22 +119,22 @@
     <div class="lg:flex justify-end lg:space-x-4 mt-6">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2 my-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[704px]"/>
+        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[704px] focus:outline-none "/>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[236px]">
-          <option value="Position" >Position</option>
-          <option>พนักงาน</option>
-          <option>ทดลองงาน</option>
-          <option>ฝึกงาน</option>
+        <select v-model="selected" placeholder="Position" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[236px] focus:outline-none">
+          <option disabled value="" >Position</option>
+          <option value="พนักงาน">พนักงาน</option>
+          <option value="ทดลองงาน">ทดลองงาน</option>
+          <option value="ฝึกงาน">ฝึกงาน</option>
         </select>
       </div>
       <div>
-        <select  class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[152px]">
-          <option value="Status" >Status</option>
-          <option>Punch In</option>
-          <option>Punch Out</option>
-          <option>Leaves</option>
+        <select v-model="select_status" placeholder="Status" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[152px] focus:outline-none">
+          <option disabled value="" >Status</option>
+          <option value="Punch In">Punch In</option>
+          <option value="Punch Out">Punch Out</option>
+          <option value="Leaves">Leaves</option>
         </select>
       </div>
     </div>
@@ -177,7 +177,7 @@
         </tr>
         </thead>
         <tbody class="font-kanit text-lg">
-        <tr class="bg-white border-t border-gray12"  v-for="data in mockData" :key="data.id">
+        <tr class="bg-white border-t border-gray12"  v-for="data in filterData" :key="data.id">
           <td class="px-6 py-4 text-gray11 whitespace-nowrap ">{{data.name}}</td>
           <td class="px-8
 
@@ -226,10 +226,14 @@ export default {
   data(){
     return{
       page: 10,
+      search: '',
+      selected: '',
+      select_status: '',
+      filterData: '',
       mockData: [
         {
           id:1,
-          name:'CHAWANNOP THAMMAJAI',
+          name:'bjaja',
           time_in:'10.30 AM',
           time_out:'--.-- AM',
           tag: 'พนักงาน',
@@ -237,7 +241,7 @@ export default {
         },
         {
           id:2,
-          name:'CHAWANNOP THAMMAJAI',
+          name:'monomo',
           time_in:'10.30 AM',
           time_out:'--.-- AM',
           tag: 'พนักงาน',
@@ -293,6 +297,49 @@ export default {
         },
       ]
     }
+  },
+  watch: {
+    search: function (val) {
+      this.filterEmployee(val)
+    },
+    selected: function (val){
+      this.filterPosition(val)
+    },
+    select_status: function (val){
+      this.filterStatus(val)
+    }
+  },
+  methods: {
+    filterEmployee(search) {
+      if(search){
+        this.filterData = this.mockData.filter(val => {
+          return val.name.toLowerCase().includes(search.toLowerCase())
+        })
+      }else {
+        this.filterData = this.mockData
+      }
+    },
+    filterPosition(selected) {
+      if(selected){
+        this.filterData = this.mockData.filter(val => {
+          return val.tag.toLowerCase().includes(selected.toLowerCase())
+        })
+      }else {
+        this.filterData = this.mockData
+      }
+    },
+    filterStatus(select_status) {
+      if(select_status){
+        this.filterData = this.mockData.filter(val => {
+          return val.status.toLowerCase().includes(select_status.toLowerCase())
+        })
+      }else {
+        this.filterData = this.mockData
+      }
+    }
+  },
+  mounted() {
+    this.filterData = this.mockData
   }
 }
 </script>
