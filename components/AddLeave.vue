@@ -12,10 +12,9 @@
         <div class="mb-4">
           <p class="mb-3 text-xl">Leave Types</p>
           <select v-model="form.selected" class="rounded-lg px-4 py-2 w-full text-gray14 border border-gray12">
-            <option value="Leave type">Select Leave type</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option value="Leave type" disabled>Select Leave type</option>
+            <option>ลาป่วย</option>
+            <option>ลากิจ</option>
           </select>
         </div>
         <p class="mb-3 text-xl">From</p>
