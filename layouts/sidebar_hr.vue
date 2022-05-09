@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
       <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen'>
-      <img src="~/assets/images/notification1.png">
+      <img src="~/assets/images/Notification.svg">
     </nav>
 
     <aside

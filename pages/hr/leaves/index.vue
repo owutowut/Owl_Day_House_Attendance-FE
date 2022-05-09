@@ -60,26 +60,18 @@
       <ModalHR :show="show"/>
     </div>
 
-<!--    <client-only>-->
-<!--      <div class="flex justify-end">-->
-<!--        <Paginate-->
-<!--          :pageCount="totalPage"-->
-<!--          :page-range="3"-->
-<!--          :margin-pages="1"-->
-<!--          :clickHandler="onChangePage"-->
-<!--          :containerClass="'pagination'"-->
-<!--          :prev-text="'<'"-->
-<!--          :next-text="'>'"-->
-<!--          :page-class="'page-item'"-->
-<!--          :page-link-class="'page-link'"-->
-<!--          :prev-class="'page-item'"-->
-<!--          :prev-link-class="'page-link'"-->
-<!--          :next-class="'page-item'"-->
-<!--          :next-link-class="'page-link'"-->
-<!--        >-->
-<!--        </Paginate>-->
-<!--      </div>-->
-<!--    </client-only>-->
+    <paginate
+      class="flex justify-end text-sm mb-6 text-black2 space-x-4"
+      v-model="page"
+      :page-count="10"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="onChangePage"
+      :prev-text="'<'"
+      :next-text="'>'"
+      :container-class="'pagination'"
+      :page-class="'page-item'">
+    </paginate>
 
   </div>
 </template>

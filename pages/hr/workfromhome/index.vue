@@ -24,6 +24,20 @@
           ...item,}
       })"/>
     </div>
+
+    <paginate
+      class="flex justify-end text-sm mb-6 text-black2 space-x-4"
+      v-model="page"
+      :page-count="10"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="onChangePage"
+      :prev-text="'<'"
+      :next-text="'>'"
+      :container-class="'pagination'"
+      :page-class="'page-item'">
+    </paginate>
+
   </div>
 </template>
 
