@@ -49,11 +49,22 @@
     </div>
 
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="leaves.map((item, index) => {
-        return {
-          index: (index + 1) + pageStart,
-          ...item,}
-      })"/>
+      <Table
+        :headers="headers"
+        :data="filterData.map((item, index) => {
+          return {
+            ...item,
+            index: (index + 1) + pageStart,
+             status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
+             noofdays: `${item.noofdays} Days`
+          }
+      })">
+        <template v-slot:action="data">
+            <div class="cursor-pointer flex justify-center items-center">
+              <svg-icon name="Search" width='24' height='24' class="text-blue"/>
+            </div>
+        </template>
+      </Table>
     </div>
 
     <div>
@@ -61,7 +72,7 @@
     </div>
 
     <paginate
-      class="flex justify-end text-sm mb-6 text-black2 space-x-4"
+      class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
       v-model="page"
       :page-count="10"
       :page-range="3"
@@ -86,66 +97,68 @@ export default {
   components:{
     Table,ModalHR
   },
-  // computed: {
-  //   pageStart() {
-  //     return (this.currentPage - 1) * this.leaves.perPage
-  //   },
-  //   totalPage() {
-  //     return Math.ceil(this.leaves.total / this.leaves.perPage)
-  //   },
-  // },
-  methods: {
-    // onChangePage(i) {
-    //   this.currentPage = i
-    // },
-    onHideAddLeave(event) {
-      this.isAddLeave = event
+  computed: {
+    pageStart() {
+      return (this.currentPage - 1) * this.perPage
     },
+
+    filterData() {
+      if (this.search.trim()) {
+        return this.leaves.filter(item => {
+          return item.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+      if (this.selected !== "all") {
+        return this.leaves.filter(item => {
+          return item.leavetype.toLowerCase().includes(this.selected.toLowerCase())
+        })
+      }
+      return this.leaves
+    }
   },
   data() {
     return {
-      // currentPage: 1,
-      // perPage: 10,
       sort: {
         field: '',
         sorted:true,
       },
       show:{
         addleave: false,
+        success: false,
       },
       selected: 'all',
-      path:'leaves',
-      icon:'Search2',
       search: '',
       headers: [{
-        key: 'name',
         title:'Employee',
+        key: 'name',
+        sort: 'name',
       }, {
-        key: 'leavetype',
         title: 'LeaveType',
-        sort: true,
+        key: 'leavetype',
+        sort: 'leavetype',
       }, {
-        key: 'from',
         title: 'From',
-        sort: true,
+        key: 'from',
+        sort: 'from',
       }, {
-        key: 'to',
         title: 'To',
-        sort: true,
+        key: 'to',
+        sort: 'to',
       }, {
-        key: 'noofdays',
         title: 'No of Days',
-        sort: true,
+        key: 'no_of_days',
+        sort: 'no_of_days',
       }, {
-        key: 'tag',
         title: 'Tag',
-        sort: true,
+        key: 'tag',
+        sort: 'tag',
       }, {
-        key: 'status',
         title: 'Status',
-        sort: true,
+        key: 'status',
+        sort: 'status',
       }, {
         title: 'Actions',
+        key: 'action',
       },
       ],
       leaves: [
@@ -155,10 +168,10 @@ export default {
           leavetype: 'ลาป่วย',
           from: '11 Jan 2020',
           to: '11 Jan 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'พนักงาน',
-          status: 'Approve',
+          status: 'approve',
         },
         {
           id: 2,
@@ -166,7 +179,7 @@ export default {
           leavetype: 'ลาป่วย',
           from: '5 Oct 2020',
           to: '6 Oct 2020',
-          noofdays: '2 day',
+          no_of_days: '2 day',
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'pending',
@@ -177,7 +190,7 @@ export default {
           leavetype: 'ลาป่วย',
           from: '24 Mar 2020',
           to: '24 Mar 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
           status: 'pending',
@@ -188,7 +201,7 @@ export default {
           leavetype: 'ลาป่วย',
           from: '18 Jan 2020',
           to: '21 Jan 2020',
-          noofdays: '3 day',
+          no_of_days: '3 day',
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'pending',
@@ -199,10 +212,10 @@ export default {
           leavetype: 'ลากิจ',
           from: '3 Feb 2020',
           to: '3 Feb 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
-          status: 'Approve',
+          status: 'approve',
         },
         {
           id: 6,
@@ -210,10 +223,10 @@ export default {
           leavetype: 'ลากิจ',
           from: '24 Mar 2020',
           to: '24 Mar 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'พนักงาน',
-          status: 'Approve',
+          status: 'approve',
         },
         {
           id: 7,
@@ -221,10 +234,10 @@ export default {
           leavetype: 'ลาป่วย',
           from: '18 Jan 2020',
           to: '18 Jan 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
-          status: 'Approve',
+          status: 'approve',
         },
         {
           id: 8,
@@ -232,10 +245,10 @@ export default {
           leavetype: 'ลาป่วย',
           from: '3 Mar 2020',
           to: '3 Mar 2020',
-          noofdays: '1 day',
+          no_of_days: '1 day',
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
-          status: 'Approve',
+          status: 'approve',
         },
       ],
     }

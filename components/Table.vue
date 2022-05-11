@@ -43,7 +43,7 @@
             </span>
 
             <div class="py-4" v-if="item.key === 'action'">
-              <slot name="action" :data="row"></slot>
+                <slot name="action" :data="row"></slot>
             </div>
           </td>
         </tr>
@@ -54,13 +54,7 @@
 </template>
 
 <script>
-import ModalHR from '@/components/ModalHR.vue'
-
 export default {
-  components: {
-    ModalHR,
-  },
-
   props: {
     data: {
       type: Array,
@@ -144,7 +138,7 @@ export default {
         else if (/\$leaves\$$/.test(data)) {
         return 'text-white bg-red4 rounded-lg px-3'
       }
-      return 'text-black'
+      return 'text-blue'
     },
 
     mapPath(path, data) {
