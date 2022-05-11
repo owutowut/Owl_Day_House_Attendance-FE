@@ -61,7 +61,6 @@
     <div class="lg:pl-[276px] pt-10 px-6 bg-gray18 min-h-screen " @click='isOpen = true'>
       <Nuxt/>
     </div>
-
   </div>
 </template>
 

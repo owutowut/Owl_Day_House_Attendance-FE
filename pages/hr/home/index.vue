@@ -123,7 +123,7 @@
       </div>
       <div>
         <select v-model="selected" placeholder="Position" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[236px] focus:outline-none">
-          <option disabled value="" >Position</option>
+          <option disabled value="all" >Position</option>
           <option value="พนักงาน">พนักงาน</option>
           <option value="ทดลองงาน">ทดลองงาน</option>
           <option value="ฝึกงาน">ฝึกงาน</option>
@@ -131,77 +131,32 @@
       </div>
       <div>
         <select v-model="select_status" placeholder="Status" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[152px] focus:outline-none">
-          <option disabled value="" >Status</option>
-          <option value="Punch In">Punch In</option>
-          <option value="Punch Out">Punch Out</option>
+          <option disabled value="all" >Status</option>
+          <option value="PunchIn">Punch In</option>
+          <option value="PunchOut">Punch Out</option>
           <option value="Leaves">Leaves</option>
         </select>
       </div>
     </div>
     <div class="relative overflow-x-auto  sm:rounded-lg mt-6">
-      <table class="w-full">
-        <thead class="text-lg text-blue  bg-white">
-        <tr>
-          <th scope="col" class="px-6 py-4">
-            <div class="flex items-center">
-              <Span>Employee</Span>
-            </div>
-          </th>
-          <th scope="col" class="px-6 py-4">
-            <div class="flex items-center">
-              <svg-icon name="Swap" width="20" height="20"/>
-              <Span>Punch In</Span>
-            </div>
-          </th>
-          <th scope="col" class="px-6 py-4">
-            <div class="flex items-center">
-              <svg-icon name="Swap" width="20" height="20"/>
-              <Span>Punch Out</Span>
-            </div>
-          </th>
-          <th scope="col" class="px-6 py-4">
-            <div class="flex items-center">
-              <svg-icon name="Swap" width="20" height="20"/>
-              <Span>Tag</Span>
-            </div>
-          </th>
-          <th scope="col" class="px-6 py-4">
-            <div class="flex items-center">
-              <svg-icon name="Swap" width="20" height="20"/>
-              <Span>Status</Span>
-            </div>
-          </th>
-          <th scope="col" class="px-6 py-4">
-            <Span>Actions</Span>
-          </th>
-        </tr>
-        </thead>
-        <tbody class="font-kanit text-lg">
-        <tr class="bg-white border-t border-gray12"  v-for="data in filterData" :key="data.id">
-          <td class="px-6 py-4 text-gray11 whitespace-nowrap ">{{data.name}}</td>
-          <td class="px-8
-
-           py-4 text-gray11 whitespace-nowrap">{{ data.time_in }}</td>
-          <td class="px-8 py-4 text-gray11 whitespace-nowrap">{{ data.time_out}}</td>
-          <td class="w-8">
-            <div class="bg-blue rounded-2xl text-white  whitespace-nowrap px-4 text-center" v-if="data.tag=='พนักงาน'" >{{data.tag}}</div>
-            <div v-if="data.tag=='ทดลองงาน'" class="bg-yellow rounded-2xl text-white  whitespace-nowrap px-4 text-center">{{data.tag}}</div>
-            <div v-if="data.tag=='ฝึกงาน'" class="bg-purple1 rounded-2xl text-white  whitespace-nowrap px-4 text-center">{{data.tag}}</div>
-          </td>
-          <td class="flex mt-4 ml-10">
-            <div class="bg-green rounded-2xl text-white  whitespace-nowrap px-4 " v-if="data.status=='Punch In'">{{data.status}}</div>
-            <div class="bg-red4 rounded-2xl text-white  whitespace-nowrap  px-6" v-if="data.status=='Leaves'">{{data.status}}</div>
-          </td>
-          <td >
-            <button>
-              <NuxtLink to="/hr/profile">
-                <img src="~/assets/images/Search.svg" class="flex ml-8 md:ml-10 lg:ml-20 whitespace-nowrap"/>
-              </NuxtLink>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <Table
+        :headers="headers"
+        :data="filterData.map((item, index) => {
+          return {
+            ...item,
+            index: (index + 1) + pageStart,
+             status: item.status === 'punchIn' ? 'punch In $punchIn$' : 'Leaves $leaves$',
+             noofdays: `${item.noofdays} Days`
+          }
+      })">
+        <template v-slot:action="data">
+          <div class="cursor-pointer flex justify-center items-center" >
+            <NuxtLink to="/hr/profile">
+              <svg-icon name="Search2" width='24' height='24' class="text-blue"/>
+            </NuxtLink>
+          </div>
+        </template>
+      </Table>
     </div>
       <paginate
         class="flex justify-end mt-10 text-sm text-black2 space-x-4"
@@ -220,127 +175,147 @@
 
 <script>
 
+import Table from "@/components/Table";
+
 export default {
   name: "home",
   layout: 'sidebar_hr',
+  components: {
+    Table
+  },
   data(){
     return{
+      sort: {
+        field: '',
+        sorted:true,
+      },
       page: 10,
       search: '',
-      selected: '',
-      select_status: '',
-      filterData: '',
+      selected: 'all',
+      select_status: 'all',
+      icon:'Search',
+      headers: [
+        {
+          title:'Employee',
+          key: 'name',
+        },
+        {
+          title: 'Punch In',
+          key: 'punchIn',
+          sort: 'punchIn',
+        },
+        {
+          title: 'Punch Out',
+          key: 'punchOut',
+          sort: 'punchOut',
+        },
+        {
+          title: 'Tag',
+          key: 'tag',
+          sort: 'tag',
+        },
+        {
+          title: 'Status',
+          key: 'status',
+          sort: 'status',
+        },
+        {
+          title: 'Actions',
+          key: 'action',
+        }
+      ],
       mockData: [
         {
           id:1,
           name:'bjaja',
-          time_in:'10.30 AM',
-          time_out:'--.-- AM',
+          punchIn:'10.30 AM',
+          punchOut:'--.-- AM',
           tag: 'พนักงาน',
-          status: 'Punch In'
+          status: 'punchIn'
         },
         {
           id:2,
           name:'monomo',
-          time_in:'10.30 AM',
-          time_out:'--.-- AM',
+          punchIn:'10.30 AM',
+          punchOut:'--.-- AM',
           tag: 'พนักงาน',
-          status: 'Punch In'
+          status: 'punchIn'
         },
         {
           id:3,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'10.32 AM',
-          time_out:'--.-- AM',
+          punchIn:'10.32 AM',
+          punchOut:'--.-- AM',
           tag: 'ทดลองงาน',
-          status: 'Punch In'
+          status: 'punchIn'
         },
         {
           id:4,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'10.25 AM',
-          time_out:'--.-- AM',
+          punchIn:'10.25 AM',
+          punchOut:'10.00 AM',
           tag: 'ฝึกงาน',
-          status: 'Punch In'
+          status: 'punchIn'
         },
         {
           id:5,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'10.36 AM',
-          time_out:'--.-- AM',
+          punchIn:'10.36 AM',
+          punchOut:'--.-- AM',
           tag: 'ฝึกงาน',
-          status: 'Punch In'
+          status: 'punchIn'
         },
         {
           id:6,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'--.-- AM',
-          time_out:'--.-- AM',
+          punchIn:'--.-- AM',
+          punchOut:'--.-- AM',
           tag: 'พนักงาน',
-          status: 'Leaves'
+          status: 'leaves'
         },
         {
           id:7,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'--.-- AM',
-          time_out:'--.-- AM',
+          punchIn:'--.-- AM',
+          punchOut:'--.-- AM',
           tag: 'ทดลองงาน',
-          status: 'Leaves'
+          status: 'leaves'
         },
         {
           id:8,
           name:'CHAWANNOP THAMMAJAI',
-          time_in:'--.-- AM',
-          time_out:'--.-- AM',
+          punchIn:'--.-- AM',
+          punchOut:'--.-- AM',
           tag: 'ฝึกงาน',
-          status: 'Leaves'
+          status: 'leaves'
         },
       ]
     }
   },
-  watch: {
-    search: function (val) {
-      this.filterEmployee(val)
+  computed: {
+    pageStart() {
+      return (this.currentPage - 1) * this.perPage
     },
-    selected: function (val){
-      this.filterPosition(val)
-    },
-    select_status: function (val){
-      this.filterStatus(val)
+
+    filterData() {
+      if (this.search.trim()) {
+        return this.mockData.filter(val => {
+          return val.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+      if (this.selected !== "all") {
+        return this.mockData.filter(val => {
+          return val.tag.toLowerCase().includes(this.selected.toLowerCase())
+        })
+      }
+      if (this.select_status !== "all") {
+        return this.mockData.filter(val => {
+          return val.status.toLowerCase().includes(this.select_status.toLowerCase())
+        })
+      }
+      return this.mockData
     }
   },
-  methods: {
-    filterEmployee(search) {
-      if(search){
-        this.filterData = this.mockData.filter(val => {
-          return val.name.toLowerCase().includes(search.toLowerCase())
-        })
-      }else {
-        this.filterData = this.mockData
-      }
-    },
-    filterPosition(selected) {
-      if(selected){
-        this.filterData = this.mockData.filter(val => {
-          return val.tag.toLowerCase().includes(selected.toLowerCase())
-        })
-      }else {
-        this.filterData = this.mockData
-      }
-    },
-    filterStatus(select_status) {
-      if(select_status){
-        this.filterData = this.mockData.filter(val => {
-          return val.status.toLowerCase().includes(select_status.toLowerCase())
-        })
-      }else {
-        this.filterData = this.mockData
-      }
-    }
-  },
-  mounted() {
-    this.filterData = this.mockData
-  }
 }
 </script>
 

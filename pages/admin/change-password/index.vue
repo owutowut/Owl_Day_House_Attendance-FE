@@ -1,7 +1,7 @@
 <template>
   <div>
     <Loading v-if="isLoading"/>
-    <div v-else>
+    <div v-else class="ml-6">
       <p class="text-4xl font-semibold mb-8">Change Password</p>
       <div class="bg-white rounded-md shadow p-6">
         <p class="mb-4 text-blue text-2xl">Account Data</p>

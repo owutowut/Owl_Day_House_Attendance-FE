@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'kanit' : ['Kanit', 'sans-serif']
+        'kanit' : ['Kanit', 'sans-serif'],
+        'NotoSansThai' : ['Noto Sans Thai', 'sans-serif']
       },
       screens: {
         sm: '480px',
@@ -22,9 +23,11 @@ module.exports = {
         'blue2' : '#303030',
         'yellow' : '#F4B01A',
         'yellow2' : '#E89F00',
+        'yellow3' : '#F4B01A1A',
         'gray' : '#CBCBCB',
         'gray2' : '#C5C5C5',
         'gray3' : '#CECECE',
+        'gray3' : '#E5E5E5',
         'gray4' : '#707070',
         'gray5' : '#E1E1E1',
         'gray6' : '#89898980',
@@ -56,9 +59,11 @@ module.exports = {
         'black2' : '#565656',
         'black3' : '#5B5B5B',
         'black4' : '#909090',
+        'black5' : '#1F1F1F',
         'white1': '#F7F7FC',
         'white2' : '#EBEBEB',
         'white3' : '#E8E8E8',
+        'white4' : '#FAFAFA',
         'red1' : '#F26464',
         'red2' : '#EB4646',
         'red3' : '#FF5D26',

@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-4">
+  <div class="ml-6">
     <div class="font-semibold text-3xl">Hello! CHAWANNOP</div>
     <div class="grid md:grid-cols-1 lg:grid-cols-3 mt-16 gap-6">
       <div class="bg-white shadow p-6 rounded-md  ">
@@ -102,10 +102,10 @@
           </div>
           <div class="text-white flex items-center space-x-4 mt-7">
             <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">
-              <NuxtLink to="/edit-project">Edit</NuxtLink>
+              <NuxtLink to="/admin/edit-project">Edit</NuxtLink>
             </button>
             <button class="rounded-2xl px-5 py-3 bg-black w-full">
-              <NuxtLink to="/view-project">View</NuxtLink>
+              <NuxtLink to="/admin/view-project">View</NuxtLink>
             </button>
           </div>
         </div>
@@ -121,10 +121,10 @@
           </div>
           <div class="text-white flex items-center space-x-4 mt-7">
             <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">
-              <NuxtLink to="/edit-project">Edit</NuxtLink>
+              <NuxtLink to="/admin/edit-project">Edit</NuxtLink>
             </button>
             <button class="rounded-2xl px-5 py-3 bg-black w-full">
-              <NuxtLink to="/view-project">View</NuxtLink>
+              <NuxtLink to="/admin/view-project">View</NuxtLink>
             </button>
           </div>
         </div>
