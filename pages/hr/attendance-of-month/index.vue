@@ -11,15 +11,11 @@
     <div class="bg-white py-6 rounded-lg lg:flex justify-start lg:space-x-4 p-8 mt-8">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2 my-2 border border-white3">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-96"/>
+        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-96 focus:outline-none"/>
       </div>
       <div>
-        <select
-          v-model="month"
-          @change="onChange"
-          class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-72 border border-white3"
-        >
-          <option>Select Month</option>
+        <select v-model="month" placeholder="Select Month" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-72 border border-white3 focus:outline-none">
+          <option disabled value="">Select Month</option>
           <option value="1">January</option>
           <option value="2">February</option>
           <option value="3">March</option>
@@ -35,26 +31,11 @@
         </select>
       </div>
       <div>
-        <select
-          v-model="year"
-          @change="onChange"
-          class="
-          rounded-lg
-          px-4
-          py-2
-          my-2
-          text-gray14
-          font-kanit
-          text-lg
-          w-full
-          lg:w-64
-          border border-white3
-        "
-        >
-          <option>Select Year</option>
-          <option>2022</option>
-          <option>2021</option>
-          <option>2020</option>
+        <select v-model="year" placeholder="Select year" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-64 border border-white3 focus:outline-none ">
+          <option disabled value="">Select Year</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020 ">2020</option>
         </select>
       </div>
       <div>
@@ -78,7 +59,7 @@
         </tr>
         </thead>
         <tbody class="font-kanit text-lg">
-        <tr class="bg-white border-t border-gray12" v-for="employee in employeeData" :key="employee.id">
+        <tr class="bg-white border-t border-gray12" v-for="employee in filterData" :key="employee.id">
           <td class="px-6 py-4 text-gray11 whitespace-nowrap ">{{ employee.name }}</td>
           <td v-for="n in employee.dates" :key="n">
             <div v-if="n.status==='present'">
@@ -123,6 +104,10 @@ export default {
   layout: 'sidebar_hr',
   data() {
     return {
+      search:'',
+      month:'',
+      year:'',
+      filterData:'',
       currentPage: 1,
       perPage: 10,
       employeeData: [
@@ -218,7 +203,7 @@ export default {
         },
         {
           id: 7,
-          name: 'CHAWANNOP THAMMAJAI',
+          name: 'BBB',
           status: 'present',
           dates: [
             {
@@ -233,7 +218,7 @@ export default {
         },
         {
           id: 8,
-          name: 'CHAWANNOP THAMMAJAI',
+          name: 'AAA',
           status: 'present',
           dates: [
             {
@@ -252,6 +237,15 @@ export default {
   methods: {
     onChangePage(i) {
       this.currentPage = i
+    },
+    filterEmployee(search) {
+      if(search){
+        this.filterData = this.employeeData.filter(val => {
+          return val.name.toLowerCase().includes(search.toLowerCase())
+        })
+      }else {
+        this.filterData = this.employeeData
+      }
     }
   },
   mounted() {
@@ -276,6 +270,13 @@ export default {
       }
     })
     console.log(this.employeeData)
+
+    this.filterData = this.employeeData
+  },
+  watch: {
+    search: function (val) {
+      this.filterEmployee(val)
+    }
   }
 }
 </script>

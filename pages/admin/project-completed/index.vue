@@ -1,25 +1,25 @@
 <template>
-  <div>
+  <div class="ml-6">
     <div class="flex justify-between ">
       <span class="text-3xl font-semibold mb-12">Project Complete</span>
       <div>
         <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
-          <nuxt-link to="/home">Back</nuxt-link>
+          <nuxt-link to="/admin/work-list-yesterday">Back</nuxt-link>
         </button>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-6 mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-white p-4 rounded-lg">
         <p class="text-lg mb-2 font-medium">Punch In</p>
-        <p class="text-gray4">Mon, 11 January 2022 10.30 AM </p>
+        <p class="text-gray4 text-sm">Mon, 11 January 2022 10.30 AM </p>
       </div>
       <div class="bg-white p-4 rounded-lg">
         <p class="text-lg mb-2 font-medium">Punch Out</p>
-        <p class="text-gray4">Mon, 11 January 2022 14.00 AM </p>
+        <p class="text-gray4 text-sm">Mon, 11 January 2022 14.00 AM </p>
       </div>
       <div class="bg-white p-4 rounded-lg">
         <p class="text-lg mb-2 font-medium">Break Time</p>
-        <p class="text-gray4">11.45 AM - 13.00 AM </p>
+        <p class="text-gray4 text-sm">11.45 AM - 13.00 AM </p>
       </div>
       <div class="grid grid-cols-2 bg-white p-4 rounded-lg ">
         <div class="border-r-2 border-gray13 text-center">
@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: "project_complete",
+  name: "view_project",
   layout: 'sidebar',
   data() {
     return {

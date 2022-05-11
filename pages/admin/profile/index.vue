@@ -34,7 +34,7 @@
           <p class="font-light text-blue2">Email :</p> <p class="text-gray7 ml-4 font-light">chwannop@owndayshouse.com</p>
         </div>
         <button class="bg-blue rounded-lg text-white text-xs px-3 py-2">
-          <NuxtLink to="/change-password">Change Password</NuxtLink>
+          <NuxtLink to="/admin/change-password">Change Password</NuxtLink>
         </button>
       </div>
     </div>

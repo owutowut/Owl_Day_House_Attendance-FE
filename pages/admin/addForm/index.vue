@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="ml-6">
     <div class="flex justify-between ">
       <span class="text-3xl font-semibold mb-12">Work from Home</span>
       <div>
         <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
-          <NuxtLink to="/work-from-home">Back</NuxtLink>
+          <NuxtLink to="/admin/work-from-home">Back</NuxtLink>
         </button>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-6 mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-white  p-6 rounded-lg">
         <p class="mb-4 text-lg font-medium">From</p>
         <div class="relative w-full mb-4">
@@ -61,7 +61,7 @@
     </div>
 
     <div class="bg-white  p-6 rounded-md mt-6 ">
-      <div class="grid grid-cols-12 gap-4 mb-8">
+      <div class="grid lg:grid-cols-12 gap-4 mb-8">
           <div class="col-span-2">
             <span class="mb-4 text-xl text-black3 font-medium">Reason</span>
           </div>
@@ -69,7 +69,7 @@
             <input placeholder="Lorem ipsum dolor sit" class="w-full border border-gray12 rounded-lg text-gray8 py-2 px-4"/>
           </div>
       </div>
-        <div class="grid grid-cols-12 gap-4 mb-8">
+        <div class="grid lg:grid-cols-12 gap-4 mb-8">
           <div class="col-span-2">
             <span class="mb-4 text-xl text-black3 font-medium">Details</span>
           </div>
@@ -78,7 +78,7 @@
                       rows="8" class="w-full  border border-gray12 rounded-lg text-gray8 py-2 px-4"/>
           </div>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-center lg:justify-end">
           <button class="bg-blue px-10 py-2 text-white rounded-md text-sm" @click="update">Submit</button>
         </div>
       <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>

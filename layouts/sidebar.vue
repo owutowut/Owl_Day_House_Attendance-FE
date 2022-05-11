@@ -21,13 +21,13 @@
         <div class="px-5">
           <ul class="text-white mt-12">
             <li class="mb-6">
-              <NuxtLink to="/home" exact class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home'"/>
+              <NuxtLink to="/admin/home" exact class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home' "/>
                 <span>Home</span>
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/profile" class="flex items-center">
+              <NuxtLink to="/admin/profile" class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='profile'"/>
                 Profile
               </NuxtLink>
@@ -40,11 +40,11 @@
               </div>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/work-list-yesterday" :class="`${currentPath === 'work-list-yesterday' && 'text-yellow'}`"> Work list Yesterday
+              <NuxtLink to="/admin/work-list-yesterday" :class="`${currentPath === 'work-list-yesterday' && 'text-yellow'}`"> Work list Yesterday
               </NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/work-list-complete" :class="`${currentPath === 'work-list-complete' && 'text-yellow'}`">Work
+              <NuxtLink to="/admin/work-list-complete" :class="`${currentPath === 'work-list-complete' && 'text-yellow'}`">Work
                 list Complete
               </NuxtLink>
             </li>
@@ -55,10 +55,10 @@
               </div>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/leave" :class="`${currentPath === 'leave' && 'text-yellow'}`">Leave</NuxtLink>
+              <NuxtLink to="/admin/leave" :class="`${currentPath === 'leave' && 'text-yellow'}`">Leave</NuxtLink>
             </li>
             <li class="mb-6 ml-4">
-              <NuxtLink to="/work-from-home" :class="`${currentPath === 'work-from-home' && 'text-yellow'}`">Work from Home</NuxtLink>
+              <NuxtLink to="/admin/work-from-home" :class="`${currentPath === 'work-from-home' && 'text-yellow'}`">Work from Home</NuxtLink>
             </li>
           </ul>
           <button class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
@@ -96,7 +96,7 @@ export default {
   methods: {
     checkPath(path) {
       console.log(path.split("/"))
-      this.currentPath = path.split("/")[1]
+      this.currentPath = path.split("admin/")[1]
     },
     handleOpen() {
       this.isOpen = !this.isOpen
