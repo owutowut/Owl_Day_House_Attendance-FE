@@ -21,7 +21,7 @@
       })">
         <template v-slot:action="data">
           <div class="cursor-pointer flex justify-center items-center" >
-            <NuxtLink to="/admin/work-list-project">
+            <NuxtLink :to="`/admin/work-list-complete/${data.data.id}`">
               <svg-icon name="Search2" width='24' height='24' class="text-blue"/>
             </NuxtLink>
           </div>

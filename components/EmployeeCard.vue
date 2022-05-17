@@ -13,7 +13,7 @@
           <div v-if="card.tag=='ฝึกงาน'" class="bg-purple1 rounded-2xl text-white w-auto px-4 py-1 mt-2 text-xs">{{card.tag}}</div>
         </div>
       </div>
-    <Edit v-if="isEdit" :isEdit="isEdit" @handleHideEdit="onHideEdit" />
+    <Edit v-if="isEdit" :isEdit="isEdit" :id="card.id" @handleHideEdit="onHideEdit" />
   </div>
 </template>
 

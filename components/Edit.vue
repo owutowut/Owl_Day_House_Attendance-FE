@@ -3,9 +3,7 @@
     <div class="bg-white px-6 py-4 border border-gray21 w-40 h-20" >
       <div class="flex space-x-4">
         <svg-icon name="Edit" width="20" height="20"/>
-        <button>
-          <NuxtLink to="/hr/edit_employee">Edit</NuxtLink>
-        </button>
+        <NuxtLink :to="`/hr/employee/${id}`">Edit</NuxtLink>
       </div>
       <div class="flex space-x-4 mt-2">
         <svg-icon name="Delete" width="20" height="20"/>
@@ -22,7 +20,7 @@ import Delete from "@/components/Delete";
 import Modal from "@/components/Modal";
 export default {
   name: "Edit",
-  props: ['isEdit'],
+  props: ['isEdit','id'],
   components: {
     Delete,Modal
   },

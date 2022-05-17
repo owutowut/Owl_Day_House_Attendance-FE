@@ -15,7 +15,7 @@
       <div>
         <button class="bg-yellow px-10 py-2 mt-2 w-full text-white rounded-lg text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="10" height="10" class="mr-2"/>
-          <NuxtLink to="/admin/addForm">Add from</NuxtLink>
+          <NuxtLink to="/admin/work-from-home/addForm">Add from</NuxtLink>
         </button>
       </div>
     </div>
@@ -126,7 +126,7 @@ export default {
       }
       if (this.selected !== "all") {
         return this.wfhData.filter(val => {
-          return val.name.toLowerCase().includes(this.selected.toLowerCase())
+          return val.createdate.toLowerCase().includes(this.selected.toLowerCase())
         })
       }
       return this.wfhData

@@ -4,7 +4,7 @@
       <span class="text-3xl font-semibold mb-12">Project Complete</span>
       <div>
         <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
-          <nuxt-link to="/hr/profile">Back</nuxt-link>
+          <nuxt-link to="/hr/home/profile">Back</nuxt-link>
         </button>
       </div>
     </div>
@@ -66,14 +66,14 @@ export default {
   name: "index",
   layout: 'sidebar_hr',
   data() {
-  return {
-    form: {
-      project_name: 'Lorem ipsum dolor sit',
-      detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.',
-      proceeding: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.'
+    return {
+      form: {
+        project_name: 'Lorem ipsum dolor sit',
+        detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.',
+        proceeding: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean aliquet tincidunt sed tortor, dapibus nulla. Nisi leo sem pellentesque et ut arcu dignissim adipiscing arcu. Suscipit proin aliquam morbi pellentesque euismod.'
+      }
     }
   }
-}
 }
 </script>
 

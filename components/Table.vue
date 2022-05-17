@@ -122,9 +122,14 @@ export default {
         return data.replace(/\$break\$$/, "")
       } else if (/\$punchIn\$$/.test(data)) {
         return data.replace(/\$punchIn\$$/, "")
-      }
-        else if (/\$leaves\$$/.test(data)) {
+      } else if (/\$leaves\$$/.test(data)) {
         return data.replace(/\$leaves\$$/, "")
+      } else if (/\$พนักงาน\$$/.test(data)) {
+        return data.replace(/\$พนักงาน\$$/, "")
+      } else if (/\$ทดลองงาน\$$/.test(data)) {
+        return data.replace(/\$ทดลองงาน\$$/, "")
+      } else if (/\$ฝึกงาน\$$/.test(data)) {
+        return data.replace(/\$ฝึกงาน\$$/, "")
       }
       return data
     },
@@ -140,12 +145,18 @@ export default {
         return 'text-white bg-red5 rounded-lg px-6'
       } else if (/\$punchIn\$$/.test(data)) {
         return 'text-white bg-green rounded-lg px-3'
-      }
-        else if (/\$leaves\$$/.test(data)) {
-        return 'text-white bg-red4 rounded-lg px-3'
+      } else if (/\$leaves\$$/.test(data)) {
+        return 'text-white bg-red4 rounded-lg px-4'
+      } else if (/\$พนักงาน\$$/.test(data)) {
+        return 'text-white bg-blue rounded-lg px-5'
+      } else if (/\$ทดลองงาน\$$/.test(data)) {
+        return 'text-white bg-yellow rounded-lg px-3'
+      } else if (/\$ฝึกงาน\$$/.test(data)) {
+        return 'text-white bg-purple1 rounded-lg px-6'
       }
       return 'text-black'
     },
+
 
     mapPath(path, data) {
       const indexes = []
