@@ -61,7 +61,7 @@
       })">
         <template v-slot:action="data">
             <div class="cursor-pointer flex justify-center items-center">
-              <svg-icon name="Search" width='24' height='24' class="text-blue"/>
+                <svg-icon name="Search" width='24' height='24' class="text-blue"/>
             </div>
         </template>
       </Table>
@@ -118,10 +118,6 @@ export default {
   },
   data() {
     return {
-      sort: {
-        field: '',
-        sorted:true,
-      },
       show:{
         addleave: false,
         success: false,
@@ -131,7 +127,6 @@ export default {
       headers: [{
         title:'Employee',
         key: 'name',
-        sort: 'name',
       }, {
         title: 'LeaveType',
         key: 'leavetype',

@@ -42,8 +42,10 @@
               {{ renderItem(row[item.key]) }}
             </span>
 
-            <div class="py-4" v-if="item.key === 'action'">
+            <div class="py-4 flex justify-center space-x-4 pr-6" v-if="item.key === 'action'">
+<!--              <a :href=`hr/leaves/${{item.id}}`>-->
                 <slot name="action" :data="row"></slot>
+<!--              </a>-->
             </div>
           </td>
         </tr>

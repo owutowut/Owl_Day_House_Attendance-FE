@@ -14,15 +14,38 @@
           <p class="text-black text-sm" >Forgot password?</p>
         </div>
         <input class="border border-gray2 rounded-md px-3 py-2 w-full mb-10 " v-model="password" placeholder="Type your password" />
-        <button class="border bg-yellow text-white w-full rounded-md py-2" >Login</button>
+        <button @click="login()" class="border bg-yellow text-white w-full rounded-md py-2" >Login</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage'
+import axios from 'axios'
 
+export default {
+  name: 'IndexPage',
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    async login(){
+      const response=await axios.get('http://localhost:3333/login',{
+        email:this.email,
+        password:this.password,
+      })
+      if(response.data==='invalid email or password') {
+        alert('อีเมลหรือรหัสผ่านผิด กรุณาป้อนใหม่อีกครั้ง')
+      }
+      else{
+        localStorage.setItem('token',response.data.token)
+        alert('เข้าสู่ระบบสำเร็จ')
+        this.$router.push('/Member/Main')
+      }
+    }
+  }
 }
 </script>

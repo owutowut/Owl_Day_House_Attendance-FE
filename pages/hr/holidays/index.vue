@@ -23,11 +23,24 @@
     </div>
 
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="holidays.map((item, index) => {
-        return {
-          index: (index + 1) + pageStart,
-          ...item,}
-      })"/>
+      <Table
+        :headers="headers"
+        :data="filterData.map((item, index) => {
+          return {
+            ...item,
+            index: (index + 1) + pageStart,
+            noofdays: `${item.noofdays} Days`
+          }
+      })">
+        <template v-slot:action="data">
+          <div @click="show.edit=true" class="cursor-pointer flex justify-center items-center">
+            <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
+          </div>
+          <div @click="show.delete=true" class="cursor-pointer flex justify-center items-center">
+            <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
+          </div>
+        </template>
+      </Table>
     </div>
 
     <div>
@@ -35,7 +48,7 @@
     </div>
 
     <paginate
-      class="flex justify-end text-sm mb-6 text-black2 space-x-4"
+      class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
       v-model="page"
       :page-count="10"
       :page-range="3"
@@ -60,43 +73,58 @@ export default {
   components:{
     Table,ModalHR
   },
+  computed: {
+    pageStart() {
+      return (this.currentPage - 1) * this.perPage
+    },
+
+    filterData() {
+      if (this.search.trim()) {
+        return this.holidays.filter(item => {
+          return item.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+      if (this.selected !== "all") {
+        return this.holidays.filter(item => {
+          return item.createdate.toLowerCase().includes(this.selected.toLowerCase())
+        })
+      }
+      return this.holidays
+    }
+  },
   data() {
     return {
-      sort: {
-        field: '',
-        sorted:true,
-      },
       show:{
         addform: false,
         delete: false,
         edit: false,
+        success: false,
       },
       selected: 'all',
       search: '',
-      path:'holidays',
-      icon:'Edit_Square',
       headers: [
       {
-        key: 'name',
         title:'Holiday Name',
+        key: 'name',
       },
       {
-        key: 'from',
         title: 'From',
-        sort: true,
+        key: 'from',
+        sort: 'from',
       },
       {
-        key: 'to',
         title: 'To',
-        sort: true,
+        key: 'to',
+        sort: 'to',
       },
       {
-        key: 'noofdays',
         title: 'No of Days',
-        sort: true,
+        key: 'no_of_days',
+        sort: 'no_of_days',
       },
       {
         title: 'Actions',
+        key: 'action',
       }
       ],
       holidays: [
@@ -105,7 +133,7 @@ export default {
           name: 'สงกรานต์',
           from: '10 April 2020',
           to: '17 April 2020',
-          noofdays: 7,
+          no_of_days: 7,
           createdate: '9 April 2020',
         },
         {
@@ -113,7 +141,7 @@ export default {
           name: 'วันจักรี',
           from: '6 April 2020',
           to: '7 April 2020',
-          noofdays: 1,
+          no_of_days: 1,
           createdate: '28 March 2020',
         },
         {
@@ -121,7 +149,7 @@ export default {
           name: 'วันภาพยนตร์แห่งชาติ',
           from: '4 April 2020',
           to: '5 April 2020',
-          noofdays: 1,
+          no_of_days: 1,
           createdate: '1 April 2020',
         },
       ],

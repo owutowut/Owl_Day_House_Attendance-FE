@@ -12,21 +12,35 @@
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
         <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4"/>
       </div>
-      <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
-        <option value="all">Date</option>
-        <option v-for="date in workfromhome" :value="date.createdate">{{date.createdate}}</option>
-      </select>
+      <div>
+        <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+          <option value="all">Date</option>
+          <option v-for="date in work_from_home" :value="date.createdate">{{date.createdate}}</option>
+        </select>
+      </div>
     </div>
+
     <div class="relative overflow-x-auto sm:rounded-lg">
-      <Table :icon="icon" :path="path" :search="search" :selected="selected" :sort="sort" :headers="headers" :data="workfromhome.map((item, index) => {
-        return {
-          index: (index + 1) + pageStart,
-          ...item,}
-      })"/>
+      <Table
+        :headers="headers"
+        :data="filterData.map((item, index) => {
+          return {
+            ...item,
+            index: (index + 1) + pageStart,
+             status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
+             no_of_days: `${item.no_of_days} Days`
+          }
+      })">
+        <template v-slot:action="data">
+          <div class="cursor-pointer flex justify-center items-center space-x-4">
+            <svg-icon name="Search" width='24' height='24' class="text-blue"/>
+          </div>
+        </template>
+      </Table>
     </div>
 
     <paginate
-      class="flex justify-end text-sm mb-6 text-black2 space-x-4"
+      class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
       v-model="page"
       :page-count="10"
       :page-range="3"
@@ -50,58 +64,72 @@ export default {
   components:{
     Table,
   },
+  computed: {
+    pageStart() {
+      return (this.currentPage - 1) * this.perPage
+    },
+
+    filterData() {
+      if (this.search.trim()) {
+        return this.work_from_home.filter(item => {
+          return item.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+      if (this.selected !== "all") {
+        return this.work_from_home.filter(item => {
+          return item.createdate.toLowerCase().includes(this.selected.toLowerCase())
+        })
+      }
+      return this.work_from_home
+    }
+  },
   data() {
     return {
-      sort: {
-        field: '',
-        sorted:true,
-      },
-      path:'workfromhome',
       selected: 'all',
       search: '',
-      icon:'Search2',
       headers: [{
-        key: 'name',
         title:'Employee',
+        key: 'name',
       }, {
-        key: 'leavetype',
         title: 'type',
-        sort: true,
+        key: 'leavetype',
+        sort: 'leavetype',
       }, {
-        key: 'from',
         title: 'From',
-        sort: true,
+        key: 'from',
+        sort: 'from',
       }, {
-        key: 'to',
         title: 'To',
-        sort: true,
+        key: 'to',
+        sort: 'to',
       }, {
-        key: 'noofdays',
         title: 'No of Days',
-        sort: true,
+        key: 'no_of_days',
+        sort: 'no_of_days',
       }, {
-        key: 'tag',
         title: 'Tag',
-        sort: true,
+        key: 'tag',
+        sort: 'tag',
       }, {
-        key: 'status',
         title: 'Status',
-        sort: true,
+        key: 'status',
+        sort: 'status',
       }, {
         title: 'Actions',
+        key: 'action'
       },
       ],
-      workfromhome: [
+      work_from_home: [
         {
           id: 1,
           name: 'JIRAPHAT THAMMAJAI',
           leavetype: 'ลาป่วย',
           from: '11 Jan 2020',
           to: '16 Jan 2020',
-          noofdays: 5,
+          no_of_days: 5,
           department:'UX/UI Designer',
           tag: 'พนักงาน',
-          status: 'Approve',
+          status: 'approve',
           createdate: '7 Jan 2020',
         },
         {
@@ -110,7 +138,7 @@ export default {
           leavetype: 'ลากิจ',
           from: '5 Oct 2020',
           to: '8 Oct 2020',
-          noofdays: 3,
+          no_of_days: 3,
           department:'UX/UI Designer',
           tag: 'พนักงาน',
           status: 'pending',
@@ -122,7 +150,7 @@ export default {
           leavetype: 'ลาป่วย',
           from: '24 Mar 2020',
           to: '31 Mar 2020',
-          noofdays: 7,
+          no_of_days: 7,
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
           status: 'pending',
@@ -134,7 +162,7 @@ export default {
           leavetype: 'ลาป่วย',
           from: '18 Jan 2020',
           to: '22 Jan 2020',
-          noofdays: 4,
+          no_of_days: 4,
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
           status: 'pending',
@@ -146,10 +174,10 @@ export default {
           leavetype: 'ลากิจ',
           from: '3 Feb 2020',
           to: '9 Feb 2020',
-          noofdays: 6,
+          no_of_days: 6,
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
-          status: 'Approve',
+          status: 'approve',
           createdate: '1 Feb 2020',
         },
         {
@@ -158,10 +186,10 @@ export default {
           leavetype: 'ลากิจ',
           from: '24 Mar 2020',
           to: '31 Mar 2020',
-          noofdays: 7,
+          no_of_days: 7,
           department:'UX/UI Designer',
           tag: 'พนักงาน',
-          status: 'Approve',
+          status: 'approve',
           createdate: '22 Mar 2020',
         },
         {
@@ -170,10 +198,10 @@ export default {
           leavetype: 'ลาป่วย',
           from: '18 Jan 2020',
           to: '21 Jan 2020',
-          noofdays: 3,
+          no_of_days: 3,
           department:'UX/UI Designer',
           tag: 'ทดลองงาน',
-          status: 'Approve',
+          status: 'approve',
           createdate: '15 Jan 2020',
         },
         {
@@ -182,10 +210,10 @@ export default {
           leavetype: 'ลาป่วย',
           from: '3 Mar 2020',
           to: '5 Mar 2020',
-          noofdays: 2,
+          no_of_days: 2,
           department:'UX/UI Designer',
           tag: 'ฝึกงาน',
-          status: 'Approve',
+          status: 'approve',
           createdate: '2 Mar 2020',
         },
       ],
