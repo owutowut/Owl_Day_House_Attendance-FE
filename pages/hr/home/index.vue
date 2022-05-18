@@ -26,11 +26,11 @@
         </div>
         <div class="bg-white mt-4 py-6 px-4 rounded-lg grid grid-cols-2 ">
           <div class="flex items-center  justify-center">
-            <svg-icon name="Man" width="65" height="65" />
+            <svg-icon name="Man" width="65" height="65"/>
             <span class="text-lg font-medium">60%</span>
           </div>
           <div class="flex items-center justify-center ">
-            <svg-icon name="Female" width="65" height="65" />
+            <svg-icon name="Female" width="65" height="65"/>
             <span class="text-lg font-medium">40%</span>
           </div>
         </div>
@@ -40,29 +40,29 @@
         <div class="grid grid-cols-2">
           <div class="bg-white  p-4 border border-gray19 m-4 rounded-lg">
             <div>
-              <svg-icon name="Work" width="40" height="40" />
-              <p class="text-xs font-medium mt-4">Attendance</p>
+              <svg-icon name="Work" width="40" height="40"/>
+              <p class="text-sm font-medium mt-4">Attendance</p>
             </div>
             <p class="text-lg text-gray20 text-center mt-6">10</p>
           </div>
           <div class="bg-white  p-4 border border-gray19 m-4 rounded-lg">
             <div>
-              <svg-icon name="Time Circle" width="40" height="40" />
-              <p class="text-xs font-medium mt-4">Late Coming</p>
+              <svg-icon name="Time Circle" width="40" height="40"/>
+              <p class="text-sm font-medium mt-4">Late Coming</p>
             </div>
             <p class="text-lg text-gray20 text-center mt-6">3</p>
           </div>
           <div class="bg-white  p-4 border border-gray19 m-4 rounded-lg">
             <div>
-              <svg-icon name="Close Square" width="40" height="40" />
-              <p class="text-xs font-medium mt-4">Leave</p>
+              <svg-icon name="Close Square" width="40" height="40"/>
+              <p class="text-sm font-medium mt-4">Leave</p>
             </div>
             <p class="text-lg text-gray20 text-center mt-6">1</p>
           </div>
           <div class="bg-white  p-4 border border-gray19 m-4 rounded-lg">
             <div>
-              <svg-icon name="Home" width="40" height="40" />
-              <p class="text-xs font-medium mt-4">Work from Home</p>
+              <svg-icon name="Home" width="40" height="40"/>
+              <p class="text-sm font-medium mt-4">Work from Home</p>
             </div>
             <p class="text-lg text-gray20 text-center mt-6">1</p>
           </div>
@@ -86,10 +86,10 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-between mt-24" >
+    <div class="flex justify-between mt-24">
       <span class="text-3xl font-semibold">Attendance Today</span>
       <button class="bg-blue px-6 md:px-10 md:py-2 text-white rounded-lg text-lg">
-        <NuxtLink to="/hr/attendance-of-month">View all</NuxtLink>
+        <NuxtLink to="/hr/home/view_all">View all</NuxtLink>
       </button>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -119,57 +119,61 @@
     <div class="lg:flex justify-end lg:space-x-4 mt-6">
       <div class="search-wrapper  flex justify-center items-center bg-white rounded-lg px-4 py-2 my-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full lg:w-[704px] focus:outline-none "/>
+        <input v-model="search" type="text" placeholder="Search to Name.."
+               class="font-kanit text-lg w-full lg:w-[656px] focus:outline-none "/>
       </div>
       <div>
-        <select v-model="selected" placeholder="Position" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[236px] focus:outline-none">
-          <option disabled value="all" >Position</option>
+        <select v-model="selected" placeholder="Position"
+                class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-64 focus:outline-none">
+          <option value="all">Position</option>
           <option value="พนักงาน">พนักงาน</option>
           <option value="ทดลองงาน">ทดลองงาน</option>
           <option value="ฝึกงาน">ฝึกงาน</option>
         </select>
       </div>
       <div>
-        <select v-model="select_status" placeholder="Status" class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-[152px] focus:outline-none">
-          <option disabled value="all" >Status</option>
+        <select v-model="select_status" placeholder="Status"
+                class="rounded-lg px-4 py-2 my-2 text-gray14 font-kanit text-lg w-full lg:w-56 focus:outline-none">
+          <option value="all">Status</option>
           <option value="PunchIn">Punch In</option>
           <option value="PunchOut">Punch Out</option>
           <option value="Leaves">Leaves</option>
         </select>
       </div>
     </div>
-    <div class="relative overflow-x-auto  sm:rounded-lg mt-6">
+    <div class="relative overflow-x-auto sm:rounded-lg mt-6">
       <Table
         :headers="headers"
         :data="filterData.map((item, index) => {
           return {
             ...item,
             index: (index + 1) + pageStart,
-             status: item.status === 'punchIn' ? 'punch In $punchIn$' : 'Leaves $leaves$',
-             noofdays: `${item.noofdays} Days`
+            tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
+            status: item.status === 'punchIn' ? 'Punch In $punchIn$' : 'Leaves $leaves$',
+            noofdays: `${item.noofdays} Days`
           }
       })">
         <template v-slot:action="data">
-          <div class="cursor-pointer flex justify-center items-center" >
-            <NuxtLink to="/hr/profile">
+          <div class="cursor-pointer flex justify-center items-center">
+            <NuxtLink :to="`/hr/home/${data.data.id}`">
               <svg-icon name="Search2" width='24' height='24' class="text-blue"/>
             </NuxtLink>
           </div>
         </template>
       </Table>
     </div>
-      <paginate
-        class="flex justify-end mt-10 text-sm text-black2 space-x-4"
-        v-model="page"
-        :page-count="10"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'">
-      </paginate>
+    <paginate
+      class="flex justify-end mt-10 text-sm text-black2 space-x-4"
+      v-model="page"
+      :page-count="10"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="onChangePage"
+      :prev-text="'<'"
+      :next-text="'>'"
+      :container-class="'pagination'"
+      :page-class="'page-item'">
+    </paginate>
   </div>
 </template>
 
@@ -183,20 +187,20 @@ export default {
   components: {
     Table
   },
-  data(){
-    return{
+  data() {
+    return {
       sort: {
         field: '',
-        sorted:true,
+        sorted: true,
       },
       page: 10,
       search: '',
       selected: 'all',
       select_status: 'all',
-      icon:'Search',
+      icon: 'Search',
       headers: [
         {
-          title:'Employee',
+          title: 'Employee',
           key: 'name',
         },
         {
@@ -226,66 +230,66 @@ export default {
       ],
       mockData: [
         {
-          id:1,
-          name:'bjaja',
-          punchIn:'10.30 AM',
-          punchOut:'--.-- AM',
+          id: 1,
+          name: 'bjaja',
+          punchIn: '10.30 AM',
+          punchOut: '--.-- AM',
           tag: 'พนักงาน',
           status: 'punchIn'
         },
         {
-          id:2,
-          name:'monomo',
-          punchIn:'10.30 AM',
-          punchOut:'--.-- AM',
+          id: 2,
+          name: 'monomo',
+          punchIn: '10.30 AM',
+          punchOut: '--.-- AM',
           tag: 'พนักงาน',
           status: 'punchIn'
         },
         {
-          id:3,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'10.32 AM',
-          punchOut:'--.-- AM',
+          id: 3,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '10.32 AM',
+          punchOut: '--.-- AM',
           tag: 'ทดลองงาน',
           status: 'punchIn'
         },
         {
-          id:4,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'10.25 AM',
-          punchOut:'10.00 AM',
+          id: 4,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '10.25 AM',
+          punchOut: '10.00 AM',
           tag: 'ฝึกงาน',
           status: 'punchIn'
         },
         {
-          id:5,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'10.36 AM',
-          punchOut:'--.-- AM',
+          id: 5,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '10.36 AM',
+          punchOut: '--.-- AM',
           tag: 'ฝึกงาน',
           status: 'punchIn'
         },
         {
-          id:6,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'--.-- AM',
-          punchOut:'--.-- AM',
+          id: 6,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '--.-- AM',
+          punchOut: '--.-- AM',
           tag: 'พนักงาน',
           status: 'leaves'
         },
         {
-          id:7,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'--.-- AM',
-          punchOut:'--.-- AM',
+          id: 7,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '--.-- AM',
+          punchOut: '--.-- AM',
           tag: 'ทดลองงาน',
           status: 'leaves'
         },
         {
-          id:8,
-          name:'CHAWANNOP THAMMAJAI',
-          punchIn:'--.-- AM',
-          punchOut:'--.-- AM',
+          id: 8,
+          name: 'CHAWANNOP THAMMAJAI',
+          punchIn: '--.-- AM',
+          punchOut: '--.-- AM',
           tag: 'ฝึกงาน',
           status: 'leaves'
         },
@@ -296,24 +300,26 @@ export default {
     pageStart() {
       return (this.currentPage - 1) * this.perPage
     },
-
     filterData() {
+      let result = this.mockData
+
       if (this.search.trim()) {
-        return this.mockData.filter(val => {
+        result = result.filter(val => {
           return val.name.toLowerCase().includes(this.search.toLowerCase())
         })
       }
       if (this.selected !== "all") {
-        return this.mockData.filter(val => {
+        result = result.filter(val => {
           return val.tag.toLowerCase().includes(this.selected.toLowerCase())
         })
       }
       if (this.select_status !== "all") {
-        return this.mockData.filter(val => {
+        result = result.filter(val => {
           return val.status.toLowerCase().includes(this.select_status.toLowerCase())
         })
       }
-      return this.mockData
+
+      return result
     }
   },
 }

@@ -39,7 +39,7 @@
         </select>
       </div>
       <div>
-        <button class="bg-blue w-full px-14 py-3 mr-6 my-2 text-white rounded-md">Search</button>
+        <button class="bg-blue w-full px-14 py-3 mr-6 my-2 text-white rounded-md" @click="onSearch">Search</button>
       </div>
     </div>
     <div class="relative overflow-x-auto  sm:rounded-lg mt-6">
@@ -51,7 +51,7 @@
               <Span>Employee</Span>
             </div>
           </th>
-          <th scope="col" class="" v-for="n in 31" :key="n">
+          <th scope="col" class="" v-for="(n, index) in 31" :key="index">
             <div class="flex">
               {{ n }}
             </div>
@@ -115,121 +115,65 @@ export default {
           id: 1,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'absent',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'3',
+          years:'2022'
         },
         {
           id: 2,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'1',
+          years:'2022'
         },
         {
           id: 3,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'2',
+          years:'2022'
         },
         {
           id: 4,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'1',
+          years:'2021'
         },
         {
           id: 5,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'1',
+          years:'2020'
         },
         {
           id: 6,
           name: 'CHAWANNOP THAMMAJAI',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'2',
+          years:'2022'
         },
         {
           id: 7,
           name: 'BBB',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'3',
+          years:'2022'
         },
         {
           id: 8,
           name: 'AAA',
           status: 'present',
-          dates: [
-            {
-              day: 1,
-              status: "present"  // absent // late
-            },
-            {
-              day:2,
-              status: "absent"  // absent // late
-            }
-          ]
+          dates: [],
+          months:'2',
+          years:'2022'
         }
       ]
     }
@@ -238,14 +182,26 @@ export default {
     onChangePage(i) {
       this.currentPage = i
     },
-    filterEmployee(search) {
-      if(search){
-        this.filterData = this.employeeData.filter(val => {
-          return val.name.toLowerCase().includes(search.toLowerCase())
+    onSearch(){
+      let result = this.employeeData
+
+      if (this.search.trim()) {
+        result = result.filter(val => {
+          return val.name.toLowerCase().includes(this.search.toLowerCase())
         })
-      }else {
-        this.filterData = this.employeeData
       }
+      if (this.month !== "all") {
+        result = result.filter(val => {
+          return val.months.toLowerCase().includes(this.month.toLowerCase())
+        })
+      }
+      if (this.year !== "all") {
+        result = result.filter(val => {
+          return val.years.toLowerCase().includes(this.year.toLowerCase())
+        })
+      }
+
+      this.filterData = result
     }
   },
   mounted() {
@@ -272,11 +228,6 @@ export default {
     console.log(this.employeeData)
 
     this.filterData = this.employeeData
-  },
-  watch: {
-    search: function (val) {
-      this.filterEmployee(val)
-    }
   }
 }
 </script>

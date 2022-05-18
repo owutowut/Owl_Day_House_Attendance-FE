@@ -2,7 +2,12 @@
   <div class="flex flex-col ">
     <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
       <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden" v-show='isOpen' @click='handleOpen'>
-      <img src="~/assets/images/Notification.svg">
+      <button class="relative">
+        <svg-icon name="Notification" class="h-[45px] w-[45px]" />
+        <div class="absolute -top-1 -right-2 bg-red6 text-white text-xs px-2 rounded-lg ">
+          {{total_notification}}
+        </div>
+      </button>
     </nav>
 
     <aside
@@ -35,7 +40,7 @@
             <li class="mb-6">
               <div class="flex items-center">
                 <svg-icon name="ArrowRight" height="28" width="28"
-                          v-if="currentPath==='work-list-yesterday' || currentPath==='work-list-complete'"/>
+                          v-if="currentPath==='work-list-yesterday' || currentPath==='work-list-complete' "/>
                 Work list
               </div>
             </li>
@@ -82,7 +87,8 @@ export default {
     return {
       currentPath: "",
       isActive: false,
-      isOpen: true
+      isOpen: true,
+      total_notification: '0'
     }
   },
   mounted() {

@@ -92,40 +92,18 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div
           :class="`${punch ? 'bg-white shadow p-6 rounded-md' : 'bg-white opacity-50 shadow p-6 rounded-md'}`"
+          v-for="item in completed_data" :key="item.id"
         >
           <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
-          <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022 10:30 AM - 14:00 AM</p>
+          <p class="text-xs text-gray4 mb-8">{{item.day}}</p>
           <div class="flex justify-center mt-[40px]">
             <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
-              <div class="text-lg text-black2 font-medium">4.10 hrs</div>
+              <div class="text-lg text-black2 font-medium">{{item.time}}</div>
             </div>
           </div>
-          <div class="text-white flex items-center space-x-4 mt-7">
-            <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">
-              <NuxtLink to="/admin/edit-project">Edit</NuxtLink>
-            </button>
-            <button class="rounded-2xl px-5 py-3 bg-black w-full">
-              <NuxtLink to="/admin/view-project">View</NuxtLink>
-            </button>
-          </div>
-        </div>
-        <div
-          :class="`${punch ? 'bg-white shadow p-6 rounded-md' : 'bg-white opacity-50 shadow p-6 rounded-md'}`"
-        >
-          <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
-          <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022  10.30 AM - Tur, 12 ... </p>
-          <div class="flex justify-center mt-[40px]">
-            <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
-              <div class="text-lg text-black2 font-medium">3.50 hrs</div>
-            </div>
-          </div>
-          <div class="text-white flex items-center space-x-4 mt-7">
-            <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">
-              <NuxtLink to="/admin/edit-project">Edit</NuxtLink>
-            </button>
-            <button class="rounded-2xl px-5 py-3 bg-black w-full">
-              <NuxtLink to="/admin/view-project">View</NuxtLink>
-            </button>
+          <div class="text-white text-center flex items-center space-x-4 mt-7">
+            <NuxtLink :to="`/admin/home/${item.id}/edit`" class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</NuxtLink>
+            <NuxtLink :to="`/admin/home/${item.id}`" class="rounded-2xl px-5 py-3 bg-black w-full">View</NuxtLink>
           </div>
         </div>
       </div>
@@ -150,7 +128,19 @@ export default {
     return {
       punch: false,
       isAddTask: false,
-      isCompleted: false
+      isCompleted: false,
+      completed_data: [
+        {
+          id:1,
+          day:'Mon, 11 January 2022 10:30 AM - 14:00 AM',
+          time:"4.10 hrs",
+        },
+        {
+          id:2,
+          day:'Mon, 11 January 2022  10.30 AM - Tur, 12 ...',
+          time:"3.50 hrs",
+        }
+      ]
     }
   },
   methods: {

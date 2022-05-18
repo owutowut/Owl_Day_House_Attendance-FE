@@ -63,36 +63,22 @@
           <p class="text-lg text-black border-b-2 w-1/2 pb-2">Completed</p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-white shadow p-6 rounded-md">
-            <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
-            <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022 10:30 AM - 14:00 AM</p>
-            <div class="flex justify-center mt-[40px]">
-              <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
-                <div class="text-lg text-black2 font-medium">4.10 hrs</div>
+          <div v-for="item in completed_data" :key="item.id">
+            <div class="bg-white shadow p-6 rounded-md">
+              <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
+              <p class="text-xs text-gray4 mb-8">{{item.day}}</p>
+              <div class="flex justify-center mt-[40px]">
+                <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
+                  <div class="text-lg text-black2 font-medium">{{item.time}}</div>
+                </div>
+              </div>
+              <div class="text-white flex items-center space-x-4 mt-7">
+                <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</button>
+                <nuxt-link :to="`/hr/home/${$route.params.id}/detail/${item.id}`" class="rounded-2xl text-center px-5 py-3 bg-black w-full"> View</nuxt-link>
               </div>
             </div>
-            <div class="text-white flex items-center space-x-4 mt-7">
-              <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</button>
-              <button class="rounded-2xl px-5 py-3 bg-black w-full">
-                <nuxt-link to="/hr/project-complete">View</nuxt-link>
-              </button>
-            </div>
           </div>
-          <div class="bg-white shadow p-6 rounded-md">
-            <p class="text-sm font-medium mb-2">Punch In - Punch out</p>
-            <p class="text-xs text-gray4 mb-8">Mon, 11 January 2022  10.30 AM - Tur, 12 ... </p>
-            <div class="flex justify-center mt-[40px]">
-              <div class="w-[124px] h-[124px] bg-gray5 rounded-full flex justify-center items-center">
-                <div class="text-lg text-black2 font-medium">3.50 hrs</div>
-              </div>
-            </div>
-            <div class="text-white flex items-center space-x-4 mt-7">
-              <button class="rounded-2xl px-5 py-3 bg-yellow2 w-full">Edit</button>
-              <button class="rounded-2xl px-5 py-3 bg-black w-full">
-                <nuxt-link to="/hr/project-complete">View</nuxt-link>
-              </button>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -102,7 +88,23 @@
 <script>
 export default {
   name: "profile",
-  layout: 'sidebar_hr'
+  layout: 'sidebar_hr',
+  data(){
+    return {
+      completed_data: [
+        {
+          id:1,
+          day:'Mon, 11 January 2022 10:30 AM - 14:00 AM',
+          time:"4.10 hrs",
+        },
+        {
+          id:2,
+          day:'Mon, 11 January 2022  10.30 AM - Tur, 12 ...',
+          time:"3.50 hrs",
+        }
+      ]
+    }
+  }
 }
 </script>
 

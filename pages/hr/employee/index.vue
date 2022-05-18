@@ -6,7 +6,7 @@
         class="bg-yellow px-8 md:px-10 md:py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
         <svg-icon name="add1" width="10" height="10" class="mr-2"/>
         <span class="text-lg font-kanit">
-          <NuxtLink to="/hr/addEmployee">Add employee</NuxtLink>
+          <NuxtLink to="/hr/employee/addEmployee">Add employee</NuxtLink>
         </span>
       </button>
     </div>
@@ -17,7 +17,7 @@
       </div>
       <div>
         <select v-model="selected" placeholder="Position"  class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full focus:outline-none">
-          <option disabled value="">Position</option>
+          <option value="all">Position</option>
           <option value="UX/UI Designer">UX/UI Designer</option>
           <option value="Tester">Tester</option>
           <option value="Dev">Dev</option>
@@ -25,7 +25,7 @@
       </div>
       <div>
         <select v-model="selected_status" placeholder="Status"  class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full focus:outline-none">
-          <option disabled value="">Status</option>
+          <option value="all">Status</option>
           <option value="พนักงาน">พนักงาน</option>
           <option value="ทดลองงาน">ทดลองงาน</option>
           <option value="ฝึกงาน">ฝึกงาน</option>
@@ -52,9 +52,8 @@ export default {
     return {
       isEdit: false,
       search: '',
-      selected:'',
-      selected_status:'',
-      filterData: '',
+      selected:'all',
+      selected_status:'all',
       Employees: [
         {
           id: 1,
@@ -143,49 +142,29 @@ export default {
       ]
     }
   },
-  watch: {
-    search: function (val) {
-      this.filterEmployee(val)
-    },
-    selected: function (val){
-      this.filterPosition(val)
-    },
-    selected_status: function (val){
-      this.filterStatus(val)
+  computed: {
+    filterData() {
+      let result = this.Employees
+
+      if (this.search.trim()) {
+        result = result.filter(val => {
+          return val.name.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
+      if (this.selected !== "all") {
+        result = result.filter(val => {
+          return val.department.toLowerCase().includes(this.selected.toLowerCase())
+        })
+      }
+      if (this.selected_status !== "all") {
+        result = result.filter(val => {
+          return val.tag.toLowerCase().includes(this.selected_status.toLowerCase())
+        })
+      }
+
+      return  result
     }
   },
-  methods: {
-    filterEmployee(search) {
-      if(search){
-        this.filterData = this.Employees.filter(val => {
-          return val.name.toLowerCase().includes(search.toLowerCase())
-        })
-      }else {
-        this.filterData = this.Employees
-      }
-    },
-    filterPosition(selected) {
-      if(selected){
-        this.filterData = this.Employees.filter(val => {
-          return val.department.toLowerCase().includes(selected.toLowerCase())
-        })
-      }else {
-        this.filterData = this.Employees
-      }
-    },
-    filterStatus(selected_status) {
-      if(selected_status){
-        this.filterData = this.Employees.filter(val => {
-          return val.tag.toLowerCase().includes(selected_status.toLowerCase())
-        })
-      }else {
-        this.filterData = this.Employees
-      }
-    }
-  },
-  mounted() {
-    this.filterData = this.Employees
-  }
 }
 </script>
 
