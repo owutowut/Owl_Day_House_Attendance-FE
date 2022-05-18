@@ -42,8 +42,10 @@
               {{ renderItem(row[item.key]) }}
             </span>
 
-            <div class="py-4" v-if="item.key === 'action'">
-              <slot name="action" :data="row"></slot>
+            <div class="py-4 flex justify-center space-x-4 pr-6" v-if="item.key === 'action'">
+<!--              <a :href=`hr/leaves/${{item.id}}`>-->
+                <slot name="action" :data="row"></slot>
+<!--              </a>-->
             </div>
           </td>
         </tr>
@@ -54,13 +56,7 @@
 </template>
 
 <script>
-import ModalHR from '@/components/ModalHR.vue'
-
 export default {
-  components: {
-    ModalHR,
-  },
-
   props: {
     data: {
       type: Array,
@@ -154,7 +150,7 @@ export default {
       } else if (/\$ฝึกงาน\$$/.test(data)) {
         return 'text-white bg-purple1 rounded-lg px-6'
       }
-      return 'text-black'
+      return 'text-blue'
     },
 
 

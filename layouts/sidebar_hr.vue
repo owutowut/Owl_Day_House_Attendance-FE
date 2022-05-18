@@ -56,7 +56,7 @@
               </NuxtLink>
             </li>
           </ul>
-          <button class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
+          <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
             <img src="~/assets/images/ls_logout.svg">
             <span>ออกจากระบบ</span>
           </button>
@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "sidebar_hr",
   data() {
@@ -95,6 +97,14 @@ export default {
     },
     handleOpen() {
       this.isOpen = !this.isOpen
+    },
+    async logout(){
+      const response = await axios.get('http://127.0.0.1:3333/logout')
+      if(response.data.message==='You have logged out successfully.'){
+        return location.href = "/"
+      } else {
+        return response.data.message
+      }
     }
   }
 }

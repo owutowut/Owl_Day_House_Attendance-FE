@@ -84,12 +84,12 @@
                       <div class="flex space-x-2">
                         <div class="flex font-bold space-x-2 text-blue">
                           <div class="space-y-1">
-                            <input v-model="punchout.hour" required placeholder="00" class="text-3xl text-center bg-gray24 rounded-md py-4" maxlength="2" size="2" type="text">
+                            <input v-model="punchout.hour" required placeholder="00" class="text-3xl text-center bg-gray24 rounded-md py-4" pattern="[0-9]+" minlength="2"  maxlength="2" size="2" type="text">
                             <p class="text-left text-gray24 text-xs	font-light">Hour</p>
                           </div>
                           <p class="self-center mb-5 text-3xl">:</p>
                           <div class="space-y-1">
-                            <input v-model="punchout.minute" required placeholder="00" class="text-3xl text-center bg-gray24 rounded-md py-4" maxlength="2" size="2" type="text">
+                            <input v-model="punchout.minute" required placeholder="00" class="text-3xl text-center bg-gray24 rounded-md py-4" pattern="[0-9]+" minlength="2"  maxlength="2" size="2" type="text">
                             <p class="text-left text-gray24 text-xs	font-light">Minute</p>
                           </div>
                         </div>
