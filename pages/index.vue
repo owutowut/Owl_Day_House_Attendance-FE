@@ -60,8 +60,11 @@ export default {
         if (data) {
           console.log(data)
           this.$auth.setUser(data)
-          // if(data.)
-          this.$router.push('/admin/home')
+          if(data.data.role === 'admin') {
+            this.$router.push('/admin/home')
+          } else {
+            this.$router.push('/hr/home')
+          }
         }
 
         this.isLoading = false
