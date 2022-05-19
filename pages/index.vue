@@ -35,30 +35,11 @@ export default {
     }
   },
   methods: {
-    // async login() {
-    //   const response = await this.$axios.post(`login`, {
-    //     email: this.email,
-    //     password: this.password,
-    //   })
-    //   console.log(response)
-    //   localStorage.setItem('token', response.data.token)
-    //
-    //   if(response.data.message==='You have logged in successfully.') {
-    //     if(response.data.query.role==='hr') {
-    //         this.$router.push('/hr/home')
-    //       } else {
-    //         this.$router.push('/admin/home')
-    //     }
-    //   }
-    //
-    // }
-
     async login() {
       this.isLoading = true
       try {
         let {data} = await this.$auth.loginWith('local', {data: this.form})
         if (data) {
-          console.log(data)
           this.$auth.setUser(data)
           if(data.data.role === 'admin') {
             this.$router.push('/admin/home')
