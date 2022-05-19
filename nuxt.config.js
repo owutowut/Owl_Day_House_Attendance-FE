@@ -1,3 +1,4 @@
+const API_URL = `${process.env.API_URL}`
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -22,6 +23,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/axios.js',
     {src: '~/plugins/vue-persian-datetime-picker.js', ssr: false},
     {src: '~/plugins/vuejs-paginate.js', ssr: false},
     {src: '~/plugins/vue-owl-carousel.js', ssr: false},
@@ -41,6 +43,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/svg-sprite',
+    '@nuxtjs/auth-next'
   ],
   svgSprite: {
     // manipulate module options
@@ -48,9 +51,34 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: API_URL,
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          maxAge: 60 * 60 * 24 * 30,
+          global: true,
+        },
+        user: {
+          property: 'user',
+        },
+        scheme: 'local',
+        endpoints: {
+          login: { url: `login`, method: 'post', propertyName: 'data.token' },
+          user: false,
+          logout: false
+        }
+      },
+      // plugins: ['~/plugins/auth.js']
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  env: {
+    apiUrl: API_URL || 'http://192.168.1.23:3333',
+  },
 }

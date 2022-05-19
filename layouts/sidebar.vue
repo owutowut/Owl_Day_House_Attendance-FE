@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     checkPath(path) {
-      console.log(path.split("/"))
+      // console.log(path.split("/"))
       this.currentPath = path.split("admin/")[1]
     },
     handleOpen() {

@@ -55,13 +55,16 @@
           return {
             ...item,
             index: (index + 1) + pageStart,
+             tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
              status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
              noofdays: `${item.noofdays} Days`
           }
       })">
         <template v-slot:action="data">
             <div class="cursor-pointer flex justify-center items-center">
-                <svg-icon name="Search" width='24' height='24' class="text-blue"/>
+              <NuxtLink :to="`/hr/leaves/${data.data.id}`">
+                <svg-icon name="Search2" width='24' height='24' class="text-blue"/>
+              </NuxtLink>
             </div>
         </template>
       </Table>

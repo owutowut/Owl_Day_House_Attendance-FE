@@ -38,20 +38,20 @@
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/hr/holidays/" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='holiday'"/>
+              <NuxtLink to="/hr/holidays" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='holidays'"/>
                 Hoilday
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/hr/leaves/" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'"/>
+              <NuxtLink to="/hr/leaves" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leaves'"/>
                 Leaves
               </NuxtLink>
             </li>
             <li class="mb-6">
-              <NuxtLink to="/hr/workfromhome/" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='work-from-home'"/>
+              <NuxtLink to="/hr/workfromhome" class="flex items-center">
+                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='workfromhome'"/>
                 Work from Home
               </NuxtLink>
             </li>
@@ -99,7 +99,7 @@ export default {
       this.isOpen = !this.isOpen
     },
     async logout(){
-      const response = await axios.get('http://127.0.0.1:3333/logout')
+      const response = await axios.get('http://192.168.1.23:3333/logout')
       if(response.data.message==='You have logged out successfully.'){
         return location.href = "/"
       } else {
