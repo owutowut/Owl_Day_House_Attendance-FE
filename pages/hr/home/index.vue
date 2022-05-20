@@ -296,6 +296,7 @@ export default {
       ]
     }
   },
+
   computed: {
     pageStart() {
       return (this.currentPage - 1) * this.perPage
@@ -320,7 +321,7 @@ export default {
       }
 
       return result
-    }
+    },
   },
 }
 </script>

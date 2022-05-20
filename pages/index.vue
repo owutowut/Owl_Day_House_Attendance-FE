@@ -31,7 +31,8 @@ export default {
         email: '',
         password: '',
         role:'',
-      }
+      },
+        isLoading: false
     }
   },
   methods: {
