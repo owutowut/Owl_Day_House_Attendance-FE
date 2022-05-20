@@ -67,7 +67,7 @@ export default {
         },
         scheme: 'local',
         endpoints: {
-          login: { url: `login`, method: 'post', propertyName: 'data.token' },
+          login: { url:  `${API_URL}/login`, method: 'post'},
           user: false,
           logout: false
         }
@@ -79,6 +79,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    apiUrl: API_URL || 'http://192.168.1.23:3333',
+    apiUrl: API_URL || 'http://127.0.0.1:3333',
   },
 }
