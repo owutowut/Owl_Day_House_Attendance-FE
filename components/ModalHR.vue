@@ -198,7 +198,12 @@ export default {
           to: '17 Jan 2020',
           noofdays: 7,
       },
+      user_profile: [],
     }
+  },
+
+  mounted() {
+    this.profile()
   },
 
   methods: {
@@ -208,8 +213,10 @@ export default {
       this.leave.no_of_days = parseInt((to - from) / (24 * 3600 * 1000))
     },
     async leaveSubmit() {
-      console.log(this.leave)
+      console.log(this.user_profile.user_id)
+
       await this.$axios.post(`leaves/create`, {
+        user_id: this.user_profile.user_id,
         leave_type: this.leave.leave_type,
         from: this.leave.from,
         to: this.leave.to,
@@ -217,13 +224,24 @@ export default {
         reason: this.leave.reason,
       })
         .then(response => {
-          console.log(response)
           this.show.success = true
-          this.$router.push('/hr/leaves')
-      })
+          console.log(response)
+        })
         .catch(err => {
           console.log(err)
         })
+    },
+    async profile() {
+      try {
+        const profile = await this.$auth.user
+
+        this.user_profile = profile.data.user
+        this.isLoading = false
+      } catch (error) {
+        await this.$auth.logout()
+        await this.$auth.redirect('logout')
+        console.log(error)
+      }
     }
   }
 }

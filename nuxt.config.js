@@ -64,13 +64,19 @@ export default {
         },
         user: {
           property: 'user',
+          autoFetch: true
         },
         scheme: 'local',
         endpoints: {
           login: { url:  `${API_URL}/login`, method: 'post'},
           user: false,
-          logout: false
-        }
+          logout: false,
+        },
+        redirect: {
+          login: '/',
+          logout: '/',
+        },
+        resetOnError: true,
       },
       // plugins: ['~/plugins/auth.js']
     }
@@ -79,6 +85,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    apiUrl: API_URL || 'http://192.168.1.17:3333',
+    apiUrl: API_URL || 'http://10.0.0.101:3333',
   },
 }

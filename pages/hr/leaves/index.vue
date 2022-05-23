@@ -1,6 +1,7 @@
 <template>
   <div>
     <Loading v-if="isLoading"/>
+
     <div v-else>
       <div class="flex justify-between mb-2">
         <span class="text-3xl font-semibold text-blue">LEAVES</span>
@@ -177,9 +178,14 @@ export default {
 
   methods: {
     async leavesData() {
-      const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
-      this.leaves = data.data
-      this.isLoading = false
+      try {
+        const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
+
+        this.leaves = data.data
+        this.isLoading = false
+      } catch (error) {
+        console.log(error)
+      }
     },
     onChangePage(page) {
       console.log(page)
