@@ -79,6 +79,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    apiUrl: API_URL || 'http://127.0.0.1:3333',
+    apiUrl: API_URL || 'http://192.168.1.17:3333',
   },
 }

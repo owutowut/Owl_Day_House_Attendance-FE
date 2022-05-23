@@ -6,7 +6,7 @@
         <div>
           <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.addform">
             <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-              <div @click="show.addform = false" class="flex justify-end cursor-pointer right m-4">
+              <div @click="show.add_form = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
               </div>
               <div class="px-8">
@@ -84,7 +84,7 @@
     <div class="DeleteModal">
       <div>
         <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.delete">
-          <div class="modalSucess bg-white rounded-lg border border-gray19 drop-shadow">
+          <div class="modalSuccess bg-white rounded-lg border border-gray19 drop-shadow">
             <div @click="show.delete = false" class="pt-8 mb-6 flex justify-center">
               <svg-icon name="trashsolid" width="60" height="69"/>
             </div>
@@ -101,9 +101,9 @@
       </div>
     </div>
 
-    <div class="SucessModal">
+    <div class="SuccessModal">
       <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.success">
-        <div class="grid justify-items-center modalSucess text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
+        <div class="grid justify-items-center modalSuccess text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
           <div @click="show.success = false" class="cursor-pointer justify-self-end m-4">
             <svg-icon name="close" width="15" height="15"/>
           </div>
@@ -116,11 +116,11 @@
     </div>
 
     <div class="AddLeaveModal">
-      <form onsubmit="Submit()">
+      <form @submit="leaveSubmit">
         <div>
-          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.addleave">
+          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_leave">
             <div class="modalAddLeave text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-              <div @click="show.addleave = false" class="flex justify-end cursor-pointer right m-4">
+              <div @click="show.add_leave = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
               </div>
               <div class="px-8">
@@ -128,29 +128,29 @@
                 <div class="space-y-2">
                   <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Leave Type</Span>
-                    <select v-model="leave.selected" class="font-light rounded-md px-4 py-1 w-full text-gray26 border border-gray12 cursor-pointer">
+                    <select v-model="leave.leave_type" class="font-light rounded-md px-4 py-1 w-full text-gray26 border border-gray12 cursor-pointer">
                       <option value="all" disabled>Select Leave type</option>
                       <option value="ลาป่วย">ลาป่วย</option>
                       <option value="ลากิจ">ลากิจ</option>
                     </select>                </div>
                   <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input v-model="leave.from" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input @change="GetDays()" v-model="leave.from" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input v-model="leave.to" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input @change="GetDays()" v-model="leave.to" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="leave.noofdays+' Day'" disabled class="font-light text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="leave.no_of_days+' Days'" disabled class="font-light text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Leave Reason</Span>
                     <textarea v-model="leave.reason" class="font-light w-full h-24 text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-2">
-                    <button @click="show.addleave = false;show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
                       <span class="text-lg font-kanit">Submit</span>
                     </button>
                   </div>
@@ -169,27 +169,27 @@
 export default {
   props: {
     show:{
-      addform: Boolean,
+      add_form: Boolean,
       success: Boolean,
       delete: Boolean,
       edit: Boolean,
-      addleave: Boolean,
+      add_leave: Boolean,
     },
   },
   data() {
     return {
       leave: {
-        selected: 'all',
+        leave_type: 'all',
         from: '',
         to: '',
-        noofdays: 0,
+        no_of_days: 0,
         reason: '',
       },
       form: {
         name: '',
         from: '',
         to: '',
-        noofdays: 0,
+        no_of_days: 0,
       },
       data: {
           id: 1,
@@ -200,6 +200,32 @@ export default {
       },
     }
   },
+
+  methods: {
+    GetDays(){
+      let from = new Date(this.leave.from);
+      let to = new Date(this.leave.to);
+      this.leave.no_of_days = parseInt((to - from) / (24 * 3600 * 1000))
+    },
+    async leaveSubmit() {
+      console.log(this.leave)
+      await this.$axios.post(`leaves/create`, {
+        leave_type: this.leave.leave_type,
+        from: this.leave.from,
+        to: this.leave.to,
+        no_of_days: this.leave.no_of_days,
+        reason: this.leave.reason,
+      })
+        .then(response => {
+          console.log(response)
+          this.show.success = true
+          this.$router.push('/hr/leaves')
+      })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 
@@ -214,7 +240,7 @@ export default {
   height: 660px;
 }
 
-.modalSucess{
+.modalSuccess{
   width: 590px;
   height: 314px;
 }

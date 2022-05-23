@@ -5,7 +5,7 @@
       <div class="flex justify-between mb-2">
         <span class="text-3xl font-semibold text-blue">LEAVES</span>
         <button class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center"
-                @click="show.addleave=true">
+                @click="show.add_leave=true">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Leave</span>
         </button>
@@ -59,7 +59,7 @@
             index: (index + 1) + pageStart,
              tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
              status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
-             noofdays: `${item.noofdays} Days`
+             no_of_days: `${item.no_of_days} Days`
           }
       })">
           <template v-slot:action="data">
@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       show:{
-        addleave: false,
+        add_leave: false,
         success: false,
       },
       isLoading: true,
@@ -118,8 +118,8 @@ export default {
         key: 'name',
       }, {
         title: 'LeaveType',
-        key: 'leavetype',
-        sort: 'leavetype',
+        key: 'leave_type',
+        sort: 'leave_type',
       }, {
         title: 'From',
         key: 'from',
@@ -151,6 +151,7 @@ export default {
   mounted() {
     this.leavesData()
   },
+
   computed: {
     pageStart() {
       return (this.currentPage - 1) * this.leaves.perPage
@@ -167,17 +168,17 @@ export default {
       }
       if (this.selected !== "all") {
         return this.leaves.data.filter(item => {
-          return item.leavetype.toLowerCase().includes(this.selected.toLowerCase())
+          return item.leave_type.toLowerCase().includes(this.selected.toLowerCase())
         })
       }
       return this.leaves.data
     }
   },
+
   methods: {
     async leavesData() {
-      let {data} = await this.$axios.get(`leaves/?page=${this.page}`)
+      const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
       this.leaves = data.data
-      // console.log(data.data)
       this.isLoading = false
     },
     onChangePage(page) {

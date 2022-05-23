@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-5 h-screen">
     <div class="col-span-3 bg-blue flex items-center justify-center">
-      <img src="~/assets/images/ODH_Banding-09 (1) 2.png" >
+      <img src="~/assets/images/ODH_Banding-09 (1) 2.png"  alt="">
     </div>
     <div class="col-span-2 p-24">
       <div class="bg-white shadow p-6 " >
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'IndexPage',
@@ -39,13 +38,13 @@ export default {
     async login() {
       this.isLoading = true
       try {
-        let {data} = await this.$auth.loginWith('local', {data: this.form})
-        if (data) {
-          this.$auth.setUser(data)
-          if(data.data.role === 'admin') {
-            this.$router.push('/admin/home')
+        let {login} = await this.$auth.loginWith('local', {data: this.form})
+        if (login) {
+          this.$auth.setUser(login)
+          if(login.data.role === 'admin') {
+            await this.$router.push('/admin/home')
           } else {
-            this.$router.push('/hr/home')
+            await this.$router.push('/hr/home')
           }
         }
 
