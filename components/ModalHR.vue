@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div>
 
     <div class="AddFormModal">
@@ -128,26 +128,49 @@
                 <div class="space-y-2">
                   <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Leave Type</Span>
-                    <select v-model="leave.leave_type" class="font-light rounded-md px-4 py-1 w-full text-gray26 border border-gray12 cursor-pointer">
-                      <option value="all" disabled>Select Leave type</option>
+                    <select required v-model="leave.leave_type" class="no-outline font-light text-gray26 rounded-md px-4 py-1 w-full border border-gray12 cursor-pointer">
+                      <option value="" disabled selected>Select Leave type</option>
                       <option value="ลาป่วย">ลาป่วย</option>
                       <option value="ลากิจ">ลากิจ</option>
-                    </select>                </div>
+                    </select>
+                  </div>
                   <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input @change="GetDays()" v-model="leave.from" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      color="#252647"
+                      auto-submit
+                      @change="GetDays()"
+                      v-model="leave.from"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="date_picker_from"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="leave.from" required id="date_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input @change="GetDays()" v-model="leave.to" class="font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      color="#252647"
+                      auto-submit
+                      @change="GetDays()"
+                      v-model="leave.to"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="date_picker_to"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="leave.to" required placeholder="วว/ดด/ปปปป" id="date_picker_to" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="leave.no_of_days+' Days'" disabled class="font-light text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="leave.no_of_days+' Days'" required disabled class="no-outline font-light text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full"/>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Leave Reason</Span>
-                    <textarea v-model="leave.reason" class="font-light w-full h-24 text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <textarea required v-model="leave.reason" class="no-outline font-light w-full h-24 text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-2">
                     <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
@@ -179,11 +202,12 @@ export default {
   data() {
     return {
       leave: {
-        leave_type: 'all',
+        leave_type: '',
         from: '',
         to: '',
         no_of_days: 0,
         reason: '',
+        status: 'pending'
       },
       form: {
         name: '',
@@ -207,16 +231,25 @@ export default {
   },
 
   methods: {
-    GetDays(){
+    GetDays() {
       let from = new Date(this.leave.from);
       let to = new Date(this.leave.to);
-      this.leave.no_of_days = parseInt((to - from) / (24 * 3600 * 1000))
+      if (this.leave.to === '') {
+        return this.leave.no_of_days = 0
+      }
+      let total = parseInt((to - from) / (24 * 3600 * 1000))
+      if(total < 0) {
+        return this.leave.no_of_days = 0
+      } else {
+        this.leave.no_of_days = total
+      }
     },
     async leaveSubmit() {
-      console.log(this.user_profile.user_id)
-
       await this.$axios.post(`leaves/create`, {
-        user_id: this.user_profile.user_id,
+        user_id: this.user_profile.id,
+        name: this.user_profile.first_name+'  '+this.user_profile.last_name,
+        tag: this.user_profile.tag,
+        status: this.leave.status,
         leave_type: this.leave.leave_type,
         from: this.leave.from,
         to: this.leave.to,
@@ -236,7 +269,6 @@ export default {
         const profile = await this.$auth.user
 
         this.user_profile = profile.data.user
-        this.isLoading = false
       } catch (error) {
         await this.$auth.logout()
         await this.$auth.redirect('logout')
@@ -248,6 +280,10 @@ export default {
 </script>
 
 <style scoped>
+.no-outline:focus {
+  outline: none;
+}
+
 .modal{
   width: 560px;
   height: 600px;

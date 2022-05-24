@@ -3,11 +3,11 @@ import Vue from 'vue'
 Vue.use(VuePersianDatetimePicker, {
   name: 'date-picker',
   props: {
-    format: 'YYYY-MM-DD HH:mm',
+    format: 'YYYY-MM-DD',
     displayFormat: 'jYYYY-jMM-jDD',
     editable: false,
-    placeholder: 'Please select a date',
-    altFormat: 'YYYY-MM-DD HH:mm',
+    placeholder: 'วว/ดด/ปปปป',
+    altFormat: 'YYYY-MM-DD',
     autoSubmit: true,
     locale: "en",
     timezone: false

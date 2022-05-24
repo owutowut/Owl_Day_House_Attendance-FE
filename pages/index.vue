@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Loading v-if="isLoading"/>
-
     <div class="grid grid-cols-5 h-screen">
       <div class="col-span-3 bg-blue flex items-center justify-center">
         <img src="~/assets/images/ODH_Banding-09 (1) 2.png"  alt="">

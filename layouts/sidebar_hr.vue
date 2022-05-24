@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Loading v-if="isLoading"/>
-
     <div class="flex flex-col">
       <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
         <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen'>
@@ -85,7 +83,6 @@ export default {
       first_name: '',
       last_name: '',
       user_profile: [],
-      isLoading: true
     }
   },
   mounted() {
@@ -119,7 +116,6 @@ export default {
         const profile = await this.$auth.user
 
         this.user_profile = profile.data.user
-        this.isLoading = false
       } catch (error) {
         await this.$auth.logout()
         await this.$auth.redirect('logout')
