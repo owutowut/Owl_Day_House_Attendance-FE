@@ -24,7 +24,9 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/axios.js',
+    {src: '~/plugins/vuex-persistedstate.js', ssr: false},
     {src: '~/plugins/vue-persian-datetime-picker.js', ssr: false},
+    {src: '~/plugins/vue-sweetalert2.js', ssr: false},
     {src: '~/plugins/vuejs-paginate.js', ssr: false},
     {src: '~/plugins/vue-owl-carousel.js', ssr: false},
   ],
@@ -43,8 +45,17 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/svg-sprite',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'vue-sweetalert2/nuxt',
   ],
+
+  sweetalert: {
+    confirmButtonText: 'yes,Delete it',
+    cancelButtonText: 'No, Keep it',
+    confirmButtonColor: '#30C97F',
+    cancelButtonColor: '#333333'
+  },
+
   svgSprite: {
     // manipulate module options
   },

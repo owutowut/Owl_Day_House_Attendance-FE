@@ -20,18 +20,14 @@
         </div>
         <div>
           <div class="relative">
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
-            <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3 "/>
+            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
+            <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
             <date-picker
               v-model="selected"
               custom-input=".custom-input"
+              color="#252647"
             />
           </div>
-<!--          <select v-model="selected"-->
-<!--                  class="cursor-pointer rounded-md px-4 py-2 w-full lg:w-[320px] text-gray14 font-kanit text-lg focus:outline-none">-->
-<!--            <option value="all">Date</option>-->
-<!--            <option v-for="date in holidays" :value="date.created_at">{{ date.created_at }}</option>-->
-<!--          </select>-->
         </div>
       </div>
 
@@ -40,14 +36,17 @@
           :headers="headers"
           :data="filterData.map((item, index) => {
           return {
-            ...item
+            ...item,
+            index: (index + 1) + pageStart,
+            no_of_days: `${item.no_of_days} Days`,
           }
         })">
           <template v-slot:action="data">
             <div @click="show.edit=true" class="cursor-pointer flex justify-center items-center">
               <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
+<!--              <ModalHR :holidays="data.data" :show="show"/>-->
             </div>
-            <div @click="show.delete=true" class="cursor-pointer flex justify-center items-center">
+            <div @click="handleModalDelete(data.data)" class="cursor-pointer flex justify-center items-center">
               <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
             </div>
           </template>
@@ -55,7 +54,7 @@
       </div>
 
       <div>
-        <ModalHR :data="holidays" :show="show"/>
+        <ModalHR :holidays="holidays" :show="show"/>
       </div>
 
       <paginate
@@ -77,6 +76,7 @@
 <script>
 import Table from '@/components/Table.vue'
 import ModalHR from '@/components/ModalHR.vue'
+import {mapActions} from 'vuex'
 
 export default {
   name: "holiday",
@@ -94,7 +94,7 @@ export default {
         edit: false,
         success: false,
       },
-      selected: 'all',
+      selected: '',
       search: '',
       perPage: 10,
       page: 1,
@@ -140,6 +140,7 @@ export default {
     },
 
     filterData() {
+      // console.log(this.holidays)
       if (this.search.trim()) {
         return this.holidays.data.filter(item => {
           return item.name.toLowerCase().includes(this.search.toLowerCase())
@@ -156,16 +157,53 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      getEmployeeHoliday: 'hr/getEmployeeHoliday',
+      deleteEmployeeHoliday: 'hr/deleteEmployeeHoliday'
+    }),
     async asyncData() {
-      let {data} = await this.$axios.get(`holiday/?page=${this.page}`)
+      // const {data} = await this.$axios.get(`holiday/?page=${this.page}`)
+      const req = {
+        params: {
+          page: this.page,
+          // search: this.search,
+        }
+      }
+      const {data} = await this.getEmployeeHoliday(req)
       this.holidays = data.data
-      // console.log(data.data)
       this.isLoading = false
     },
     onChangePage(page) {
       console.log(page)
       this.asyncData()
-    }
-  },
+    },
+    async handleModalDelete(data) {
+      this.$swal({
+        title: `<p class="text-2xl">Delete Holiday <br> <div class="text-lg font-light">Are you sure to permanently delete this ?</div> </p>`,
+        imageUrl: `${require('~/assets/sprite/svg/trash-alt-solid.svg')}`,
+        imageWidth: 60,
+        imageHeight: 69,
+        showCancelButton: true,
+        reverseButtons: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // const res = await this.$axios.$delete(`holiday/delete/${data.id}`)
+          const res = await this.deleteEmployeeHoliday(data.id)
+          if (res) {
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              timer: 1000
+            }).then(
+              this.asyncData()
+            )
+          }
+        }
+      })
+    },
+  }
 }
 </script>
