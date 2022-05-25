@@ -2,7 +2,7 @@
   <div>
 
     <div class="AddFormModal">
-      <form onsubmit="Submit()">
+      <form @submit="addForm">
         <div>
           <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.addform">
             <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
@@ -26,10 +26,10 @@
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="form.noofdays+' Days'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="form.no_of_days+' Days'"  class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
-                    <button @click="show.addform = false;show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
                       <span class="text-lg font-kanit">Submit</span>
                     </button>
                   </div>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="EditModal">
-      <form @submit="editHoliday">
+      <form onsubmit="Submit()">
         <div>
           <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.edit">
             <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
@@ -54,22 +54,22 @@
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday_by_id.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="data.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input v-model="holiday_by_id.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input v-model="data.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input v-model="holiday_by_id.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input v-model="data.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="holiday_by_id.no_of_days+' Day'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="data.noofdays+' Day'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
-                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <button @click="show.edit = false;show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
                       <span class="text-lg font-kanit">Submit</span>
                     </button>
                   </div>
@@ -189,18 +189,16 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   props: {
-    show: {
+    show:{
       add_form: Boolean,
       success: Boolean,
       delete: Boolean,
       edit: Boolean,
       add_leave: Boolean,
-    },
-    holiday_by_id: {
-      type: Object,
-      default: {},
     },
   },
   data() {
@@ -219,6 +217,13 @@ export default {
         to: '',
         no_of_days: 0,
       },
+      data: {
+          id: 1,
+          name: '',
+          from: '',
+          to: '',
+          noofdays: 7,
+      },
       user_profile: [],
     }
   },
@@ -228,6 +233,10 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      createHolidayForm: 'hr/createHolidayForm',
+      createLeave: 'hr/createLeave'
+    }),
     GetDays() {
       let from = new Date(this.leave.from);
       let to = new Date(this.leave.to);
@@ -242,17 +251,34 @@ export default {
       }
     },
     async leaveSubmit() {
-      await this.$axios.post(`leaves/create`, {
-        user_id: this.user_profile.id,
-        name: this.user_profile.first_name+'  '+this.user_profile.last_name,
-        tag: this.user_profile.tag,
-        status: this.leave.status,
-        leave_type: this.leave.leave_type,
-        from: this.leave.from,
-        to: this.leave.to,
-        no_of_days: this.leave.no_of_days,
-        reason: this.leave.reason,
-      })
+      const data = {
+        user_id: `${this.user_profile.id}`,
+        name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
+        tag: `${this.user_profile.tag}`,
+        status: `${this.leave.status}`,
+        leave_type: `${this.leave.leave_type}`,
+        from: `${this.leave.from}`,
+        to: `${this.leave.to}`,
+        no_of_days: `${this.leave.no_of_days}`,
+        reason: `${this.leave.reason}`,
+      }
+      await this.createLeave(data)
+        .then(response => {
+          this.show.success = true
+          console.log(response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    async addForm() {
+      const data = {
+        name: `${this.form.name}`,
+        from: `${this.form.from}`,
+        to: `${this.form.to}`,
+        no_of_days: `${this.form.no_of_days}`,
+      }
+      await this.createHolidayForm(data)
         .then(response => {
           this.show.success = true
           console.log(response)
@@ -271,10 +297,6 @@ export default {
         await this.$auth.redirect('logout')
         console.log(error)
       }
-    },
-    async editHoliday() {
-      let {data} = await this.$axios.patch(`holiday/2`)
-      this.holiday_by_id = data.data
     }
   }
 }
