@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col">
       <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
-        <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen'>
+        <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
         <button class="relative">
           <svg-icon name="Notification" class="h-[45px] w-[45px]" />
           <div class="absolute -top-1 -right-2 bg-red6 text-white text-xs px-2 rounded-lg ">
@@ -17,10 +17,10 @@
       >
         <div>
           <div class="flex justify-center py-3.5 mx-4 border-b border-white">
-            <img src="~/assets/images/ODH_Banding-09 (1) 2.png">
+            <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="">
           </div>
           <div class="flex flex-col items-center text-white  ">
-            <img src="~/assets/images/profile-hr.png" class="py-5">
+            <img src="~/assets/images/profile-hr.png" class="py-5" alt="">
             <p class="font-light">{{ user_profile.first_name }} {{user_profile.last_name}}</p>
             <p class="text-xs mt-2 font-thin">{{user_profile.tag}}</p>
           </div>
@@ -41,7 +41,7 @@
               <li class="mb-6">
                 <NuxtLink to="/hr/holidays" class="flex items-center">
                   <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='holidays'"/>
-                  Hoilday
+                  Holiday
                 </NuxtLink>
               </li>
               <li class="mb-6">
@@ -58,7 +58,7 @@
               </li>
             </ul>
             <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
-              <img src="~/assets/images/ls_logout.svg">
+              <img src="~/assets/images/ls_logout.svg" alt="">
               <span>ออกจากระบบ</span>
             </button>
           </div>
@@ -80,8 +80,6 @@ export default {
       isActive: false,
       isOpen: true,
       total_notification: '0',
-      first_name: '',
-      last_name: '',
       user_profile: [],
     }
   },
@@ -113,12 +111,18 @@ export default {
     },
     async profile() {
       try {
-        const profile = await this.$auth.user
+        let isLogin = await this.$auth.loggedIn
 
-        this.user_profile = profile.data.user
+        if (isLogin) {
+          let profile = await this.$auth.user
+          this.user_profile = profile.data.user
+          console.log(profile)
+
+        } else {
+          await this.$auth.logout()
+          await this.$auth.redirect('logout')
+        }
       } catch (error) {
-        await this.$auth.logout()
-        await this.$auth.redirect('logout')
         console.log(error)
       }
     }

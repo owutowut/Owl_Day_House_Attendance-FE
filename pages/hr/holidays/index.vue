@@ -5,7 +5,7 @@
 
       <div class="flex justify-between mb-6">
         <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
-        <button @click="show.addform=true"
+        <button @click="show.add_form=true"
                 class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>
@@ -15,7 +15,7 @@
       <div class="lg:flex justify-end lg:space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" placeholder="Search.."
+          <input @keyup="asyncData" type="text" v-model="search" placeholder="Search.."
                  class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
@@ -45,7 +45,7 @@
         })">
           <template v-slot:action="data">
             <div @click="show.edit=true" class="cursor-pointer flex justify-center items-center">
-              <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
+              <svg-icon name="Edit_Square" width='24' height='24' class="text-blue" @click="findID(data);holiday_getID()"/>
             </div>
             <div @click="show.delete=true" class="cursor-pointer flex justify-center items-center">
               <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
@@ -55,7 +55,7 @@
       </div>
 
       <div>
-        <ModalHR :data="holidays" :show="show"/>
+        <ModalHR :holiday_by_id="holiday_by_id" :show="show""/>
       </div>
 
       <paginate
@@ -89,7 +89,7 @@ export default {
     return {
       isLoading: true,
       show: {
-        addform: false,
+        add_form: false,
         delete: false,
         edit: false,
         success: false,
@@ -124,11 +124,13 @@ export default {
         }
       ],
       holidays: [],
+      holiday_by_id: {},
     }
   },
 
   mounted() {
     this.asyncData()
+    this.holiday_getID()
   },
 
   computed: {
@@ -140,11 +142,6 @@ export default {
     },
 
     filterData() {
-      if (this.search.trim()) {
-        return this.holidays.data.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
       if (this.selected !== "all") {
         return this.holidays.data.filter(item => {
           return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
@@ -156,11 +153,18 @@ export default {
   },
 
   methods: {
+    findID(data) {
+      return this.data_id = data.data.id
+    },
     async asyncData() {
-      let {data} = await this.$axios.get(`holiday/?page=${this.page}`)
+      let {data} = await this.$axios.get(`holiday/?page=${this.page}&search=${this.search}`)
       this.holidays = data.data
-      // console.log(data.data)
+
       this.isLoading = false
+    },
+    async holiday_getID() {
+      let {data} = await this.$axios.get(`holiday/${this.data_id}`)
+      this.holiday_by_id = data.data
     },
     onChangePage(page) {
       console.log(page)

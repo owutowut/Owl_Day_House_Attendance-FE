@@ -41,6 +41,7 @@ export default {
 
         if (login) {
           await this.$auth.setUser(login)
+
           if(login.data.role === 'admin') {
             await this.$router.push('/admin/home')
           } else if(login.data.role === 'hr') {
