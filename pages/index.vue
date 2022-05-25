@@ -38,13 +38,11 @@ export default {
     async login() {
       try {
         let login  = await this.$auth.loginWith('local', {data: this.form})
-
         if (login) {
           await this.$auth.setUser(login)
-
-          if(login.data.role === 'admin') {
+          if(login.data.user.role === 'admin') {
             await this.$router.push('/admin/home')
-          } else if(login.data.role === 'hr') {
+          } else if(login.data.user.role === 'hr') {
             await this.$router.push('/hr/home')
           }
         }

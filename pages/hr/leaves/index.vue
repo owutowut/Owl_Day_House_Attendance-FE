@@ -96,6 +96,7 @@
 <script>
 import Table from '@/components/Table.vue'
 import ModalHR from '@/components/ModalHR.vue'
+import {mapActions} from "vuex";
 
 export default {
   name: "leaves",
@@ -163,25 +164,34 @@ export default {
 
     filterData() {
       if (this.search.trim()) {
-        return this.leaves.data.filter(item => {
+        return this.leaves.filter(item => {
           return item.name.toLowerCase().includes(this.search.toLowerCase())
         })
       }
       if (this.selected !== "all") {
-        return this.leaves.data.filter(item => {
+        return this.leaves.filter(item => {
           return item.leave_type.toLowerCase().includes(this.selected.toLowerCase())
         })
       }
-      return this.leaves.data
+      return this.leaves
     }
   },
 
   methods: {
+    ...mapActions({
+      getLeave: 'hr/getLeave'
+    }),
     async leavesData() {
       try {
-        const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
-
-        this.leaves = data.data
+        // const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
+        const req = {
+          params: {
+            page: this.page,
+            // search: this.search,
+          }
+        }
+        const {data} = await this.getLeave(req)
+        this.leaves = data.data_all
         this.isLoading = false
       } catch (error) {
         console.log(error)
