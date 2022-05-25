@@ -15,7 +15,7 @@
       <div class="lg:flex justify-end lg:space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" placeholder="Search.."
+          <input type="text" v-model="search" @keyup="asyncData" placeholder="Search.."
                  class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
@@ -141,11 +141,11 @@ export default {
 
     filterData() {
       // console.log(this.holidays)
-      if (this.search.trim()) {
-        return this.holidays.data.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
+      // if (this.search.trim()) {
+      //   return this.holidays.data.filter(item => {
+      //     return item.name.toLowerCase().includes(this.search.toLowerCase())
+      //   })
+      // }
       if (this.selected !== "all") {
         return this.holidays.data.filter(item => {
           return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
@@ -166,7 +166,7 @@ export default {
       const req = {
         params: {
           page: this.page,
-          // search: this.search,
+          search: this.search,
         }
       }
       const {data} = await this.getEmployeeHoliday(req)

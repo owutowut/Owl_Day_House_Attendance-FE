@@ -296,7 +296,11 @@ export default {
       ]
     }
   },
+  methods:{
+    onChangePage(){
 
+    }
+  },
   computed: {
     pageStart() {
       return (this.currentPage - 1) * this.perPage

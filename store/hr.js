@@ -11,7 +11,10 @@ export const actions = {
   getWfhData({}, data){
     return this.$axios.get(`work_from_home`,data)
   },
-  addHolidayForm({}, data){
+  createHolidayForm({}, data){
     return this.$axios.post(`holiday/create`,data )
+  },
+  createLeave({},data){
+    return this.$axios.post(`leaves/create`, data )
   }
 }

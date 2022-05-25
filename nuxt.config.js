@@ -53,7 +53,7 @@ export default {
     confirmButtonText: 'yes,Delete it',
     cancelButtonText: 'No, Keep it',
     confirmButtonColor: '#30C97F',
-    cancelButtonColor: '#333333'
+    cancelButtonColor: '#fff'
   },
 
   svgSprite: {
