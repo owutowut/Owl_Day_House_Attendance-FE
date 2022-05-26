@@ -139,12 +139,6 @@ export default {
     },
 
     filterData() {
-      // console.log(this.holidays)
-      // if (this.search.trim()) {
-      //   return this.holidays.data.filter(item => {
-      //     return item.name.toLowerCase().includes(this.search.toLowerCase())
-      //   })
-      // }
       if (this.selected !== "all") {
         return this.holidays.data.filter(item => {
           return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
