@@ -4,7 +4,7 @@
     <div class="AddFormModal">
       <form @submit="addForm">
         <div>
-          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.addform">
+          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_form">
             <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
               <div @click="show.add_form = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
@@ -54,19 +54,19 @@
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="data.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday_by_id.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input v-model="data.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input v-model="holiday_by_id.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input v-model="data.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <input v-model="holiday_by_id.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="data.noofdays+' Day'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday_by_id.no_of_days" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
                     <button @click="show.edit = false;show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
@@ -152,6 +152,7 @@
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">To</Span>
                     <date-picker
+                      :disabled="isDateFrom"
                       color="#252647"
                       auto-submit
                       @change="GetDays()"
@@ -200,6 +201,7 @@ export default {
       edit: Boolean,
       add_leave: Boolean,
     },
+    holiday_by_id: [],
   },
   data() {
     return {
@@ -225,6 +227,7 @@ export default {
           noofdays: 7,
       },
       user_profile: [],
+      isDateFrom: true,
     }
   },
 
@@ -232,10 +235,18 @@ export default {
     this.profile()
   },
 
+  watch: {
+    'leave.from' () {
+      if (this.leave.from) {
+        this.isDateFrom = false
+      }
+    }
+  },
+
   methods: {
     ...mapActions({
       createHolidayForm: 'hr/createHolidayForm',
-      createLeave: 'hr/createLeave'
+      createLeave: 'hr/createLeave',
     }),
     GetDays() {
       let from = new Date(this.leave.from);

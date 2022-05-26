@@ -5,7 +5,7 @@
 
       <div class="flex justify-between mb-6">
         <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
-        <button @click="show.addform=true"
+        <button @click="show.add_form=true"
                 class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>
@@ -42,19 +42,14 @@
           }
         })">
           <template v-slot:action="data">
-            <div @click="show.edit=true" class="cursor-pointer flex justify-center items-center">
+            <div @click="editHoliday(data.data.id)" class="cursor-pointer flex justify-center items-center">
               <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
-<!--              <ModalHR :holidays="data.data" :show="show"/>-->
             </div>
             <div @click="handleModalDelete(data.data)" class="cursor-pointer flex justify-center items-center">
               <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
             </div>
           </template>
         </Table>
-      </div>
-
-      <div>
-        <ModalHR :holidays="holidays" :show="show"/>
       </div>
 
       <paginate
@@ -67,9 +62,12 @@
         :prev-text="'<'"
         :next-text="'>'"
         :container-class="'pagination'"
-        :page-class="'page-item'">
+        :page-class="'page-item'" list="" name="">
       </paginate>
     </div>
+
+    <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
+
   </div>
 </template>
 
@@ -89,7 +87,7 @@ export default {
     return {
       isLoading: true,
       show: {
-        addform: false,
+        add_form: false,
         delete: false,
         edit: false,
         success: false,
@@ -124,6 +122,7 @@ export default {
         }
       ],
       holidays: [],
+      holiday_by_id: [],
     }
   },
 
@@ -159,10 +158,18 @@ export default {
   methods: {
     ...mapActions({
       getEmployeeHoliday: 'hr/getEmployeeHoliday',
-      deleteEmployeeHoliday: 'hr/deleteEmployeeHoliday'
+      deleteEmployeeHoliday: 'hr/deleteEmployeeHoliday',
+      editEmployeeHoliday: 'hr/editEmployeeHoliday',
+      getEmployeeHolidayByID: 'hr/getEmployeeHolidayByID'
     }),
+    async editHoliday(data) {
+      this.show.edit = true
+
+      const res = await this.getEmployeeHolidayByID(data)
+      this.holiday_by_id = res.data.data
+      console.log(this.holiday_by_id)
+    },
     async asyncData() {
-      // const {data} = await this.$axios.get(`holiday/?page=${this.page}`)
       const req = {
         params: {
           page: this.page,
@@ -173,8 +180,7 @@ export default {
       this.holidays = data.data
       this.isLoading = false
     },
-    onChangePage(page) {
-      console.log(page)
+    onChangePage() {
       this.asyncData()
     },
     async handleModalDelete(data) {
