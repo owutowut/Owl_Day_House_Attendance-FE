@@ -111,19 +111,12 @@ export default {
     },
     async profile() {
       try {
-        let isLogin = await this.$auth.loggedIn
-        console.log(isLogin)
+        const profile = await this.$auth.user
 
-        if (isLogin) {
-          let profile = await this.$auth.fetchUser()
-          console.log(profile)
+        if (profile) {
           this.user_profile = profile.data.user
-
-        // } else {
-        //   await this.$auth.logout()
-        //   await this.$auth.redirect('logout')
-        // }
-      }} catch (error) {
+        }
+      } catch (error) {
         console.log(error)
       }
     }

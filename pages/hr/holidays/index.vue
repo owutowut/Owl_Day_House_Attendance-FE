@@ -167,7 +167,6 @@ export default {
 
       const res = await this.getEmployeeHolidayByID(data)
       this.holiday_by_id = res.data.data
-      console.log(this.holiday_by_id)
     },
     async asyncData() {
       const req = {
@@ -193,7 +192,6 @@ export default {
         reverseButtons: true,
       }).then(async (result) => {
         if (result.isConfirmed) {
-          // const res = await this.$axios.$delete(`holiday/delete/${data.id}`)
           const res = await this.deleteEmployeeHoliday(data.id)
           if (res) {
             this.$swal({
