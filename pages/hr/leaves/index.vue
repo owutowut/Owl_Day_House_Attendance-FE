@@ -14,25 +14,25 @@
       <div class="grid grid-cols-4 gap-1.5 mb-4">
         <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
           <p class="text-xs text-blue mb-2">ลาป่วย</p>
-          <p class="leaves_result">3</p>
+          <p class="leaves_result">{{ total_leaves.sick_leaves_total }}</p>
         </div>
         <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
           <p class="text-xs text-blue mb-2">ลากิจ</p>
-          <p class="leaves_result">2</p>
+          <p class="leaves_result">{{ total_leaves.business_leaves_total }}</p>
         </div>
         <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
           <p class="text-xs text-blue mb-2">การลาทั้งหมด</p>
-          <p class="leaves_result">5</p>
+          <p class="leaves_result">{{ total_leaves.all_leaves_total }}</p>
         </div>
         <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
           <div class="grid grid-cols-2 divide-x justify-center divide-gray13 text-xs text-blue">
             <div class="mt-1.5">
               <p>ลาทั้งหมด</p>
-              <p class="leaves_result">5</p>
+              <p class="leaves_result">{{ total_leaves.all_leaves_total }}</p>
             </div>
             <div class="mt-1.5">
               <p>ลาของเดือนนี้</p>
-              <p class="leaves_result">3</p>
+              <p class="leaves_result">{{ total_leaves.all_leaves_month_total }}</p>
             </div>
           </div>
         </div>
@@ -40,10 +40,10 @@
       <div class="flex justify-end space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" placeholder="Search.." class="no-outline w-[488px] font-kanit text-lg px-4"/>
+          <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.." class="no-outline w-[488px] font-kanit text-lg px-4"/>
         </div>
         <div>
-          <select v-model="selected" class="no-outline cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+          <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
             <option value="all">Leave type</option>
             <option value="ลาป่วย">ลาป่วย</option>
             <option value="ลากิจ">ลากิจ</option>
@@ -72,25 +72,27 @@
           </template>
         </Table>
       </div>
-
-      <div>
-        <ModalHR :show="show"/>
-      </div>
-
-      <paginate
-        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-        v-model="page"
-        :page-count="totalPage"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'">
-      </paginate>
     </div>
+
+    <paginate
+      class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+      v-model="page"
+      :page-count="totalPage"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="onChangePage"
+      :prev-text="'<'"
+      :next-text="'>'"
+      :container-class="'pagination'"
+      :page-class="'page-item'" list="" name="">
+    </paginate>
+
+    <div>
+      <ModalHR :show="show"/>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -148,10 +150,8 @@ export default {
       },
       ],
       leaves: [],
+      total_leaves: [],
     }
-  },
-  mounted() {
-    this.leavesData()
   },
 
   computed: {
@@ -161,47 +161,41 @@ export default {
     totalPage() {
       return Math.ceil(this.leaves.total / this.leaves.perPage)
     },
-
     filterData() {
-      if (this.search.trim()) {
-        return this.leaves.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-      if (this.selected !== "all") {
-        return this.leaves.filter(item => {
-          return item.leave_type.toLowerCase().includes(this.selected.toLowerCase())
-        })
-      }
-      return this.leaves
-    }
+      return this.leaves.data
+    },
+  },
+
+  mounted() {
+    this.leavesData()
   },
 
   methods: {
     ...mapActions({
       getLeave: 'hr/getLeave'
     }),
+
     async leavesData() {
-      try {
-        // const {data} = await this.$axios.get(`leaves/?page=${this.page}`)
-        const req = {
-          params: {
-            page: this.page,
-            // search: this.search,
-          }
+      const req = {
+        params: {
+          page: this.page,
+          search: this.search,
+          selected: this.selected
         }
-        const {data} = await this.getLeave(req)
-        this.leaves = data.data_all
-        this.isLoading = false
-      } catch (error) {
-        console.log(error)
       }
+      const {data} = await this.getLeave(req)
+      console.log(data)
+
+      this.leaves = data.data
+      this.total_leaves = data
+
+      this.isLoading = false
     },
-    onChangePage(page) {
-      console.log(page)
-      this.leavesData()
+
+    onChangePage() {
+        this.leavesData()
+      }
     }
-  },
 }
 </script>
 
