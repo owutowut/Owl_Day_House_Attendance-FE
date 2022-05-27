@@ -1,15 +1,15 @@
 export const actions = {
-  getEmployeeHoliday({}, data) {
+  getHoliday({}, data) {
     return this.$axios.get(`holiday`,data)
   },
-  getEmployeeHolidayByID({}, data) {
+  getHolidayByID({}, data) {
     return this.$axios.get(`holiday/${data}`)
   },
-  deleteEmployeeHoliday({}, data) {
+  deleteHoliday({}, data) {
     return this.$axios.$delete(`holiday/delete/${data}`)
   },
-  editEmployeeHoliday({}, data) {
-    return this.$axios.$patch(`/holiday/update/${data}`)
+  editHoliday({}, data) {
+    return this.$axios.$patch(`/holiday/update/${data.id}`,data)
   },
   getLeave({}, data){
     return this.$axios.get(`leaves`,data)

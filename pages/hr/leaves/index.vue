@@ -184,7 +184,6 @@ export default {
         }
       }
       const {data} = await this.getLeave(req)
-      console.log(data)
 
       this.leaves = data.data
       this.total_leaves = data

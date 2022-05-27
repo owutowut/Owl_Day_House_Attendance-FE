@@ -14,19 +14,42 @@
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="form.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday.name" placeholder="Name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
-                  <div class="text-left space-y-2 w-full">
+                  <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input v-model="form.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      color="#252647"
+                      auto-submit
+                      @change="GetDays(dataName='holiday')"
+                      v-model="holiday.from"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="holiday_date_picker_from"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="holiday.from" required id="holiday_date_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
-                  <div class=" text-left space-y-2 w-full">
+                  <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input v-model="form.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      :disabled="isDateFrom"
+                      color="#252647"
+                      auto-submit
+                      @change="GetDays(dataName='holiday')"
+                      v-model="holiday.to"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="holiday_date_picker_to"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="holiday.to" required placeholder="วว/ดด/ปปปป" id="holiday_date_picker_to" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="form.no_of_days+' Days'"  class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday.no_of_days+' Days'" required disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
                     <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
@@ -42,7 +65,7 @@
     </div>
 
     <div class="EditModal">
-      <form onsubmit="Submit()">
+      <form @submit="editModal">
         <div>
           <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.edit">
             <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
@@ -69,7 +92,7 @@
                     <input v-model="holiday_by_id.no_of_days" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
-                    <button @click="show.edit = false;show.success = true" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
                       <span class="text-lg font-kanit">Submit</span>
                     </button>
                   </div>
@@ -139,7 +162,7 @@
                     <date-picker
                       color="#252647"
                       auto-submit
-                      @change="GetDays()"
+                      @change="GetDays(dataName='leave')"
                       v-model="leave.from"
                       :min="new Date().toISOString().substr(0, 10)"
                       element="date_picker_from"
@@ -155,7 +178,7 @@
                       :disabled="isDateFrom"
                       color="#252647"
                       auto-submit
-                      @change="GetDays()"
+                      @change="GetDays(dataName='leave')"
                       v-model="leave.to"
                       :min="new Date().toISOString().substr(0, 10)"
                       element="date_picker_to"
@@ -213,7 +236,7 @@ export default {
         reason: '',
         status: 'pending'
       },
-      form: {
+      holiday: {
         name: '',
         from: '',
         to: '',
@@ -228,6 +251,7 @@ export default {
       },
       user_profile: [],
       isDateFrom: true,
+      dataName: ''
     }
   },
 
@@ -240,6 +264,11 @@ export default {
       if (this.leave.from) {
         this.isDateFrom = false
       }
+    },
+    'holiday.from' () {
+      if (this.holiday.from) {
+        this.isDateFrom = false
+      }
     }
   },
 
@@ -247,18 +276,41 @@ export default {
     ...mapActions({
       createHolidayForm: 'hr/createHolidayForm',
       createLeave: 'hr/createLeave',
+      editHoliday: 'hr/editHoliday'
     }),
     GetDays() {
-      let from = new Date(this.leave.from);
-      let to = new Date(this.leave.to);
-      if (this.leave.to === '') {
-        return this.leave.no_of_days = 0
+      if (this.dataName === "leave") {
+        let from = new Date(this.leave.from);
+        let to = new Date(this.leave.to);
+
+        if (this.leave.to === '') {
+          return this.leave.no_of_days = 0
+        }
+
+        let total = parseInt((to - from) / (24 * 3600 * 1000))
+
+        if(total < 0) {
+          return this.leave.no_of_days = 0
+        } else {
+          this.leave.no_of_days = total
+        }
       }
-      let total = parseInt((to - from) / (24 * 3600 * 1000))
-      if(total < 0) {
-        return this.leave.no_of_days = 0
-      } else {
-        this.leave.no_of_days = total
+      if (this.dataName === "holiday") {
+
+        let from = new Date(this.holiday.from);
+        let to = new Date(this.holiday.to);
+
+        if (this.holiday.to === '') {
+          return this.holiday.no_of_days = 0
+        }
+
+        let total = parseInt((to - from) / (24 * 3600 * 1000))
+
+        if(total < 0) {
+          return this.holiday.no_of_days = 0
+        } else {
+          this.holiday.no_of_days = total
+        }
       }
     },
     async leaveSubmit() {
@@ -284,15 +336,24 @@ export default {
     },
     async addForm() {
       const data = {
-        name: `${this.form.name}`,
-        from: `${this.form.from}`,
-        to: `${this.form.to}`,
-        no_of_days: `${this.form.no_of_days}`,
+        name: `${this.holiday.name}`,
+        from: `${this.holiday.from}`,
+        to: `${this.holiday.to}`,
+        no_of_days: `${this.holiday.no_of_days}`,
       }
       await this.createHolidayForm(data)
         .then(response => {
-          this.show.success = true
-          console.log(response)
+          this.show.add_form = false
+
+          if (response) {
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              timer: 1000
+            })
+          }
         })
         .catch(err => {
           console.log(err)
@@ -306,6 +367,31 @@ export default {
       } catch (error) {
         await this.$auth.logout()
         await this.$auth.redirect('logout')
+        console.log(error)
+      }
+    },
+    async editModal() {
+      const data = {
+        id : this.holiday_by_id.id,
+        name: this.holiday_by_id.name,
+        from: this.holiday_by_id.from,
+        to: this.holiday_by_id.to,
+        no_of_days: this.holiday_by_id.no_of_days,
+      }
+      try {
+        const result = await this.editHoliday(data)
+        this.show.edit = false
+        if (result) {
+          this.$swal({
+            title: '<p class="text-3xl"> Successful transaction</p>',
+            imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+            imageWidth: 80,
+            imageHeight: 80,
+            timer: 1000
+          })
+        }
+        console.log(result)
+      } catch (error) {
         console.log(error)
       }
     }

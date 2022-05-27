@@ -20,13 +20,17 @@
         </div>
         <div>
           <div class="relative">
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
+            <input id="custom-input" class="cursor-pointer w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
             <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
             <date-picker
-              v-model="selected"
-              custom-input=".custom-input"
               color="#252647"
-            />
+              auto-submit
+              @change="asyncData"
+              v-model="selected"
+              :min="new Date().toISOString().substr(0, 10)"
+              element="custom-input"
+              simple
+            ></date-picker>
           </div>
         </div>
       </div>
@@ -137,29 +141,22 @@ export default {
     totalPage() {
       return Math.ceil(this.holidays.total / this.holidays.perPage)
     },
-
     filterData() {
-      if (this.selected !== "all") {
-        return this.holidays.data.filter(item => {
-          return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
-        })
-      }
       return this.holidays.data
     },
-
   },
 
   methods: {
     ...mapActions({
-      getEmployeeHoliday: 'hr/getEmployeeHoliday',
-      deleteEmployeeHoliday: 'hr/deleteEmployeeHoliday',
-      editEmployeeHoliday: 'hr/editEmployeeHoliday',
-      getEmployeeHolidayByID: 'hr/getEmployeeHolidayByID'
+      getHoliday: 'hr/getHoliday',
+      deleteHoliday: 'hr/deleteHoliday',
+      editHoliday: 'hr/editHoliday',
+      getHolidayByID: 'hr/getHolidayByID'
     }),
     async editHoliday(data) {
       this.show.edit = true
 
-      const res = await this.getEmployeeHolidayByID(data)
+      const res = await this.getHolidayByID(data)
       this.holiday_by_id = res.data.data
     },
     async asyncData() {
@@ -167,9 +164,11 @@ export default {
         params: {
           page: this.page,
           search: this.search,
+          selected: this.selected
         }
       }
-      const {data} = await this.getEmployeeHoliday(req)
+      console.log(req.params.selected)
+      const {data} = await this.getHoliday(req)
       this.holidays = data.data
       this.isLoading = false
     },
@@ -186,7 +185,7 @@ export default {
         reverseButtons: true,
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await this.deleteEmployeeHoliday(data.id)
+          const res = await this.deleteHoliday(data.id)
           if (res) {
             this.$swal({
               title: '<p class="text-3xl"> Successful transaction</p>',
@@ -196,7 +195,7 @@ export default {
               showConfirmButton: false,
               timer: 1000
             }).then(
-              this.asyncData()
+              this.asyncData(this.page=1)
             )
           }
         }
