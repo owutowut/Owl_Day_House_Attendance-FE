@@ -16,17 +16,40 @@
                     <Span class="text-base text-blue">Hoilday Name</Span>
                     <input v-model="form.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
-                  <div class="text-left space-y-2 w-full">
+                  <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">From</Span>
-                    <input v-model="form.from" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      color="#252647"
+                      auto-submit
+                      @change="GetDate()"
+                      v-model="form.from"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="day_picker_from"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="form.from" required id="day_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
-                  <div class=" text-left space-y-2 w-full">
+                  <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">To</Span>
-                    <input v-model="form.to" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full cursor-pointer" type="date"/>
+                    <date-picker
+                      :disabled="isDayFrom"
+                      color="#252647"
+                      auto-submit
+                      @change="GetDate()"
+                      v-model="form.to"
+                      :min="new Date().toISOString().substr(0, 10)"
+                      element="day_picker_to"
+                    ></date-picker>
+                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                      <input v-model="form.to" required placeholder="วว/ดด/ปปปป" id="day_picker_to" class="no-outline cursor-pointer w-full">
+                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                    </div>
                   </div>
-                  <div class=" text-left space-y-2 w-full">
+                  <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="form.no_of_days+' Days'"  class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="form.no_of_days+' Days'" required disabled class="no-outline font-light text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full"/>
                   </div>
                   <div class="flex justify-center pt-6">
                     <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
@@ -228,6 +251,7 @@ export default {
       },
       user_profile: [],
       isDateFrom: true,
+      isDayFrom:true
     }
   },
 
@@ -239,6 +263,11 @@ export default {
     'leave.from' () {
       if (this.leave.from) {
         this.isDateFrom = false
+      }
+    },
+    'form.from' () {
+      if (this.form.from) {
+        this.isDayFrom = false
       }
     }
   },
@@ -259,6 +288,19 @@ export default {
         return this.leave.no_of_days = 0
       } else {
         this.leave.no_of_days = total
+      }
+    },
+    GetDate() {
+      let from = new Date(this.form.from);
+      let to = new Date(this.form.to);
+      if (this.form.to === '') {
+        return this.form.no_of_days = 0
+      }
+      let total = parseInt((to - from) / (24 * 3600 * 1000))
+      if(total < 0) {
+        return this.form.no_of_days = 0
+      } else {
+        this.form.no_of_days = total
       }
     },
     async leaveSubmit() {

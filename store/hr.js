@@ -9,7 +9,7 @@ export const actions = {
     return this.$axios.$delete(`holiday/delete/${data}`)
   },
   editEmployeeHoliday({}, data) {
-    return this.$axios.$patch(`/holiday/update/${data}`)
+    return this.$axios.$patch(`holiday/update/${data}`)
   },
   getLeave({}, data){
     return this.$axios.get(`leaves`,data)
@@ -28,5 +28,14 @@ export const actions = {
   },
   createLeave({}, data){
     return this.$axios.post(`leaves/create`, data )
-  }
+  },
+  createWfhForm({},data){
+    return this.$axios.post(`work_from_home/create`, data)
+  },
+  getWfhById({},id){
+    return this.$axios.$get(`work_from_home/${id}`)
+  },
+  wfhApprove({}, data){
+    return this.$axios.patch(`work_from_home/update/${data.id}`,data)
+  },
 }

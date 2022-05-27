@@ -26,9 +26,11 @@ body {
 
 .swal2-styled.swal2-cancel{
   color: black !important;
-  border: 2px solid #333333 !important;
+  border: 1px solid #414042 !important;
+  border-radius: 8px !important;
 }
 
 .swal2-styled.swal2-confirm:focus {
  box-shadow: none !important;
+  border-radius: 8px !important;
 }

@@ -148,7 +148,6 @@ export default {
       this.leave = data.data
       this.isLoading = false
     },
-
     async leaveStatus() {
       const data = {
         id : this.$route.params.id,
@@ -157,7 +156,6 @@ export default {
       try {
         const result = await this.leaveApprove(data)
         console.log(result)
-
       } catch (error) {
         console.log(error)
       }
@@ -166,7 +164,6 @@ export default {
     async profile() {
       try {
         const profile = await this.$auth.user
-
         if (profile) {
           this.user_profile = profile.data.user
         }

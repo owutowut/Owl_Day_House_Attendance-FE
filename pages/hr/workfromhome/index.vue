@@ -12,13 +12,18 @@
       <div class="flex justify-end space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4"/>
+          <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
-          <select v-model="selected" class="cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
-            <option value="all">Date</option>
-            <option v-for="date in work_from_home" :value="date.createdate">{{date.createdate}}</option>
-          </select>
+          <div class="relative">
+            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
+            <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
+            <date-picker
+              v-model="selected"
+              custom-input=".custom-input"
+              color="#252647"
+            />
+          </div>
         </div>
       </div>
 
@@ -29,9 +34,9 @@
           return {
             ...item,
             index: (index + 1) + pageStart,
-             tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
-             status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
-             no_of_days: `${item.no_of_days} Days`
+            tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
+            status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
+            no_of_days: `${item.no_of_days} Days`
           }
       })">
           <template v-slot:action="data">
@@ -44,18 +49,20 @@
         </Table>
       </div>
 
-      <paginate
-        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-        v-model="page"
-        :page-count="totalPage"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'">
-      </paginate>
+      <client-only>
+        <paginate
+          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+          v-model="page"
+          :page-count="totalPage"
+          :page-range="3"
+          :margin-pages="1"
+          :click-handler="onChangePage"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination'"
+          :page-class="'page-item'">
+        </paginate>
+      </client-only>
     </div>
   </div>
 </template>
@@ -73,17 +80,13 @@ export default {
   data() {
     return {
       isLoading: true,
-      selected: 'all',
+      selected: '',
       search: '',
       perPage: 10,
       page: 1,
       headers: [{
         title:'Employee',
         key: 'name',
-      }, {
-        title: 'type',
-        key: 'leavetype',
-        sort: 'leavetype',
       }, {
         title: 'From',
         key: 'from',
@@ -131,7 +134,7 @@ export default {
       }
       if (this.selected !== "all") {
         return this.work_from_home.filter(item => {
-          return item.createdate.toLowerCase().includes(this.selected.toLowerCase())
+          return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
         })
       }
       return this.work_from_home
@@ -153,10 +156,10 @@ export default {
       this.work_from_home = data.data
       this.isLoading = false
     },
-    onChangePage(page) {
-      console.log(page)
+    onChangePage() {
       this.wfhData()
-    }
+    },
+
   }
 }
 </script>

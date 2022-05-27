@@ -52,18 +52,20 @@
         </Table>
       </div>
 
-      <paginate
-        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-        v-model="page"
-        :page-count="totalPage"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'" list="" name="">
-      </paginate>
+      <client-only>
+        <paginate
+          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+          v-model="page"
+          :page-count="totalPage"
+          :page-range="3"
+          :margin-pages="1"
+          :click-handler="onChangePage"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination'"
+          :page-class="'page-item'" list="" name="">
+        </paginate>
+      </client-only>
     </div>
 
     <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
@@ -139,6 +141,11 @@ export default {
     },
 
     filterData() {
+      // if (this.search.trim()) {
+      //   return this.holidays.data.filter(item => {
+      //     return item.name.toLowerCase().includes(this.search.toLowerCase())
+      //   })
+      // }
       if (this.selected !== "all") {
         return this.holidays.data.filter(item => {
           return item.created_at.toLowerCase().includes(this.selected.toLowerCase())

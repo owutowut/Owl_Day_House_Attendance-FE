@@ -162,18 +162,20 @@
         </template>
       </Table>
     </div>
-    <paginate
-      class="flex justify-end mt-10 text-sm text-black2 space-x-4"
-      v-model="page"
-      :page-count="10"
-      :page-range="3"
-      :margin-pages="1"
-      :click-handler="onChangePage"
-      :prev-text="'<'"
-      :next-text="'>'"
-      :container-class="'pagination'"
-      :page-class="'page-item'">
-    </paginate>
+    <client-only>
+      <paginate
+        class="flex justify-end mt-10 text-sm text-black2 space-x-4"
+        v-model="page"
+        :page-count="10"
+        :page-range="3"
+        :margin-pages="1"
+        :click-handler="onChangePage"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination'"
+        :page-class="'page-item'">
+      </paginate>
+    </client-only>
   </div>
 </template>
 
