@@ -5,24 +5,33 @@ export const actions = {
   getHolidayByID({}, data) {
     return this.$axios.get(`holiday/${data}`)
   },
+  createHolidayForm({}, data){
+    return this.$axios.post(`holiday/create`,data )
+  },
   deleteHoliday({}, data) {
     return this.$axios.$delete(`holiday/delete/${data}`)
   },
   editHoliday({}, data) {
     return this.$axios.$patch(`/holiday/update/${data.id}`,data)
+
   },
   getLeave({}, data){
     return this.$axios.get(`leaves`,data)
   },
-  getWfhData({}, data){
-    return this.$axios.get(`work_from_home`,data)
+  getLeaveByID({},id){
+    return this.$axios.$get(`leaves/${id}`)
   },
-  createHolidayForm({}, data){
-    return this.$axios.post(`holiday/create`,data )
+  leaveApprove({}, data){
+    return this.$axios.patch(`leaves/update/${data.id}`,data)
   },
   createLeave({}, data){
     return this.$axios.post(`leaves/create`, data )
   },
+
+  getWfhData({}, data){
+    return this.$axios.get(`work_from_home`,data)
+  },
+
   createWfhForm({},data){
     return this.$axios.post(`work_from_home/create`, data)
   },

@@ -167,7 +167,6 @@ export default {
           selected: this.selected
         }
       }
-      console.log(req.params.selected)
       const {data} = await this.getHoliday(req)
       this.holidays = data.data
       this.isLoading = false

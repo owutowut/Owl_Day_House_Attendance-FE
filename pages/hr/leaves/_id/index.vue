@@ -145,7 +145,7 @@ export default {
     async leavesData() {
       const id = this.$route.params.id
       const {data} = await this.getLeaveByID(id)
-      this.leave = data.data
+      this.leave = data
       this.isLoading = false
     },
 

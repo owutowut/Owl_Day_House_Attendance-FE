@@ -12,17 +12,21 @@
       <div class="flex justify-end space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
+          <input type="text" @keyup="wfhData" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
           <div class="relative">
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
+            <input id="custom-input" class="cursor-pointer custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
             <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
             <date-picker
-              v-model="selected"
-              custom-input=".custom-input"
               color="#252647"
-            />
+              auto-submit
+              @change="wfhData"
+              v-model="selected"
+              :min="new Date().toISOString().substr(0, 10)"
+              element="custom-input"
+              simple
+            ></date-picker>
           </div>
         </div>
       </div>
@@ -115,6 +119,7 @@ export default {
       work_from_home: [],
     }
   },
+
   mounted() {
     this.wfhData()
   },
@@ -127,29 +132,19 @@ export default {
     },
 
     filterData() {
-      if (this.search.trim()) {
-        return this.work_from_home.filter(item => {
-          return item.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-      if (this.selected !== "all") {
-        return this.work_from_home.filter(item => {
-          return item.created_at.toLowerCase().includes(this.selected.toLowerCase())
-        })
-      }
-      return this.work_from_home
-    }
+      return this.work_from_home.data
+    },
   },
   methods: {
     ...mapActions({
       getWfhData: 'hr/getWfhData'
     }),
     async wfhData() {
-      // const {data} = await this.$axios.get(`work_from_home/?page=${this.page}`)
       const req = {
         params: {
           page: this.page,
-          // search: this.search,
+          search: this.search,
+          selected: this.selected
         }
       }
       const {data} = await this.getWfhData(req)
