@@ -50,8 +50,8 @@ export default {
   ],
 
   sweetalert: {
-    confirmButtonText: 'yes,Delete it',
-    cancelButtonText: 'No, Keep it',
+    confirmButtonText: 'YES,DELETE IT',
+    cancelButtonText: 'NO, KEEP IT',
     confirmButtonColor: '#30C97F',
     cancelButtonColor: '#fff'
   },
@@ -75,7 +75,7 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: true
+          // autoFetch: true
         },
         scheme: 'local',
         endpoints: {

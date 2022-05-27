@@ -14,12 +14,6 @@ export const actions = {
   getLeave({}, data){
     return this.$axios.get(`leaves`,data)
   },
-  getLeaveByID({}, id){
-    return this.$axios.get(`leaves/${id}`)
-  },
-  leaveApprove({}, data){
-    return this.$axios.patch(`leaves/update/${data.id}`,data)
-  },
   getWfhData({}, data){
     return this.$axios.get(`work_from_home`,data)
   },
@@ -28,5 +22,14 @@ export const actions = {
   },
   createLeave({}, data){
     return this.$axios.post(`leaves/create`, data )
-  }
+  },
+  createWfhForm({},data){
+    return this.$axios.post(`work_from_home/create`, data)
+  },
+  getWfhById({},id){
+    return this.$axios.$get(`work_from_home/${id}`)
+  },
+  wfhApprove({}, data){
+    return this.$axios.patch(`work_from_home/update/${data.id}`,data)
+  },
 }

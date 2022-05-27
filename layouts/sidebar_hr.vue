@@ -102,8 +102,8 @@ export default {
     },
     async logout(){
       try {
-        await this.$auth.logout()
-        await this.$auth.redirect('logout')
+        // await this.$auth.logout()
+        // await this.$auth.redirect('logout')
 
       } catch (error) {
         console.log(error)
@@ -115,6 +115,7 @@ export default {
 
         if (profile) {
           this.user_profile = profile.data.user
+
         }
       } catch (error) {
         console.log(error)
