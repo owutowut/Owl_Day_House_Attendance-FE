@@ -156,8 +156,19 @@ export default {
       }
       try {
         const result = await this.leaveApprove(data)
+        if (result) {
+          this.$swal({
+            title: '<p class="text-3xl"> Successful transaction</p>',
+            imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+            imageWidth: 80,
+            imageHeight: 80,
+            showConfirmButton: false,
+            timer: 1000
+          }).then(
+            this.asyncData()
+          )
+        }
         console.log(result)
-
       } catch (error) {
         console.log(error)
       }

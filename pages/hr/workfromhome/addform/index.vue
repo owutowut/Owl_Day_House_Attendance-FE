@@ -243,7 +243,8 @@ export default {
         punchIn: `${this.form.punchIn}`,
         punchOut: `${this.form.punchOut}`,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
-        user_id: `${this.user_profile.id}`
+        user_id: `${this.user_profile.id}`,
+        tag: `${this.user_profile.tag}`
       }
       await this.createWfhForm(data)
         .then(response => {
