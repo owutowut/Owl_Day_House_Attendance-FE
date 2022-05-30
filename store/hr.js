@@ -1,4 +1,8 @@
 export const actions = {
+  getHome() {
+    return this.$axios.get(`home`)
+  },
+
   getHoliday({}, data) {
     return this.$axios.get(`holiday`,data)
   },

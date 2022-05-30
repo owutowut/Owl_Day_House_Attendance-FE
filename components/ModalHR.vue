@@ -1,5 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html">
-  <div>
+  <Loading v-if="isLoading"/>
+
+  <div v-else>
 
     <div class="AddFormModal">
       <form @submit="addForm">
@@ -124,20 +126,6 @@
       </div>
     </div>
 
-    <div class="SuccessModal">
-      <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.success">
-        <div class="grid justify-items-center modalSuccess text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-          <div @click="show.success = false" class="cursor-pointer justify-self-end m-4">
-            <svg-icon name="close" width="15" height="15"/>
-          </div>
-          <div class="mt-2">
-            <svg-icon name="check-circle-solid2" width="77.5" height="77.5"/>
-          </div>
-          <span class="pb-12">Successful transaction</span>
-        </div>
-      </div>
-    </div>
-
     <div class="AddLeaveModal">
       <form @submit="leaveSubmit">
         <div>
@@ -219,11 +207,11 @@ export default {
   props: {
     show:{
       add_form: Boolean,
-      success: Boolean,
       delete: Boolean,
       edit: Boolean,
       add_leave: Boolean,
     },
+    isLoading: Boolean,
     holiday_by_id: [],
   },
   data() {
@@ -314,6 +302,8 @@ export default {
       }
     },
     async leaveSubmit() {
+      this.isLoading = true
+
       const data = {
         user_id: `${this.user_profile.id}`,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
@@ -327,14 +317,28 @@ export default {
       }
       await this.createLeave(data)
         .then(response => {
-          this.show.success = true
-          console.log(response)
+          if (response) {
+            this.show.add_leave = false
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              reverseButtons: true,
+              timer: 2500
+            })
+
+            this.isLoading = false
+          }
         })
         .catch(err => {
           console.log(err)
         })
     },
     async addForm() {
+      this.isLoading = true
+
       const data = {
         name: `${this.holiday.name}`,
         from: `${this.holiday.from}`,
@@ -344,19 +348,21 @@ export default {
       await this.createHolidayForm(data)
         .then(response => {
           this.show.add_form = false
-
           if (response) {
             this.$swal({
               title: '<p class="text-3xl"> Successful transaction</p>',
               imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
               imageWidth: 80,
               imageHeight: 80,
-              timer: 1000
+              showConfirmButton: false,
+              reverseButtons: true,
+              timer: 2500
             })
+
+            this.isLoading = false
           }
-        })
-        .catch(err => {
-          console.log(err)
+        }).catch(err => {
+          console.log(err.message)
         })
     },
     async profile() {
@@ -379,9 +385,9 @@ export default {
         no_of_days: this.holiday_by_id.no_of_days,
       }
       try {
-        const result = await this.editHoliday(data)
+        const response = await this.editHoliday(data)
         this.show.edit = false
-        if (result) {
+        if (response) {
           this.$swal({
             title: '<p class="text-3xl"> Successful transaction</p>',
             imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
@@ -390,9 +396,9 @@ export default {
             timer: 1000
           })
         }
-        console.log(result)
+        console.log(response)
       } catch (error) {
-        console.log(error)
+        console.log(error.message)
       }
     }
   }

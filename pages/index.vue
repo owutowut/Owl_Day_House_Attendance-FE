@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Loading v-if="isLoading"/>
-    <div v-else class="grid grid-cols-5 h-screen">
+    <div class="grid grid-cols-5 h-screen">
       <div class="col-span-3 bg-blue flex items-center justify-center">
         <img src="~/assets/images/ODH_Banding-09 (1) 2.png"  alt="">
       </div>
@@ -26,40 +25,32 @@
 <script>
 
 export default {
+  auth: 'guest',
   name: 'IndexPage',
   data() {
     return {
-      isLoading: true,
       form: {
         email: '',
         password: '',
       },
     }
   },
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = false
-    }, 2000)
-  },
   methods: {
     async login() {
-      this.isLoading = true
-      try {
-        let login  = await this.$auth.loginWith('local', {data: this.form})
-        if (login) {
+      let login  = await this.$auth.loginWith('local', {data: this.form})
+
+      if (login) {
+        try {
           await this.$auth.setUser(login)
+
           if(login.data.user.role === 'admin') {
             await this.$router.push('/admin/home')
-          } else if(login.data.user.role === 'hr') {
+          } else {
             await this.$router.push('/hr/home')
           }
+        } catch (error) {
+        console.log(error.message)
         }
-        this.isLoading = false
-
-      } catch (error) {
-        console.log(error)
-        this.isLoading = false
-
       }
     }
   }

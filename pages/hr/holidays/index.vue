@@ -70,7 +70,7 @@
       </paginate>
     </div>
 
-    <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
+    <ModalHR :holiday_by_id="holiday_by_id" :show="show" :isLoading="isLoading"/>
 
   </div>
 </template>
@@ -159,6 +159,7 @@ export default {
       const res = await this.getHolidayByID(data)
       this.holiday_by_id = res.data.data
     },
+
     async asyncData() {
       const req = {
         params: {
@@ -168,12 +169,16 @@ export default {
         }
       }
       const {data} = await this.getHoliday(req)
+      console.log(data)
       this.holidays = data.data
+
       this.isLoading = false
     },
+
     onChangePage() {
       this.asyncData()
     },
+
     async handleModalDelete(data) {
       this.$swal({
         title: `<p class="text-2xl">Delete Holiday <br> <div class="text-lg font-light">Are you sure to permanently delete this ?</div> </p>`,
@@ -192,7 +197,7 @@ export default {
               imageWidth: 80,
               imageHeight: 80,
               showConfirmButton: false,
-              timer: 1000
+              timer: 2500
             }).then(
               this.asyncData(this.page=1)
             )

@@ -44,7 +44,7 @@
         </div>
         <div>
           <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
-            <option value="all">Leave type</option>
+            <option value="">Leave type</option>
             <option value="ลาป่วย">ลาป่วย</option>
             <option value="ลากิจ">ลากิจ</option>
           </select>
@@ -115,7 +115,7 @@ export default {
         success: false,
       },
       isLoading: true,
-      selected: 'all',
+      selected: '',
       search: '',
       perPage: 10,
       page: 1,
@@ -179,21 +179,20 @@ export default {
     }),
 
     async leavesData() {
-      const req = {
-        params: {
+      const request = {
           page: this.page,
           search: this.search,
           selected: this.selected
-        }
       }
-      const {data} = await this.getLeave(req)
+      const {data} = await this.getLeave(request)
 
-      this.leaves = data.data
+      console.log(data)
+      console.log(request)
+      this.leaves = data.leaves
       this.total_leaves = data
 
       this.isLoading = false
     },
-
     onChangePage() {
         this.leavesData()
       }

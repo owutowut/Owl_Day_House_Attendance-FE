@@ -53,20 +53,18 @@
         </Table>
       </div>
 
-      <client-only>
-        <paginate
-          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-          v-model="page"
-          :page-count="totalPage"
-          :page-range="3"
-          :margin-pages="1"
-          :click-handler="onChangePage"
-          :prev-text="'<'"
-          :next-text="'>'"
-          :container-class="'pagination'"
-          :page-class="'page-item'">
-        </paginate>
-      </client-only>
+      <paginate
+        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+        v-model="page"
+        :page-count="totalPage"
+        :page-range="3"
+        :margin-pages="1"
+        :click-handler="onChangePage"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination'"
+        :page-class="'page-item'">
+      </paginate>
     </div>
   </div>
 </template>
@@ -149,6 +147,8 @@ export default {
       }
       const {data} = await this.getWfhData(req)
       this.work_from_home = data.data
+      console.log(data)
+
       this.isLoading = false
     },
     onChangePage() {

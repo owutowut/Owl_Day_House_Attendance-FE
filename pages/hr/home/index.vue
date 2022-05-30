@@ -8,30 +8,30 @@
           <div class="grid grid-cols-2">
             <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
               <p class="text-xs text-black mb-4">พนักงานทั้งหมด</p>
-              <p class="text-black text-lg">15</p>
+              <p class="text-black text-lg">{{ home_data.all_employee_total }}</p>
             </div>
             <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
               <p class="text-xs text-black mb-4">พนักงาน</p>
-              <p class="text-black text-lg">8</p>
+              <p class="text-black text-lg">{{ home_data.tag_employee_total }}</p>
             </div>
             <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
               <p class="text-xs text-black mb-4">ทดลองงาน</p>
-              <p class="text-black text-lg">4</p>
+              <p class="text-black text-lg">{{ home_data.tag_probation_total }}</p>
             </div>
             <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
               <p class="text-xs text-black mb-4">ฝึกงาน</p>
-              <p class="text-black text-lg">3</p>
+              <p class="text-black text-lg">{{ home_data.tag_internship_total }}</p>
             </div>
           </div>
         </div>
         <div class="bg-white mt-4 py-6 px-4 rounded-lg grid grid-cols-2 ">
           <div class="flex items-center  justify-center">
             <svg-icon name="Man" width="65" height="65"/>
-            <span class="text-lg font-medium">60%</span>
+            <span class="text-lg font-medium">{{ gender_percentage.gender_male_percentage }} %</span>
           </div>
           <div class="flex items-center justify-center ">
             <svg-icon name="Female" width="65" height="65"/>
-            <span class="text-lg font-medium">40%</span>
+            <span class="text-lg font-medium">{{ gender_percentage.gender_female_percentage }} %</span>
           </div>
         </div>
       </div>
@@ -95,15 +95,15 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">พนักงาน</p>
-        <p class="text-gray4 text-lg">3</p>
+        <p class="text-gray4 text-lg">{{ home_data.tag_employee_total }}</p>
       </div>
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">ทดลองงาน</p>
-        <p class="text-gray4 text-lg">2</p>
+        <p class="text-gray4 text-lg">{{ home_data.tag_probation_total }}</p>
       </div>
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">ฝึกงาน</p>
-        <p class="text-gray4 text-lg">5</p>
+        <p class="text-gray4 text-lg">{{ home_data.tag_internship_total }}</p>
       </div>
       <div class="grid grid-cols-2 bg-white  p-4 rounded-lg font-kanit">
         <div class="border-r border-gray13 text-center">
@@ -182,6 +182,7 @@
 <script>
 
 import Table from "@/components/Table";
+import {mapActions} from "vuex";
 
 export default {
   name: "home",
@@ -295,12 +296,28 @@ export default {
           tag: 'ฝึกงาน',
           status: 'leaves'
         },
-      ]
+      ],
+      home_data: [],
+      gender_percentage: []
     }
   },
+  mounted() {
+    this.homeData()
+  },
   methods:{
-    onChangePage(){
+    ...mapActions({
+      getHome: 'hr/getHome'
+    }),
 
+    onChangePage(){
+    },
+    async homeData () {
+      const {data} = await this.getHome()
+      this.home_data = data
+
+      const gender_male_percentage = Math.ceil((this.home_data.gender_male_total*100)/this.home_data.all_employee_total)
+      const gender_female_percentage = Math.ceil((this.home_data.gender_female_total*100)/this.home_data.all_employee_total)
+      this.gender_percentage = {gender_male_percentage,gender_female_percentage}
     }
   },
   computed: {
