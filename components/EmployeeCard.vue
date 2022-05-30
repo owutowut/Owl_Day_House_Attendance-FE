@@ -44,9 +44,6 @@ export default {
       this.isEdit = event
     }
   },
-  mounted() {
-    console.log(this.card.profile)
-  }
 }
 </script>
 

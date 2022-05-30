@@ -153,11 +153,12 @@ export default {
       editHoliday: 'hr/editHoliday',
       getHolidayByID: 'hr/getHolidayByID'
     }),
-    async editHoliday(data) {
+    async editHoliday(id) {
       this.show.edit = true
 
-      const res = await this.getHolidayByID(data)
-      this.holiday_by_id = res.data.data
+      const {data}  = await this.getHolidayByID(id)
+      console.log(data)
+      this.holiday_by_id = data.holidays
     },
 
     async asyncData() {
