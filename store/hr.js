@@ -3,11 +3,11 @@ export const actions = {
     return this.$axios.get(`home`)
   },
 
-  getHoliday({}, data) {
-    return this.$axios.get(`holiday`,data)
+  getHoliday({},data) {
+    return this.$axios.get(`holiday`,data )
   },
-  getHolidayByID({}, data) {
-    return this.$axios.get(`holiday/${data}`)
+  getHolidayByID() {
+    return this.$axios.get(`holiday`)
   },
   createHolidayForm({}, data){
     return this.$axios.post(`holiday/create`,data )

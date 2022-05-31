@@ -42,7 +42,7 @@
           return {
             ...item,
             index: (index + 1) + pageStart,
-            no_of_days: `${item.no_of_days} Days`,
+            no_of_days: `${item.no_of_days} Days`
           }
         })">
           <template v-slot:action="data">
@@ -56,26 +56,29 @@
         </Table>
       </div>
 
-      <paginate
-        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-        v-model="page"
-        :page-count="totalPage"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'" list="" name="">
-      </paginate>
+      <client-only>
+        <paginate
+          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+          v-model="page"
+          :page-count="totalPage"
+          :page-range="3"
+          :margin-pages="1"
+          :click-handler="onChangePage"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination'"
+          :page-class="'page-item'" list="" name="">
+        </paginate>
+      </client-only>
+
+      <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
+
     </div>
-
-    <ModalHR :holiday_by_id="holiday_by_id" :show="show" :isLoading="isLoading"/>
-
   </div>
 </template>
 
 <script>
+
 import Table from '@/components/Table.vue'
 import ModalHR from '@/components/ModalHR.vue'
 import {mapActions} from 'vuex'
@@ -92,9 +95,7 @@ export default {
       isLoading: true,
       show: {
         add_form: false,
-        delete: false,
         edit: false,
-        success: false,
       },
       selected: '',
       search: '',
@@ -153,24 +154,21 @@ export default {
       editHoliday: 'hr/editHoliday',
       getHolidayByID: 'hr/getHolidayByID'
     }),
+
     async editHoliday(id) {
       this.show.edit = true
 
       const {data}  = await this.getHolidayByID(id)
-      console.log(data)
       this.holiday_by_id = data.holidays
     },
 
     async asyncData() {
       const req = {
-        params: {
-          page: this.page,
-          search: this.search,
-          selected: this.selected
-        }
+        page: this.page,
+        search: this.search,
+        selected: this.selected
       }
       const {data} = await this.getHoliday(req)
-      console.log(data)
       this.holidays = data.data
 
       this.isLoading = false

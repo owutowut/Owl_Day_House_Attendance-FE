@@ -65,7 +65,7 @@
             </div>
             <div class="bg-white p-4 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">No of day</Span>
-              <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{workfromhome.no_of_days}}</p>
+              <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{workfromhome.no_of_days}} Days</p>
             </div>
           </div>
           <div class="overflow-x-hidden pb-16 text-base font-kanit">
@@ -106,8 +106,8 @@
             <div class="grid justify-items-center">
               <select v-model="selected" class="cursor-pointer w-full border border-gray12 rounded-md bg-white px-2 py-1 text-gray23 font-kanit">
                 <option disabled value="current" > {{workfromhome.status}} </option>
-                <option value="approve">Approve</option>
-                <option value="pending">Pending</option>
+                <option value="Approve">Approve</option>
+                <option value="Pending">Pending</option>
               </select>
               <div class="pt-8 self-center">
                 <button @click="wfhStatus" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
@@ -160,8 +160,8 @@ export default {
       const id = this.$route.params.id
       const {data} = await this.getWfhById(id)
       this.workfromhome = data
+
       this.isLoading = false
-      console.log(this.workfromhome)
     },
     async wfhStatus() {
       const data = {

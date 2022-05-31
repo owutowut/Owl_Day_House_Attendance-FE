@@ -6,10 +6,10 @@ Vue.use(VuePersianDatetimePicker, {
     format: 'YYYY-MM-DD',
     displayFormat: 'jYYYY-jMM-jDD',
     editable: false,
-    placeholder: 'วว/ดด/ปปปป',
+    placeholder: 'ปปปป/ดด/วว',
     altFormat: 'YYYY-MM-DD',
     autoSubmit: true,
-    locale: "en",
+    locale: "th",
     timezone: false
     //...
     //... And whatever you want to set as default.

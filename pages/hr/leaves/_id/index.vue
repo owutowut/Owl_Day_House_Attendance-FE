@@ -11,7 +11,7 @@
   <div class="grid grid-cols-2 gap-4 mb-4">
     <div class="flex bg-white p-10 rounded-lg text-left font-kanit border border-gray19 space-x-6">
       <div class="self-center">
-        <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px">
+        <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px" alt="">
       </div>
       <div class="self-center">
         <p class="text-xl text-blue2">{{user_profile.first_name + ' ' + user_profile.last_name}}</p>
@@ -90,8 +90,8 @@
         <div class="grid justify-items-center">
           <select v-model="selected" class="cursor-pointer w-full border border-gray12 rounded-md bg-white px-2 py-1 text-gray23 font-kanit">
             <option disabled value="current" > {{leave.status}} </option>
-            <option value="approve">Approve</option>
-            <option value="pending">Pending</option>
+            <option value="Approve">Approve</option>
+            <option value="Pending">Pending</option>
           </select>
           <div class="pt-8 self-center">
             <button @click="leaveStatus" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
@@ -115,7 +115,7 @@ import ModalHR from '@/components/ModalHR.vue'
 import {mapActions} from "vuex";
 
 export default {
-  name: "leaveview.vue",
+  name: "leave_view.vue",
   layout: 'sidebar_hr',
   components:{
     ModalHR
@@ -144,45 +144,57 @@ export default {
 
     async leavesData() {
       const id = this.$route.params.id
-      const {data} = await this.getLeaveByID(id)
-      this.leave = data
+      const data = await this.getLeaveByID(id)
+      this.leave = data.leave
+
       this.isLoading = false
     },
 
     async leaveStatus() {
       const data = {
         id : this.$route.params.id,
-        status: `${this.selected}`,
+        status: this.selected,
       }
-      try {
-        const result = await this.leaveApprove(data)
-        if (result) {
-          this.$swal({
-            title: '<p class="text-3xl"> Successful transaction</p>',
-            imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
-            imageWidth: 80,
-            imageHeight: 80,
-            showConfirmButton: false,
-            timer: 1000
-          }).then(
-            this.asyncData()
-          )
-        }
-        console.log(result)
-      } catch (error) {
-        console.log(error)
-      }
+      await this.leaveApprove(data)
+        .then(response => {
+          if (response) {
+            this.show.add_leave = false
+
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              reverseButtons: true,
+              timer: 2500
+            })
+
+            this.$router.back('hr/leaves')
+          }
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
     },
 
     async profile() {
-      try {
-        const profile = await this.$auth.user
+      const isLogin = await this.$auth.loggedIn
 
-        if (profile) {
-          this.user_profile = profile.data.user
+      if (isLogin) {
+        try {
+          const profile = await this.$auth.user
+
+          if (profile) {
+            this.user_profile = profile.data.user
+          } else {
+            console.log('User not found.')
+          }
+        } catch (error) {
+          console.log(error)
         }
-      } catch (error) {
-        console.log(error)
+      } else {
+        console.log('Login is required!')
       }
     }
   }
@@ -190,33 +202,6 @@ export default {
 </script>
 
 <style scoped>
-.modal{
-  width: 590px;
-  height: 292px;
-}
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.faster {
-  -webkit-animation-duration: 250ms;
-  animation-duration: 250ms;
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-.fadeOut {
-  -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;

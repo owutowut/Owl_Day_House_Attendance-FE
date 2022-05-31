@@ -59,8 +59,8 @@
             ...item,
             index: (index + 1) + pageStart,
              tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
-             status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
-             no_of_days: `${item.no_of_days} Days`
+             status: item.status === 'Approve' ? 'Approve $approve$' : 'Pending $pending$',
+             no_of_days: `${item.no_of_days} Days`,
           }
       })">
           <template v-slot:action="data">
@@ -186,13 +186,12 @@ export default {
       }
       const {data} = await this.getLeave(request)
 
-      console.log(data)
-      console.log(request)
       this.leaves = data.leaves
       this.total_leaves = data
 
       this.isLoading = false
     },
+
     onChangePage() {
         this.leavesData()
       }

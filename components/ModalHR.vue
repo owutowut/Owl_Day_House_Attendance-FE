@@ -1,7 +1,5 @@
 <template xmlns="http://www.w3.org/1999/html">
-  <Loading v-if="isLoading"/>
-
-  <div v-else>
+  <div>
 
     <div class="AddFormModal">
       <form @submit="addForm">
@@ -84,7 +82,6 @@
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">From</Span>
                     <date-picker
-                      :disabled="isDateFrom"
                       color="#252647"
                       auto-submit
                       @change="GetDays(dataName='holiday_by_id')"
@@ -157,14 +154,14 @@
                       @change="GetDays(dataName='leave')"
                       v-model="leave.from"
                       :min="new Date().toISOString().substr(0, 10)"
-                      element="date_picker_from"
+                      element="leave_date_picker_from"
                     ></date-picker>
-                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                      <input v-model="leave.from" required id="date_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
-                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
-                    </div>
                   </div>
-                  <div class=" text-left space-y-1 w-full">
+                  <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                    <input v-model="leave.from" required placeholder="วว/ดด/ปปปป" id="leave_date_picker_from" class="no-outline cursor-pointer w-full">
+                    <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                  </div>
+                  <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">To</Span>
                     <date-picker
                       :disabled="isDateFrom"
@@ -172,12 +169,13 @@
                       @change="GetDays(dataName='leave')"
                       v-model="leave.to"
                       :min="new Date().toISOString().substr(0, 10)"
-                      element="date_picker_to"
+                      element="leave_date_picker_to"
                     ></date-picker>
-                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                      <input v-model="leave.to" required placeholder="วว/ดด/ปปปป" id="date_picker_to" class="no-outline cursor-pointer w-full">
-                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
-                    </div>
+                  </div>
+                  <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                    <input v-model="leave.to" required placeholder="วว/ดด/ปปปป" id="leave_date_picker_to" class="no-outline cursor-pointer w-full">
+                    <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                  </div>
                   </div>
                   <div class=" text-left space-y-1 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
@@ -196,7 +194,6 @@
               </div>
             </div>
           </div>
-        </div>
       </form>
     </div>
 
@@ -214,12 +211,15 @@ export default {
       edit: Boolean,
       add_leave: Boolean,
     },
-    isLoading: Boolean,
-    holiday_by_id: [],
+    holiday_by_id: {
+      type: Array,
+      default: ()=> [],
+    },
   },
   data() {
     return {
       leave: {
+        name:'',
         leave_type: '',
         from: '',
         to: '',
@@ -232,13 +232,6 @@ export default {
         from: '',
         to: '',
         no_of_days: 0,
-      },
-      data: {
-          id: 1,
-          name: '',
-          from: '',
-          to: '',
-          noofdays: 7,
       },
       user_profile: [],
       isDateFrom: true,
@@ -284,6 +277,7 @@ export default {
         }
 
         let total = parseInt((to - from) / (24 * 3600 * 1000))
+        console.log(from, to)
 
         if(total < 0) {
           return this.leave.no_of_days = 0
@@ -328,23 +322,22 @@ export default {
     },
 
     async leaveSubmit() {
-      this.isLoading = true
-
       const data = {
-        user_id: `${this.user_profile.id}`,
+        user_id: this.user_profile.id,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
-        tag: `${this.user_profile.tag}`,
-        status: `${this.leave.status}`,
-        leave_type: `${this.leave.leave_type}`,
-        from: `${this.leave.from}`,
-        to: `${this.leave.to}`,
-        no_of_days: `${this.leave.no_of_days}`,
-        reason: `${this.leave.reason}`,
+        tag: this.user_profile.tag,
+        status: this.leave.status,
+        leave_type: this.leave.leave_type,
+        from: this.leave.from,
+        to: this.leave.to,
+        no_of_days: this.leave.no_of_days,
+        reason: this.leave.reason,
       }
       await this.createLeave(data)
         .then(response => {
           if (response) {
             this.show.add_leave = false
+
             this.$swal({
               title: '<p class="text-3xl"> Successful transaction</p>',
               imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
@@ -354,23 +347,20 @@ export default {
               reverseButtons: true,
               timer: 2500
             })
-
-            this.isLoading = false
           }
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.message)
         })
     },
     async addForm() {
-      this.isLoading = true
-
       const data = {
-        name: `${this.holiday.name}`,
-        from: `${this.holiday.from}`,
-        to: `${this.holiday.to}`,
-        no_of_days: `${this.holiday.no_of_days}`,
+        name: this.holiday.name,
+        from: this.holiday.from,
+        to: this.holiday.to,
+        no_of_days: this.holiday.no_of_days,
       }
+
       await this.createHolidayForm(data)
         .then(response => {
           if (response) {
@@ -385,8 +375,6 @@ export default {
               reverseButtons: true,
               timer: 2500
             })
-
-            this.isLoading = false
           }
         }).catch(err => {
           console.log(err.message)
@@ -404,8 +392,6 @@ export default {
       }
     },
     async editModal() {
-      this.isLoading = true
-
       const data = {
         id : this.holiday_by_id.id,
         name: this.holiday_by_id.name,
@@ -427,8 +413,6 @@ export default {
               reverseButtons: true,
               timer: 2500
             })
-
-            this.isLoading = false
           }
         }).catch(err => {
           console.log(err.message)
@@ -451,11 +435,6 @@ export default {
 .modalAddLeave{
   width: 560px;
   height: 660px;
-}
-
-.modalSuccess{
-  width: 590px;
-  height: 314px;
 }
 
 .animated {

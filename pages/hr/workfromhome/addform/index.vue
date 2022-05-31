@@ -19,7 +19,7 @@
               element="date_picker_from"
             />
             <div class="rounded-md border border-gray12 px-2 py-1 w-full cursor-pointer relative">
-              <input v-model="form.from" required placeholder="วว/ดด/ปปปป" id="date_picker_from" class="no-outline cursor-pointer w-full">
+              <input v-model="form.from" required placeholder="วว/ดด/ปปปป" id="date_picker_from" class="focus:outline-none no-outline cursor-pointer w-full">
               <svg-icon  name="Calendar" width="19" height="19" class="absolute top-1 right-1"></svg-icon>
             </div>
           </div>
@@ -35,13 +35,13 @@
               element="date_picker_to"
             ></date-picker>
             <div class="rounded-md border border-gray12 px-2 py-1 w-full cursor-pointer relative">
-              <input v-model="form.to" required placeholder="วว/ดด/ปปปป" id="date_picker_to" class="no-outline cursor-pointer w-full">
+              <input v-model="form.to" required placeholder="วว/ดด/ปปปป" id="date_picker_to" class="focus:outline-none no-outline cursor-pointer w-full">
               <svg-icon  name="Calendar" width="19" height="19" class="absolute top-1 right-1"></svg-icon>
             </div>
           </div>
           <div class="bg-white p-4 rounded-lg text-left space-y-1">
             <Span class="text-base text-blue font-semibold">No of day</Span>
-            <input v-model="form.no_of_days+' day'" disabled class="border border-gray12 rounded-md bg-gray12 w-full px-2 py-1"/>
+            <input v-model="form.no_of_days+' Days'" disabled class="border border-gray12 rounded-md bg-gray12 w-full px-2 py-1"/>
           </div>
           <div class="bg-white px-2 py-4 rounded-lg">
             <div class="text-center grid grid-cols-2 divide-x justify-center divide-gray13">
@@ -62,7 +62,7 @@
                 </div>
               </div>
 
-              <form>
+              <form @submit="getPunchIn">
                 <div class="right-36 fixed justify-center items-center animated fadeIn faster" v-if="showModalPunchin">
                   <div class="grid justify-items-center modal text-xl bg-white rounded-xl font-kanit border shadow-md border-gray19">
                     <div class="p-2 text-gray24">
@@ -92,14 +92,14 @@
                       </div>
                       <div class="mt-2 flex justify-end text-blue text-sm space-x-4">
                         <button @click="showModalPunchin = false ;punchIn.hour='',punchIn.minute=''">CANCEL</button>
-                        <button @click="showModalPunchin = false; getPunchIn()">OK</button>
+                        <button type="submit" >OK</button>
                       </div>
                     </div>
                   </div>
                 </div>
               </form>
 
-              <form>
+              <form @submit="getPunchOut">
                 <div class="right-36 fixed justify-center items-center animated fadeIn faster" v-if="showModalPunchout">
                   <div class="grid justify-items-center modal text-xl bg-white rounded-xl font-kanit border shadow-md border-gray19">
                     <div class="p-2 text-gray24">
@@ -129,7 +129,7 @@
                       </div>
                       <div class="mt-2 flex justify-end text-blue text-sm space-x-4">
                         <button @click="showModalPunchout = false;punchOut.hour='',punchOut.minute=''">CANCEL</button>
-                        <button @click="showModalPunchout = false; getPunchOut()">OK</button>
+                        <button type="submit">OK</button>
                       </div>
                     </div>
                   </div>
@@ -148,8 +148,8 @@
               <p>Details</p>
             </div>
             <div class="space-y-4 w-full">
-              <input type="text" class="w-full border border-gray12 rounded-md px-4 py-2" v-model="form.reason">
-              <textarea rows="10" cols="40" class="w-full border border-gray12 rounded-md p-4" v-model="form.detail"></textarea>
+              <input type="text" class="focus:outline-none w-full border border-gray12 rounded-md px-4 py-2" v-model="form.reason">
+              <textarea rows="10" cols="40" class="focus:outline-none w-full border border-gray12 rounded-md p-4" v-model="form.detail"></textarea>
             </div>
           </div>
           <div class="pt-6 justify-self-end">
@@ -193,12 +193,12 @@ export default {
         punchOut: '',
       },
       punchIn:{
-        time_type:'',
+        time_type:'AM',
         hour: '',
         minute: ''
       },
       punchOut:{
-        time_type:'',
+        time_type:'AM',
         hour: '',
         minute: ''
       },
@@ -255,11 +255,16 @@ export default {
           console.log(err)
       })
     },
-    getPunchIn(){
-      this.form.punchIn = `${this.punchIn.hour} ${this.punchIn.minute} ${this.punchIn.time_type}`
+    getPunchIn(ev){
+      this.form.punchIn = `${this.punchIn.hour}:${this.punchIn.minute} ${this.punchIn.time_type}`
+      ev.preventDefault();
+      this.showModalPunchin = false
     },
-    getPunchOut(){
-      this.form.punchOut = `${this.punchOut.hour} ${this.punchOut.minute} ${this.punchOut.time_type}`
+    getPunchOut(ev){
+      this.form.punchOut = `${this.punchOut.hour}:${this.punchOut.minute} ${this.punchOut.time_type}`
+      ev.preventDefault();
+      this.showModalPunchout = false
+
     },
     async profile() {
       try {

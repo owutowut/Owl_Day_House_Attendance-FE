@@ -39,7 +39,7 @@
             ...item,
             index: (index + 1) + pageStart,
             tag: item.tag === 'พนักงาน' ? 'พนักงาน $พนักงาน$' : item.tag === 'ทดลองงาน' ? 'ทดลองงาน $ทดลองงาน$' : 'ฝึกงาน $ฝึกงาน$',
-            status: item.status === 'approve' ? 'Approve $approve$' : 'Pending $pending$',
+            status: item.status === 'Approve' ? 'Approve $approve$' : 'Pending $pending$',
             no_of_days: `${item.no_of_days} Days`
           }
       })">
@@ -147,7 +147,6 @@ export default {
       }
       const {data} = await this.getWfhData(req)
       this.work_from_home = data.data
-      console.log(data)
 
       this.isLoading = false
     },
