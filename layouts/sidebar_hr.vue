@@ -73,7 +73,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  // middleware: 'auth',
   name: "sidebar_hr",
   data() {
     return {
@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     this.checkPath(this.$route.path)
-    this.profile()
+    // this.profile()
   },
   watch: {
     $route() {
@@ -109,25 +109,25 @@ export default {
         console.log(error)
       }
     },
-    async profile() {
-      const isLogin = await this.$auth.loggedIn
-
-      if (isLogin) {
-        try {
-          const profile = await this.$auth.user
-
-          if (profile) {
-            this.user_profile = profile.data.user
-          } else {
-            console.log('User not found.')
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      } else {
-        console.log('Login is required!')
-      }
-    }
+    // async profile() {
+    //   const isLogin = await this.$auth.loggedIn
+    //
+    //   if (isLogin) {
+    //     try {
+    //       const profile = await this.$auth.user
+    //
+    //       if (profile) {
+    //         this.user_profile = profile.data.user
+    //       } else {
+    //         console.log('User not found.')
+    //       }
+    //     } catch (error) {
+    //       console.log(error)
+    //     }
+    //   } else {
+    //     console.log('Login is required!')
+    //   }
+    // }
   }
 }
 </script>

@@ -303,6 +303,8 @@ export default {
   },
   mounted() {
     this.homeData()
+    console.log(this.$auth.loggedIn)
+    console.log(this.$auth.user)
   },
   methods:{
     ...mapActions({

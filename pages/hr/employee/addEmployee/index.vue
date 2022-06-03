@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="bg-white rounded-lg p-6 lg:w-3/4 ">
-      <Profile_img class="my-4 lg:mt-14 lg:left-14" />
+      <Profile_img class="my-4 lg:mt-14 w-14" :currentImage="form.profile_img" />
       <div class="grid lg:grid-cols-3 gap-6 lg:-mt-32">
           <div class="lg:col-start-2">
             <p>First Name</p>
@@ -25,7 +25,7 @@
           </div>
         <div>
           <p>Password</p>
-          <input v-model="form.password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+          <input v-model="form.password" type="password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
         </div>
           <div class="lg:col-start-2 ">
             <p>Position</p>
@@ -33,11 +33,11 @@
           </div>
         <div>
           <p class="mb-2">Tag</p>
-          <select v-model="form.select_Tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
+          <select v-model="form.tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
             <option value="Select Tag">Select Tag</option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
+            <option>พนักงาน</option>
+            <option>ฝึกงาน</option>
+            <option>ทดลองงาน</option>
           </select>
         </div>
           <div class="lg:col-start-2 ">
@@ -47,7 +47,7 @@
         <div>
           <p class="mb-2">Birthday</p>
           <div class="relative">
-            <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
+            <input class="custom-input-birthday w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="18/03/1999"/>
             <svg-icon name="CalendarBlack" width="24" height="24" class="absolute right-3 top-3 "/>
             <date-picker
               v-model="form.birthday"
@@ -86,7 +86,7 @@
           </div>
           <div>
             <p>Pincode</p>
-            <input v-model="form.pincode" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+            <input v-model="form.pin_code" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
 
         <div class="lg:col-start-2">
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div class="flex justify-center mt-10">
-        <button class="bg-blue rounded-md py-2 px-8 text-white" @click="update">Submit</button>
+        <button class="bg-blue rounded-md py-2 px-8 text-white" @click="submitEmployee">Submit</button>
       </div>
       <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
     </div>
@@ -106,6 +106,7 @@
 
 import Modal from "@/components/Modal";
 import Profile_img from "@/components/Profile_img";
+import {mapActions} from "vuex";
 
 export default {
   name: "index",
@@ -126,21 +127,64 @@ export default {
         tag: '',
         birthday:'',
         date_of_join: '',
-        select_Tag: 'Select Tag',
-        report_to: 'Select Name',
+        report_to: '',
         address: '',
         state: '',
         country: '',
-        pincode: ''
+        pin_code: '',
+        gender:'as'
       }
     }
   },
   methods: {
+    ...mapActions({
+      getEmployee: 'hr/getEmployee',
+      createEmployee: 'hr/createEmployee'
+    }),
     onHideModal(event) {
       this.isModal = event
     },
     update(){
       this.isModal = true
+    },
+    async submitEmployee(){
+      const data = {
+        first_name: `${this.form.first_name}`,
+        last_name: `${this.form.last_name}`,
+        email: `${this.form.email}`,
+        password: `${this.form.password}`,
+        position:`${this.form.position}`,
+        phone: `${this.form.phone}`,
+        tag: `${this.form.tag}`,
+        birthday:`${this.form.birthday}`,
+        date_of_join: `${this.form.date_of_join}`,
+        report_to: `${this.form.report_to}`,
+        address: `${this.form.address}`,
+        state: `${this.form.state}`,
+        country: `${this.form.country}`,
+        pin_code: `${this.form.pin_code}`,
+        gender: `${this.form.gender}`,
+        // profile_img: ''
+      }
+      console.log(data)
+      await this.createEmployee(data)
+        .then(response => {
+          this.$router.push(`/hr/employee`)
+          console.log(response)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      if (data) {
+        this.$swal({
+          title: '<p class="text-3xl"> Successful transaction</p>',
+          imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+          imageWidth: 80,
+          imageHeight: 80,
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
     }
   }
 }
@@ -149,3 +193,4 @@ export default {
 <style scoped>
 
 </style>
+

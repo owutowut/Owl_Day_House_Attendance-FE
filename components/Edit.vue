@@ -1,13 +1,13 @@
 <template>
-  <div class="absolute top-14 right-2" v-if="isEdit">
+  <div class="absolute top-12 right-2" v-if="isEdit">
     <div class="bg-white px-6 py-4 border border-gray21 w-40 h-20" >
-      <div class="flex space-x-4">
+      <div class="flex space-x-4" >
         <svg-icon name="Edit" width="20" height="20"/>
         <NuxtLink :to="`/hr/employee/${id}`">Edit</NuxtLink>
       </div>
       <div class="flex space-x-4 mt-2">
         <svg-icon name="Delete" width="20" height="20"/>
-        <button @click="Delete">Delete</button>
+        <button @click="handleModalDelete(id)">Delete</button>
       </div>
     </div>
     <Delete v-if="isDelete" :isDelete="isDelete" @handleHideDelete="onHideDelete" @submit="submit"/>
@@ -18,6 +18,7 @@
 <script>
 import Delete from "@/components/Delete";
 import Modal from "@/components/Modal";
+import {mapActions} from "vuex";
 export default {
   name: "Edit",
   props: ['isEdit','id'],
@@ -31,22 +32,34 @@ export default {
     }
   },
   methods: {
-    onHideDelete(event) {
-      this.isDelete = event
+    ...mapActions({
+      deleteEmployee: 'hr/deleteEmployee'
+    }),
+    async handleModalDelete(id) {
+      this.$swal({
+        title: `<p class="text-2xl">Delete Holiday <br> <div class="text-lg font-light">Are you sure to permanently delete this ?</div> </p>`,
+        imageUrl: `${require('~/assets/sprite/svg/trash-alt-solid.svg')}`,
+        imageWidth: 60,
+        imageHeight: 69,
+        showCancelButton: true,
+        reverseButtons: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await this.deleteEmployee(id)
+          if (res) {
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              timer: 2500,
+            })
+          }
+         await this.$router.push('/hr/employee')
+        }
+      })
     },
-    Delete(){
-      this.isDelete = true
-    },
-    onHideModal(event) {
-      this.isModal = event
-    },
-    submit(event){
-      this.isDelete = false
-      this.$emit('handleHideEdit',false)
-      setTimeout(()=>{
-        this.isModal = true
-      },500)
-    }
   }
 }
 </script>
