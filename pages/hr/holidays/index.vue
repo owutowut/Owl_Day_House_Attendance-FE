@@ -127,7 +127,7 @@ export default {
         }
       ],
       holidays: [],
-      holiday_by_id: [],
+      holiday_by_id: {},
     }
   },
 
@@ -151,30 +151,30 @@ export default {
     ...mapActions({
       getHoliday: 'hr/getHoliday',
       deleteHoliday: 'hr/deleteHoliday',
-      editHoliday: 'hr/editHoliday',
       getHolidayByID: 'hr/getHolidayByID'
     }),
 
     async editHoliday(id) {
       this.show.edit = true
-
       const {data}  = await this.getHolidayByID(id)
-      this.holiday_by_id = data.holidays
+      console.log(data)
+      this.holiday_by_id = data.data
     },
 
     async asyncData() {
-      const req = {
+      const request = {
         page: this.page,
         search: this.search,
         selected: this.selected
       }
-      const {data} = await this.getHoliday(req)
+      const {data} = await this.getHoliday(request)
       this.holidays = data.data
 
       this.isLoading = false
     },
 
-    onChangePage() {
+    onChangePage(i) {
+      this.page = i
       this.asyncData()
     },
 

@@ -2,30 +2,18 @@ export const actions = {
   getHome() {
     return this.$axios.get(`home`)
   },
-
-
-  getEmployee({}, data) {
-    return this.$axios.get(`users`, data)
+  getProfile() {
+    return this.$axios.get(`/me`)
   },
-  getEmployeeByID({}, id) {
-    return this.$axios.$get(`users/${id}`)
+  getUserByID({}, data) {
+    return this.$axios.get(`/users/${data}`)
   },
-  createEmployee({}, data) {
-    return this.$axios.post(`register`, data.formData)
-  },
-  deleteEmployee({}, data) {
-    return this.$axios.$delete(`users/delete/${data}`)
-  },
-  editEmployeeById({}, data) {
-    return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
-  },
-
 
   getHoliday({}, data) {
-    return this.$axios.get(`holiday`, data)
+    return this.$axios.post(`holiday`, data)
   },
-  getHolidayByID() {
-    return this.$axios.get(`holiday`)
+  getHolidayByID({}, id) {
+    return this.$axios.get(`holiday/${id}`)
   },
   createHolidayForm({}, data) {
     return this.$axios.post(`holiday/create`, data)
@@ -35,11 +23,10 @@ export const actions = {
   },
   editHoliday({}, data) {
     return this.$axios.$patch(`/holiday/update/${data.id}`, data)
+
   },
-
-
   getLeave({}, data) {
-    return this.$axios.get(`leaves`, data)
+    return this.$axios.post(`leaves`, data)
   },
   getLeaveByID({}, id) {
     return this.$axios.$get(`leaves/${id}`)
@@ -51,10 +38,8 @@ export const actions = {
     return this.$axios.post(`leaves/create`, data)
   },
 
-
-
   getWfhData({}, data) {
-    return this.$axios.get(`work_from_home`, data)
+    return this.$axios.post(`work_from_home`, data)
   },
 
   createWfhForm({}, data) {
@@ -67,4 +52,19 @@ export const actions = {
     return this.$axios.patch(`work_from_home/update/${data.id}`, data)
   },
 
+  getEmployee({}, data) {
+    return this.$axios.post(`users`, data)
+  },
+  getEmployeeByID({}, id) {
+    return this.$axios.$get(`users/${id}`)
+  },
+  createEmployee({}, data) {
+    return this.$axios.post(`register`, data)
+  },
+  deleteEmployee({}, data) {
+    return this.$axios.$delete(`users/delete/${data}`)
+  },
+  editEmployeeById({}, data) {
+    return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
+  },
 }

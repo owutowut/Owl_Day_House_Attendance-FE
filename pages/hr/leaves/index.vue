@@ -180,9 +180,9 @@ export default {
 
     async leavesData() {
       const request = {
-          page: this.page,
-          search: this.search,
-          selected: this.selected
+        page: this.page,
+        search: this.search,
+        selected: this.selected
       }
       const {data} = await this.getLeave(request)
 
@@ -193,7 +193,8 @@ export default {
     },
 
     onChangePage() {
-        this.leavesData()
+      this.page = i
+      this.leavesData()
       }
     }
 }

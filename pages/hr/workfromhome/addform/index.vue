@@ -235,26 +235,21 @@ export default {
     },
     async onSubmitForm() {
       const data = {
-        reason: `${this.form.reason}`,
-        detail: `${this.form.detail}`,
-        from: `${this.form.from}`,
-        to: `${this.form.to}`,
-        no_of_days: `${this.form.no_of_days}`,
-        punchIn: `${this.form.punchIn}`,
-        punchOut: `${this.form.punchOut}`,
+        reason: this.form.reason,
+        detail: this.form.detail,
+        from: this.form.from,
+        to: this.form.to,
+        no_of_days: this.form.no_of_days,
+        punchIn: this.form.punchIn,
+        punchOut: this.form.punchOut,
+        user_id: this.user_profile.id,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
-        user_id: `${this.user_profile.id}`,
-        tag: `${this.user_profile.tag}`
+        status: this.user_profile.status,
+        tag: this.user_profile.tag,
       }
-      await this.createWfhForm(data)
-        .then(response => {
-          this.$router.push(`/hr/workfromhome`)
-          console.log(response)
-        })
-        .catch(err => {
-          console.log(err)
-      })
+      await this.createWfhForm(data).then(this.$router.push(`/hr/workfromhome`))
     },
+
     getPunchIn(ev){
       this.form.punchIn = `${this.punchIn.hour}:${this.punchIn.minute} ${this.punchIn.time_type}`
       ev.preventDefault();
@@ -267,13 +262,13 @@ export default {
 
     },
     async profile() {
+      const profile = await this.$auth.user
       try {
-        const profile = await this.$auth.user
         if (profile) {
-          this.user_profile = profile.data.user
+          this.user_profile = profile
         }
       } catch (error) {
-        console.log(error)
+        console.log(error.message)
       }
     }
   }

@@ -37,21 +37,18 @@ export default {
       },
     }
   },
-  mounted() {
-    console.log(this.$auth.loggedIn)
-  },
   methods: {
     async login() {
-      try {
-        let {data} = await this.$auth.loginWith('local', {data: this.form})
-        // return console.log(data)
-        if (data.token) {
-          // this.$auth.setUser(data)
+      let {data} = await this.$auth.loginWith('local', {data: this.form})
 
-          if (data.user.role === 'admin') {
-            await this.$router.push('/admin/home')
+      try {
+        if (data) {
+          await this.$auth.setUser(data.user)
+
+          if (this.$auth.user.role === 'admin') {
+            return await this.$router.push('/admin/home')
           } else {
-            await this.$router.push('/hr/home')
+            return await this.$router.push('/hr/home')
           }
         }
       } catch (error) {

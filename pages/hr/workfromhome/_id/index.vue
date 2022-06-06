@@ -15,8 +15,8 @@
             <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px">
           </div>
           <div class="self-center">
-            <p class="text-xl text-blue2">{{user_profile.first_name + ' ' + user_profile.last_name}}</p>
-            <p class="text-base text-gray6 mb-2">{{ user_profile.department }}</p>
+            <p class="text-xl text-blue2">{{user_profile.first_name}} {{user_profile.last_name}}</p>
+            <p class="text-base text-gray6 mb-2">{{user_profile.position}}</p>
             <div>
               <span class="bg-blue rounded-2xl text-white text-center py-1 px-4">{{ user_profile.tag }}</span>
             </div>
@@ -25,7 +25,7 @@
         <div class="bg-white p-10 rounded-lg text-left font-kanit border border-gray19">
           <div class="space-x-6 flex">
             <p class="text-blue2 mb-2">Date of Join :</p>
-            <p class="text-gray7 mb-2">{{ user_profile.created_at }}</p>
+            <p class="text-gray7 mb-2">{{ user_profile.date_of_join }}</p>
           </div>
           <div class="space-x-6 flex">
             <p class="text-blue2 mb-2">Phone :</p>
@@ -149,20 +149,24 @@ export default {
   },
   mounted() {
     this.wfhData()
-    this.profile()
   },
   methods: {
     ...mapActions({
       getWfhById: 'hr/getWfhById',
-      wfhApprove: 'hr/wfhApprove'
+      wfhApprove: 'hr/wfhApprove',
+      getUserByID: 'hr/getUserByID'
     }),
+
     async wfhData() {
       const id = this.$route.params.id
       const {data} = await this.getWfhById(id)
       this.workfromhome = data
+      const user = await this.getUserByID(data.user_id)
+      this.user_profile = user.data
 
       this.isLoading = false
     },
+
     async wfhStatus() {
       const data = {
         id : this.$route.params.id,
@@ -180,55 +184,16 @@ export default {
             timer: 1000
           }).then(
             this.asyncData()
-          )
-        }
-        console.log(result)
+          )}
       } catch (error) {
         console.log(error)
       }
     },
-    async profile() {
-      try {
-        const profile = await this.$auth.user
-        if (profile) {
-          this.user_profile = profile.data.user
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
   }
 }
 </script>
 
 <style scoped>
-.modal{
-  width: 590px;
-  height: 292px;
-}
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.faster {
-  -webkit-animation-duration: 250ms;
-  animation-duration: 250ms;
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-.fadeOut {
-  -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;

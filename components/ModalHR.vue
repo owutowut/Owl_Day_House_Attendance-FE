@@ -77,7 +77,7 @@
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday_by_id.name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday_by_id.name" required placeholder="Name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">From</Span>
@@ -95,7 +95,7 @@
                     </div>
                   </div>
                   <div class="text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">From</Span>
+                    <Span class="text-base text-blue">To</Span>
                     <date-picker
                       :disabled="isDateFrom"
                       color="#252647"
@@ -112,7 +112,7 @@
                   </div>
                   <div class=" text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="holiday_by_id.no_of_days+' Days'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday_by_id.no_of_days+ ' Days'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="flex justify-center pt-6">
                     <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
@@ -212,8 +212,7 @@ export default {
       add_leave: Boolean,
     },
     holiday_by_id: {
-      type: Array,
-      default: ()=> [],
+      type: Object,
     },
   },
   data() {
@@ -225,7 +224,7 @@ export default {
         to: '',
         no_of_days: 0,
         reason: '',
-        status: 'pending'
+        status: 'Pending'
       },
       holiday: {
         name: '',
@@ -277,7 +276,6 @@ export default {
         }
 
         let total = parseInt((to - from) / (24 * 3600 * 1000))
-        console.log(from, to)
 
         if(total < 0) {
           return this.leave.no_of_days = 0
@@ -353,6 +351,7 @@ export default {
           console.log(err.message)
         })
     },
+
     async addForm() {
       const data = {
         name: this.holiday.name,
@@ -380,17 +379,18 @@ export default {
           console.log(err.message)
         })
     },
-    async profile() {
-      try {
-        const profile = await this.$auth.user
 
-        this.user_profile = profile.data.user
+    async profile() {
+      const profile = await this.$auth.user
+      try {
+        if (profile) {
+          this.user_profile = profile
+        }
       } catch (error) {
-        await this.$auth.logout()
-        await this.$auth.redirect('logout')
-        console.log(error)
+        console.log(error.message)
       }
     },
+
     async editModal() {
       const data = {
         id : this.holiday_by_id.id,

@@ -21,8 +21,8 @@
           </div>
           <div class="flex flex-col items-center text-white  ">
             <img src="~/assets/images/profile-hr.png" class="py-5" alt="">
-            <p class="font-light">{{ user_profile.first_name }} {{user_profile.last_name}}</p>
-            <p class="text-xs mt-2 font-thin">{{user_profile.tag}}</p>
+            <p class="font-light">{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
+            <p class="text-xs mt-2 font-thin">{{ user_profile.tag }}</p>
           </div>
           <div class="px-5">
             <ul class="text-white mt-12">
@@ -72,8 +72,10 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
-  // middleware: 'auth',
+  middleware: 'auth',
   name: "sidebar_hr",
   data() {
     return {
@@ -81,12 +83,12 @@ export default {
       isActive: false,
       isOpen: true,
       total_notification: '0',
-      user_profile: [],
+      user_profile: {},
     }
   },
   mounted() {
     this.checkPath(this.$route.path)
-    // this.profile()
+    this.userProfile()
   },
   watch: {
     $route() {
@@ -94,6 +96,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getProfile: 'hr/getProfile'
+    }),
+
     checkPath(path) {
       this.currentPath = path.split("hr/")[1]
     },
@@ -104,30 +110,24 @@ export default {
     async logout(){
       try {
         await this.$auth.logout()
-
       } catch (error) {
         console.log(error)
       }
     },
-    // async profile() {
-    //   const isLogin = await this.$auth.loggedIn
-    //
-    //   if (isLogin) {
-    //     try {
-    //       const profile = await this.$auth.user
-    //
-    //       if (profile) {
-    //         this.user_profile = profile.data.user
-    //       } else {
-    //         console.log('User not found.')
-    //       }
-    //     } catch (error) {
-    //       console.log(error)
-    //     }
-    //   } else {
-    //     console.log('Login is required!')
-    //   }
-    // }
+    async userProfile() {
+      const verify = await this.$auth.loggedIn
+
+      try {
+        if (!verify) {
+          return 'Login required!'
+        } else {
+          const user = await this.$auth.user
+          return this.user_profile = user
+        }
+      } catch (error) {
+        return error.message
+      }
+    }
   }
 }
 </script>

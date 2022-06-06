@@ -12,7 +12,7 @@
       <div class="flex justify-end space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" @keyup="wfhData" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
+          <input type="text" @keyup="fetchData" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
           <div class="relative">
@@ -21,9 +21,8 @@
             <date-picker
               color="#252647"
               auto-submit
-              @change="wfhData"
+              @change="fetchData"
               v-model="selected"
-              :min="new Date().toISOString().substr(0, 10)"
               element="custom-input"
               simple
             ></date-picker>
@@ -53,18 +52,20 @@
         </Table>
       </div>
 
-      <paginate
-        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-        v-model="page"
-        :page-count="totalPage"
-        :page-range="3"
-        :margin-pages="1"
-        :click-handler="onChangePage"
-        :prev-text="'<'"
-        :next-text="'>'"
-        :container-class="'pagination'"
-        :page-class="'page-item'">
-      </paginate>
+      <client-only>
+        <paginate
+          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+          v-model="page"
+          :page-count="totalPage"
+          :page-range="3"
+          :margin-pages="1"
+          :click-handler="onChangePage"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination'"
+          :page-class="'page-item'">
+        </paginate>
+      </client-only>
     </div>
   </div>
 </template>
@@ -84,7 +85,6 @@ export default {
       isLoading: true,
       selected: '',
       search: '',
-      perPage: 10,
       page: 1,
       headers: [{
         title:'Employee',
@@ -119,7 +119,7 @@ export default {
   },
 
   mounted() {
-    this.wfhData()
+    this.fetchData()
   },
   computed: {
     pageStart() {
@@ -137,21 +137,21 @@ export default {
     ...mapActions({
       getWfhData: 'hr/getWfhData'
     }),
-    async wfhData() {
-      const req = {
-        params: {
-          page: this.page,
-          search: this.search,
-          selected: this.selected
-        }
+
+    async fetchData() {
+      const request = {
+        page: this.page,
+        search: this.search,
+        selected: this.selected
       }
-      const {data} = await this.getWfhData(req)
-      this.work_from_home = data.data
+      const {data} = await this.getWfhData(request)
+      this.work_from_home = data.work_from_home
 
       this.isLoading = false
     },
-    onChangePage() {
-      this.wfhData()
+    onChangePage(i) {
+      this.page = i
+      this.fetchData()
     },
 
   }

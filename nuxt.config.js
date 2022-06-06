@@ -75,12 +75,12 @@ export default {
           global: true
         },
         user: {
-          property: 'user'
+          property: 'user',
         },
         scheme: 'local',
         endpoints: {
           login: {url: `${API_URL}/login`, method: 'post'},
-          user: { url: `${API_URL}/users/me`, method: 'get' },
+          user: {url: `${API_URL}/me`, method: 'get'},
           logout: false
         },
       },
@@ -91,6 +91,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    apiUrl: API_URL || 'http://10.0.0.68:3333'
+    apiUrl: API_URL || 'http://localhost:3000'
   }
 }

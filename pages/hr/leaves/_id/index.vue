@@ -14,8 +14,8 @@
         <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px" alt="">
       </div>
       <div class="self-center">
-        <p class="text-xl text-blue2">{{user_profile.first_name + ' ' + user_profile.last_name}}</p>
-        <p class="text-base text-gray6 mb-2">{{ user_profile.position }}</p>
+        <p class="text-xl text-blue2">{{user_profile.first_name}} {{user_profile.last_name}}</p>
+        <p class="text-base text-gray6 mb-2">{{user_profile.position}}</p>
         <div>
           <span class="bg-blue rounded-2xl text-white text-center py-1 px-4">{{ user_profile.tag }}</span>
         </div>
@@ -25,7 +25,7 @@
     <div class="bg-white p-10 rounded-lg text-left font-kanit border border-gray19">
       <div class="space-x-6 flex">
         <p class="text-blue2 mb-2">Date of Join :</p>
-        <p class="text-gray7 mb-2">{{ user_profile.created_at }}</p>
+        <p class="text-gray7 mb-2">{{ user_profile.date_of_join }}</p>
       </div>
       <div class="space-x-6 flex">
         <p class="text-blue2 mb-2">Phone :</p>
@@ -133,19 +133,21 @@ export default {
 
   mounted() {
     this.leavesData()
-    this.profile()
   },
 
   methods: {
     ...mapActions({
       getLeaveByID: 'hr/getLeaveByID',
-      leaveApprove: 'hr/leaveApprove'
+      leaveApprove: 'hr/leaveApprove',
+      getUserByID: 'hr/getUserByID'
     }),
 
     async leavesData() {
       const id = this.$route.params.id
       const data = await this.getLeaveByID(id)
       this.leave = data.leave
+      const user = await this.getUserByID(data.leave.user_id)
+      this.user_profile = user.data
 
       this.isLoading = false
     },
@@ -177,26 +179,6 @@ export default {
           console.log(err.message)
         })
     },
-
-    async profile() {
-      const isLogin = await this.$auth.loggedIn
-
-      if (isLogin) {
-        try {
-          const profile = await this.$auth.user
-
-          if (profile) {
-            this.user_profile = profile.data.user
-          } else {
-            console.log('User not found.')
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      } else {
-        console.log('Login is required!')
-      }
-    }
   }
 }
 </script>
