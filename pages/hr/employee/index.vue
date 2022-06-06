@@ -15,22 +15,22 @@
       <div class="lg:flex justify-end lg:space-x-4 mt-16">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-lg my-2 px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input v-model="search" type="text" placeholder="Search to Name.."
+          <input v-model="search" @keyup="userData" type="text" placeholder="Search to Name.."
                  class="font-kanit text-lg w-full lg:w-[420px] focus:outline-none "/>
         </div>
         <div>
-          <select v-model="selected" placeholder="Position"
+          <select v-model="position" @change="userData" placeholder="Position"
                   class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full focus:outline-none">
-            <option value="all">Position</option>
+            <option disabled value="">Position</option>
             <option value="UX/UI Designer">UX/UI Designer</option>
             <option value="Tester">Tester</option>
             <option value="Dev">Dev</option>
           </select>
         </div>
         <div>
-          <select v-model="selected_status" placeholder="Status"
+          <select v-model="tag" @change="userData" placeholder="Status"
                   class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full focus:outline-none">
-            <option value="all">Status</option>
+            <option disabled value="">Status</option>
             <option value="พนักงาน">พนักงาน</option>
             <option value="ทดลองงาน">ทดลองงาน</option>
             <option value="ฝึกงาน">ฝึกงาน</option>
@@ -61,32 +61,14 @@ export default {
       isLoading: true,
       isEdit: false,
       search: '',
-      selected: 'all',
-      selected_status: 'all',
+      position: '',
+      tag: '',
       Employees: []
     }
   },
   computed: {
     filterData() {
-      //   let result = this.Employees
-      //
-      //   if (this.search.trim()) {
-      //     result = result.filter(val => {
-      //       return val.name.toLowerCase().includes(this.search.toLowerCase())
-      //     })
-      //   }
-      //   if (this.selected !== "all") {
-      //     result = result.filter(val => {
-      //       return val.department.toLowerCase().includes(this.selected.toLowerCase())
-      //     })
-      //   }
-      //   if (this.selected_status !== "all") {
-      //     result = result.filter(val => {
-      //       return val.tag.toLowerCase().includes(this.selected_status.toLowerCase())
-      //     })
-      //   }
-      //
-      //   return  result
+
       return this.Employees
     }
   },
@@ -99,7 +81,13 @@ export default {
     }),
     async userData() {
       try {
-        const {data} = await this.getEmployee(data)
+        const request = {
+          search: this.search,
+          position: this.position,
+          tag: this.tag
+
+        }
+        const {data} = await this.getEmployee(request)
         if (data) {
           this.Employees = data.user
           console.log(data.user)
