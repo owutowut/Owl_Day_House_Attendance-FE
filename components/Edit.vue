@@ -37,7 +37,7 @@ export default {
     }),
     async handleModalDelete(id) {
       this.$swal({
-        title: `<p class="text-2xl">Delete Holiday <br> <div class="text-lg font-light">Are you sure to permanently delete this ?</div> </p>`,
+        title: `<p class="text-2xl">Delete Profile<br> <div class="text-lg font-light">Are you sure to permanently delete this Profile ?</div> </p>`,
         imageUrl: `${require('~/assets/sprite/svg/trash-alt-solid.svg')}`,
         imageWidth: 60,
         imageHeight: 69,
@@ -54,9 +54,12 @@ export default {
               imageHeight: 80,
               showConfirmButton: false,
               timer: 2500,
+            }).then(response => {
+              // this.$router.push(`/hr/employee`)
+              location.reload()
+              console.log(response)
             })
-          }
-         await this.$router.push('/hr/employee')
+        }
         }
       })
     },

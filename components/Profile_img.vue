@@ -5,7 +5,7 @@
         v-if="image === null && currentImage !== null"
         alt="" width="96" height="96"
         class="rounded-full object-cover relative "
-        :src="typeof currentImage[0] !== 'undefined' ? currentImage : require(`~/assets/sprite/svg/Profile.svg`)"
+        :src="typeof currentImage !== 'undefined' ? currentImage : require(`~/assets/sprite/svg/Profile.svg`)"
       />
       <img
         v-else
@@ -26,12 +26,7 @@
 <script>
 export default {
   name: "Profile_img",
-  props: {
-    currentImage: {
-      type: [String, Object],
-      default: require(`~/assets/sprite/svg/Profile.svg`),
-    },
-  },
+  props: ['currentImage'],
   data() {
     return {
       image: null,

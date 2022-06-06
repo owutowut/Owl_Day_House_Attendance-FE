@@ -102,6 +102,7 @@ export default {
         const {data} = await this.getEmployee(data)
         if (data) {
           this.Employees = data.user
+          console.log(data.user)
         }
         this.isLoading = false
       } catch (e) {

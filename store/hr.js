@@ -3,6 +3,24 @@ export const actions = {
     return this.$axios.get(`home`)
   },
 
+
+  getEmployee({}, data) {
+    return this.$axios.get(`users`, data)
+  },
+  getEmployeeByID({}, id) {
+    return this.$axios.$get(`users/${id}`)
+  },
+  createEmployee({}, data) {
+    return this.$axios.post(`register`, data.formData)
+  },
+  deleteEmployee({}, data) {
+    return this.$axios.$delete(`users/delete/${data}`)
+  },
+  editEmployeeById({}, data) {
+    return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
+  },
+
+
   getHoliday({}, data) {
     return this.$axios.get(`holiday`, data)
   },
@@ -17,8 +35,9 @@ export const actions = {
   },
   editHoliday({}, data) {
     return this.$axios.$patch(`/holiday/update/${data.id}`, data)
-
   },
+
+
   getLeave({}, data) {
     return this.$axios.get(`leaves`, data)
   },
@@ -31,6 +50,8 @@ export const actions = {
   createLeave({}, data) {
     return this.$axios.post(`leaves/create`, data)
   },
+
+
 
   getWfhData({}, data) {
     return this.$axios.get(`work_from_home`, data)
@@ -45,19 +66,5 @@ export const actions = {
   wfhApprove({}, data) {
     return this.$axios.patch(`work_from_home/update/${data.id}`, data)
   },
-  getEmployee({}, data) {
-    return this.$axios.get(`users`, data)
-  },
-  getEmployeeByID({}, id) {
-    return this.$axios.$get(`users/${id}`)
-  },
-  createEmployee({}, data) {
-    return this.$axios.post(`register`, data)
-  },
-  deleteEmployee({}, data) {
-    return this.$axios.$delete(`users/delete/${data}`)
-  },
-  editEmployeeById({}, data) {
-    return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
-  },
+
 }

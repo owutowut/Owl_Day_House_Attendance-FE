@@ -42,9 +42,9 @@
               <p class="mb-2">Tag</p>
               <select v-model="form.tag" class="rounded-lg h-11 px-4 py-2 w-full text-gray14 border border-gray12">
                 <option value="Select Tag">Select Tag</option>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
+                <option>พนักงาน</option>
+                <option>ฝึกงาน</option>
+                <option>ทดลองงาน</option>
               </select>
             </div>
             <div class="lg:col-start-2 ">
@@ -77,7 +77,7 @@
               </div>
             </div>
             <div>
-              <p class="mt-2">Report to</p>
+              <p>Report to</p>
               <select v-model="form.report_to"
                       class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
                 <option value="Select Name">Select Name</option>
@@ -142,14 +142,7 @@ export default {
     ...mapActions({
       editEmployeeById: 'hr/editEmployeeById',
       getEmployeeByID: 'hr/getEmployeeByID',
-      profile: 'hr/profile'
     }),
-    onHideModal(event) {
-      this.isModal = event
-    },
-    update() {
-      this.isModal = true
-    },
     onChangeFile(e) {
       this.form.profile_img = e
       console.log(e)
@@ -171,7 +164,6 @@ export default {
       for (const key in this.form) {
         formData.append(key, this.form[key])
       }
-      // formData.set('id', this.$route.params.id)
       formData.set('profile_img', this.form.profile_img)
 
 
