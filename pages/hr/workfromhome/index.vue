@@ -9,10 +9,10 @@
           <span class="text-lg font-kanit">Add Form</span>
         </nuxt-link>
       </div>
-      <div class="flex justify-end space-x-4 mb-6">
-        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
+      <div class="lg:flex justify-end lg:space-x-4 mb-6">
+        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" @keyup="fetchData" v-model="search" placeholder="Search.." class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
+          <input type="text" @keyup="fetchData" v-model="search" placeholder="Search.." class="w-full lg:w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
           <div class="relative">

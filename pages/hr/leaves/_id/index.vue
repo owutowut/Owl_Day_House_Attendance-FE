@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="mr-4">
 
   <div class="flex justify-between mb-4">
     <span class="text-3xl font-semibold text-blue">LEAVE</span>
@@ -8,7 +8,7 @@
     </nuxt-link>
   </div>
 
-  <div class="grid grid-cols-2 gap-4 mb-4">
+  <div class="grid lg:grid-cols-2 gap-4 mb-4">
     <div class="flex bg-white p-10 rounded-lg text-left font-kanit border border-gray19 space-x-6">
       <div class="self-center">
         <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px" alt="">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-4 flex space-x-4">
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 flex space-x-4">
     <div class="col-span-3 space-y-4">
       <div class="grid grid-cols-3 col-span-full flex gap-4 text-gray23">
         <div class="bg-white p-4 rounded-lg text-left space-y-1">

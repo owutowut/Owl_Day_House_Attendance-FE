@@ -67,7 +67,21 @@
               />
             </div>
           </div>
-          <div class="">
+          <div>
+            <p>Gender</p>
+            <select v-model="form.gender" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
+              <option disabled value="Select Name">Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+
+          <div class="lg:col-start-2 lg:col-span-2" >
+            <p>Address</p>
+            <input v-model="form.address" class="w-full  border border-gray12 rounded-lg  py-2 px-4"/>
+          </div>
+
+          <div class="lg:col-start-2">
             <p>Report to</p>
             <select v-model="form.report_to" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
               <option value="Select Name">Select Name</option>
@@ -76,24 +90,21 @@
               <option>C</option>
             </select>
           </div>
-          <div class="lg:col-start-2 lg:col-span-2" >
-            <p>Address</p>
-            <input v-model="form.address" class="w-full  border border-gray12 rounded-lg  py-2 px-4"/>
-          </div>
 
-          <div class="lg:col-start-2">
+          <div class="">
             <p>State</p>
             <input v-model="form.state" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div>
+          <div class="lg:col-start-2">
             <p>Pincode</p>
             <input v-model="form.pin_code" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
 
-          <div class="lg:col-start-2">
+          <div>
             <p>Country</p>
             <input v-model="form.country" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
+
         </div>
         <div class="flex justify-center mt-10">
           <button class="bg-blue rounded-md py-2 px-8 text-white" @click="submitEmployee">Submit</button>
@@ -134,7 +145,7 @@ export default {
         state: '',
         country:  '',
         pin_code: '',
-        gender: 'x',
+        gender: '',
         profile_img:''
       }
     }
@@ -162,11 +173,9 @@ export default {
         }
 
         formData.set('profile_img',this.form.profile_img)
-        const data = {
-          formData
-        }
+
         // console.log([...formData])
-        await this.createEmployee(data)
+        await this.createEmployee(formData)
           .then(response => {
             this.$router.push(`/hr/employee`)
             console.log(response)

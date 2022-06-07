@@ -164,16 +164,16 @@
     </div>
     <client-only>
       <paginate
-        class="flex justify-end mt-10 text-sm text-black2 space-x-4"
+        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
         v-model="page"
-        :page-count="10"
+        :page-count="totalPage"
         :page-range="3"
         :margin-pages="1"
         :click-handler="onChangePage"
         :prev-text="'<'"
         :next-text="'>'"
         :container-class="'pagination'"
-        :page-class="'page-item'">
+        :page-class="'page-item'" list="" name="">
       </paginate>
     </client-only>
   </div>
@@ -309,7 +309,8 @@ export default {
       getHome: 'hr/getHome'
     }),
 
-    onChangePage(){
+    onChangePage(i) {
+      this.page = i
     },
     async homeData () {
       const {data} = await this.getHome()
@@ -322,7 +323,10 @@ export default {
   },
   computed: {
     pageStart() {
-      return (this.currentPage - 1) * this.perPage
+      return (this.currentPage - 1) * this.mockData.perPage
+    },
+    totalPage() {
+      return Math.ceil(this.mockData.total / this.mockData.perPage)
     },
     filterData() {
       let result = this.mockData

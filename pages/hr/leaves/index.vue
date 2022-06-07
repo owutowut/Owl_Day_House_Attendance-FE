@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mr-4">
     <Loading v-if="isLoading"/>
 
     <div v-else>
@@ -11,7 +11,7 @@
           <span class="text-lg font-kanit">Add Leave</span>
         </button>
       </div>
-      <div class="grid grid-cols-4 gap-1.5 mb-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-1.5 mb-4">
         <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
           <p class="text-xs text-blue mb-2">ลาป่วย</p>
           <p class="leaves_result">{{ total_leaves.sick_leaves_total }}</p>
@@ -37,13 +37,13 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-end space-x-4 mb-6">
-        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2">
+      <div class=" lg:flex justify-end lg:space-x-4 mb-6">
+        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.." class="no-outline w-[488px] font-kanit text-lg px-4"/>
+          <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.." class="no-outline w-full lg:w-[488px] font-kanit text-lg px-4"/>
         </div>
         <div>
-          <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-[320px] text-gray14 font-kanit text-lg">
+          <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-full lg:w-[320px] text-gray14 font-kanit text-lg">
             <option value="">Leave type</option>
             <option value="ลาป่วย">ลาป่วย</option>
             <option value="ลากิจ">ลากิจ</option>

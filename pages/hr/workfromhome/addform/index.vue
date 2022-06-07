@@ -7,7 +7,7 @@
       </nuxt-link>
     </div>
     <div class="grid flex space-x-4 mb-4">
-        <div class="grid grid-cols-4 col-span-full flex gap-4 text-gray23">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 col-span-full flex gap-4 text-gray23">
           <div class="bg-white p-4 rounded-lg text-left space-y-1">
             <Span class="text-base text-blue font-semibold">From</Span>
             <date-picker
