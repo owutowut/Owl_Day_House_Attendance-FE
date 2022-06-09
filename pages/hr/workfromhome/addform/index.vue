@@ -247,7 +247,18 @@ export default {
         status: this.user_profile.status,
         tag: this.user_profile.tag,
       }
-      await this.createWfhForm(data).then(this.$router.push(`/hr/workfromhome`))
+      await this.createWfhForm(data).then(
+        this.$swal({
+          title: '<p class="text-3xl"> Successful transaction</p>',
+          imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+          imageWidth: 80,
+          imageHeight: 80,
+          showConfirmButton: false,
+          reverseButtons: true,
+          timer: 2500
+        }),
+        this.$router.push(`/hr/workfromhome`)
+    )
     },
 
     getPunchIn(ev){
@@ -262,13 +273,19 @@ export default {
 
     },
     async profile() {
-      const profile = await this.$auth.user
+      const verify = await this.$auth.loggedIn
+
       try {
-        if (profile) {
-          this.user_profile = profile
+        if (!verify) {
+          return 'Login required!'
+        } else {
+          const user=await this.$axios.get('me', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+          })
+          return this.user_profile = user.data
         }
       } catch (error) {
-        console.log(error.message)
+        return error.message
       }
     }
   }

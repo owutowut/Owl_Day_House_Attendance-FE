@@ -319,7 +319,7 @@ export default {
       }
     },
 
-    async leaveSubmit() {
+    async leaveSubmit(ev) {
       const data = {
         user_id: this.user_profile.id,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,
@@ -381,13 +381,19 @@ export default {
     },
 
     async profile() {
-      const profile = await this.$auth.user
+      const verify = await this.$auth.loggedIn
+
       try {
-        if (profile) {
-          this.user_profile = profile
+        if (!verify) {
+          return 'Login required!'
+        } else {
+          const user=await this.$axios.get('me', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+          })
+          return this.user_profile = user.data
         }
       } catch (error) {
-        console.log(error.message)
+        return error.message
       }
     },
 

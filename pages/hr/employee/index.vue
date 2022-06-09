@@ -21,7 +21,7 @@
         <div>
           <select v-model="position" @change="userData" placeholder="Position"
                   class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full focus:outline-none">
-            <option disabled value="">Position</option>
+            <option value="">Position</option>
             <option value="UX/UI Designer">UX/UI Designer</option>
             <option value="Tester">Tester</option>
             <option value="Dev">Dev</option>
@@ -30,7 +30,7 @@
         <div>
           <select v-model="tag" @change="userData" placeholder="Status"
                   class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full focus:outline-none">
-            <option disabled value="">Status</option>
+            <option value="">Status</option>
             <option value="พนักงาน">พนักงาน</option>
             <option value="ทดลองงาน">ทดลองงาน</option>
             <option value="ฝึกงาน">ฝึกงาน</option>
@@ -85,7 +85,6 @@ export default {
           search: this.search,
           position: this.position,
           tag: this.tag
-
         }
         const {data} = await this.getEmployee(request)
         if (data) {

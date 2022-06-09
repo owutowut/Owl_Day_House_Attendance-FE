@@ -192,7 +192,7 @@ export default {
       this.isLoading = false
     },
 
-    onChangePage() {
+    onChangePage(i) {
       this.page = i
       this.leavesData()
       }

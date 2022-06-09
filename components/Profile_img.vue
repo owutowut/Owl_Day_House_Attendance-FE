@@ -5,7 +5,7 @@
         v-if="image === null && currentImage !== null"
         alt="" width="96" height="96"
         class="rounded-full object-cover relative "
-        :src="typeof currentImage !== 'undefined' ? currentImage : require(`~/assets/sprite/svg/Profile.svg`)"
+        src="~/assets/sprite/svg/profile.svg"
       />
       <img
         v-else

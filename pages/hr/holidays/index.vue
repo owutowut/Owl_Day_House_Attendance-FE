@@ -6,7 +6,7 @@
       <div class="flex justify-between mb-6">
         <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
         <button @click="show.add_form=true"
-                class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+                class="md:px-10 md:py-2 bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>
         </button>
@@ -27,7 +27,6 @@
               auto-submit
               @change="asyncData"
               v-model="selected"
-              :min="new Date().toISOString().substr(0, 10)"
               element="custom-input"
               simple
             ></date-picker>

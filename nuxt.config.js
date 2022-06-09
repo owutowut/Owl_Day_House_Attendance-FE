@@ -2,7 +2,7 @@ const API_URL = `${process.env.API_URL}`
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'EXAMPLE NUXT',
+    title: 'OWL DAY HOUSE - THE SOFTWARE HOUSE',
     htmlAttrs: {
       lang: 'en'
     },
@@ -12,7 +12,7 @@ export default {
       {hid: 'description', name: 'description', content: ''},
       {name: 'format-detection', content: 'telephone=no'}
     ],
-    link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}]
+    link: [{rel: 'icon', type: 'image/x-icon', href: '/ODHlogo.png'}]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -66,7 +66,6 @@ export default {
   },
 
   auth: {
-    localStorage: false,
     strategies: {
       local: {
         token: {
@@ -76,14 +75,16 @@ export default {
         },
         user: {
           property: 'user',
+          autoFetch: false,
         },
         scheme: 'local',
         endpoints: {
           login: {url: `${API_URL}/login`, method: 'post'},
-          user: {url: `${API_URL}/me`, method: 'get'},
+          // user: {url: `${API_URL}/me`, method: 'get'},
+          user: false,
           logout: false
-        },
-      },
+        }
+      }
     },
     plugins: ['~/plugins/auth.js']
   },

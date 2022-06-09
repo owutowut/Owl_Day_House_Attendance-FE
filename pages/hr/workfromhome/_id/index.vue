@@ -12,7 +12,7 @@
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div class="flex bg-white p-10 rounded-lg text-left font-kanit border border-gray19 space-x-6">
           <div class="self-center">
-            <img src="~/assets/images/profile-hr.png" class="rounded-full" width="126px" height="126px">
+            <img :src="user_profile.profile_img" class="rounded-full" width="126px" height="126px">
           </div>
           <div class="self-center">
             <p class="text-xl text-blue2">{{user_profile.first_name}} {{user_profile.last_name}}</p>
@@ -183,7 +183,7 @@ export default {
             showConfirmButton: false,
             timer: 1000
           }).then(
-            this.asyncData()
+            this.$router.back('hr/workfromhome')
           )}
       } catch (error) {
         console.log(error)

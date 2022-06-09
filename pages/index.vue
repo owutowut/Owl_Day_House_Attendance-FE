@@ -40,11 +40,10 @@ export default {
   methods: {
     async login() {
       let {data} = await this.$auth.loginWith('local', {data: this.form})
-
       try {
         if (data) {
           await this.$auth.setUser(data.user)
-
+          // await localStorage.setItem('token',data.token)
           if (this.$auth.user.role === 'admin') {
             return await this.$router.push('/admin/home')
           } else {

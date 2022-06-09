@@ -20,12 +20,12 @@
             <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="">
           </div>
           <div class="flex flex-col items-center text-white  ">
-            <img src="~/assets/images/profile-hr.png" class="py-5" alt="">
-            <p class="font-light">{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
+            <img :src="user_profile.profile_img" class="w-28 h-28 bg-gray5 rounded-full flex justify-center items-center mt-6 md:mx-10 lg:ml-10" alt="">
+            <p class="font-light mt-4">{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
             <p class="text-xs mt-2 font-thin">{{ user_profile.tag }}</p>
           </div>
           <div class="px-5">
-            <ul class="text-white mt-12">
+            <ul class="text-white mt-8">
               <li class="mb-6">
                 <NuxtLink to="/hr/home" exact class="flex items-center">
                   <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home' || currentPath==='attendance-of-month'  "/>
@@ -57,7 +57,7 @@
                 </NuxtLink>
               </li>
             </ul>
-            <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
+            <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mt-16 flex space-x-4 justify-center font-kanit">
               <img src="~/assets/images/ls_logout.svg" alt="">
               <span>ออกจากระบบ</span>
             </button>
@@ -84,6 +84,10 @@ export default {
       isOpen: true,
       total_notification: '0',
       user_profile: {},
+      form: {
+        email: 'test',
+        password: 'test',
+      },
     }
   },
   mounted() {
@@ -121,8 +125,10 @@ export default {
         if (!verify) {
           return 'Login required!'
         } else {
-          const user = await this.$auth.user
-          return this.user_profile = user
+          const user=await this.$axios.get('me', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+          })
+          return this.user_profile = user.data
         }
       } catch (error) {
         return error.message
