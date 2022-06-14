@@ -1,7 +1,7 @@
 <template xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div>
-    <div class="flex justify-between mb-6">
-      <span class="text-3xl font-semibold text-blue">Work from Home</span>
+    <div class="lg:flex justify-between mb-6">
+      <div class="text-3xl font-semibold text-blue mb-4">Work from Home</div>
       <nuxt-link to="/hr/workfromhome" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
         <span class="text-lg font-kanit">Back</span>
       </nuxt-link>

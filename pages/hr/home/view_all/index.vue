@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="flex justify-between ">
+    <div class="md:flex justify-between ">
       <span class="text-3xl font-semibold">Attendance of month</span>
       <div>
-        <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
+        <button class="bg-blue w-full h-10 mt-4 md:mt-0 md:w-44 lg:w-44 text-white rounded-md text-sm">
           <NuxtLink to="/hr/home">Back</NuxtLink>
         </button>
       </div>
@@ -42,7 +42,7 @@
         <button class="bg-blue w-full px-14 py-3 mr-6 my-2 text-white rounded-md" @click="onSearch">Search</button>
       </div>
     </div>
-    <div class="relative overflow-x-auto  sm:rounded-lg mt-6">
+    <div class="overflow-x-auto sm:rounded-lg mt-6">
       <table class="w-full">
         <thead class="text-lg text-blue  bg-white">
         <tr>

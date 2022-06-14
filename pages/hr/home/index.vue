@@ -86,13 +86,13 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-between mt-24">
+    <div class="md:flex md:justify-between mt-24">
       <span class="text-3xl font-semibold">Attendance Today</span>
-      <button class="bg-blue px-6 md:px-10 md:py-2 text-white rounded-lg text-lg">
+      <button class="bg-blue w-full h-10 mt-4 md:mt-0 md:w-44 lg:w-44 text-white rounded-lg text-lg">
         <NuxtLink to="/hr/home/view_all">View all</NuxtLink>
       </button>
     </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
       <div class="bg-white  p-4 rounded-md text-center font-kanit">
         <p class="text-lg mb-4">พนักงาน</p>
         <p class="text-gray4 text-lg">{{ home_data.tag_employee_total }}</p>
