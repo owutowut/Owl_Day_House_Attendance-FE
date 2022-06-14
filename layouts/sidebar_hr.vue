@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex flex-col">
-      <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
+    <div class="flex flex-col relative">
+      <nav class="fixed top-0 left-0 right-0 w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 ">
         <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
         <button class="relative">
           <svg-icon name="Notification" class="h-[45px] w-[45px]" />

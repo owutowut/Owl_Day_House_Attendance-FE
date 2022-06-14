@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="flex justify-between ">
+    <div class="md:flex justify-between ">
       <span class="text-3xl font-semibold mb-12">Project Complete</span>
       <div>
-        <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
+        <button class="bg-blue w-full h-10 my-4 md:mt-0 md:w-44 lg:w-44 text-white rounded-md text-sm">
           <nuxt-link to="/hr/home/profile">Back</nuxt-link>
         </button>
       </div>
@@ -17,20 +17,22 @@
         <p class="text-lg mb-2 font-medium">Punch Out</p>
         <p class="text-gray4">Mon, 11 January 2022 14.00 AM </p>
       </div>
-      <div class="bg-white p-4 rounded-lg">
-        <p class="text-lg mb-2 font-medium">Break Time</p>
-        <p class="text-gray4">11.45 AM - 13.00 AM </p>
-      </div>
-      <div class="grid grid-cols-2 bg-white p-4 rounded-lg ">
-        <div class="border-r-2 border-gray13 text-center">
-          <div class="text-sm mb-3 font-medium">Time to Work </div>
-          <div class="text-sm text-gray4">4.10 hrs</div>
+        <div class="flex md:grid md:grid-cols-2 md:col-span-2 gap-6">
+          <div class="bg-white p-4 rounded-lg">
+            <p class="text-lg mb-2 font-medium">Break Time</p>
+            <p class="text-gray4">11.45 AM - 13.00 AM </p>
+          </div>
+          <div class="grid grid-cols-2 bg-white p-4 rounded-lg ">
+            <div class="border-r-2 border-gray13 text-center">
+              <div class="text-sm mb-3 font-medium">Time to Work </div>
+              <div class="text-sm text-gray4">4.10 hrs</div>
+            </div>
+            <div class="text-center">
+              <div class="text-sm mb-3 font-medium">Time to Break</div>
+              <div class="text-sm text-gray4">1.15 hrs</div>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <div class="text-sm mb-3 font-medium">Time to Break</div>
-          <div class="text-sm text-gray4">1.15 hrs</div>
-        </div>
-      </div>
     </div>
     <div class="bg-white shadow p-6 rounded-md mt-6 ">
       <div class="grid lg:grid-cols-12 gap-4 mb-8">

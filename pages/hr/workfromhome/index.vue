@@ -2,8 +2,8 @@
   <div>
     <Loading v-if="isLoading"/>
     <div v-else>
-      <div class="flex justify-between mb-6">
-        <span class="text-3xl font-semibold text-blue">Work from Home</span>
+      <div class="lg:flex justify-between mb-6">
+        <div class="text-3xl font-semibold text-blue mb-4">Work from Home</div>
         <nuxt-link to="/hr/workfromhome/addform" class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>

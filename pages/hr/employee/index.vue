@@ -3,16 +3,16 @@
     <Loading v-if="isLoading" />
     <div v-else>
       <div class="flex justify-between">
-        <span class="text-3xl font-semibold">Employee</span>
+        <span class="text-3xl font-semibold ">Employee</span>
         <button
-          class="bg-yellow px-8 md:px-10 md:py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+          class="bg-yellow  h-10 w-44 md:w-44 lg:w-44 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="10" height="10" class="mr-2"/>
           <span class="text-lg font-kanit">
           <NuxtLink to="/hr/employee/addEmployee">Add employee</NuxtLink>
-        </span>
+          </span>
         </button>
       </div>
-      <div class="lg:flex justify-end lg:space-x-4 mt-16">
+      <div class="lg:flex justify-end lg:space-x-4 mt-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-lg my-2 px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
           <input v-model="search" @keyup="userData" type="text" placeholder="Search to Name.."
@@ -20,8 +20,8 @@
         </div>
         <div>
           <select v-model="position" @change="userData" placeholder="Position"
-                  class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg lg:w-[236px] w-full focus:outline-none">
-            <option value="">Position</option>
+                  class="rounded-lg px-4 py-2 text-gray14 font-kanit my-2 text-lg w-full focus:outline-none">
+            <option disabled value="">Position</option>
             <option value="UX/UI Designer">UX/UI Designer</option>
             <option value="Tester">Tester</option>
             <option value="Dev">Dev</option>
@@ -30,7 +30,7 @@
         <div>
           <select v-model="tag" @change="userData" placeholder="Status"
                   class="rounded-lg px-4 py-2 mt-2 text-gray14 font-kanit text-lg lg:w-[152px] w-full focus:outline-none">
-            <option value="">Status</option>
+            <option disabled value="">Status</option>
             <option value="พนักงาน">พนักงาน</option>
             <option value="ทดลองงาน">ทดลองงาน</option>
             <option value="ฝึกงาน">ฝึกงาน</option>

@@ -3,10 +3,10 @@
     <Loading v-if="isLoading"/>
     <div v-else>
 
-      <div class="flex justify-between mb-6">
-        <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
+      <div class="lg:flex justify-between mb-6">
+        <div class="text-3xl font-semibold text-blue mb-4">Holiday of the month</div>
         <button @click="show.add_form=true"
-                class="md:px-10 md:py-2 bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+                class="w-full h-10 mt-4 md:w-44 lg:w-44  bg-yellow  text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>
         </button>
