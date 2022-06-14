@@ -1,7 +1,8 @@
 <template>
   <div>
     <Loading v-if="isLoading" />
-    <div v-else>
+
+    <div v-else class="mt-20">
       <div class="flex justify-between">
         <span class="text-3xl font-semibold">Employee</span>
         <button
@@ -15,7 +16,7 @@
       <div class="lg:flex justify-end lg:space-x-4 mt-16">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-lg my-2 px-4 py-2">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input v-model="search" @keyup="userData" type="text" placeholder="Search to Name.."
+          <input v-model="search" @keyup="userData" type="text" placeholder="Search..."
                  class="font-kanit text-lg w-full lg:w-[420px] focus:outline-none "/>
         </div>
         <div>
@@ -68,7 +69,6 @@ export default {
   },
   computed: {
     filterData() {
-
       return this.Employees
     }
   },

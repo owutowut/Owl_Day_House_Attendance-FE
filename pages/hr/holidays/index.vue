@@ -1,78 +1,77 @@
 <template>
-  <div class="md:mr-2">
-    <Loading v-if="isLoading"/>
-    <div v-else>
+  <Loading v-if="isLoading"/>
 
-      <div class="flex justify-between mb-6">
-        <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
+  <div v-else class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+
+    <div class="sm:text-center sm:pb-2 lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
+      <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
+      <div class="lg:pb-5 lg:w-48 md:w-full sm:w-full">
         <button @click="show.add_form=true"
-                class="md:px-10 md:py-2 bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+                class="w-full bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
           <span class="text-lg font-kanit">Add Form</span>
         </button>
       </div>
-
-      <div class="lg:flex justify-end lg:space-x-4 mb-6">
-        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
-          <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" @keyup="asyncData" placeholder="Search.."
-                 class="w-[488px] font-kanit text-lg px-4 focus:outline-none"/>
-        </div>
-        <div>
-          <div class="relative">
-            <input id="custom-input" class="cursor-pointer w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
-            <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
-            <date-picker
-              color="#252647"
-              auto-submit
-              @change="asyncData"
-              v-model="selected"
-              element="custom-input"
-              simple
-            ></date-picker>
-          </div>
-        </div>
-      </div>
-
-      <div class="relative overflow-x-auto sm:rounded-lg">
-        <Table
-          :headers="headers"
-          :data="filterData.map((item, index) => {
-          return {
-            ...item,
-            index: (index + 1) + pageStart,
-            no_of_days: `${item.no_of_days} Days`
-          }
-        })">
-          <template v-slot:action="data">
-            <div @click="editHoliday(data.data.id)" class="cursor-pointer flex justify-center items-center">
-              <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
-            </div>
-            <div @click="handleModalDelete(data.data)" class="cursor-pointer flex justify-center items-center">
-              <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
-            </div>
-          </template>
-        </Table>
-      </div>
-
-      <client-only>
-        <paginate
-          class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
-          v-model="page"
-          :page-count="totalPage"
-          :page-range="3"
-          :margin-pages="1"
-          :click-handler="onChangePage"
-          :prev-text="'<'"
-          :next-text="'>'"
-          :container-class="'pagination'"
-          :page-class="'page-item'" list="" name="">
-        </paginate>
-      </client-only>
-
-      <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
-
     </div>
+
+    <div class="lg:flex lg:justify-end lg:space-x-4">
+      <div class="lg:w-96 md:w-full sm:w-full search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
+        <svg-icon name="Search" width="15" height="15"/>
+        <input type="text" v-model="search" @keyup="asyncData" placeholder="Search..."
+               class="lg:w-96 md:w-full sm:w-full font-kanit text-lg px-4 focus:outline-none"/>
+      </div>
+      <div>
+        <input id="custom-input" class="cursor-pointer w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
+        <date-picker
+          color="#252647"
+          auto-submit
+          @change="asyncData"
+          v-model="selected"
+          element="custom-input"
+          simple
+        >
+        </date-picker>
+      </div>
+    </div>
+
+    <div class="sm:pt-4 overflow-x-auto rounded-lg">
+      <Table
+        :headers="headers"
+        :data="filterData.map((item, index) => {
+        return {
+          ...item,
+          index: (index + 1) + pageStart,
+          no_of_days: `${item.no_of_days} Days`
+        }
+      })">
+        <template v-slot:action="data">
+          <div @click="editHoliday(data.data.id)" class="cursor-pointer flex justify-center items-center">
+            <svg-icon name="Edit_Square" width='24' height='24' class="text-blue"/>
+          </div>
+          <div @click="handleModalDelete(data.data)" class="cursor-pointer flex justify-center items-center">
+            <svg-icon name="trashsolid" width='24' height='24' class="text-blue"/>
+          </div>
+        </template>
+      </Table>
+    </div>
+
+    <client-only>
+      <paginate
+        class="flex justify-end text-sm my-4 mr-2 text-black2 space-x-4"
+        v-model="page"
+        :page-count="totalPage"
+        :page-range="3"
+        :margin-pages="1"
+        :click-handler="onChangePage"
+        :prev-text="'<'"
+        :next-text="'>'"
+        :container-class="'pagination'"
+        :page-class="'page-item'" list="" name="">
+      </paginate>
+    </client-only>
+
+    <ModalHR :holiday_by_id="holiday_by_id" :show="show"/>
+
   </div>
 </template>
 
@@ -156,7 +155,6 @@ export default {
     async editHoliday(id) {
       this.show.edit = true
       const {data}  = await this.getHolidayByID(id)
-      console.log(data)
       this.holiday_by_id = data.data
     },
 

@@ -1,8 +1,9 @@
 <template>
   <div>
     <Loading v-if="isLoading"/>
-    <div v-else>
-      <div class="flex justify-between mb-6">
+
+    <div v-else class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+      <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
         <span class="text-3xl font-semibold text-blue">Work from Home</span>
         <nuxt-link to="/hr/workfromhome/addform" class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15" class="mr-2"/>
@@ -30,7 +31,7 @@
         </div>
       </div>
 
-      <div class="relative overflow-x-auto sm:rounded-lg">
+      <div class="sm:pt-4 overflow-x-auto rounded-lg">
         <Table
           :headers="headers"
           :data="filterData.map((item, index) => {

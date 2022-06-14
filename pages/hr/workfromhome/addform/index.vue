@@ -302,11 +302,6 @@ export default {
   height: 160px;
 }
 
-.modalSucess{
-  width: 590px;
-  height: 292px;
-}
-
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

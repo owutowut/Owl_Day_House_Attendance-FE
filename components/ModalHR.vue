@@ -4,17 +4,17 @@
     <div class="AddFormModal">
       <form @submit="addForm">
         <div>
-          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_form">
-            <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
+          <div class="fixed p-8 flex h-screen w-full top-0 right-0 overflow-hidden justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_form">
+            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
               <div @click="show.add_form = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
               </div>
-              <div class="px-8">
+              <div class="px-8 pb-8">
                 <p class="font-medium text-3xl text-blue text-center mb-6">Add Hoilday</p>
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday.name" placeholder="Name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday.name" placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="text-left space-y-1 w-full">
                     <Span class="text-base text-blue">From</Span>
@@ -67,17 +67,17 @@
     <div class="EditModal">
       <form @submit="editModal">
         <div>
-          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.edit">
-            <div class="modal text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
+          <div class="fixed flex h-screen p-8 w-full top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.edit">
+            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
               <div @click="show.edit = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
               </div>
-              <div class="px-8">
+              <div class="px-8 pb-8">
                 <p class="font-medium text-3xl text-blue text-center mb-6">Edit Hoilday</p>
                 <div class="space-y-4">
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday_by_id.name" required placeholder="Name" class="text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                    <input v-model="holiday_by_id.name" required placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
                   </div>
                   <div class="text-left space-y-2 w-full">
                     <Span class="text-base text-blue">From</Span>
@@ -130,12 +130,12 @@
     <div class="AddLeaveModal">
       <form @submit="leaveSubmit">
         <div>
-          <div class="fixed w-full h-screen top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_leave">
-            <div class="modalAddLeave text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
+          <div class="fixed flex h-screen w-full p-8 top-0 right-0 overflow-hidden justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_leave">
+            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
               <div @click="show.add_leave = false" class="flex justify-end cursor-pointer right m-4">
                 <svg-icon name="cross" width="33.33" height="33.33"/>
               </div>
-              <div class="px-8">
+              <div class="px-8 pb-8">
                 <p class="font-medium text-3xl text-blue text-center mb-2">Add Leave</p>
                 <div class="space-y-2">
                   <div class="text-left space-y-1 w-full">
@@ -374,6 +374,8 @@ export default {
               reverseButtons: true,
               timer: 2500
             })
+
+            this.$router.push('hr/holidays')
           }
         }).catch(err => {
           console.log(err.message)
@@ -431,16 +433,6 @@ export default {
 <style scoped>
 .no-outline:focus {
   outline: none;
-}
-
-.modal{
-  width: 560px;
-  height: 600px;
-}
-
-.modalAddLeave{
-  width: 560px;
-  height: 660px;
 }
 
 .animated {

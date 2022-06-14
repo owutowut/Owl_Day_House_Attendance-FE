@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="flex flex-col">
-      <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
+      <nav class="fixed w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
         <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
-        <button class="relative">
+        <button v-if="isOpen" class="relative">
           <svg-icon name="Notification" class="h-[45px] w-[45px]" />
           <div class="absolute -top-1 -right-2 bg-red6 text-white text-xs px-2 rounded-lg ">
             {{total_notification}}
@@ -12,7 +12,7 @@
       </nav>
 
       <aside
-        class='overflow transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 sm:hidden md:block'
+        class='overflow transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 md:block'
         :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
       >
         <div>

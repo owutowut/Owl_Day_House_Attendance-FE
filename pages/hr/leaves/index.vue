@@ -1,46 +1,51 @@
 <template>
-  <div class="mr-4">
     <Loading v-if="isLoading"/>
 
-    <div v-else>
-      <div class="flex justify-between mb-2">
+    <div v-else class="lg:mx-4 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+
+      <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
         <span class="text-3xl font-semibold text-blue">LEAVES</span>
-        <button class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center"
-                @click="show.add_leave=true">
-          <svg-icon name="add1" width="15" height="15" class="mr-2"/>
-          <span class="text-lg font-kanit">Add Leave</span>
-        </button>
+        <div class="lg:pb-5 lg:w-48 md:w-full sm:w-full">
+          <button @click="show.add_leave=true"
+                  class="w-full bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+            <svg-icon name="add1" width="15" height="15" class="mr-2"/>
+            <span class="text-lg font-kanit">Add Leave</span>
+          </button>
+        </div>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-1.5 mb-4">
-        <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
-          <p class="text-xs text-blue mb-2">ลาป่วย</p>
+
+      <div class="sm:space-y-2 sm:w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div class="bg-white p-4 lg:pt-5 mt-2 rounded-lg text-center font-kanit border border-gray19">
+          <p class="text-xs text-blue">ลาป่วย</p>
           <p class="leaves_result">{{ total_leaves.sick_leaves_total }}</p>
         </div>
-        <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
-          <p class="text-xs text-blue mb-2">ลากิจ</p>
+        <div class="bg-white p-4 lg:pt-5 rounded-lg text-center font-kanit border border-gray19">
+          <p class="text-xs text-blue">ลากิจ</p>
           <p class="leaves_result">{{ total_leaves.business_leaves_total }}</p>
         </div>
-        <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
-          <p class="text-xs text-blue mb-2">การลาทั้งหมด</p>
+        <div class="bg-white p-4 lg:pt-5 rounded-lg text-center font-kanit border border-gray19">
+          <p class="text-xs text-blue">การลาทั้งหมด</p>
           <p class="leaves_result">{{ total_leaves.all_leaves_total }}</p>
         </div>
-        <div class="bg-white m-4 p-4 rounded-lg text-center font-kanit border border-gray19">
+        <div class="bg-white p-4 lg:pt-5 rounded-lg text-center font-kanit border border-gray19">
           <div class="grid grid-cols-2 divide-x justify-center divide-gray13 text-xs text-blue">
-            <div class="mt-1.5">
+            <div class="mt-1">
               <p>ลาทั้งหมด</p>
               <p class="leaves_result">{{ total_leaves.all_leaves_total }}</p>
             </div>
-            <div class="mt-1.5">
+            <div class="mt-1">
               <p>ลาของเดือนนี้</p>
               <p class="leaves_result">{{ total_leaves.all_leaves_month_total }}</p>
             </div>
           </div>
         </div>
       </div>
-      <div class=" lg:flex justify-end lg:space-x-4 mb-6">
-        <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
-          <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-          <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.." class="no-outline w-full lg:w-[488px] font-kanit text-lg px-4"/>
+
+      <div class="sm:pt-2 lg:flex lg:justify-end lg:space-x-4">
+        <div class="lg:w-96 md:w-full sm:w-full search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
+          <svg-icon name="Search" width="15" height="15"/>
+          <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.."
+                 class="lg:w-96 md:w-full sm:w-full font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
           <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-full lg:w-[320px] text-gray14 font-kanit text-lg">
@@ -51,7 +56,7 @@
         </div>
       </div>
 
-      <div class="relative overflow-x-auto sm:rounded-lg">
+      <div class="sm:pt-4 overflow-x-auto rounded-lg">
         <Table
           :headers="headers"
           :data="filterData.map((item, index) => {
@@ -72,7 +77,6 @@
           </template>
         </Table>
       </div>
-    </div>
 
     <client-only>
       <paginate
@@ -89,12 +93,9 @@
       </paginate>
     </client-only>
 
-    <div>
-      <ModalHR :show="show"/>
-    </div>
+    <ModalHR :show="show"/>
 
   </div>
-
 </template>
 
 <script>

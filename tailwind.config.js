@@ -13,10 +13,10 @@ module.exports = {
         'NotoSansThai' : ['Noto Sans Thai', 'sans-serif']
       },
       screens: {
-        sm: '480px',
+        sm: '350px',
         md: '768px',
-        lg: '976px',
-        xl: '1440px',
+        lg: '1024px',
+        xl: '1280px',
       },
       colors:{
         'blue':'#252647',

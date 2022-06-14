@@ -1,15 +1,16 @@
 <template>
   <div>
     <div class="drop-shadow-md">
-      <table class="w-full ">
+      <table class="w-full">
         <thead class="text-base text-blue bg-white">
         <tr>
           <th
             v-for="(header,i) in headers"
             :key="i"
             @click="sortBy(header.sort)"
+            class="sm:px-4"
           >
-            <div v-if="header.sort" class="flex justify-center space-x-2">
+            <div v-if="header.sort" class="sm:whitespace-nowrap sm:px-6 flex justify-center space-x-2">
               <div class="cursor-pointer">
                 <svg-icon name="Swap" width="15.82px" height="16.33px" class="h-full self-center"/>
               </div>
@@ -19,7 +20,7 @@
                 </button>
               </div>
             </div>
-            <div v-if="!header.sort" class="pr-8">
+            <div v-if="!header.sort" class="sm:whitespace-nowrap sm:px-6">
               <div class="py-4">
                 <span class="font-semibold">
                   {{ header.title }}
@@ -35,7 +36,7 @@
           v-for="(row, indexRow) in filterData" :key="indexRow"
         >
           <td
-            class="py-4"
+            class="sm:px-4 py-4"
             v-for="(item, indexItem) in headers" :key="indexItem"
           >
             <span :class="classStatus(row[item.key])">

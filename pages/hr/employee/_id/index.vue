@@ -212,7 +212,7 @@ export default {
               showConfirmButton: false,
               timer: 1000
             })
-            this.$router.back()
+            this.$router.replace('/hr/employee')
           }
         }).catch(err => {
           console.log(err.message)
