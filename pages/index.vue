@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="lg:grid lg:grid-cols-5 h-screen sm:grid sm:grid-cols-2 sm:grid-rows-5">
-      <div class="lg:col-span-3 col-span-3 lg:row-span-full md:col-span-3 md:row-span-full bg-blue flex items-center justify-center sm:row-span-1 sm:px-6 sm:col-span-full">
-        <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="">
+    <div class="grid lg:grid-cols-5 md:grid-cols-6 h-screen sm:grid-cols-2 sm:grid-rows-5">
+      <div class="lg:col-span-3 md:col-span-3 lg:row-span-full md:col-span-3 md:row-span-full bg-blue flex items-center justify-center sm:row-span-1 sm:px-6 sm:col-span-full">
+        <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="" class="min-w-full px-2">
       </div>
-      <div class="lg:col-span-2 col-span-2 lg:row-span-full md:col-span-3 md:row-span-full p-24 lg:p-24 md:p-24 sm:p-10 sm:row-span-4 sm:col-span-full">
+      <div class="lg:col-span-2 md:col-span-3 lg:row-span-full md:col-span-3 md:row-span-full md:p-16 lg:p-24 sm:p-10 sm:row-span-4 sm:col-span-full">
         <div class="bg-white shadow p-6 ">
           <h2 class="text-center font-bold text-3xl">Welcome back!</h2>
           <p class="text-center text-sm text-gray mb-12">sign in to your account to continue</p>

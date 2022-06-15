@@ -1,10 +1,12 @@
 <template xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <div>
-    <div class="lg:flex justify-between mb-6">
-      <div class="text-3xl font-semibold text-blue mb-4">Work from Home</div>
-      <nuxt-link to="/hr/workfromhome" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
-        <span class="text-lg font-kanit">Back</span>
-      </nuxt-link>
+  <div class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+    <div class="mb-6">
+      <div class="self-center lg:flex justify-between items-center space-y-6 sm:text-center sm:space-y-6">
+        <span class="text-3xl font-semibold text-blue">Work from Home</span>
+        <nuxt-link to="/hr/workfromhome" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+          <span class="text-lg font-kanit">Back</span>
+        </nuxt-link>
+      </div>
     </div>
     <div class="grid flex space-x-4 mb-4">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 col-span-full flex gap-4 text-gray23">
@@ -142,12 +144,12 @@
 
       <div class="overflow-x-hidden pb-16 text-base font-kanit">
         <div class="grid bg-white p-10 rounded-lg text-left space-y-4 text-gray23 w-full">
-          <div class="flex space-x-2 overflow-x-hidden">
-            <div class="space-y-8 mt-2 text-blue w-1/6">
+          <div class="sm:px-2 sm:grid sm:grid-cols-4 sm:space-x-2  flex space-x-2 overflow-x-hidden">
+            <div class="sm:col-span-1 space-y-8 mt-2 text-blue w-1/6">
               <p>Reason</p>
               <p>Details</p>
             </div>
-            <div class="space-y-4 w-full">
+            <div class="sm:col-span-3 space-y-4 w-full">
               <input type="text" class="focus:outline-none w-full border border-gray12 rounded-md px-4 py-2" v-model="form.reason">
               <textarea rows="10" cols="40" class="focus:outline-none w-full border border-gray12 rounded-md p-4" v-model="form.detail"></textarea>
             </div>
@@ -247,18 +249,24 @@ export default {
         status: this.user_profile.status,
         tag: this.user_profile.tag,
       }
-      await this.createWfhForm(data).then(
-        this.$swal({
-          title: '<p class="text-3xl"> Successful transaction</p>',
-          imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
-          imageWidth: 80,
-          imageHeight: 80,
-          showConfirmButton: false,
-          reverseButtons: true,
-          timer: 2500
-        }),
-        this.$router.push(`/hr/workfromhome`)
-    )
+      await this.createWfhForm(data)
+        .then(response => {
+          if (response) {
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              reverseButtons: true,
+              timer: 2500
+            })
+
+            this.$router.push(`/hr/workfromhome`)
+          }
+        }).catch(err => {
+          console.log(err.message)
+        })
     },
 
     getPunchIn(ev){
