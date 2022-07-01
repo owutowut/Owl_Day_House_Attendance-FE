@@ -2,7 +2,7 @@
   <div>
     <Loading v-if="isLoading"/>
     <div v-else>
-      <div class="sm:mx-4 mt-20 lg:space-y-4 md:space-y-4 sm:space-y-4">
+      <div class="sm:mx-4 md:mx-2 lg:mx-1 mt-20 lg:space-y-4 md:space-y-4 sm:space-y-4">
 
       <div class="sm:pb-2 flex justify-between items-center">
         <span class="text-3xl font-semibold text-blue">LEAVE</span>
@@ -15,7 +15,7 @@
 
       <div class="grid lg:grid-cols-2 gap-4">
         <div class="flex lg:justify-start bg-white p-6 rounded-lg text-left font-kanit border border-gray19 space-x-3 sm:justify-center">
-          <div class="self-center">
+          <div class="md:my-4 self-center">
             <img :src="user_profile.profile_img" class="rounded-full sm:h-28 sm:w-28 w-28 h-28 bg-gray5 lg:ml-10">
           </div>
           <div class="self-center">
@@ -27,62 +27,64 @@
           </div>
         </div>
 
-        <div class="overflow-x-hidden whitespace-nowrap space-y-2 bg-white p-10 rounded-lg text-left font-kanit border border-gray19">
-          <div class="space-x-2 flex whitespace-normal">
+        <div class="overflow-x-hidden whitespace-nowrap space-y-2 bg-white p-8 rounded-lg text-left font-kanit border border-gray19">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Date of Join :</p>
-            <p class="text-gray7">{{ user_profile.date_of_join }}</p>
+            <p class="overflow-x-hidden text-gray7">{{ user_profile.date_of_join }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Phone :</p>
             <p class="text-gray7">{{ user_profile.phone }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Birthday :</p>
             <p class="text-gray7">{{ user_profile.birthday }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Address :</p>
             <p class="text-gray7">{{ user_profile.address }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Report to :</p>
             <p class="text-gray7">{{ user_profile.report_to }}</p>
           </div>
         </div>
       </div>
 
-      <div class="pb-4 lg:grid lg:grid-cols-4 lg:grid-rows-3 sm:grid sm:grid-rows-4 sm:space-y-4 lg:flex lg:gap-4">
+      <div class="pb-4 lg:grid lg:grid-cols-4 lg:grid-rows-3 sm:grid sm:grid-rows-4 sm:space-y-4 md:space-y-4 lg:space-y-0 lg:flex lg:gap-4">
         <div class="lg:col-span-3 sm:row-span-3 space-y-4">
-          <div class="lg:grid lg:grid-cols-3 md:gap-4 sm:gap-4 sm:grid sm:grid-cols-2 lg:gap-4 text-gray23">
-            <div class="lg:col-span-1 sm:col-span-1 bg-white p-4 rounded-lg text-left space-y-1">
+          <div class="lg:grid lg:grid-cols-3 md:gap-4 sm:gap-4 sm:grid sm:grid-cols-2 sm:grid-row-2 lg:gap-4 text-gray23">
+            <div class="lg:col-span-1 sm:col-span-2 sm:text-center bg-white py-4 px-5 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">From</Span>
-              <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+              <div class="sm:space-x-4 flex sm:justify-center border border-gray12 rounded-md bg-gray22 w-full justify-between">
                 <p class="pl-2 py-1">{{leave.from}}</p>
                 <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
               </div>
             </div>
-            <div class="lg:col-span-1 sm:col-span-1 bg-white p-4 rounded-lg text-left space-y-1">
+            <div class="lg:col-span-1 sm:col-span-2 bg-white p-4 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">to</Span>
-              <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+              <div class="sm:space-x-4 flex sm:justify-center border border-gray12 rounded-md bg-gray22 w-full justify-between">
                 <p class="pl-2 py-1">{{leave.to}}</p>
                 <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
               </div>
             </div>
-            <div class="lg:col-span-1 sm:col-span-2 bg-white p-4 rounded-lg text-left space-y-1">
+            <div class="lg:col-span-1 sm:col-span-2 sm:text-center bg-white py-4 px-5 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">No of day</Span>
               <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{leave.no_of_days}} Days</p>
             </div>
           </div>
           <div class="sm:col-span-2 overflow-x-hidden text-base font-kanit">
-            <div class="bg-white p-10 rounded-lg text-left space-y-4 text-gray23 w-full">
-              <div class="flex space-x-2 overflow-x-hidden">
-                <div class="space-y-8 sm:mr-6 mt-2 text-blue w-1/6">
-                  <p>Leave Type</p>
-                  <p>Leave Reason</p>
-                </div>
-                <div class="space-y-4 w-full">
-                  <input type="text" disabled class="w-full border border-gray12 rounded-md bg-gray22 px-4 py-2" v-model="leave.leave_type">
-                  <textarea rows="10" cols="40" disabled class="w-full border border-gray12 rounded-md bg-gray22 p-4" v-model="leave.reason"></textarea>
+            <div class="bg-white lg:p-8 md:p-6 sm:py-4 sm:px-5 rounded-lg text-left space-y-4 text-gray23 w-full">
+              <div class="md:flex lg:flex space-x-2 overflow-x-hidden">
+                <div class="w-full space-y-4 text-blue">
+                  <div class="space-y-2">
+                    <p>Leave Type</p>
+                    <input type="text" disabled class="w-full border border-gray12 rounded-md bg-gray22 px-4 py-2" v-model="leave.leave_type">
+                  </div>
+                  <div class="space-y-2">
+                    <p>Leave Reason</p>
+                    <textarea rows="10" cols="40" disabled class="w-full border border-gray12 rounded-md bg-gray22 p-4" v-model="leave.reason"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
@@ -151,7 +153,8 @@ export default {
     ...mapActions({
       getLeaveByID: 'hr/getLeaveByID',
       leaveApprove: 'hr/leaveApprove',
-      getUserByID: 'hr/getUserByID'
+      getUserByID: 'hr/getUserByID',
+      notifications: 'hr/notifications'
     }),
 
     async leavesData() {
@@ -165,11 +168,15 @@ export default {
     },
 
     async leaveStatus() {
+      const data = {
+        id : this.$route.params.id,
+        status: this.selected,
+      }
+      const notificationData = {
+        leave_id: this.$route.params.id,
+        user_id: this.user_profile.id
+      }
       if (this.selected!=="current") {
-        const data = {
-          id : this.$route.params.id,
-          status: this.selected,
-        }
         await this.leaveApprove(data)
           .then(response => {
             if (response) {
@@ -185,17 +192,42 @@ export default {
                 timer: 2500
               })
 
-              this.$router.back('hr/leaves')
+              this.$router.push('/hr/leaves')
             }
           })
           .catch(err => {
             console.log(err.message)
           })
-      } else {
+      }
+      if (this.selected==="Approve") {
+        await this.notifications(notificationData)
+        await this.leaveApprove(data)
+          .then(response => {
+            if (response) {
+              this.show.add_leave = false
+
+              this.$swal({
+                title: '<p class="text-3xl"> Successful transaction</p>',
+                imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+                imageWidth: 80,
+                imageHeight: 80,
+                showConfirmButton: false,
+                reverseButtons: true,
+                timer: 2500
+              })
+
+              this.$router.push('/hr/leaves')
+            }
+          })
+          .catch(err => {
+            console.log(err.message)
+          })
+      }
+      else {
         this.alert = true
       }
-    },
-  }
+    }
+  },
 }
 </script>
 

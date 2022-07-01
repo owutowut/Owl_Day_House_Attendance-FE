@@ -54,7 +54,7 @@ module.exports = {
         'gray27' : '#414042',
         'gray28' : '#E5E5E5',
         'gray29' : '#F8F8F8',
-        'black' : '#252647',
+        'black' : '#000000',
         'black1' : '#252647',
         'black2' : '#565656',
         'black3' : '#5B5B5B',

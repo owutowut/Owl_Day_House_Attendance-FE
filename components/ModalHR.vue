@@ -3,59 +3,57 @@
 
     <div class="AddFormModal">
       <form @submit="addForm">
-        <div>
-          <div class="fixed p-8 flex h-screen w-full top-0 right-0 overflow-hidden justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_form">
-            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-              <div @click="show.add_form = false" class="flex justify-end cursor-pointer right m-4">
-                <svg-icon name="cross" width="33.33" height="33.33"/>
-              </div>
-              <div class="px-8 pb-8">
-                <p class="font-medium text-3xl text-blue text-center mb-6">Add Hoilday</p>
-                <div class="space-y-4">
-                  <div class="text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday.name" placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+        <div class="absolute left-0 top-0 w-full h-full bg-gray10" v-if="show.add_form">
+          <div class="lg:-translate-x-1/3 fixed flex top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 overflow-hidden justify-center animated fadeIn faster">
+            <div class="h-4/6 md:w-96 sm:w-72 bg-white text-xl font-kanit rounded-lg drop-shadow border border-gray19 ">
+              <div class="space-y-2 sm:p-6 sm:pb-8 p-8 pb-10">
+                <div @click="show.add_form = false" class="flex justify-end cursor-pointer right ">
+                  <svg-icon name="cross" width="33.33" height="33.33"/>
+                </div>
+                <p class="font-medium text-3xl text-blue text-center">Add Hoilday</p>
+                <div class="text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">Hoilday Name</Span>
+                  <input v-model="holiday.name" placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                </div>
+                <div class="text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">From</Span>
+                  <date-picker
+                    color="#252647"
+                    auto-submit
+                    @change="GetDays(dataName='holiday')"
+                    v-model="holiday.from"
+                    :min="new Date().toISOString().substr(0, 10)"
+                    element="holiday_date_picker_from"
+                  ></date-picker>
+                  <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                    <input v-model="holiday.from" required id="holiday_date_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
+                    <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
                   </div>
-                  <div class="text-left space-y-1 w-full">
-                    <Span class="text-base text-blue">From</Span>
-                    <date-picker
-                      color="#252647"
-                      auto-submit
-                      @change="GetDays(dataName='holiday')"
-                      v-model="holiday.from"
-                      :min="new Date().toISOString().substr(0, 10)"
-                      element="holiday_date_picker_from"
-                    ></date-picker>
-                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                      <input v-model="holiday.from" required id="holiday_date_picker_from" placeholder="วว/ดด/ปปปป" class="no-outline cursor-pointer w-full">
-                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
-                    </div>
+                </div>
+                <div class=" text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">To</Span>
+                  <date-picker
+                    :disabled="isDateFrom"
+                    color="#252647"
+                    auto-submit
+                    @change="GetDays(dataName='holiday')"
+                    v-model="holiday.to"
+                    :min="new Date().toISOString().substr(0, 10)"
+                    element="holiday_date_picker_to"
+                  ></date-picker>
+                  <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                    <input v-model="holiday.to" required placeholder="วว/ดด/ปปปป" id="holiday_date_picker_to" class="no-outline cursor-pointer w-full">
+                    <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
                   </div>
-                  <div class=" text-left space-y-1 w-full">
-                    <Span class="text-base text-blue">To</Span>
-                    <date-picker
-                      :disabled="isDateFrom"
-                      color="#252647"
-                      auto-submit
-                      @change="GetDays(dataName='holiday')"
-                      v-model="holiday.to"
-                      :min="new Date().toISOString().substr(0, 10)"
-                      element="holiday_date_picker_to"
-                    ></date-picker>
-                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                      <input v-model="holiday.to" required placeholder="วว/ดด/ปปปป" id="holiday_date_picker_to" class="no-outline cursor-pointer w-full">
-                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
-                    </div>
-                  </div>
-                  <div class=" text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="holiday.no_of_days+' Days'" required disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
-                  </div>
-                  <div class="flex justify-center pt-6">
-                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
-                      <span class="text-lg font-kanit">Submit</span>
-                    </button>
-                  </div>
+                </div>
+                <div class=" text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">Number of day</Span>
+                  <input v-model="holiday.no_of_days+' Days'" required disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                </div>
+                <div class="flex justify-center pt-4">
+                  <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <span class="text-lg font-kanit">Submit</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -66,59 +64,57 @@
 
     <div class="EditModal">
       <form @submit="editModal">
-        <div>
-          <div class="fixed flex h-screen p-8 w-full top-0 right-0 overflow-hidden flex justify-center items-center animated fadeIn faster bg-gray10" v-if="show.edit">
-            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-              <div @click="show.edit = false" class="flex justify-end cursor-pointer right m-4">
-                <svg-icon name="cross" width="33.33" height="33.33"/>
-              </div>
-              <div class="px-8 pb-8">
-                <p class="font-medium text-3xl text-blue text-center mb-6">Edit Hoilday</p>
-                <div class="space-y-4">
-                  <div class="text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">Hoilday Name</Span>
-                    <input v-model="holiday_by_id.name" required placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
-                  </div>
-                  <div class="text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">From</Span>
-                    <date-picker
-                      color="#252647"
-                      auto-submit
-                      @change="GetDays(dataName='holiday_by_id')"
-                      v-model="holiday_by_id.from"
-                      :min="new Date().toISOString().substr(0, 10)"
-                      element="holiday_by_id_date_picker_from"
-                    ></date-picker>
-                    <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                      <input v-model="holiday_by_id.from" required placeholder="วว/ดด/ปปปป" id="holiday_by_id_date_picker_from" class="no-outline cursor-pointer w-full">
-                      <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
-                    </div>
-                  </div>
-                  <div class="text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">To</Span>
-                    <date-picker
-                      :disabled="isDateFrom"
-                      color="#252647"
-                      auto-submit
-                      @change="GetDays(dataName='holiday_by_id')"
-                      v-model="holiday_by_id.to"
-                      :min="new Date().toISOString().substr(0, 10)"
-                      element="holiday_by_id_date_picker_to"
-                    ></date-picker>
-                  </div>
+        <div class="absolute left-0 top-0 w-full h-full bg-gray10" v-if="show.edit">
+          <div class="lg:-translate-x-1/3 fixed flex top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 overflow-hidden justify-center animated fadeIn faster">
+            <div class="h-4/6 md:w-96 sm:w-72 bg-white text-xl font-kanit rounded-lg drop-shadow border border-gray19 ">
+              <div class="space-y-2 sm:p-6 sm:pb-8 p-8 pb-10">
+                <div @click="show.edit = false" class="flex justify-end cursor-pointer right ">
+                  <svg-icon name="cross" width="33.33" height="33.33"/>
+                </div>
+                <p class="font-medium text-3xl text-blue text-center pb-2">Edit Hoilday</p>
+                <div class="text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">Hoilday Name</Span>
+                  <input v-model="holiday_by_id.name" required placeholder="Name" class="no-outline text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                </div>
+                <div class="text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">From</Span>
+                  <date-picker
+                    color="#252647"
+                    auto-submit
+                    @change="GetDays(dataName='holiday_by_id')"
+                    v-model="holiday_by_id.from"
+                    :min="new Date().toISOString().substr(0, 10)"
+                    element="holiday_by_id_date_picker_from"
+                  ></date-picker>
                   <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
-                    <input v-model="holiday_by_id.to" required placeholder="วว/ดด/ปปปป" id="holiday_by_id_date_picker_to" class="no-outline cursor-pointer w-full">
+                    <input v-model="holiday_by_id.from" required placeholder="วว/ดด/ปปปป" id="holiday_by_id_date_picker_from" class="no-outline cursor-pointer w-full">
                     <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
                   </div>
-                  <div class=" text-left space-y-2 w-full">
-                    <Span class="text-base text-blue">Number of day</Span>
-                    <input v-model="holiday_by_id.no_of_days+ ' Days'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
-                  </div>
-                  <div class="flex justify-center pt-6">
-                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
-                      <span class="text-lg font-kanit">Submit</span>
-                    </button>
-                  </div>
+                </div>
+                <div class="text-left w-full">
+                  <Span class="text-base text-blue">To</Span>
+                  <date-picker
+                    :disabled="isDateFrom"
+                    color="#252647"
+                    auto-submit
+                    @change="GetDays(dataName='holiday_by_id')"
+                    v-model="holiday_by_id.to"
+                    :min="new Date().toISOString().substr(0, 10)"
+                    element="holiday_by_id_date_picker_to"
+                  ></date-picker>
+                </div>
+                <div class="flex justify-between items-center font-light text-gray26 rounded-md border border-gray12 px-4 py-1">
+                  <input v-model="holiday_by_id.to" required placeholder="วว/ดด/ปปปป" id="holiday_by_id_date_picker_to" class="no-outline cursor-pointer w-full">
+                  <svg-icon name="Calendar" width="19.5" height="19.5"></svg-icon>
+                </div>
+                <div class=" text-left space-y-2 w-full">
+                  <Span class="text-base text-blue">Number of day</Span>
+                  <input v-model="holiday_by_id.no_of_days+ ' Days'" disabled class="text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                </div>
+                <div class="flex justify-center pt-6">
+                  <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                    <span class="text-lg font-kanit">Submit</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -129,13 +125,13 @@
 
     <div class="AddLeaveModal">
       <form @submit="leaveSubmit">
-        <div>
-          <div class="fixed flex h-screen w-full p-8 top-0 right-0 overflow-hidden justify-center items-center animated fadeIn faster bg-gray10" v-if="show.add_leave">
-            <div class="text-xl bg-white rounded-lg font-kanit border border-gray19 drop-shadow">
-              <div @click="show.add_leave = false" class="flex justify-end cursor-pointer right m-4">
-                <svg-icon name="cross" width="33.33" height="33.33"/>
-              </div>
-              <div class="px-8 pb-8">
+        <div class="absolute left-0 top-0 w-full h-full bg-gray10" v-if="show.add_leave">
+          <div class="lg:-translate-x-1/3 fixed flex top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 overflow-hidden justify-center animated fadeIn faster">
+            <div class="h-4/6 md:w-96 sm:w-72 bg-white text-xl font-kanit rounded-lg drop-shadow border border-gray19 ">
+              <div class="space-y-2 sm:p-6 sm:pb-8 p-8 pb-10">
+                <div @click="show.add_leave = false" class="flex justify-end cursor-pointer right ">
+                  <svg-icon name="cross" width="33.33" height="33.33"/>
+                </div>
                 <p class="font-medium text-3xl text-blue text-center mb-2">Add Leave</p>
                 <div class="space-y-2">
                   <div class="text-left space-y-1 w-full">
@@ -319,7 +315,7 @@ export default {
       }
     },
 
-    async leaveSubmit(ev) {
+    async leaveSubmit() {
       const data = {
         user_id: this.user_profile.id,
         name: `${this.user_profile.first_name} ${this.user_profile.last_name}`,

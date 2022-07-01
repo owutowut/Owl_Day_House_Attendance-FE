@@ -1,23 +1,24 @@
 <template>
-  <div class="relative mx-20 md:mx-64 lg:ml-2">
-    <div class="w-36 h-36 bg-gray5 rounded-full flex justify-center items-center md:mx-16 lg:ml-10">
-      <img
-        v-if="image === null && currentImage !== null"
-        alt="" width="96" height="96"
-        class="rounded-full object-cover relative "
-        src="~/assets/sprite/svg/profile.svg"
-      />
-      <img
-        v-else
-        :src="fileReader"
-        alt=""
-        class="rounded-full object-cover w-36 h-36"
-        width="96" height="96"
-      >
-      <div class="absolute left-28 md:left-44 lg:left-36  bottom-0">
-        <input type="file" class="absolute right-0.5 bottom-0 rounded-full w-12 h-12 opacity-0 cursor-pointer"
-               ref="file" @change="onChangeFile">
-        <svg-icon name="camera" width="32" height="32" />
+  <div class="sm:w-full sm:flex sm:justify-center md:w-full md:flex md:justify-center">
+    <div class="xl:w-44 xl:h-44 lg:w-40 lg:h-40 relative w-36 h-36 bg-gray5 rounded-full items-center">
+      <input type="file" class="absolute rounded-full w-full h-full opacity-0 cursor-pointer"
+             ref="file" @change="onChangeFile">
+      <div class="flex h-full self-center justify-center">
+        <img
+          v-if="image === null && currentImage !== null"
+          alt="" width="96" height="96"
+          src="~/assets/sprite/svg/profile.svg"
+        />
+        <img
+          v-else
+          :src="fileReader"
+          alt=""
+          class="rounded-full object-cover w-full h-full"
+          width="96" height="96"
+        >
+      </div>
+      <div class="absolute bottom-0 right-0">
+        <svg-icon name="camera" width="36" height="36" class="lg:w-[40px] lg:h-[40px] xl:w-[44px] xl:h-[44px]"/>
       </div>
     </div>
   </div>

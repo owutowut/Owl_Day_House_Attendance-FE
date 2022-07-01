@@ -1,7 +1,7 @@
 <template>
     <Loading v-if="isLoading"/>
 
-    <div v-else class="lg:mx-4 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+    <div v-else class="lg:mx-4 lg:space-y-2 md:space-y-4 sm:space-y-4">
 
       <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
         <span class="text-3xl font-semibold text-blue">LEAVES</span>
@@ -27,7 +27,7 @@
           <p class="text-xs text-blue">การลาทั้งหมด</p>
           <p class="leaves_result">{{ total_leaves.all_leaves_total }}</p>
         </div>
-        <div class="bg-white p-4 lg:pt-5 rounded-lg text-center font-kanit border border-gray19">
+        <div class="lg:p2 bg-white p-4 lg:pt-5 rounded-lg text-center font-kanit border border-gray19">
           <div class="grid grid-cols-2 divide-x justify-center divide-gray13 text-xs text-blue">
             <div class="mt-1">
               <p>ลาทั้งหมด</p>
@@ -42,13 +42,13 @@
       </div>
 
       <div class="sm:pt-2 lg:flex lg:justify-end lg:space-x-4">
-        <div class="lg:w-96 md:w-full sm:w-full search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
+        <div class="lg:w-80 md:w-full sm:w-full search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15"/>
           <input type="text" v-model="search" @keyup="leavesData" placeholder="Search.."
                  class="lg:w-96 md:w-full sm:w-full font-kanit text-lg px-4 focus:outline-none"/>
         </div>
         <div>
-          <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-full lg:w-[320px] text-gray14 font-kanit text-lg">
+          <select v-model="selected" @change="leavesData" class="no-outline cursor-pointer rounded-md px-4 py-2 w-full lg:w-80 text-gray14 font-kanit text-lg">
             <option value="">Leave type</option>
             <option value="ลาป่วย">ลาป่วย</option>
             <option value="ลากิจ">ลากิจ</option>

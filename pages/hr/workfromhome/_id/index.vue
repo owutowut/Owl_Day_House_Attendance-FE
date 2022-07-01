@@ -23,62 +23,64 @@
           </div>
         </div>
 
-        <div class="overflow-x-hidden whitespace-nowrap space-y-2 bg-white p-10 rounded-lg text-left font-kanit border border-gray19">
-          <div class="space-x-2 flex whitespace-normal">
+        <div class="overflow-x-hidden whitespace-nowrap space-y-2 bg-white p-8 rounded-lg text-left font-kanit border border-gray19">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Date of Join :</p>
-            <p class="text-gray7">{{ user_profile.date_of_join }}</p>
+            <p class="overflow-x-hidden text-gray7">{{ user_profile.date_of_join }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Phone :</p>
             <p class="text-gray7">{{ user_profile.phone }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Birthday :</p>
             <p class="text-gray7">{{ user_profile.birthday }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Address :</p>
             <p class="text-gray7">{{ user_profile.address }}</p>
           </div>
-          <div class="space-x-2 flex">
+          <div class="lg:space-x-2 md:space-x-2 lg:flex md:flex">
             <p class="text-blue2">Report to :</p>
             <p class="text-gray7">{{ user_profile.report_to }}</p>
           </div>
         </div>
       </div>
 
-      <div class="pb-4 lg:grid lg:grid-cols-4 lg:grid-rows-2 sm:grid sm:grid-rows-3 sm:space-y-4 lg:flex lg:gap-4">
+      <div class="pb-4 lg:grid lg:grid-cols-4 lg:grid-rows-3 sm:grid sm:grid-rows-3 sm:space-y-4 md:space-y-4 lg:space-y-0 lg:flex lg:gap-4">
         <div class="lg:col-span-3 sm:row-span-2 space-y-4">
-          <div class="lg:grid lg:grid-cols-3 md:gap-4 sm:gap-4 sm:grid sm:grid-cols-2 lg:gap-4 text-gray23">
-            <div class="lg:col-span-1 sm:col-span-1 bg-white p-4 rounded-lg text-left space-y-1">
+          <div class="lg:grid lg:grid-cols-3 md:gap-4 sm:gap-4 sm:grid sm:grid-cols-2 sm:grid-row-2 lg:gap-4 text-gray23">
+            <div class="lg:px-6 lg:col-span-1 sm:col-span-2 sm:text-center md:text-center lg:text-left bg-white py-4 px-5 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">From</Span>
-              <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+              <div class="lg:px-1 sm:space-x-4 flex sm:justify-center md:justify-center lg:justify-between border border-gray12 rounded-md bg-gray22 w-full justify-between">
                 <p class="pl-2 py-1">{{workfromhome.from}}</p>
-                <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
+                <svg-icon name="Calendar" width="16" height="16" class="self-center fill-current"/>
               </div>
             </div>
-            <div class="lg:col-span-1 bg-white p-4 rounded-lg text-left space-y-1">
+            <div class="lg:px-6 lg:col-span-1 sm:col-span-2 sm:text-center md:text-center lg:text-left bg-white p-4 rounded-lg text-left space-y-1">
               <Span class="text-base text-blue font-semibold">to</Span>
-              <div class="flex border border-gray12 rounded-md bg-gray22 w-full justify-between">
+              <div class="lg:px-1 sm:space-x-4 flex sm:justify-center md:justify-center lg:justify-between border border-gray12 rounded-md bg-gray22 w-full justify-between">
                 <p class="pl-2 py-1">{{workfromhome.to}}</p>
-                <svg-icon name="Calendar" width="16" height="16" class="self-center mr-2 fill-current"/>
+                <svg-icon name="Calendar" width="16" height="16" class="self-center fill-current"/>
               </div>
             </div>
-            <div class="lg:col-span-1 sm:col-span-full bg-white p-4 rounded-lg text-left space-y-1">
-              <Span class="text-base text-blue font-semibold">No of day</Span>
+            <div class="lg:pl-4 lg:col-span-1 sm:col-span-2 sm:text-center md:text-center lg:text-left bg-white py-4 px-5 rounded-lg text-left space-y-1">
+              <Span class="ext-base text-blue font-semibold">No of day</Span>
               <p class="border border-gray12 rounded-md bg-gray22 w-full px-2 py-1">{{workfromhome.no_of_days}} Days</p>
             </div>
           </div>
           <div class="sm:col-span-2 overflow-x-hidden text-base font-kanit">
-            <div class="bg-white p-10 rounded-lg text-left space-y-4 text-gray23 w-full">
-              <div class="flex space-x-2 overflow-x-hidden">
-                <div class="space-y-8 sm:mr-6 mt-2 text-blue w-1/6">
-                  <p>Reason</p>
-                  <p>Details</p>
-                </div>
-                <div class="space-y-4 w-full">
-                  <input type="text" disabled class="w-full border border-gray12 rounded-md bg-gray22 px-4 py-2" v-model="workfromhome.reason">
-                  <textarea rows="10" cols="40" disabled class="w-full border border-gray12 rounded-md bg-gray22 p-4" v-model="workfromhome.detail"></textarea>
+            <div class="bg-white lg:p-8 md:p-6 sm:py-4 sm:px-5 rounded-lg text-left space-y-4 text-gray23 w-full">
+              <div class="md:flex lg:flex space-x-2 overflow-x-hidden">
+                <div class="w-full space-y-4 text-blue">
+                  <div class="space-y-2">
+                    <p>Reason</p>
+                    <input type="text" disabled class="text-gray23 w-full border border-gray12 rounded-md bg-gray22 px-4 py-2" v-model="workfromhome.reason">
+                  </div>
+                  <div class="space-y-2">
+                    <p>Details</p>
+                    <textarea rows="10" cols="40" disabled class="text-gray23 w-full border border-gray12 rounded-md bg-gray22 p-4" v-model="workfromhome.detail"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,7 +163,8 @@ export default {
     ...mapActions({
       getWfhById: 'hr/getWfhById',
       wfhApprove: 'hr/wfhApprove',
-      getUserByID: 'hr/getUserByID'
+      getUserByID: 'hr/getUserByID',
+      notifications: 'hr/notifications'
     }),
 
     async wfhData() {
@@ -175,11 +178,17 @@ export default {
     },
 
     async wfhStatus() {
-      if (this.selected!=="current") {
-        const data = {
+      const data = {
         id : this.$route.params.id,
         status: `${this.selected}`,
       }
+
+      const notificationData = {
+        wfh_id: this.$route.params.id,
+        user_id: this.user_profile.id
+      }
+
+      if (this.selected!=="current") {
       await this.wfhApprove(data)
         .then(response => {
           if (response) {
@@ -190,15 +199,37 @@ export default {
               imageWidth: 80,
               imageHeight: 80,
               showConfirmButton: false,
-              timer: 1000
+              timer: 2500
             })
 
-            this.$router.back('hr/workfromhome')
+            this.$router.push('/hr/workfromhome')
           }
         })
         .catch(err => {
           console.log(err.message)
         })
+      }
+      if (this.selected==="Approve") {
+        await this.notifications(notificationData)
+        await this.wfhApprove(data)
+          .then(response => {
+            if (response) {
+
+              this.$swal({
+                title: '<p class="text-3xl"> Successful transaction</p>',
+                imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+                imageWidth: 80,
+                imageHeight: 80,
+                showConfirmButton: false,
+                timer: 2500
+              })
+
+              this.$router.push('/hr/workfromhome')
+            }
+          })
+          .catch(err => {
+            console.log(err.message)
+          })
       } else {
       this.alert = true
     }

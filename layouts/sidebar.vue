@@ -1,100 +1,109 @@
 <template>
-  <div class="flex flex-col ">
-    <nav class="w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6">
-      <img src="~/assets/images/menu.png" class=" w-8 h-9 mt-2  lg:hidden" v-show='isOpen' @click='handleOpen'>
-      <button class="relative">
-        <svg-icon name="Notification" class="h-[45px] w-[45px]" />
-        <div class="absolute -top-1 -right-2 bg-red6 text-white text-xs px-2 rounded-lg ">
-          {{total_notification}}
-        </div>
-      </button>
-    </nav>
+  <div>
+    <Loading v-if="isLoading" />
 
-    <aside
-      class='overflow shadow-2xl transform bg-blue fixed w-[252px] h-full shadow-lg overflow-auto ease-in-out transition-all duration-300 z-10 sm:hidden md:block'
-      :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
-    >
-      <div>
-        <div class="flex justify-center py-3.5 mx-4 border-b border-white">
-          <img src="~/assets/images/ODH_Banding-09 (1) 2.png">
-        </div>
-        <div class="flex flex-col items-center text-white  ">
-          <img src="~/assets/images/Group894.png" class="py-5">
-          <p class="font-light">CHAWANNOP THAMMAJAI</p>
-          <p class="text-xs mt-2 font-thin">UX/UI Designer</p>
-        </div>
-        <div class="px-5">
-          <ul class="text-white mt-12">
-            <li class="mb-6">
-              <NuxtLink to="/admin/home" exact class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home' "/>
-                <span>Home</span>
-              </NuxtLink>
-            </li>
-            <li class="mb-6">
-              <NuxtLink to="/admin/profile" class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='profile'"/>
-                Profile
-              </NuxtLink>
-            </li>
-            <li class="mb-6">
-              <div class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28"
-                          v-if="currentPath==='work-list-yesterday' || currentPath==='work-list-complete' "/>
-                Work list
-              </div>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/admin/work-list-yesterday" :class="`${currentPath === 'work-list-yesterday' && 'text-yellow'}`"> Work list Yesterday
-              </NuxtLink>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/admin/work-list-complete" :class="`${currentPath === 'work-list-complete' && 'text-yellow'}`">Work
-                list Complete
-              </NuxtLink>
-            </li>
-            <li class="mb-6">
-              <div class="flex items-center">
-                <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'||currentPath==='work-from-home'"/>
-                Leaves
-              </div>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/admin/leave" :class="`${currentPath === 'leave' && 'text-yellow'}`">Leave</NuxtLink>
-            </li>
-            <li class="mb-6 ml-4">
-              <NuxtLink to="/admin/work-from-home" :class="`${currentPath === 'work-from-home' && 'text-yellow'}`">Work from Home</NuxtLink>
-            </li>
-          </ul>
-          <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mt-20 flex space-x-4 justify-center font-kanit">
-            <img src="~/assets/images/ls_logout.svg">
-            <span>ออกจากระบบ</span>
+    <div v-else>
+      <div class="flex flex-col">
+        <nav class="navbar w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
+          <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
+          <button v-if="isOpen" class="relative">
+            <svg-icon name="Notification" class="h-[45px] w-[45px]" />
+            <div class="absolute -top-1 -right-2 bg-red6 text-white text-xs px-2 rounded-lg ">
+              {{total_notification}}
+            </div>
           </button>
+        </nav>
+
+        <aside
+          class='overflow transform bg-blue fixed w-[252px] h-full overflow-auto ease-in-out transition-all duration-300 z-10 md:block'
+          :class="isOpen ? '-translate-x-full lg:translate-x-0' : 'translate-x-0'"
+        >
+          <div>
+            <div class="flex justify-center py-3.5 mx-4 border-b border-white">
+              <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="">
+            </div>
+            <div class="flex flex-col items-center text-white  ">
+              <img :src="user_profile.profile_img" class="w-28 h-28 bg-gray5 rounded-full flex justify-center items-center mt-6 md:mx-10 lg:ml-10" alt="">
+              <p class="font-light mt-4 uppercase">{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
+              <p class="text-xs mt-2 font-thin">{{ user_profile.position }}</p>
+            </div>
+            <div class="px-5">
+              <ul class="text-white mt-8">
+                <li class="mb-6">
+                  <NuxtLink to="/user/home" exact class="flex items-center">
+                    <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='home' "/>
+                    <span>Home</span>
+                  </NuxtLink>
+                </li>
+                <li class="mb-6">
+                  <NuxtLink to="/user/profile" class="flex items-center">
+                    <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='profile'"/>
+                    Profile
+                  </NuxtLink>
+                </li>
+                <li class="mb-6">
+                  <div class="flex items-center">
+                    <svg-icon name="ArrowRight" height="28" width="28"
+                              v-if="currentPath==='work-list-yesterday' || currentPath==='work-list-complete' "/>
+                    Work list
+                  </div>
+                </li>
+                <li class="mb-6 ml-4">
+                  <NuxtLink to="/user/work-list-yesterday" :class="`${currentPath === 'work-list-yesterday' && 'text-yellow'}`"> Work list Yesterday
+                  </NuxtLink>
+                </li>
+                <li class="mb-6 ml-4">
+                  <NuxtLink to="/user/work-list-complete" :class="`${currentPath === 'work-list-complete' && 'text-yellow'}`">Work
+                    list Complete
+                  </NuxtLink>
+                </li>
+                <li class="mb-6">
+                  <div class="flex items-center">
+                    <svg-icon name="ArrowRight" height="28" width="28" v-if="currentPath==='leave'||currentPath==='work-from-home'"/>
+                    Leaves
+                  </div>
+                </li>
+                <li class="mb-6 ml-4">
+                  <NuxtLink to="/user/leave" :class="`${currentPath === 'leave' && 'text-yellow'}`">Leave</NuxtLink>
+                </li>
+                <li class="mb-6 ml-4">
+                  <NuxtLink to="/user/work-from-home" :class="`${currentPath === 'work-from-home' && 'text-yellow'}`">Work from Home</NuxtLink>
+                </li>
+              </ul>
+              <button @click="logout()" class="rounded-md bg-red1  text-white w-full p-3 mb-6 mt-8 flex space-x-4 justify-center font-kanit">
+                <img src="~/assets/images/ls_logout.svg" alt="">
+                <span>ออกจากระบบ</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+        <div class="sm:pl-[4px] lg:pl-[250px] bg-gray18 min-h-screen" @click='isOpen = true'>
+          <Nuxt/>
         </div>
       </div>
-    </aside>
-    <div class="lg:pl-[276px] pt-10 pr-6 bg-gray18 min-h-screen" @click='isOpen = true'>
-      <Nuxt/>
     </div>
-
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import auth from "@/plugins/auth";
 
 export default {
+  middleware: 'auth',
   name: "sidebar",
   data() {
     return {
+      isLoading: true,
       currentPath: "",
       isActive: false,
       isOpen: true,
-      total_notification: '0'
+      total_notification: '0',
+      user_profile: {},
     }
   },
   mounted() {
     this.checkPath(this.$route.path)
+    this.userProfile()
   },
   watch: {
     $route() {
@@ -103,25 +112,37 @@ export default {
   },
   methods: {
     checkPath(path) {
-      // console.log(path.split("/"))
-      this.currentPath = path.split("admin/")[1]
+      this.currentPath = path.split("user/")[1]
     },
     handleOpen() {
       this.isOpen = !this.isOpen
     },
     async logout(){
-      const response = await axios.get('http://127.0.0.1:3333/logout')
-      console.log(response)
-      if(response.data.message==='You have logged out successfully.'){
-        return location.href = "/"
-      } else {
-        return response.data.message
+      try {
+        await this.$auth.logout()
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async userProfile() {
+      const verify = await this.$auth.loggedIn
+
+      try {
+        if (!verify) {
+          return 'Login required!'
+        }
+        const user=await this.$axios.get('me', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+        })
+        if (user.data.role !== 'user') {
+          return this.$router.push('/')
+        }
+        this.user_profile = user.data
+        this.isLoading = false
+      } catch (error) {
+        return error.message
       }
     }
-  },
+  }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -3,7 +3,7 @@
     <Loading v-if="isLoading"/>
     <div v-else>
       <client-only>
-        <div class="flex justify-between mb-8">
+        <div class="flex justify-between mb-8 mt-20">
           <span class="text-3xl font-semibold">Edit Employee</span>
           <div>
             <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
@@ -11,11 +11,11 @@
             </button>
           </div>
         </div>
-        <div class="bg-white rounded-lg p-6 lg:w-3/4 ">
-          <ProfileEmployee class="my-4 w-14 lg:mt-10 lg:left-14" @change="onChangeFile"
+        <div class="lg:mx-6 grid lg:grid-cols-3 mb-14 bg-white rounded-lg px-8 py-10 gap-4">
+          <ProfileEmployee class="lg:col-span-1 lg:mt-4 xl:mt-4 w-full" @change="onChangeFile"
                            :currentImage="form.profile_img"/>
-          <div class="grid lg:grid-cols-3 gap-6 lg:-mt-32 ">
-            <div class="lg:col-start-2">
+          <div class="lg:col-span-2 grid gap-4">
+            <div class="lg:col-start-1">
               <p>First Name</p>
               <input v-model="form.first_name"
                      class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
@@ -25,16 +25,16 @@
               <input v-model="form.last_name"
                      class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
-            <div class="lg:col-start-2 ">
+            <div class="lg:col-start-1 ">
               <p>Email</p>
               <input v-model="form.email" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
-            <div>
+            <div class="overflow-x-hidden">
               <p>Password</p>
               <input type="password" v-model="form.password"
-                     class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
+                     class="pr-28 w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
-            <div class="lg:col-start-2 ">
+            <div class="lg:col-start-1 ">
               <p>Position</p>
               <input v-model="form.position" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
@@ -47,7 +47,7 @@
                 <option>ทดลองงาน</option>
               </select>
             </div>
-            <div class="lg:col-start-2 ">
+            <div class="lg:col-start-1 ">
               <p>Phone</p>
               <input v-model="form.phone" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
@@ -64,7 +64,7 @@
                 />
               </div>
             </div>
-            <div class="lg:col-start-2 ">
+            <div class="lg:col-start-1 ">
               <p class="mb-2">Date of Join</p>
               <div class="relative">
                 <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit"
@@ -85,12 +85,12 @@
               </select>
             </div>
 
-            <div class="lg:col-start-2 lg:col-span-2">
+            <div class="lg:col-start-1 lg:col-span-2">
               <p>Address</p>
               <input v-model="form.address" class="w-full text-black4 border border-gray12 rounded-lg  py-2 px-4"/>
             </div>
 
-            <div class="lg:col-start-2">
+            <div class="lg:col-start-1">
               <p>Report to</p>
               <select v-model="form.report_to"
                       class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
@@ -105,7 +105,7 @@
               <p>State</p>
               <input v-model="form.state" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
-            <div class="lg:col-start-2">
+            <div class="lg:col-start-1">
               <p>Pincode</p>
               <input v-model="form.pin_code" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
@@ -115,9 +115,9 @@
               <input v-model="form.country" class="w-full text-black4 border border-gray12 rounded-lg my-2 py-2 px-4"/>
             </div>
 
-          </div>
-          <div class="flex justify-center mt-10">
-            <button class="bg-blue rounded-md py-2 px-8 text-white" @click="editEmployee">Submit</button>
+            <div class="lg:col-start-1 w-full flex justify-center mt-2">
+              <button class="w-1/2 bg-blue rounded-md py-2 px-8 text-white" @click="editEmployee">Submit</button>
+            </div>
           </div>
           <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
         </div>
@@ -156,7 +156,6 @@ export default {
     }),
     onChangeFile(e) {
       this.form.profile_img = e
-      console.log(e)
     },
     async employeeData() {
       try {
@@ -167,7 +166,6 @@ export default {
         }
         this.isLoading = false
       } catch (e) {
-        console.log(e)
       }
     },
     async editEmployee() {
@@ -181,25 +179,7 @@ export default {
       const data = {
         id: this.$route.params.id,
         formData,
-        // first_name: `${this.form.first_name}`,
-        // last_name: `${this.form.last_name}`,
-        // email: `${this.form.email}`,
-        // password: `${this.form.password}`,
-        // position: `${this.form.position}`,
-        // phone: `${this.form.phone}`,
-        // tag: `${this.form.tag}`,
-        // birthday: `${this.form.birthday}`,
-        // date_of_join: `${this.form.date_of_join}`,
-        // report_to: `${this.form.report_to}`,
-        // address: `${this.form.address}`,
-        // state: `${this.form.state}`,
-        // country: `${this.form.country}`,
-        // pin_code: `${this.form.pin_code}`,
-        // gender: `${this.form.gender}`,
-        // profile_img: this.form.profile_img
       }
-
-      // return console.log([...formData])
 
       await this.editEmployeeById(data)
         .then(result => {
@@ -212,7 +192,7 @@ export default {
               showConfirmButton: false,
               timer: 1000
             })
-            this.$router.replace('/hr/employee')
+            this.$router.push('/hr/employee')
           }
         }).catch(err => {
           console.log(err.message)

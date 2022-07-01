@@ -2,14 +2,18 @@
   <div>
     <Loading v-if="isLoading"/>
 
-    <div v-else class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
-      <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
+    <div v-else class="lg:mx-4 lg:space-y-2 md:space-y-4 sm:space-y-4">
+
+      <div class="text-center space-y-6 items-center lg:flex lg:justify-between sm:pb-2">
         <span class="text-3xl font-semibold text-blue">Work from Home</span>
-        <nuxt-link to="/hr/workfromhome/addform" class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
-          <svg-icon name="add1" width="15" height="15" class="mr-2"/>
-          <span class="text-lg font-kanit">Add Form</span>
-        </nuxt-link>
+        <div class="lg:pb-5 lg:w-48 md:w-full sm:w-full">
+          <nuxt-link to="/hr/workfromhome/addform" class="bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+            <svg-icon name="add1" width="15" height="15" class="mr-2"/>
+            <span class="text-lg font-kanit">Add Form</span>
+          </nuxt-link>
+        </div>
       </div>
+
       <div class="lg:flex justify-end lg:space-x-4 mb-6">
         <div class="search-wrapper flex justify-center items-center bg-white rounded-md px-4 py-2 mb-4">
           <svg-icon name="Search" width="15" height="15" class="mr-2"/>
@@ -18,7 +22,7 @@
         <div>
           <div class="relative">
             <input id="custom-input" class="cursor-pointer custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit focus:outline-none" placeholder="Date"/>
-            <svg-icon name="ArrowDown4" width="24" height="24" class="absolute right-3 top-3 "/>
+            <svg-icon name="ArrowDown" width="24" height="24" class="absolute right-3 top-3 "/>
             <date-picker
               color="#252647"
               auto-submit
@@ -122,6 +126,7 @@ export default {
   mounted() {
     this.fetchData()
   },
+
   computed: {
     pageStart() {
       return (this.currentPage - 1) * this.work_from_home.perPage
@@ -129,11 +134,11 @@ export default {
     totalPage() {
       return Math.ceil(this.work_from_home.total / this.work_from_home.perPage)
     },
-
     filterData() {
       return this.work_from_home.data
     },
   },
+
   methods: {
     ...mapActions({
       getWfhData: 'hr/getWfhData'
@@ -154,7 +159,6 @@ export default {
       this.page = i
       this.fetchData()
     },
-
   }
 }
 </script>

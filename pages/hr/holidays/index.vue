@@ -1,9 +1,9 @@
 <template>
   <Loading v-if="isLoading"/>
 
-  <div v-else class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+  <div v-else class="lg:mx-4 lg:space-y-2 md:space-y-4 sm:space-y-4">
 
-    <div class="sm:text-center sm:pb-2 lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
+    <div class="text-center space-y-6 items-center lg:flex lg:justify-between sm:pb-2">
       <span class="text-3xl font-semibold text-blue">Hoilday of the month</span>
       <div class="lg:pb-5 lg:w-48 md:w-full sm:w-full">
         <button @click="show.add_form=true"

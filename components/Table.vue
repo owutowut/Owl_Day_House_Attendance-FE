@@ -8,9 +8,9 @@
             v-for="(header,i) in headers"
             :key="i"
             @click="sortBy(header.sort)"
-            class="sm:px-4"
+            class="sm:px-4 lg:px-2"
           >
-            <div v-if="header.sort" class="sm:whitespace-nowrap sm:px-6 flex justify-center space-x-2">
+            <div v-if="header.sort" class="sm:whitespace-nowrap sm:px-6 lg:px-3 flex justify-center space-x-2">
               <div class="cursor-pointer">
                 <svg-icon name="Swap" width="15.82px" height="16.33px" class="h-full self-center"/>
               </div>
@@ -20,7 +20,7 @@
                 </button>
               </div>
             </div>
-            <div v-if="!header.sort" class="sm:whitespace-nowrap sm:px-6">
+            <div v-if="!header.sort" class="sm:whitespace-nowrap sm:px-6 lg:px-3">
               <div class="py-4">
                 <span class="font-semibold">
                   {{ header.title }}

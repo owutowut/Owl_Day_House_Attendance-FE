@@ -1,7 +1,7 @@
 <template>
   <div>
     <client-only>
-      <div class="flex justify-between mb-8">
+      <div class="lg:mx-6 flex justify-between mb-8 mt-20">
         <span class="text-3xl font-semibold">Add Employee</span>
         <div>
           <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
@@ -9,10 +9,10 @@
           </button>
         </div>
       </div>
-      <div class="bg-white rounded-lg p-6 lg:w-3/4 ">
-        <Profile_img class="my-4 lg:mt-14 w-14" @change="onChangeFile" :currentImage="form.profile_img" />
-        <div class="grid lg:grid-cols-3 gap-6 lg:-mt-32">
-          <div class="lg:col-start-2">
+      <div class="lg:mx-6 grid lg:grid-cols-3 mb-14 bg-white rounded-lg px-8 py-10 gap-4">
+        <Profile_img class="lg:col-span-1 lg:mt-4 xl:mt-4 w-full" @change="onChangeFile" :currentImage="form.profile_img" />
+        <div class="lg:col-span-2 grid gap-4">
+          <div class="lg:col-start-1">
             <p>First Name</p>
             <input v-model="form.first_name" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -20,7 +20,7 @@
             <p>Last Name</p>
             <input v-model="form.last_name" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="lg:col-start-2 ">
+          <div class="lg:col-start-1 ">
             <p>Email</p>
             <input v-model="form.email" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -28,7 +28,7 @@
             <p>Password</p>
             <input v-model="form.password" type="password" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="lg:col-start-2 ">
+          <div class="lg:col-start-1 ">
             <p>Position</p>
             <input v-model="form.position" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -41,7 +41,7 @@
               <option>ทดลองงาน</option>
             </select>
           </div>
-          <div class="lg:col-start-2 ">
+          <div class="lg:col-start-1 ">
             <p>Phone</p>
             <input v-model="form.phone" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -56,7 +56,7 @@
               />
             </div>
           </div>
-          <div class="lg:col-start-2 ">
+          <div class="lg:col-start-1 ">
             <p class="mb-2">Date of Join</p>
             <div class="relative">
               <input class="custom-input w-full border border-gray12 rounded-lg h-11 py-2 pl-3 pr-8 font-kanit" placeholder="วว/ดด/ปปปป"/>
@@ -76,18 +76,16 @@
             </select>
           </div>
 
-          <div class="lg:col-start-2 lg:col-span-2" >
+          <div class="lg:col-start-1 lg:col-span-2" >
             <p>Address</p>
             <input v-model="form.address" class="w-full  border border-gray12 rounded-lg  py-2 px-4"/>
           </div>
 
-          <div class="lg:col-start-2">
+          <div class="lg:col-start-1">
             <p>Report to</p>
             <select v-model="form.report_to" class="rounded-lg h-11 my-2 px-4 py-2 w-full text-gray14 border border-gray12">
-              <option value="Select Name">Select Name</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
+              <option disabled value="">Select Name</option>
+              <option>Sarawut Bunmee</option>
             </select>
           </div>
 
@@ -95,7 +93,7 @@
             <p>State</p>
             <input v-model="form.state" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
-          <div class="lg:col-start-2">
+          <div class="lg:col-start-1">
             <p>Pincode</p>
             <input v-model="form.pin_code" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
@@ -105,9 +103,9 @@
             <input v-model="form.country" class="w-full border border-gray12 rounded-lg my-2 py-2 px-4"/>
           </div>
 
-        </div>
-        <div class="flex justify-center mt-10">
-          <button class="bg-blue rounded-md py-2 px-8 text-white" @click="submitEmployee">Submit</button>
+          <div class="lg:col-start-1 w-full flex justify-center mt-2">
+            <button class="w-1/2 bg-blue rounded-md py-2 px-8 text-white" @click="submitEmployee">Submit</button>
+          </div>
         </div>
         <Modal v-if="isModal" :isModal="isModal" @handleHideModal="onHideModal"/>
       </div>
@@ -163,7 +161,6 @@ export default {
     },
     onChangeFile(e) {
       this.form.profile_img = e
-      console.log(e)
     },
     async submitEmployee(){
       try {
@@ -177,22 +174,21 @@ export default {
         // console.log([...formData])
         await this.createEmployee(formData)
           .then(response => {
+            if (response) {
+              this.$swal({
+                title: '<p class="text-3xl"> Successful transaction</p>',
+                imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+                imageWidth: 80,
+                imageHeight: 80,
+                showConfirmButton: false,
+                timer: 1000
+              })
+            }
             this.$router.push(`/hr/employee`)
-            console.log(response)
           })
           .catch(err => {
             console.log(err)
           })
-        if (data) {
-          this.$swal({
-            title: '<p class="text-3xl"> Successful transaction</p>',
-            imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
-            imageWidth: 80,
-            imageHeight: 80,
-            showConfirmButton: false,
-            timer: 1000
-          })
-        }
       } catch (e) {
         console.log(e)
       }

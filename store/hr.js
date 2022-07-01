@@ -8,6 +8,15 @@ export const actions = {
   getUserByID({}, data) {
     return this.$axios.get(`/users/${data}`)
   },
+  forgotPassword({}, data) {
+    return this.$axios.post(`forgot_password`, data)
+  },
+  verifyToken({}, data) {
+    return this.$axios.get(`forgot_password/${data.token}`)
+  },
+  passwordReset({}, data) {
+    return this.$axios.patch(`forgot_password/${data.token}`, data)
+  },
 
   getHoliday({}, data) {
     return this.$axios.post(`holiday`, data)
@@ -66,5 +75,9 @@ export const actions = {
   },
   editEmployeeById({}, data) {
     return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
+  },
+
+  notifications({}, data) {
+    return this.$axios.post(`notifications/create`, data)
   },
 }

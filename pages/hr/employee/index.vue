@@ -38,7 +38,7 @@
           </select>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="mb-14 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <EmployeeCard v-for="Employee in filterData" :key="Employee.id" :card="Employee"/>
       </div>
     </div>
@@ -87,10 +87,7 @@ export default {
           tag: this.tag
         }
         const {data} = await this.getEmployee(request)
-        if (data) {
-          this.Employees = data.user
-          console.log(data.user)
-        }
+        this.Employees = data.user
         this.isLoading = false
       } catch (e) {
         console.log(e)
