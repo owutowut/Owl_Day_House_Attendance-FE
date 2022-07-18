@@ -1,13 +1,13 @@
 <template>
   <Loading v-if="isLoading"/>
 
-  <div v-else class="pr-5 xl:pt-6 lg:pt-6 lg:space-y-2 md:pt-8 md:px-4 md:space-y-4 sm:space-y-4 sm:pt-8 sm:px-4">
+  <div v-else class="pr-4 lg:pt-8 lg:px-6 lg:space-y-2 md:pt-8 md:px-4 md:space-y-4 sm:space-y-4 sm:pt-8 sm:px-4">
 
     <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-4 md:space-y-4 sm:space-y-4">
       <span class="text-3xl font-semibold text-blue">LEAVES</span>
       <div class="lg:w-48 md:w-full sm:w-full self-center">
         <button @click="show.add_leave=true"
-                class="w-full space-x-2 bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+                class="w-full space-x-2 bg-yellow px-4 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
           <svg-icon name="add1" width="15" height="15"/>
           <span class="text-lg font-kanit">Add Leave</span>
         </button>
@@ -168,6 +168,7 @@ export default {
       getLeave: 'user/getLeave',
       getLeaveByID: 'user/getLeaveByID'
     }),
+
     async editLeave(id) {
       this.show.edit = true
       const data = await this.getLeaveByID(id)

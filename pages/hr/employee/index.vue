@@ -2,7 +2,7 @@
   <div>
     <Loading v-if="isLoading" />
 
-    <div v-else class="mt-20">
+    <div v-else >
       <div class="flex justify-between">
         <span class="text-3xl font-semibold ">Employee</span>
         <button

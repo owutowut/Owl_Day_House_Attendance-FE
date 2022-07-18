@@ -4,7 +4,7 @@
 
     <div v-else>
       <div class="flex flex-col">
-        <nav class="navbar w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
+        <nav class="sticky top-0 navbar w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
           <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
           <button v-if="isOpen" class="relative">
             <svg-icon name="Notification" class="h-[45px] w-[45px]" />
@@ -23,7 +23,8 @@
               <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="">
             </div>
             <div class="flex flex-col items-center text-white  ">
-              <img :src="user_profile.profile_img" class="w-28 h-28 bg-gray5 rounded-full flex justify-center items-center mt-6 md:mx-10 lg:ml-10" alt="">
+              <img v-if="user_profile.profile_img===undefined" src="~/assets/images/profile-hr.png" class="w-28 h-28 bg-gray5 rounded-full flex justify-center items-center mt-6 md:mx-10 lg:ml-10" alt="">
+              <img v-else :src="user_profile.profile_img" class="w-28 h-28 bg-gray5 rounded-full flex justify-center items-center mt-6 md:mx-10 lg:ml-10" alt="">
               <p class="font-light mt-4 uppercase">{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
               <p class="text-xs mt-2 font-thin">{{ user_profile.position }}</p>
             </div>
@@ -102,8 +103,8 @@ export default {
     }
   },
   mounted() {
-    this.checkPath(this.$route.path)
     this.userProfile()
+    this.checkPath(this.$route.path)
   },
   watch: {
     $route() {
@@ -138,6 +139,7 @@ export default {
           return this.$router.push('/')
         }
         this.user_profile = user.data
+
         this.isLoading = false
       } catch (error) {
         return error.message

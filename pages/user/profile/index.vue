@@ -2,9 +2,9 @@
   <div>
     <Loading v-if="isLoading" />
 
-    <div v-else class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-4 space-y-4">
+    <div v-else class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-6 space-y-4">
         <div class="sm:space-y-2 lg:flex lg:justify-between">
-          <span class="sm:flex sm:justify-center text-3xl font-semibold text-blue">PROFILE</span>
+          <span class="sm:flex sm:justify-center text-3xl font-semibold text-blue">Profile</span>
         </div>
         <div class="grid lg:grid-cols-2 gap-6">
           <div class="bg-white rounded-lg text-left font-kanit border border-gray19 space-x-5 shadow w-full flex md:px-8 lg:px-8 xl:px-12 xl:justify-start lg:justify-start md:justify-start sm:justify-center">

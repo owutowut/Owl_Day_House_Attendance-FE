@@ -5,6 +5,8 @@ module.exports = {
     "./pages/**/*.vue",
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   theme: {
     extend: {
@@ -54,6 +56,7 @@ module.exports = {
         'gray27' : '#414042',
         'gray28' : '#E5E5E5',
         'gray29' : '#F8F8F8',
+        'gray30' : '#EAEAEA',
         'black' : '#000000',
         'black1' : '#252647',
         'black2' : '#565656',

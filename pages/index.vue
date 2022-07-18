@@ -5,20 +5,31 @@
         <img src="~/assets/images/ODH_Banding-09 (1) 2.png" alt="" class="min-w-full px-2">
       </div>
       <div class="lg:col-span-2 md:col-span-3 lg:row-span-full md:col-span-3 md:row-span-full lg:p-20 md:p-16 sm:p-10 sm:row-span-4 sm:col-span-full">
-        <div class="bg-white shadow px-6 py-12">
-          <h2 class="text-center font-bold text-3xl">Welcome back!</h2>
-          <p class="text-center text-sm text-gray mb-12">sign in to your account to continue</p>
-          <p class="font-bold text-black mb-4">Username</p>
-          <input class="border border-gray2 rounded-md px-3 py-2 w-full focus:outline-none" v-model="form.email"
-                 placeholder="Type your email"/>
-          <div class="flex items-center justify-between ">
-            <p class="font-bold text-black mb-4 mt-4">Password</p>
-            <nuxt-link to="forgot_password" class="text-black text-sm">Forgot password?</nuxt-link>
+        <form @submit="login" class="lg:mt-14 shadow-md">
+          <div class="bg-white px-6 py-20 space-y-8">
+            <div class="space-y-4 pb-4">
+              <h2 class="text-center font-bold text-3xl">Welcome back!</h2>
+              <p class="text-center text-sm text-gray">sign in to your account to continue</p>
+            </div>
+            <div class="space-y-4">
+              <p class="font-bold text-black">Username</p>
+              <input required class="border border-gray2 rounded-md px-3 py-2 w-full focus:outline-none" v-model="form.email" type="email"
+                     placeholder="Type your email"/>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between ">
+                <p class="font-bold text-black">Password</p>
+                <nuxt-link to="forgot_password" class="text-black text-sm">Forgot password?</nuxt-link>
+              </div>
+              <input required class="border border-gray2 rounded-md px-3 py-2 w-full focus:outline-none" v-model="form.password" type="password"
+                     placeholder="Type your password"/>
+              <div v-if="invalid!==''">
+                <p class="text-sm text-red-700">{{ invalid }}</p>
+              </div>
+            </div>
+            <button type="submit" class="border bg-yellow text-white w-full rounded-md py-2">Login</button>
           </div>
-          <input class="border border-gray2 rounded-md px-3 py-2 w-full mb-10 focus:outline-none" v-model="form.password" type="password"
-                 placeholder="Type your password"/>
-          <button @click="login()" class="border bg-yellow text-white w-full rounded-md py-2">Login</button>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -35,20 +46,22 @@ export default {
         email: '',
         password: '',
       },
+      invalid: '',
     }
   },
   methods: {
     async login() {
-      let {data} = await this.$auth.loginWith('local', {data: this.form})
       try {
-        if (data) {
+        event.preventDefault();
+        let {data} = await this.$auth.loginWith('local', {data: this.form})
+        if (!data.invalid) {
           await this.$auth.setUser(data.user)
-          // await localStorage.setItem('token',data.token)
           if (this.$auth.user.role === 'user') {
             return await this.$router.push('/user/home')
-          } else {
-            return await this.$router.push('/hr/home')
           }
+          return await this.$router.push('/hr/home')
+        } else {
+          return this.invalid = data.invalid
         }
       } catch (error) {
         console.log(error.message)

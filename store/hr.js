@@ -77,7 +77,13 @@ export const actions = {
     return this.$axios.$patch(`/users/update/${data.id}`, data.formData)
   },
 
+  getNotifications({}, id) {
+    return this.$axios.get(`notifications/${id}`)
+  },
   notifications({}, data) {
     return this.$axios.post(`notifications/create`, data)
+  },
+  getAttendance({}, data) {
+    return this.$axios.post(`attendance/all`, data)
   },
 }

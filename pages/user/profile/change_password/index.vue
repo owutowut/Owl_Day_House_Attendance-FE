@@ -2,9 +2,9 @@
   <div>
     <Loading v-if="isLoading"/>
 
-    <div v-else class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-4 space-y-4">
+    <div v-else class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-6 space-y-4">
       <div class="sm:space-y-2 md:flex md:justify-between lg:flex lg:justify-between">
-        <span class="sm:flex sm:justify-center text-3xl font-semibold text-blue">CHANGE PASSWORD</span>
+        <span class="sm:flex sm:justify-center text-3xl font-semibold text-blue">Change Password</span>
         <div class="sm:flex sm:justify-center lg:justify-self-center">
           <button class="sm:w-full bg-blue px-10 py-2 text-white rounded-md text-sm">
             <NuxtLink to="/user/profile">Back</NuxtLink>
@@ -82,7 +82,6 @@ export default {
         newPassword: this.newPassword,
       }
       const response = await this.changePassword(data)
-      console.log(response)
       if ( response.data!==false ) {
         this.$swal({
           title: '<p class="text-3xl"> Successful transaction</p>',
@@ -94,7 +93,7 @@ export default {
         })
         await this.$router.push('/user/profile')
       } else {
-        return this.invalid = 'Invalid Password !'
+        return this.invalid = 'Invalid Current Password !'
       }
     }
   },

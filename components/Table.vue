@@ -99,10 +99,6 @@ export default {
       return this.sort.key === key ? this.sort.isAsc ? 'text-white opacity-10' : 'text-white' : 'text-white opacity-10'
     },
 
-    sortedClassDrown(key) {
-      return this.sort.key === key ? this.sort.isAsc ? 'text-white' : 'text-white opacity-10' : 'text-white opacity-10'
-    },
-
     sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : true
       this.sort.key = key
@@ -113,8 +109,8 @@ export default {
         return data.replace(/\$approve\$$/, "")
       } else if (/\$pending\$$/.test(data)) {
         return data.replace(/\$pending\$$/, "")
-      } else if (/\$complete\$$/.test(data)) {
-        return data.replace(/\$complete\$$/, "")
+      } else if (/\$completed\$$/.test(data)) {
+        return data.replace(/\$completed\$$/, "")
       } else if (/\$break\$$/.test(data)) {
         return data.replace(/\$break\$$/, "")
       } else if (/\$punchIn\$$/.test(data)) {
@@ -136,7 +132,7 @@ export default {
         return 'text-white bg-green rounded-lg px-3'
       } else if (/\$pending\$$/.test(data)) {
         return 'text-white bg-yellow rounded-lg px-3'
-      } else if (/\$complete\$$/.test(data)) {
+      } else if (/\$completed\$$/.test(data)) {
         return 'text-white bg-green rounded-lg px-3'
       } else if (/\$break\$$/.test(data)) {
         return 'text-white bg-red5 rounded-lg px-6'

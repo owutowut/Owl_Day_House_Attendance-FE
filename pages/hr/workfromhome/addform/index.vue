@@ -1,5 +1,5 @@
 <template xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <div class="lg:mx-2 mt-20 lg:space-y-2 md:space-y-4 sm:space-y-4">
+  <div class="lg:mx-2 lg:space-y-2 md:space-y-4 sm:space-y-4">
     <div class="mb-6">
       <div class="self-center lg:flex justify-between items-center space-y-6 sm:text-center sm:space-y-6">
         <span class="text-3xl font-semibold text-blue">Work from Home</span>

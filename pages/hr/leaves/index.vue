@@ -1,7 +1,7 @@
 <template>
     <Loading v-if="isLoading"/>
 
-    <div v-else class="lg:mx-4 lg:space-y-2 md:space-y-4 sm:space-y-4">
+    <div v-else class="lg:mx-2 lg:space-y-2 md:space-y-4 sm:space-y-4">
 
       <div class="sm:pb-2 sm:text-center lg:flex lg:justify-between lg:items-center lg:space-y-6 md:space-y-6 sm:space-y-6">
         <span class="text-3xl font-semibold text-blue">LEAVES</span>

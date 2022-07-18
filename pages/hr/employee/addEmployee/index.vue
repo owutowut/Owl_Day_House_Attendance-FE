@@ -1,7 +1,7 @@
 <template>
   <div>
     <client-only>
-      <div class="lg:mx-6 flex justify-between mb-8 mt-20">
+      <div class="lg:mx-6 flex justify-between mb-8">
         <span class="text-3xl font-semibold">Add Employee</span>
         <div>
           <button class="bg-blue px-10 py-2 text-white rounded-md text-sm">
@@ -138,7 +138,7 @@ export default {
         tag:'',
         birthday:'',
         date_of_join: '',
-        report_to: '',
+        report_to: 'Sarawut Bunmee',
         address: '',
         state: '',
         country:  '',

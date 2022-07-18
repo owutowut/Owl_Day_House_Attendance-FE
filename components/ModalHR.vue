@@ -276,7 +276,7 @@ export default {
         if(total < 0) {
           return this.leave.no_of_days = 0
         } else {
-          this.leave.no_of_days = total
+          this.leave.no_of_days = total+1
         }
       }
       if (this.dataName === "holiday") {
@@ -293,7 +293,7 @@ export default {
         if(total < 0) {
           return this.holiday.no_of_days = 0
         } else {
-          this.holiday.no_of_days = total
+          this.holiday.no_of_days = total+1
         }
       }
       if (this.dataName === "holiday_by_id") {
@@ -310,7 +310,7 @@ export default {
         if(total < 0) {
           return this.holiday_by_id.no_of_days = 0
         } else {
-          this.holiday_by_id.no_of_days = total
+          this.holiday_by_id.no_of_days = total+1
         }
       }
     },

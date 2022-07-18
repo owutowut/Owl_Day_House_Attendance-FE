@@ -3,7 +3,7 @@
     <Loading v-if="isLoading" />
 
     <div v-else>
-      <div class="pt-10 sm:mx-4 lg:mx-4 lg:space-y-4 md:space-y-4 sm:space-y-4">
+      <div class="pt-12 sm:mx-4 lg:mx-6 lg:space-y-4 md:space-y-4 sm:space-y-4">
         <div class="w-full pb-2">
           <span class="text-3xl font-semibold text-blue">WORK FROM HOME</span>
         </div>
@@ -27,10 +27,10 @@
           ></date-picker>
         </div>
         <div class="sm:row-start-3 sm:col-span-full col-span-1 w-full self-center">
-          <button class="space-x-2 md:px-2 w-full bg-yellow px-10 py-2 text-white rounded-md text-lg font-light flex justify-center items-center">
+          <NuxtLink to="/user/work-from-home/create" class="space-x-2 md:px-2 w-full bg-yellow px-10 py-2 text-white rounded-md text-lg font-kanit flex justify-center items-center">
             <svg-icon name="add1" width="15" height="15"/>
-            <NuxtLink to="/user/work-from-home/create" class="text-lg font-kanit">Add from</NuxtLink>
-          </button>
+            <p>Add from</p>
+          </NuxtLink>
         </div>
       </div>
 

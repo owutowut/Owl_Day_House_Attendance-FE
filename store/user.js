@@ -1,6 +1,6 @@
 export const actions = {
-  getHome() {
-    return this.$axios.get(`user/home`)
+  getUserHoliday() {
+    return this.$axios.get(`user/holiday`)
   },
   getHoliday({}, data) {
     return this.$axios.post(`holiday`, data)
@@ -50,5 +50,46 @@ export const actions = {
 
   notifications({}, id) {
     return this.$axios.get(`notifications/${id}`)
+  },
+
+  getTaskByID({}, id) {
+    return this.$axios.get(`task/${id}`)
+  },
+  taskUpdate({}, data) {
+    return this.$axios.patch(`task/update/${data.id}`, data)
+  },
+  yesterdayTasks({}, data) {
+    return this.$axios.post(`task/yesterdayTasks/${data.id}`, data)
+  },
+  addToTask({}, data) {
+    return this.$axios.post(`task/addToTask/`, data)
+  },
+  yesterdayWorkList({}, data) {
+    return this.$axios.post(`task/yesterdayWorkList/${data.id}`, data)
+  },
+  createTask({}, data) {
+    return this.$axios.post(`task/create`, data)
+  },
+  todayTaskPending({}, data) {
+    return this.$axios.post(`task/today/pending/${data.id}`, data)
+  },
+  todayTaskCompleted({}, data) {
+    return this.$axios.post(`task/today/completed/${data.id}`, data)
+  },
+  getWorkListCompleted({}, data) {
+    return this.$axios.post(`task/completed/${data.id}`, data)
+  },
+  taskCompleted({}, data) {
+    return this.$axios.patch(`task/completed/${data.id}`, data)
+  },
+
+  attendancePunchIn({}, data) {
+    return this.$axios.post(`attendance/create`, data)
+  },
+  attendancePunchOut({}, data) {
+    return this.$axios.patch(`attendance/update/${data.id}`, data)
+  },
+  userAttendance({}, id) {
+    return this.$axios.get(`attendance/${id}`)
   },
 }

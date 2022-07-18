@@ -2,7 +2,7 @@
   <div>
     <Loading v-if="isLoading"/>
 
-    <div v-else class="lg:mx-4 lg:space-y-2 md:space-y-4 sm:space-y-4">
+    <div v-else class="lg:mx-2 lg:space-y-2 md:space-y-4 sm:space-y-4">
 
       <div class="text-center space-y-6 items-center lg:flex lg:justify-between sm:pb-2">
         <span class="text-3xl font-semibold text-blue">Work from Home</span>

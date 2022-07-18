@@ -1,10 +1,12 @@
 <template>
-  <div class="ml-6">
-    <p class="text-3xl font-semibold mb-8">work list Complete</p>
+  <Loading v-if="isLoading"/>
+
+  <div v-else class="pt-8 px-6 space-y-4">
+    <p class="text-3xl font-semibold">Work List Complete</p>
     <div class="lg:flex lg:justify-end">
-      <div class="search-wrapper flex justify-center items-center bg-white rounded-lg my-8 px-4 py-2">
+      <div class="search-wrapper flex justify-center items-center bg-white rounded-lg px-4 py-2">
         <svg-icon name="Search" width="15" height="15" class="mr-2"/>
-        <input v-model="search" type="text" placeholder="Search to Name.." class="font-kanit text-lg w-full  focus:outline-none "/>
+        <input @keyup="fetchData" v-model="search" type="text" placeholder="Search..." class="font-kanit text-lg w-full  focus:outline-none "/>
       </div>
     </div>
 
@@ -15,13 +17,13 @@
           return {
             ...item,
             index: (index + 1) + pageStart,
-             status: item.status === 'complete' ? 'Complete $complete$' : item.status === 'break' ? 'Break $break$' : 'Pending $pending$',
-             noofdays: `${item.noofdays} Days`
+             status: item.status === 'Completed' ? 'Completed $completed$' : item.status === 'Break' ? 'Break $break$' : 'Pending $pending$',
+             no_of_days: `${item.no_of_days} Days`,
           }
       })">
         <template v-slot:action="data">
           <div class="cursor-pointer flex justify-center items-center" >
-            <NuxtLink :to="`/admin/work-list-complete/${data.data.id}`">
+            <NuxtLink :to="`/user/work-list-complete/${data.data.id}`">
               <svg-icon name="Search2" width='24' height='24' class="text-blue"/>
             </NuxtLink>
           </div>
@@ -31,20 +33,21 @@
     <paginate
       class="flex justify-end mt-4 text-sm text-black2 space-x-4"
       v-model="page"
-      :page-count="10"
+      :page-count="totalPage"
       :page-range="3"
       :margin-pages="1"
       :click-handler="onChangePage"
       :prev-text="'<'"
       :next-text="'>'"
       :container-class="'pagination'"
-      :page-class="'page-item'">
+      :page-class="'page-item'" list="" name="">
     </paginate>
   </div>
 </template>
 
 <script>
 import Table from "@/components/Table";
+import {mapActions} from "vuex";
 export default {
   name: "workList_complete",
   layout: 'sidebar',
@@ -53,13 +56,10 @@ export default {
   },
   data(){
     return{
-      sort: {
-        field: '',
-        sorted: true,
-      },
+      isLoading: false,
+      perPage: 10,
+      page: 1,
       search:'',
-      path:'work-list-project',
-      icon:'Search',
       headers: [
         {
           title: 'Project Name',
@@ -67,18 +67,18 @@ export default {
         },
         {
           title: 'Punch In',
-          key: 'punchIn',
-          sort: 'punchIn',
+          key: 'punchInDate',
+          sort: 'punchInDate',
         },
         {
           title: 'Punch Out',
-          key: 'punchOut',
-          sort: 'punchOut',
+          key: 'punchOutDate',
+          sort: 'punchOutDate',
         },
         {
           title: 'No of Days',
-          key: 'noofdays',
-          sort: 'noofdays',
+          key: 'no_of_days',
+          sort: 'no_of_days',
         },
         {
           title: 'Status',
@@ -90,88 +90,68 @@ export default {
           key: 'action',
         }
       ],
-      workListData: [
-        {
-          id:1,
-          name:'AAA',
-          punchIn:'11 Jan 2020',
-          punchOut:'11 Jan 2020',
-          noofdays: 1 ,
-          status: 'pending'
-        },
-        {
-          id:2,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'5 Jan 2020',
-          punchOut:'5 Jan 2020',
-          noofdays: 1,
-          status: 'break'
-        },
-        {
-          id:3,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'24 Mar 2020',
-          punchOut:'24 Mar 2020',
-          noofdays: 3,
-          status: 'complete'
-        },
-        {
-          id:4,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'18 Mar 2020',
-          punchOut:'18 Mar 2020',
-          noofdays: 1,
-          status: 'complete'
-        },
-        {
-          id:5,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'3 Mar 2020',
-          punchOut:'3 Mar 2020',
-          noofdays: 2,
-          status: 'complete'
-        },
-        {
-          id:6,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'24 Mar 2020',
-          punchOut:'24 Mar 2020',
-          noofdays: 2,
-          status: 'complete'
-        },
-        {
-          id:7,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'18 Jan 2020',
-          punchOut:'18 Jan 2020',
-          noofdays: 1,
-          status: 'complete'
-        },
-        {
-          id:8,
-          name:'Lorem ipsum dolor sit',
-          punchIn:'3 Mar 2020',
-          punchOut:'3 Mar 2020',
-          noofdays: 1,
-          status: 'complete'
-        },
-      ]
+      workListCompleted: {},
+      workListCompletedData:[]
     }
   },
   computed: {
     pageStart() {
-      return (this.currentPage - 1) * this.perPage
+      return (this.currentPage - 1) * this.workListCompleted.perPage
+    },
+    totalPage() {
+      return Math.ceil(this.workListCompleted.total / this.workListCompleted.perPage)
     },
 
     filterData() {
-      if (this.search.trim()) {
-        return this.workListData.filter(val => {
-          return val.name.toLowerCase().includes(this.search.toLowerCase())
-        })
-      }
-      return this.workListData
-    }
+      return this.workListCompletedData
+    },
   },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    ...mapActions({
+      getWorkListCompleted: 'user/getWorkListCompleted',
+    }),
+
+    onChangePage(i) {
+      this.page = i
+      this.fetchData()
+    },
+
+    async userProfile() {
+      const verify = await this.$auth.loggedIn
+
+      try {
+        if (!verify) {
+          return 'Login required!'
+        }
+        const user=await this.$axios.get('me', {
+          headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+        })
+        if (user.data.role !== 'user') {
+          return this.$router.push('/')
+        }
+        this.user_profile = user.data
+      } catch (error) {
+        return error.message
+      }
+    },
+    async fetchData() {
+      await this.userProfile()
+
+      const request = {
+        id: this.user_profile.id,
+        page: this.page,
+        search: this.search
+      }
+      const {data} = await this.getWorkListCompleted(request)
+      this.workListCompleted = data.tasks
+      this.workListCompletedData = data.tasks.data
+
+      this.isLoading = false
+    }
+  }
 }
 </script>
 

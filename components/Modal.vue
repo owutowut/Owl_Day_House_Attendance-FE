@@ -196,6 +196,72 @@
       </form>
     </div>
 
+    <div class="AddTask">
+      <form @submit="taskSubmit">
+        <div class="fixed inset-0 z-50 w-full h-full bg-gray10" v-if="show.add_task">
+          <div class="lg:-translate-x-1/3 fixed flex top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 overflow-hidden justify-center animated fadeIn faster">
+            <div class="h-4/6 md:w-96 sm:w-80 bg-white text-xl font-kanit rounded-lg drop-shadow border border-gray19 ">
+              <div class="space-y-2 sm:p-6 sm:pb-8 p-8 pb-10">
+                <div>
+                  <div @click="show.add_task = false" class="flex justify-end cursor-pointer right ">
+                    <svg-icon name="cross" width="33.33" height="33.33"/>
+                  </div>
+                  <p class="font-medium text-3xl text-blue text-center mb-2">Add Task</p>
+                  <div class="text-left space-y-2 w-full">
+                    <Span class="text-base text-blue">Project Name</Span>
+                    <input v-model="task.name" class="no-outline font-light text-gray26 bg-white rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                  </div>
+                  <div class="pt-1 text-left space-y-1 w-full">
+                    <Span class="text-base text-blue">Details</Span>
+                    <textarea required v-model="task.details" class="no-outline font-light w-full h-40 text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-1 w-full" type="text"/>
+                  </div>
+                  <div class="flex justify-center pt-2">
+                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                      <span class="text-lg font-kanit">Submit</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="CompletedTask">
+      <form @submit="taskCompletedSubmit">
+        <div class="fixed inset-0 z-50 w-full h-full bg-gray10" v-if="show.completed_task">
+          <div class="lg:-translate-x-1/3 fixed flex top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 overflow-hidden justify-center animated fadeIn faster">
+            <div class="h-4/6 md:w-96 sm:w-80 bg-white text-xl font-kanit rounded-lg drop-shadow border border-gray19 ">
+              <div class="space-y-2 sm:p-6 sm:pb-8 p-8 pb-10">
+                  <div @click="show.completed_task = false" class="flex justify-end cursor-pointer right ">
+                    <svg-icon name="cross" width="33.33" height="33.33"/>
+                  </div>
+                  <p class="font-medium text-3xl text-blue text-center mb-2">Completed</p>
+                  <div class="text-left space-y-1 w-full">
+                    <Span class="text-base text-blue">Project Name</Span>
+                    <input v-model="task_by_id.name" disabled class="no-outline bg-gray30 font-light text-gray8 bg-white rounded-md border border-gray12 px-4 py-2 w-full" type="text"/>
+                  </div>
+                  <div class="text-left space-y-1 w-full">
+                    <Span class="text-base text-blue">Details</Span>
+                    <textarea v-model="task_by_id.details" disabled class="no-outline bg-gray30 font-light w-full h-32 text-gray8 bg-gray15 rounded-md border border-gray12 px-4 py-2" type="text"/>
+                  </div>
+                  <div class="text-left space-y-1 w-full">
+                    <Span class="text-base text-blue">Proceeding</Span>
+                    <textarea v-model="task_by_id.proceeding" required class="no-outline font-light w-full h-32 text-gray26 bg-gray15 rounded-md border border-gray12 px-4 py-2" type="text"/>
+                  </div>
+                  <div class="flex justify-center pt-2">
+                    <button type="submit" class="bg-blue px-10 py-2 text-white rounded-md text-lg font-light">
+                      <span class="text-lg font-kanit">Submit</span>
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
   </div>
 </template>
 
@@ -205,17 +271,26 @@ import {mapActions} from "vuex";
 export default {
   props: {
     show:{
+      completed_task: Boolean,
       add_form: Boolean,
       delete: Boolean,
       edit: Boolean,
       add_leave: Boolean,
+      add_task: Boolean,
     },
     leave_by_id: {
+      type: Object,
+    },
+    task_by_id: {
       type: Object,
     },
   },
   data() {
     return {
+      task: {
+        name:'',
+        details:'',
+      },
       leave: {
         name:'',
         leave_type: '',
@@ -261,9 +336,10 @@ export default {
 
   methods: {
     ...mapActions({
-      createHolidayForm: 'user/createHolidayForm',
       createLeave: 'user/createLeave',
-      editLeave: 'user/editLeave'
+      editLeave: 'user/editLeave',
+      createTask: 'user/createTask',
+      taskCompleted: 'user/taskCompleted',
     }),
     GetDays() {
       if (this.dataName === "leave") {
@@ -274,12 +350,16 @@ export default {
           return this.leave.no_of_days = 0
         }
 
+        if (this.leave.to === this.leave.from) {
+          return this.leave.no_of_days = 1
+        }
+
         let total = parseInt((to - from) / (24 * 3600 * 1000))
 
         if(total < 0) {
           return this.leave.no_of_days = 0
         } else {
-          this.leave.no_of_days = total
+          return this.leave.no_of_days = total+1
         }
       }
       if (this.dataName === "holiday") {
@@ -291,12 +371,16 @@ export default {
           return this.holiday.no_of_days = 0
         }
 
+        if (this.holiday.to === this.holiday.from) {
+          return this.holiday.no_of_days = 1
+        }
+
         let total = parseInt((to - from) / (24 * 3600 * 1000))
 
         if(total < 0) {
           return this.holiday.no_of_days = 0
         } else {
-          this.holiday.no_of_days = total
+          return this.holiday.no_of_days = total+1
         }
       }
       if (this.dataName === "leave_by_id") {
@@ -308,14 +392,79 @@ export default {
           return this.leave_by_id.no_of_days = 0
         }
 
+        if (this.leave_by_id.to === this.leave_by_id.from) {
+          return this.leave_by_id.no_of_days = 1
+        }
+
         let total = parseInt((to - from) / (24 * 3600 * 1000))
 
         if(total < 0) {
           return this.leave_by_id.no_of_days = 0
         } else {
-          this.leave_by_id.no_of_days = total
+          return this.leave_by_id.no_of_days = total+1
         }
       }
+    },
+
+    async profile() {
+      const verify = await this.$auth.loggedIn
+
+      try {
+        if (!verify) {
+          return 'Login required!'
+        } else {
+          const user=await this.$axios.get('me', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
+          })
+          return this.user_profile = user.data
+        }
+      } catch (error) {
+        return error.message
+      }
+    },
+
+    async taskSubmit() {
+      const data = {
+        user_id: this.user_profile.id,
+        name: this.task.name,
+        details: this.task.details,
+      }
+      await this.createTask(data)
+        .then(response => {
+          if (response) {
+            this.show.add_task = false
+          }
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
+    },
+
+    async taskCompletedSubmit() {
+      const request = {
+        id : this.task_by_id.id,
+        status: 'Completed',
+        proceeding: this.task_by_id.proceeding,
+      }
+      await this.taskCompleted(request)
+        .then(response => {
+          if (response) {
+            this.show.completed_task = false
+
+            this.$swal({
+              title: '<p class="text-3xl"> Successful transaction</p>',
+              imageUrl: `${require('~/assets/sprite/svg/check-circle-solid2.svg')}`,
+              imageWidth: 80,
+              imageHeight: 80,
+              showConfirmButton: false,
+              reverseButtons: true,
+              timer: 2500
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
     },
 
     async leaveSubmit() {
@@ -381,27 +530,10 @@ export default {
         })
     },
 
-    async profile() {
-      const verify = await this.$auth.loggedIn
-
-      try {
-        if (!verify) {
-          return 'Login required!'
-        } else {
-          const user=await this.$axios.get('me', {
-            headers: { Authorization: `Bearer ${localStorage.getItem('auth._token.local')}` },
-          })
-          return this.user_profile = user.data
-        }
-      } catch (error) {
-        return error.message
-      }
-    },
-
     async editModal() {
       const data = {
         id : this.leave_by_id.id,
-        name: this.leave_by_id.name,
+        leave_type: this.leave_by_id.leave_type,
         from: this.leave_by_id.from,
         to: this.leave_by_id.to,
         no_of_days: this.leave_by_id.no_of_days,

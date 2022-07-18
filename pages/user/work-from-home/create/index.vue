@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-4 space-y-4">
+    <div class="pt-10 sm:space-y-6 sm:mx-4 sm:mb-4 lg:mx-6 space-y-4">
       <div class="sm:space-y-2 md:flex md:justify-between lg:flex lg:justify-between">
         <span class="sm:flex sm:justify-center text-3xl font-semibold text-blue">Work from Home</span>
         <div class="sm:flex sm:justify-center lg:justify-self-center">
@@ -247,14 +247,21 @@ export default {
     GetDate() {
       let from = new Date(this.work_from_home.from);
       let to = new Date(this.work_from_home.to);
+
       if (this.work_from_home.to === '') {
         return this.work_from_home.no_of_days = 0
       }
+
+      if (this.work_from_home.to === this.work_from_home.from) {
+        return this.work_from_home.no_of_days = 1
+      }
+
       let total = parseInt((to - from) / (24 * 3600 * 1000))
+
       if(total < 0) {
         return this.work_from_home.no_of_days = 0
       } else {
-        this.work_from_home.no_of_days = total
+        this.work_from_home.no_of_days = total+1
       }
     },
 

@@ -4,7 +4,7 @@
 
     <div v-else>
       <div class="flex flex-col">
-        <nav class="navbar w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
+        <nav class="sticky top-0 navbar w-full flex lg:justify-end justify-between py-3 bg-white1 h-[80px] px-6 sm:w-full">
           <img src="~/assets/images/menu.png" class="w-8 h-9 mt-2 lg:hidden" v-show='isOpen' @click='handleOpen' alt="">
           <button v-if="isOpen" class="relative">
             <svg-icon name="Notification" class="h-[45px] w-[45px]" />
