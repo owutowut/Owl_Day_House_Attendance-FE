@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/*vue-persian-datetime-picker.js*/
+  .vpd-time .vpd-down-arrow-btn, .vpd-time .vpd-up-arrow-btn {
+    text-align: -webkit-center;
+  }
+
+.vpd-next, .vpd-prev svg {
+  display: initial;
+}
+
+.vpd-month-label {
+  width: auto !important;
+}
+
+.vpd-content {
+  font-family: inherit !important;
+}
+/*vue-persian-datetime-picker.js*/
+
+.swal2-styled.swal2-cancel{
+  color: black !important;
+  border: 1px solid #414042 !important;
+  border-radius: 8px !important;
+}
+
+.swal2-styled.swal2-confirm:focus {
+ box-shadow: none !important;
+  border-radius: 8px !important;
+}
